@@ -4,24 +4,23 @@ export const userService = {
     login,
     logout,
     signup,
-    getUsers,
     getUserById,
-    updateUser
-  
+    // updateUser,
+    updateFavTrips 
 }
-function getUsers() {
-    return httpService.get('user')
-}
+
 
 function getUserById(userId) {
     return httpService.get(`user/${userId}`)
 }
 
-function updateUser(user) {
+// function updateUser(user) {
+//     return httpService.put(`user/${user._id}`, user)
+// }
+
+function updateFavTrips(user) {
     return httpService.put(`user/${user._id}`, user)
 }
-
-
 
 async function login(userCred) {
     const user = await httpService.post('auth/login', userCred)

@@ -28,7 +28,6 @@ function remove(tripId) {
     return httpService.delete(`toy/${tripId}`)
 }
 
-
 function save(trip) {
     const savedTrip = trip._id ? _update(trip) : _add(trip)
     return savedTrip
