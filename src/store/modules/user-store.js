@@ -8,7 +8,8 @@ export const userStore = {
         users: [],
         loggedinUser: localLoggedinUser,
         favoriteTrips: [],
-        isGuide: false
+        isGuide: false,
+        reviews: []
     },
     getters: {
         loggedinUser(state) {
@@ -25,10 +26,13 @@ export const userStore = {
         setUsers(state, { users }) {
             state.users = users;
         },
-        // addReview(state, { review }) {
-            // state.reviews.push(review)
-        // },
 
+        setReviews(state, { reviews }) {
+            state.reviews = reviews;
+        },
+        addReview(state, { review }) {
+            state.reviews.push(review)
+        },
     },
     actions: {
         async login(context, { userCred }) {
@@ -55,8 +59,18 @@ export const userStore = {
             user.favoriteTrips = await userService.updateFavTrips(user);
             context.commit({ type: 'setUser', user })
         },
+
+
+        async loadReviews(context, { userId }) {
+            // const review = await userService.getReviewsByGuide();
+            const user = await userService.getUserById(userId);
+            const reviews = user.guideInfo.reviews
+            context.commit({ type: 'setReviews', reviews })
+        },
         async addReview(context, { review }) {
-            review = await userService.addReview(review)
+            const user = await userService.getUserById(userId);
+            // review = await userService.addReview(review)
+            user.guideInfo.reviews.push(review)
             context.commit({ type: 'addReview', review })
             return review;
         },
