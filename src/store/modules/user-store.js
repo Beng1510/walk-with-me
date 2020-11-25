@@ -47,12 +47,12 @@ export const userStore = {
             context.commit({ type: 'setUser', user: null })
         },
 
-        async loadUsers(context) {
-            const users = await userService.getUsers();
-            context.commit({ type: 'setUsers', users })
-        },
+        // async loadUsers(context) {
+        //     const users = await userService.getUsers();
+        //     context.commit({ type: 'setUsers', users })
+        // },
         async updateUser(context, { user }) {
-            user = await userService.update(user);
+            user.favoriteTrips = await userService.updateFavTrips(user);
             context.commit({ type: 'setUser', user })
         },
         async addReview(context, { review }) {
