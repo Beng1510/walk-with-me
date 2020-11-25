@@ -1,10 +1,42 @@
 <template>
-  
+  <section class="trip-list">
+      <trip-preview 
+      v-for="trip in trips" 
+      :key="trip._id" 
+      :trip="trip" 
+      @emitFav="emitFav" 
+      @click="goToDetails(trip._id)">
+      </trip-preview>
+  </section>
 </template>
 
 <script>
-export default {
 
+import tripPreview from './trip-preview.cmp.vue';
+
+export default {
+    props: {
+        trips: {
+            type: Array,
+            required: true
+        }
+    },
+
+    name: 'trip-list',
+
+    components: {
+        tripPreview
+    }, 
+
+    methods: {
+         emitFav(id) {
+           this.$emit('emitFav', id);
+       } ,
+
+       goToDetails(id) {
+           router.push({ name: 'trip', params: { id } });
+       }
+    }
 }
 </script>
 
