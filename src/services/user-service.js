@@ -17,10 +17,15 @@ export const userService = {
 
 async function getUserById(userId) {
     const res = await axios.get(`${baseUrl}/user/${userId}`)
+    
     return res.data
-
     // return httpService.get(`user/${userId}`)
 }
+
+// async function getGuideById (guideId){
+//     const res = await axios.get(`${baseUrl}/user/${guideId}`)
+//     return res.data
+// }
 
 async function getUsers() {
     // return httpService.get('user')
