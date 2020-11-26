@@ -9,10 +9,17 @@ export const bookingStore = {
         // user: localLoggedinUser
     },
     getters: {
-
+        bookings(state) {
+            return state.bookings
+        }
     },
     mutations: {
-
+        setBookings(state, { bookings }) {
+            state.bookings = bookings
+        },
+        addBooking(state, { booking }) {
+            state.bookings.unshift(booking)
+        }
     },
     actions: {
 
@@ -22,13 +29,17 @@ export const bookingStore = {
             context.commit({ type: 'setBookings', bookings })
         },
 
-        async addBooking(context, {booking}) {
-
-            booking.user = context.rootGetters.loggedinUser
+        async addBooking(context, { booking }) {
+            booking.user = {
+                _id: context.rootGetters.loggedinUser._id,
+                name: context.rootGetters.loggedinUser.name,
+                imgUrl: context.rootGetters.loggedinUser.profileImgUrl,
+            },
+                // booking.user = context.rootGetters.loggedinUser
+                console.log('booking', booking);
 
             const newBooking = await bookingService.createBooking(booking);
-
-            commit({ type: 'addBooking', newBooking })
+            context.commit({ type: 'addBooking', newBooking })
         },
 
         async updateBooking(context, { booking }) {

@@ -38,7 +38,7 @@ export default {
                 trip: {
                     _id: this.trip._id,
                     name: this.trip.name, 
-                    imgUrl: this.trip.imgUrl
+                    imgUrl: this.trip.imgUrls
                 },
                 status: 'pending',
                 peopleToSign: 1,
