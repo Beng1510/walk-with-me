@@ -5,10 +5,23 @@
       <router-link to="/about">About</router-link>
     </div>
 
+    <main-header />
     <router-view />
-    
+    <main-footer />
   </div>
 </template>
+
+<script>
+import mainHeader from "./cmps/basic/main-header.cmp.vue";
+import mainFooter from "./cmps/basic/main-footer.cmp.vue";
+
+export default {
+   components: {
+        mainHeader,
+        mainFooter
+    }
+}
+</script>
 
 <style lang="scss">
 #app {
