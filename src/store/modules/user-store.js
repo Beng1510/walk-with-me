@@ -1,7 +1,8 @@
-import userService from '../../services/user-service.js'
+import userService from "../../services/user-service.js";
 
 var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
+// else (!)
 
 export const userStore = {
     state: {
@@ -67,12 +68,12 @@ export const userStore = {
             const reviews = user.guideInfo.reviews
             context.commit({ type: 'setReviews', reviews })
         },
-        async addReview(context, { review }) {
-            const user = await userService.getUserById(userId);
+        // async addReview(context, { review }) {
+            // const user = await userService.getUserById(userId);
             // review = await userService.addReview(review)
-            user.guideInfo.reviews.push(review)
-            context.commit({ type: 'addReview', review })
-            return review;
-        },
+        //     user.guideInfo.reviews.push(review)
+        //     context.commit({ type: 'addReview', review })
+        //     return review;
+        // },
     }
 }

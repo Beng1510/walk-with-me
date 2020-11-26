@@ -7,7 +7,7 @@ export const userService = {
     getUserById,
     // updateUser,
     updateFavTrips,
-    getReviewsByGuide 
+    // getReviewsByGuide 
 }
 
 

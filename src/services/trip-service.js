@@ -1,22 +1,33 @@
 import { httpService } from './http-service.js';
+import axios from 'axios'
+
+
+const baseUrl = 'http://localhost:3000/trip';
+
 
 export const tripService = {
     query,
-    getTripById,
+    getTripById
     // remove,
     // save,
     // getEmptyTrip
 }
 
-function query(filterBy) {
-    console.log('filter by is:', filterBy)
-    const trips = httpService.get(_buildQuery(filterBy));
-    return trips;
+
+async function query() {
+// function query(filterBy) {
+    // console.log('filter by is:', filterBy)
+    const res = await axios.get(`${baseUrl}`)
+    return res.data
+    
+
+    // const trips = httpService.get(_buildQuery(filterBy));
+    // return trips;
 }
-///?? good for filter?
-function _buildQuery({ name, tags, difficulty }) {
-    return `trip?name=${name}&tags=${tags}&difficulty=${difficulty}`;
-}
+// /?? good for filter?
+// function _buildQuery({ name, tags, difficulty }) {
+//     return `trip?name=${name}&tags=${tags}&difficulty=${difficulty}`;
+// }
 
 
 function getTripById(tripId) {

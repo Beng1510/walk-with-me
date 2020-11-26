@@ -3,8 +3,8 @@
       <img :src="`${trip.imgUrls[0]}`" alt="">
       <h1>{{trip.name}}</h1>
       <h3>{{trip.date}}</h3>
-      <p>{{trip.guide.name}}</p>
-      <p>{{trip.guide.rate}}</p>
+      <p>{{trip.aboutGuide.name}}</p>
+      <p>{{trip.aboutGuide.rate}}</p>
       <!-- <p><i :class="rateStars"></i></p> -->
       <p>{{booked}}/5 trippers</p>
       <p><i :class="fav"></i></p>
@@ -27,7 +27,7 @@ export default {
 
     data() {
         return {
-            isFav = false
+            isFav: false
         }
     },
 
@@ -36,7 +36,7 @@ export default {
     methods: {
        emitFav(id) {
            this.$emit('emitFav', id);
-           this.isFav = !isFav;
+           this.isFav = !this.isFav;
        } 
     },
 

@@ -2,46 +2,52 @@
   <div class="home-page">
     <h2>Walk With Me</h2>
     <span v-if="isLoading">Loading...</span>
-    <!-- <trip-filter @onFilter="updateFilter" /> -->
-    <!-- <trip-list :trips="tripsForDisplay" /> -->
+    <trip-filter @filterBy="updateFilter" />
+    <trip-list :trips="tripsForDisplay" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-// import tripFilter from "../cmps/trip/trip-filter.cmp.vue";
-// import tripList from "../cmps/trip/trip-list.cmp.vue";
+import tripFilter from "../cmps/trip/trip-filter.cmp.vue";
+import tripList from "../cmps/trip/trip-list.cmp.vue";
 
 export default {
   name: "home-page",
   data() {
     return {
-      isLoading: flase,
+      isLoading: false
     };
   },
   methods: {
     updateFilter(filterBy) {
       this.$store.commit({
         type: "setFilterBy",
-        filterBy,
+        filterBy
       });
       this.$store.dispatch({
-        type: "loadTrips",
+        type: "loadTrips"
       });
-    },
+    }
   },
   computed: {
     tripsForDisplay() {
-      return this.$store.getters.toysForDisplay;
+      return this.$store.getters.tripsForDisplay;
     },
-    tripsForHomeDisplay() {
-      return this.$store.getters.tripsForHomeDisplay;
-    },
+    // tripsForHomeDisplay() {
+    //   return this.$store.getters.tripsForHomeDisplay;
+    // }
   },
   components: {
-    // tripFilter,
-    // tripList,
+    tripFilter,
+    tripList,
   },
+  created() {
+    console.log("got here");
+    this.$store.dispatch({
+      type: "loadTrips"
+    });
+  }
 };
 </script>

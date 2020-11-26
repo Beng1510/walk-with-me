@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import home from "../views/homepage.vue";
+import home from "../views/home-page.vue";
 // import about from "../views/about.vue"
 import tripList from "../cmps/trip/trip-list.cmp.vue"
 import tripDetails from "../views/trip-details.vue"

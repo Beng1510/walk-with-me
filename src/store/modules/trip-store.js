@@ -10,12 +10,21 @@ export const tripStore = {
         currTrip: {}
     },
     getters: {
-        tripsForHomeDisplay(state) {
-            return state.trips,slice(0,4)
-        },
+        // tripsForHomeDisplay(state) {
+        //     return state.trips,slice(0,4)
+        // },
         tripsForDisplay(state) {
             return state.trips
         },
+        // mountainTripsForDisplay(state) {
+        //     return state.trips filterbytype
+        // },
+        // seaTripsForDisplay(state) {
+        //     return state.trips
+        // },
+        // cityTripsForDisplay(state) {
+        //     return state.trips
+        // },
     },
     mutations: {
         setFilterBy(state, { filterBy }) {
@@ -41,12 +50,16 @@ export const tripStore = {
     },
     actions: {
         async loadTrips({ commit, state }) {
-            commit({ type: 'setIsLoading', isLoading: true })
-            const trips = await tripService.query(state.filterBy)
+            console.log('filter',state.filterBy);
+            // commit({ type: 'setIsLoading', isLoading: true })
+            // const trips = await tripService.query(state.filterBy)
+            const trips = await tripService.query()
+                // commit({ type: 'setIsLoading', isLoading: false })
 
             commit({ type: 'setTrips', trips })
-            commit({ type: 'setIsLoading', isLoading: false })
+            // commit({ type: 'setIsLoading', isLoading: false })
         },
+        
         async loadTripsForHomePage({ commit, state }) {
             commit({ type: 'setIsLoading', isLoading: true })
             const trips = await tripService.query(state.filterBy)

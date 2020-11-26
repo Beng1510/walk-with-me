@@ -33,8 +33,10 @@ export default {
            this.$emit('emitFav', id);
        } ,
 
-       goToDetails(id) {
-           router.push({ name: 'trip', params: { id } });
+       goToDetails() {
+    //    goToDetails(id) {
+     console.log('hi from list');
+        //   router.push({ name: 'trip', params: { id } });
        }
     }
 }
