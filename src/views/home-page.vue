@@ -4,6 +4,14 @@
     <span v-if="isLoading">Loading...</span>
     <trip-filter @filterBy="updateFilter" />
     <trip-list :trips="tripsForDisplay" />
+    <hr/>
+    <trip-list :trips="mountainTripsForDisplay" />
+    <!-- <trip-list :trips="seaTripsForDisplay" />
+    <trip-list :trips="cityTripsForDisplay" /> -->
+    <hr/>
+    <guide-list :users="guidesForDisplay" />
+
+    <hr/>
   </div>
 </template>
 
@@ -12,28 +20,35 @@
 
 import tripFilter from "../cmps/trip/trip-filter.cmp.vue";
 import tripList from "../cmps/trip/trip-list.cmp.vue";
+import guideList from "../cmps/guide/guide-list.cmp.vue"
 
 export default {
   name: "home-page",
   data() {
     return {
-      isLoading: false
+      isLoading: false,
     };
   },
   methods: {
     updateFilter(filterBy) {
       this.$store.commit({
         type: "setFilterBy",
-        filterBy
+        filterBy,
       });
       this.$store.dispatch({
-        type: "loadTrips"
+        type: "loadTrips",
       });
-    }
+    },
   },
   computed: {
     tripsForDisplay() {
       return this.$store.getters.tripsForDisplay;
+    },
+    mountainTripsForDisplay() {
+      return this.$store.getters.mountainTripsForDisplay;
+    },
+    guidesForDisplay() {
+      return this.$store.getters.guidesForDisplay;
     },
     // tripsForHomeDisplay() {
     //   return this.$store.getters.tripsForHomeDisplay;
@@ -42,12 +57,16 @@ export default {
   components: {
     tripFilter,
     tripList,
+    guideList
   },
   created() {
     console.log("got here");
     this.$store.dispatch({
-      type: "loadTrips"
+      type: "loadTrips",
     });
-  }
+    this.$store.dispatch({
+      type: "loadUsers",
+    });
+  },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <section class="trip-preview">
+  <section class="trip-preview" @click="goToDetails(trip._id)">
       <img :src="`${trip.imgUrls[0]}`" alt="">
       <h1>{{trip.name}}</h1>
       <h3>{{trip.date}}</h3>
@@ -35,6 +35,11 @@ export default {
        emitFav(id) {
            this.$emit('emitFav', id);
            this.isFav = !this.isFav;
+       },
+         
+       goToDetails(id) {
+        console.log('hi from list');
+          router.push({ name: 'trip', params: { id } });
        } 
     },
 
