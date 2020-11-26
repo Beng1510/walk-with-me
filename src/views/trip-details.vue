@@ -34,7 +34,8 @@ import tripBook from '../cmps/trip/trip-book.cmp.vue';
 export default {
 	data() {
 		return {
-            trip: null,
+			trip: null,
+			gal: 'gal'
             
 		};
 	},
