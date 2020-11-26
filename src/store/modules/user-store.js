@@ -92,7 +92,6 @@ export const userStore = {
 
         async loadUsers(context) {
             const users = await userService.getUsers();
-            console.log('users',users);
             context.commit({ type: 'setUsers', users })
         },
         async updateUser(context, { user }) {
