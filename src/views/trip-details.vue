@@ -10,8 +10,8 @@
 		<h3>Trip date: {{ trip.date }}</h3>
 		<h3>Trip type: {{ trip.tags }}</h3>
 		<h3>Price: {{ trip.price }}$</h3>
-		<h3>Trip capacity: {{ trip.capacity }}</h3>
-		<h3>Trip difficulty: {{ trip.difficulty }}(1-5)</h3>
+		<h3>Trip capacity: {{ trip.capacity }}/10</h3>
+		<h3>Trip difficulty: {{ trip.difficulty }}</h3>
         <p>Description {{trip.description}}</p>
 
            
