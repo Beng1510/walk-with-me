@@ -33,7 +33,7 @@ import guideReview from "../cmps/review/guide-review.cmp.vue";
 export default {
 	data() {
 		return {
-            trip: null,
+			trip: null,
             
 		};
 	},
@@ -46,7 +46,6 @@ export default {
 	async created() { 
 		const tripId = this.$route.params.id;
 		const trip = await tripService.getTripById(tripId);
-		console.log('trip????',trip);
 		this.trip = trip;
 	},
 	components: {
