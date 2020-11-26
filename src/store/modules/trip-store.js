@@ -16,15 +16,17 @@ export const tripStore = {
         tripsForDisplay(state) {
             return state.trips
         },
-        // mountainTripsForDisplay(state) {
-        //     return state.trips filterbytype
-        // },
+        mountainTripsForDisplay(state) {
+            console.log('stateTrips',state);
+            return state.trips.filter(trip => trip.type === "mountain" )
+        },
         // seaTripsForDisplay(state) {
         //     return state.trips
         // },
         // cityTripsForDisplay(state) {
         //     return state.trips
         // },
+      
     },
     mutations: {
         setFilterBy(state, { filterBy }) {
