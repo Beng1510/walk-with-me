@@ -9,6 +9,7 @@ export const userService = {
     signup,
     getUserById,
     getUsers,
+    saveReview,
     // updateUser,
     updateFavTrips,
     // getReviewsByGuide 
@@ -20,6 +21,17 @@ async function getUserById(userId) {
     
     return res.data
     // return httpService.get(`user/${userId}`)
+}
+
+async function saveReview(review){
+    
+    console.log('review:Lest Time', review.txt)
+    console.log('review:Lest Time', review.rate)
+
+     const res = await axios.post(`${baseUrl}/user`,review)
+    
+    
+    return res.data
 }
 
 // async function getGuideById (guideId){
