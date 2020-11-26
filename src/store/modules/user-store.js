@@ -22,7 +22,10 @@ export const userStore = {
         guidesForDisplay(state) {
             console.log('state at users',state);
             return state.users
-        }
+        },
+        reviews(state) {
+            return state.reviews;
+        },
     },
     mutations: {
         setUser(state, { user }) {
@@ -67,17 +70,19 @@ export const userStore = {
         },
 
 
-        async loadReviews(context, { userId }) {
+        async loadReviews(context, { guideId }) {
             // const review = await userService.getReviewsByGuide();
-            const user = await userService.getUserById(userId);
+            const user = await userService.getUserById(guideId);
+            console.log('user:', user)
             const reviews = user.guideInfo.reviews
+            console.log('reviews:', reviews)
             context.commit({ type: 'setReviews', reviews })
         },
         // async addReview(context, { review }) {
         //     const user = await userService.getUserById(userId);
         //     review = await userService.addReview(review)
         //     user.guideInfo.reviews.push(review)
-        //     context.commit({ type: 'addReview', review })
+            // context.commit({ type: 'addReview', review })
         //     return review;
         // },
     }
