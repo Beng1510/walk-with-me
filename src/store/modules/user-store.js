@@ -20,7 +20,6 @@ export const userStore = {
             return state.isGuide
         },
         guidesForDisplay(state) {
-            console.log('state at users',state);
             return state.users
         }
     },
@@ -58,7 +57,6 @@ export const userStore = {
 
         async loadUsers(context) {
             const users = await userService.getUsers();
-            console.log('users',users);
             context.commit({ type: 'setUsers', users })
         },
         async updateUser(context, { user }) {

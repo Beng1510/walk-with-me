@@ -17,7 +17,6 @@ export const tripStore = {
             return state.trips
         },
         mountainTripsForDisplay(state) {
-            console.log('stateTrips',state);
             return state.trips.filter(trip => trip.type === "mountain" )
         },
         // seaTripsForDisplay(state) {
@@ -52,7 +51,6 @@ export const tripStore = {
     },
     actions: {
         async loadTrips({ commit, state }) {
-            console.log('filter',state.filterBy);
             // commit({ type: 'setIsLoading', isLoading: true })
             // const trips = await tripService.query(state.filterBy)
             const trips = await tripService.query()

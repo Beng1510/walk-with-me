@@ -38,7 +38,6 @@ export default {
        },
          
        goToDetails(id) {
-        console.log('hi from list');
           this.$router.push(`/trip/${id}`);
        } 
     },

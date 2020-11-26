@@ -60,7 +60,6 @@ export default {
     guideList
   },
   created() {
-    console.log("got here");
     this.$store.dispatch({
       type: "loadTrips",
     });
