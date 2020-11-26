@@ -8,7 +8,7 @@ export const userStore = {
         users: [],
         loggedinUser: localLoggedinUser,
         favoriteTrips: [],
-        isGuide: false,
+        // isGuide: false,
         reviews: []
     },
     getters: {
