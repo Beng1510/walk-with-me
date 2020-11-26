@@ -37,8 +37,11 @@ export default {
             
 		};
 	},
-	computed: {
 	
+	methods: {
+		bookTrip(booking) {
+			this.$store.dispatch({type:'addBooking', booking});
+		}
 	},
 	async created() { 
 		const tripId = this.$route.params.id;
