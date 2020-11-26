@@ -41,9 +41,9 @@ export default {
 	
 	},
 	async created() {
-		console.log('hi from details');
+		
 		const tripId = this.$route.params.id;
-		console.log('tripId',tripId);
+		
 		const trip = await tripService.getTripById(tripId);
 		console.log('trip????',trip);
 		this.trip = trip;
