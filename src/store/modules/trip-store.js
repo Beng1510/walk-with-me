@@ -1,6 +1,7 @@
 import { tripService } from '../../services/trip-service.js';
 
 
+
 export const tripStore = {
     strict: true,
     state: {
