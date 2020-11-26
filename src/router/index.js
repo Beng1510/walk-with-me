@@ -36,6 +36,11 @@ const routes = [
     component: backOffice
   },
   // {
+  //   path: "/booking",
+  //   name: "booking",
+  //   component: booking
+  // },
+  // {
   //   path: "/about",
   //   name: "about",
   //   component: about

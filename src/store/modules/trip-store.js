@@ -19,12 +19,15 @@ export const tripStore = {
         mountainTripsForDisplay(state) {
             return state.trips.filter(trip => trip.type === "mountain" )
         },
-        // seaTripsForDisplay(state) {
-        //     return state.trips
-        // },
-        // cityTripsForDisplay(state) {
-        //     return state.trips
-        // },
+        forestTripsForDisplay(state) {
+            return state.trips.filter(trip => trip.type === "forest" )
+        },
+        seaTripsForDisplay(state) {
+            return state.trips.filter(trip => trip.type === "seaside" )
+        },
+        cityTripsForDisplay(state) {
+            return state.trips.filter(trip => trip.type === "city" )
+        },
       
     },
     mutations: {
@@ -58,14 +61,6 @@ export const tripStore = {
 
             commit({ type: 'setTrips', trips })
             // commit({ type: 'setIsLoading', isLoading: false })
-        },
-        
-        async loadTripsForHomePage({ commit, state }) {
-            commit({ type: 'setIsLoading', isLoading: true })
-            const trips = await tripService.query(state.filterBy)
-
-            commit({ type: 'setTrips', trips })
-            commit({ type: 'setIsLoading', isLoading: false })
         },
         // async saveTrip({ commit }, { trip }) {
         //     const actionType = (trip._id) ? 'updateTrip' : 'addTrip';
