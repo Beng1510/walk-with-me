@@ -4,8 +4,7 @@
       v-for="trip in trips" 
       :key="trip._id" 
       :trip="trip" 
-      @emitFav="emitFav" 
-      @click="goToDetails(trip._id)">
+      @emitFav="emitFav">
       </trip-preview>
   </section>
 </template>
@@ -31,13 +30,7 @@ export default {
     methods: {
          emitFav(id) {
            this.$emit('emitFav', id);
-       } ,
-
-       goToDetails() {
-    //    goToDetails(id) {
-     console.log('hi from list');
-        //   router.push({ name: 'trip', params: { id } });
-       }
+       } 
     }
 }
 </script>

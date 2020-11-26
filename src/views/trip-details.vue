@@ -22,13 +22,13 @@
         <img  class="guidImg" :src="trip.aboutGuide.imgUrl" alt="Image..." />
         
 
-		<guide-review :guideId="trip.aboutGuide._id"  />
+		<!-- <guide-review :guideId="trip.aboutGuide._id"  /> -->
 	</section>
 </template>
 
 <script>
 import { tripService } from "../services/trip-service.js";
-import guideReview from "../cmps/review/guide-review.cmp.js";
+// import guideReview from "../cmps/review/guide-review.cmp.js";
 
 export default {
 	data() {
@@ -45,8 +45,8 @@ export default {
 		const trip = await tripService.getTripById(tripId);
 		this.trip = trip;
 	},
-	components: {
-		guideReview,
-	},
+	// components: {
+	// 	guideReview,
+	// },
 };
 </script>
