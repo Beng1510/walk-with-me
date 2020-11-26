@@ -39,7 +39,7 @@ export default {
          
        goToDetails(id) {
         console.log('hi from list');
-          router.push({ name: 'trip', params: { id } });
+          this.$router.push(`/trip/${id}`);
        } 
     },
 
