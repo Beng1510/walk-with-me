@@ -43,11 +43,7 @@ export default {
 	async created() {
 		console.log('hi from details');
 		const tripId = this.$route.params.id;
-<<<<<<< HEAD
-		console.log(tripId);
-=======
 		console.log('tripId',tripId);
->>>>>>> 4101ca3fabfe536c0e061fce3a76e39f394b53f1
 		const trip = await tripService.getTripById(tripId);
 		console.log('trip????',trip);
 		this.trip = trip;
