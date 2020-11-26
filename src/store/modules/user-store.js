@@ -1,10 +1,42 @@
 import {userService} from "../../services/user-service.js";
+var defaultUser = {
+    _id: "u102",
+    name: "Shuki Locali",
+    favoriteTrips: [
+        {
+            _id: "t104",
+            "name": "Switzerland Mountains",
+            "date": 9898989
+        },
+        {
+            _id: "t101",
+            name: "Scotland Heights",
+            date: 9898989
+        },
+        {
+            _id: "t102",
+            tripName: "Tuscany Vineyards",
+            date: 9898989
+        }
+    ],
+    profileImgUrl: "",
+    isGuide: false,
+    guideInfo: {
+        rate: "",
+        description: "",
+        lang: [],
+        reviews: []
+    }
+}
 
 var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
-// else (!)
+else {
+    localLoggedinUser = defaultUser
+} 
 
 export const userStore = {
+    strict: true,
     state: {
         users: [],
         loggedinUser: localLoggedinUser,
@@ -21,11 +53,9 @@ export const userStore = {
         },
         guidesForDisplay(state) {
             console.log('state at users',state);
-            return state.users
-        },
-        reviews(state) {
-            return state.reviews;
-        },
+            return state.users.filter(user => user.isGuide === true )
+            // return state.users
+        }
     },
     mutations: {
         setUser(state, { user }) {
@@ -48,6 +78,7 @@ export const userStore = {
             context.commit({ type: 'setUser', user })
             return user;
         },
+        
         async signup(context, { userCred }) {
             const user = await userService.signup(userCred)
             context.commit({ type: 'setUser', user })
@@ -61,7 +92,6 @@ export const userStore = {
 
         async loadUsers(context) {
             const users = await userService.getUsers();
-            console.log('users',users);
             context.commit({ type: 'setUsers', users })
         },
         async updateUser(context, { user }) {

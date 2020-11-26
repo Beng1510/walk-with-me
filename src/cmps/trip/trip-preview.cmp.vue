@@ -4,7 +4,7 @@
       <h1>{{trip.name}}</h1>
       <h3>{{trip.date}}</h3>
       <p>{{trip.aboutGuide.name}}</p>
-      <!-- <p>{{trip.aboutGuide.rate}}</p> -->
+      <p>{{trip.aboutGuide.rate}}</p>
       <p>
           <i v-for="n in 5" :key="n" class="fas fa-star"></i>
       </p>
@@ -38,7 +38,6 @@ export default {
        },
          
        goToDetails(id) {
-        console.log('hi from list');
           this.$router.push(`/trip/${id}`);
        } 
     },

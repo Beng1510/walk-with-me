@@ -10,11 +10,11 @@
 		<h3>Trip date: {{ trip.date }}</h3>
 		<h3>Trip type: {{ trip.tags }}</h3>
 		<h3>Price: {{ trip.price }}$</h3>
-		<h3>Trip capacity: {{ trip.capacity }}</h3>
-		<h3>Trip difficulty: {{ trip.difficulty }}(1-5)</h3>
+		<h3>Trip capacity: {{ trip.capacity }}/10</h3>
+		<h3>Trip difficulty: {{ trip.difficulty }}</h3>
         <p>Description {{trip.description}}</p>
 
-           
+        <trip-book :trip="trip" @bookTrip="bookTrip"/>    
         
         <h2>Guide Details</h2>
         <h3>Guide name: {{ trip.aboutGuide.name }}</h3>
@@ -31,23 +31,24 @@
 import { tripService } from "../services/trip-service.js";
 import guideReview from "../cmps/review/guide-review.cmp.vue";
 import addReview from "../cmps/review/add-review.cmp.vue";
+import tripBook from '../cmps/trip/trip-book.cmp.vue';
 
 export default {
 	data() {
 		return {
-            trip: null,
+			trip: null,
             
 		};
 	},
-	computed: {
 	
+	methods: {
+		bookTrip(booking) {
+			this.$store.dispatch({type:'addBooking', booking});
+		}
 	},
-	async created() {
-		console.log('hi from details');
+	async created() { 
 		const tripId = this.$route.params.id;
-		// console.log('tripId',tripId);
 		const trip = await tripService.getTripById(tripId);
-		// console.log('trip????',trip);
 		this.trip = trip;
 	},
 	components: {
