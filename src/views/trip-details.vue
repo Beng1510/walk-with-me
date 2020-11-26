@@ -29,6 +29,7 @@
 <script>
 import { tripService } from "../services/trip-service.js";
 import guideReview from "../cmps/review/guide-review.cmp.vue";
+import tripBook from '../cmps/trip/trip-book.cmp.vue';
 
 export default {
 	data() {
