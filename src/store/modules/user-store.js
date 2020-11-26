@@ -69,8 +69,8 @@ export const userStore = {
             context.commit({ type: 'setReviews', reviews })
         },
         // async addReview(context, { review }) {
-            // const user = await userService.getUserById(userId);
-            // review = await userService.addReview(review)
+        //     const user = await userService.getUserById(userId);
+        //     review = await userService.addReview(review)
         //     user.guideInfo.reviews.push(review)
         //     context.commit({ type: 'addReview', review })
         //     return review;
