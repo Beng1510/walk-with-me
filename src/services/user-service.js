@@ -1,10 +1,14 @@
+import axios from 'axios'
 import { httpService } from './http-service.js'
+const baseUrl = 'http://localhost:3000';
+
 
 export const userService = {
     login,
     logout,
     signup,
     getUserById,
+    getUsers,
     // updateUser,
     updateFavTrips,
     // getReviewsByGuide 
@@ -15,6 +19,12 @@ function getUserById(userId) {
     return httpService.get(`user/${userId}`)
 }
 
+async function getUsers() {
+    // return httpService.get('user')
+    const res = await axios.get(`${baseUrl}/user`)
+   
+    return res.data
+}
 // function updateUser(user) {
 //     return httpService.put(`user/${user._id}`, user)
 // }

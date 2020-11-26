@@ -1,4 +1,4 @@
-import userService from "../../services/user-service.js";
+import {userService} from "../../services/user-service.js";
 
 var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
@@ -18,6 +18,10 @@ export const userStore = {
         },
         isGuide(state) {
             return state.isGuide
+        },
+        guidesForDisplay(state) {
+            console.log('state at users',state);
+            return state.users
         }
     },
     mutations: {
@@ -52,10 +56,11 @@ export const userStore = {
             context.commit({ type: 'setUser', user: null })
         },
 
-        // async loadUsers(context) {
-        //     const users = await userService.getUsers();
-        //     context.commit({ type: 'setUsers', users })
-        // },
+        async loadUsers(context) {
+            const users = await userService.getUsers();
+            console.log('users',users);
+            context.commit({ type: 'setUsers', users })
+        },
         async updateUser(context, { user }) {
             user.favoriteTrips = await userService.updateFavTrips(user);
             context.commit({ type: 'setUser', user })

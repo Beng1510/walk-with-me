@@ -2,7 +2,7 @@ import { httpService } from './http-service.js';
 import axios from 'axios'
 
 
-const baseUrl = 'http://localhost:3000/trip';
+const baseUrl = 'http://localhost:3000';
 
 
 export const tripService = {
@@ -17,7 +17,7 @@ export const tripService = {
 async function query() {
 // function query(filterBy) {
     // console.log('filter by is:', filterBy)
-    const res = await axios.get(`${baseUrl}`)
+    const res = await axios.get(`${baseUrl}/trip`)
     return res.data
     
 
