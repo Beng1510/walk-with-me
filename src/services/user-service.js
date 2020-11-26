@@ -6,22 +6,22 @@ export const userService = {
     signup,
     getUsers,
     getUserById,
-    remove,
-    update
+    updateUser
+  
 }
 function getUsers() {
     return httpService.get('user')
 }
+
 function getUserById(userId) {
     return httpService.get(`user/${userId}`)
 }
-function remove(userId) {
-    return httpService.delete(`user/${userId}`)
-}
 
-function update(user) {
+function updateUser(user) {
     return httpService.put(`user/${user._id}`, user)
 }
+
+
 
 async function login(userCred) {
     const user = await httpService.post('auth/login', userCred)
