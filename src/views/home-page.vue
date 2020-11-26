@@ -3,12 +3,22 @@
     <h2>Walk With Me</h2>
     <span v-if="isLoading">Loading...</span>
     <trip-filter @filterBy="updateFilter" />
+    <h3> All Trips </h3>
     <trip-list :trips="tripsForDisplay" />
     <hr/>
+    <h3> Mountain Trips </h3>
     <trip-list :trips="mountainTripsForDisplay" />
-    <!-- <trip-list :trips="seaTripsForDisplay" />
-    <trip-list :trips="cityTripsForDisplay" /> -->
+     <hr/>
+    <h3> Forest Trips </h3>
+    <trip-list :trips="forestTripsForDisplay" />
     <hr/>
+    <h3> Seaside Trips </h3>
+    <trip-list :trips="seaTripsForDisplay" />
+    <hr/>
+    <h3> City Trips </h3> 
+    <trip-list :trips="cityTripsForDisplay" />
+    <hr/>
+    <h3> Guide List </h3>
     <guide-list :users="guidesForDisplay" />
 
     <hr/>
@@ -47,6 +57,15 @@ export default {
     mountainTripsForDisplay() {
       return this.$store.getters.mountainTripsForDisplay;
     },
+    forestTripsForDisplay() {
+      return this.$store.getters.forestTripsForDisplay;
+    },
+    seaTripsForDisplay() {
+      return this.$store.getters.seaTripsForDisplay;
+    },
+    cityTripsForDisplay() {
+      return this.$store.getters.cityTripsForDisplay;
+    },
     guidesForDisplay() {
       return this.$store.getters.guidesForDisplay;
     },
@@ -60,7 +79,6 @@ export default {
     guideList
   },
   created() {
-    console.log("got here");
     this.$store.dispatch({
       type: "loadTrips",
     });

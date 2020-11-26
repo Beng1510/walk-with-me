@@ -15,11 +15,11 @@ export const tripService = {
 
 
 async function query() {
-// function query(filterBy) {
+    // function query(filterBy) {
     // console.log('filter by is:', filterBy)
     const res = await axios.get(`${baseUrl}/trip`)
     return res.data
-    
+
 
     // const trips = httpService.get(_buildQuery(filterBy));
     // return trips;
@@ -30,8 +30,11 @@ async function query() {
 // }
 
 
-function getTripById(tripId) {
-    return httpService.get(`trip/${tripId}`)
+async function getTripById(tripId) {
+
+    const res = await axios.get(`${baseUrl}/trip/${tripId}`)
+    return res.data
+    // return httpService.get(`trip/${tripId}`)
 }
 
 

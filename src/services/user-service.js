@@ -15,13 +15,20 @@ export const userService = {
 }
 
 
-function getUserById(userId) {
-    return httpService.get(`user/${userId}`)
+async function getUserById(userId) {
+    const res = await axios.get(`${baseUrl}/user/${userId}`)
+    return res.data
+
+    // return httpService.get(`user/${userId}`)
 }
 
 async function getUsers() {
     // return httpService.get('user')
     const res = await axios.get(`${baseUrl}/user`)
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
     return res.data
 }
 // function updateUser(user) {
