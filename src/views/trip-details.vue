@@ -43,7 +43,7 @@ export default {
 			this.$store.dispatch({type:'addBooking', booking});
 		}
 	},
-	async created() {
+	async created() { 
 		const tripId = this.$route.params.id;
 		const trip = await tripService.getTripById(tripId);
 		this.trip = trip;
