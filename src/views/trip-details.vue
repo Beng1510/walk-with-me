@@ -14,7 +14,7 @@
 		<h3>Trip difficulty: {{ trip.difficulty }}</h3>
         <p>Description {{trip.description}}</p>
 
-           
+        <trip-book :trip="trip" @bookTrip="bookTrip"/>    
         
         <h2>Guide Details</h2>
         <h3>Guide name: {{ trip.aboutGuide.name }}</h3>
