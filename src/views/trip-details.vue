@@ -53,7 +53,8 @@ export default {
 	},
 	components: {
 		guideReview,
-		addReview
+		addReview,
+		tripBook
 	},
 };
 </script>

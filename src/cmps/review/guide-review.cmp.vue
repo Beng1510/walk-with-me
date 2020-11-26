@@ -2,7 +2,7 @@
   <section class="reviews">
     <!-- v-if="guideId" -->
     <h1>-----------------Reviews-----------------</h1>
-    <ul class="">
+    
       
       <h2>
         <button @click="handleReview">Add</button>
@@ -18,11 +18,12 @@
           <button type="button" @click="cancelReview">Cancel</button>
         </div>
       </form>
+      <ul class="">
       <li
         class="review-card flex f-col f-center"
         v-for="review in reviews"
-        :key="review._id"
-      >
+        :key="review._id">
+      
         <img class="userImg" :src="review.reviewByUser.imgUrl" alt="Image..." />
         <h3>By: {{ review.reviewByUser.userName }}</h3>
         <h2>{{ review.txt }}</h2>
@@ -82,7 +83,7 @@ export default {
     },
   },
   async created() {
-    console.log("guideId", this.guideId);
+    console.log("guideIdwwwwwww", this.guideId);
     // const guide = userService.getUserById(guideId);
     // console.log("guideeee", guide);
     this.$store.dispatch({ type: "loadReviews", guideId: this.guideId });

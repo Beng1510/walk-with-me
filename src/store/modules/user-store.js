@@ -55,6 +55,9 @@ export const userStore = {
             console.log('state at users',state);
             return state.users.filter(user => user.isGuide === true )
             // return state.users
+        },
+        reviews(state){
+            return state.reviews
         }
     },
     mutations: {
