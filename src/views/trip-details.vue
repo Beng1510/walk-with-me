@@ -38,6 +38,7 @@ export default {
             
 		};
 	},
+	
 	methods: {
 		bookTrip(booking) {
 			this.$store.dispatch({type:'addBooking', booking});
