@@ -33,7 +33,7 @@ export default {
     },
   },
   created() {
-      console.log('guideId',guideId);
+     
     const guide = userService.getUserById(guideId);
     console.log("guideeee", guide);
     this.$store.dispatch({ type: "loadReviews" });
