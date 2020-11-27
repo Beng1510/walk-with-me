@@ -73,7 +73,11 @@ export const userStore = {
         },
         addReview(state, { review }) {
             state.reviews.push(review)
+            
+            console.log('reviewsssssss:', state.reviews)
+
         },
+       
     },
     actions: {
         async login(context, { userCred }) {
@@ -111,6 +115,16 @@ export const userStore = {
             console.log('reviews:', reviews)
             context.commit({ type: 'setReviews', reviews })
         },
+
+        async saveReview({ commit }, { review ,guideId } ) {
+            
+          
+
+            const savedReview = await userService.saveReview(review ,guideId)
+            commit({type: 'addReview', review})
+            
+        }
+
         // async addReview(context, { review }) {
         //     const user = await userService.getUserById(userId);
         //     review = await userService.addReview(review)
