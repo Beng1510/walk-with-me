@@ -1,6 +1,7 @@
 <template>
   <div class="home-page">
-    <h2>Walk With Me</h2>
+    <img class="hero" src="../assets/img/hero1.jpeg"/>
+    <h2>Let Us Guide You</h2>
     <span v-if="isLoading">Loading...</span>
     <trip-filter @filterBy="updateFilter" />
     <h3> All Trips </h3>
