@@ -60,10 +60,6 @@ export default {
         dateForDisplay() {
             return this.trip.date.toLocaleDateString();
         }
-    },
-
-    created() {
-        
     }
 }
 </script>
