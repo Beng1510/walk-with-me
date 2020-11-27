@@ -25,7 +25,7 @@ export const bookingStore = {
 
         async loadBookings(context) {
             const bookings = await bookingService.getBookings();
-
+            console.log('bookingssssss', bookings);
             context.commit({ type: 'setBookings', bookings })
         },
 

@@ -11,8 +11,8 @@ export const bookingService = {
   
 }
 
-function getBookings() {
-const res = axios.get(`${baseUrl}/booking`)
+async function getBookings() {
+const res = await axios.get(`${baseUrl}/booking`)
 return res.data
 
 }

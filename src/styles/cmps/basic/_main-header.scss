@@ -1,0 +1,20 @@
+.main-header {
+    // background-color: aquamarine;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    // position: absolute;
+}
+
+.nav-bar a{
+    text-decoration: none;
+    color: black;
+    font-family: PerMark;
+    font-size: 24px;
+}
+
+.logo {
+    font-family: PerMark;
+    font-size: 36px;
+}
