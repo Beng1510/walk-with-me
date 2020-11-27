@@ -15,7 +15,6 @@
 
 <script>
 export default {
-    //What about stars? thought to create an array w/ loop and the v-for the icons. overkill?
     props: {
         trip: {
             type: Object,
@@ -25,6 +24,7 @@ export default {
 
     data() {
         return {
+            user: null,
             isFav: false
         }
     },
@@ -60,6 +60,11 @@ export default {
         dateForDisplay() {
             return this.trip.date.toLocaleDateString();
         }
+    },
+
+    created() {
+        this.user = this.$store.getters.loggedinUser;
+        console.log(this.user);
     }
 }
 </script>
