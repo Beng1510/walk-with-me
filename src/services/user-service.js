@@ -9,23 +9,35 @@ export const userService = {
     signup,
     getUserById,
     getUsers,
-    // updateUser,
-    updateFavTrips,
+    saveReview,
+    updateUser,
+  
     // getReviewsByGuide 
 }
 
 
 async function getUserById(userId) {
     const res = await axios.get(`${baseUrl}/user/${userId}`)
-    
+
     return res.data
     // return httpService.get(`user/${userId}`)
 }
 
-// async function getGuideById (guideId){
-//     const res = await axios.get(`${baseUrl}/user/${guideId}`)
-//     return res.data
-// }
+async function saveReview(review, guideId) {
+    
+    
+    // console.log('review:Lest Time', review.txt)
+    // console.log('review:Lest Time', review.rate)
+
+    const user = await getUserById(guideId)
+    console.log('user:', user)
+    user.guideInfo.reviews.push(review)
+    console.log('user:', user)
+
+    updateUser(user);
+    // return 
+}
+
 
 async function getUsers() {
     // return httpService.get('user')
@@ -36,8 +48,10 @@ async function getUsers() {
 //     return httpService.put(`user/${user._id}`, user)
 // }
 
-function updateFavTrips(user) {
-    return httpService.put(`user/${user._id}`, user)
+async function updateUser(user) {
+    const res = await axios.put(`${baseUrl}/user/${user._id}`,user)
+    return res.data 
+    // return httpService.put(`user/${user._id}`, user)
 }
 
 // function getReviewsByGuide(userId) {
