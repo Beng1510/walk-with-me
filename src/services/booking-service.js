@@ -31,6 +31,6 @@ async function getBookingById(bookingId) {
 }
 
 async function updateBooking(booking) {
-    const res = await axios.put(`${booking}/user/${booking._id}`,booking)
+    const res = await axios.put(`${baseUrl}/booking/${booking._id}`,booking)
     return res.data 
 }

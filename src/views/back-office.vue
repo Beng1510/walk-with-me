@@ -8,7 +8,7 @@
     <ul>
       <li v-for="booking in filterdBookings" :key="booking._id">
         {{ booking.trip.name }} | Status: {{ booking.status }}
-        <button @click="approveBooking(booking)">Approve</button>
+        <button @click.stop="approveBooking(booking)">{{btnText}}</button>
       </li>
     </ul>
   </section>
@@ -24,28 +24,33 @@ export default {
     return {
       guide: null,
       filterdBookings: null,
+      btnText: 'Approve'
     };
   },
 
   methods: {
     async approveBooking(booking) {
-
       // const booking = await bookingService.getBookingById(bookingId)
-      booking.status = "approved"
-      console.log('book after approval',booking)
+      if (booking.status === "pending") {
+        booking.status = "approved";
+        // this.btnText = "Undo"
+      } else {
+        booking.status = "pending";
+        // this.btnText = "Approve"
+      }
+      console.log("book after approval", booking);
 
       this.$store.dispatch({
-					type: 'updateBooking',
-					booking
-				});
-    }
+        type: "updateBooking",
+        booking,
+      });
     },
-  computed: {
   },
+  computed: {},
   async created() {
     this.guide = this.$store.getters.loggedinGuide;
     console.log("guide", this.guide);
-    
+
     this.$store.dispatch({
       type: "loadBookings",
     });
@@ -57,7 +62,6 @@ export default {
       (booking) => booking.guide._id === this.guide._id
     );
     console.log("this.filterdBookings", this.filterdBookings);
-
   },
   components: {},
 };
