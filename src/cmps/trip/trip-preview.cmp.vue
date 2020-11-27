@@ -9,7 +9,7 @@
           <i v-for="n in 5" :key="n" class="fas fa-star"></i>
       </p>
       <p>{{trip.capacity}}/10 trippers</p>
-      <p @click.stop="emitFav(trip._id)"><i :class="fav"></i></p>
+      <p @click.stop="emitFav(trip)"><i :class="fav"></i></p>
   </section>
 </template>
 
@@ -32,8 +32,8 @@ export default {
     name: 'trip-preview',
 
     methods: {
-       emitFav(id) {
-           this.$emit('emitFav', id);
+       emitFav(trip) {
+           this.$emit('emitFav', trip);
            this.isFav = !this.isFav;
        },
          

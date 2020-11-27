@@ -29,8 +29,8 @@ export default {
   },
 
   methods: {
-    emitFav(id) {
-      this.$emit("emitFav", id);
+    emitFav(trip) {
+      this.$emit("emitFav", trip);
     },
 
     goToDetails(id) {

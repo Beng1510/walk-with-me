@@ -50,23 +50,21 @@ export default {
         type: "loadTrips",
       });
     },
-    addToFavs(id) {
+    addToFavs(trip) {
       var userFavs = this.user.favoriteTrips;
-      const trip = this.$store.getters.getTripById(id)
-      let isFav = userFavs.map(userFav => userFav._id.includes(id));
-      // if (isFav.includes(true)) {
-      //    const idx = userFavs.findIndex((fav) => fav._id === this.trip._id);
-      //   if (idx >= 0) {
-      //     userFavs.splice(idx, 1);
-      //   }
-      // } else {
-      //    userFavs.push({
-      //     date: this.trip.date,
-      //     name: this.trip.name,
-      //     _id: this.trip._id,
-      //   });
-      // }
-      console.log(trip);
+      let isFav = userFavs.map(userFav => userFav._id.includes(trip._id));
+      if (isFav.includes(true)) {
+         const idx = userFavs.findIndex((fav) => fav._id === trip._id);
+        if (idx >= 0) {
+          userFavs.splice(idx, 1);
+        }
+      } else {
+         userFavs.unshift({
+          date: trip.date,
+          name: trip.name,
+          _id: trip._id,
+        });
+      }
     },
   },
   computed: {
