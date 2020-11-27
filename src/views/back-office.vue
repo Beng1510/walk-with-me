@@ -8,7 +8,7 @@
     <ul>
       <li v-for="booking in filterdBookings" :key="booking._id">
         {{ booking.trip.name }} | Status: {{ booking.status }}
-        <button @click="approveBooking(booking._id)">Approve</button>
+        <button @click="approveBooking(booking)">Approve</button>
       </li>
     </ul>
   </section>
@@ -28,11 +28,16 @@ export default {
   },
 
   methods: {
-    async approveBooking(bookingId) {
-      const booking = await bookingService.getBookingById(bookingId)
+    async approveBooking(booking) {
+
+      // const booking = await bookingService.getBookingById(bookingId)
       booking.status = "approved"
       console.log('book after approval',booking)
-      
+
+      this.$store.dispatch({
+					type: 'updateBooking',
+					booking
+				});
     }
     },
   computed: {

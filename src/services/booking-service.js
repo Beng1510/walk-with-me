@@ -8,7 +8,8 @@ const baseUrl = 'http://localhost:3000';
 export const bookingService = {
     getBookings,
     createBooking,
-    getBookingById
+    getBookingById,
+    updateBooking
   
 }
 
@@ -27,4 +28,9 @@ async function getBookingById(bookingId) {
     const res = await axios.get(`${baseUrl}/booking/${bookingId}`)
 
     return res.data
+}
+
+async function updateBooking(booking) {
+    const res = await axios.put(`${booking}/user/${booking._id}`,booking)
+    return res.data 
 }

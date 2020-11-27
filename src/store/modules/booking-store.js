@@ -43,8 +43,10 @@ export const bookingStore = {
         },
 
         async updateBooking(context, { booking }) {
-
-            context.commit({ type: 'setBooking', booking })
+            console.log('booking at store??', booking);
+            const updatedBooking = await bookingService.updateBooking(booking)
+            console.log('updatedBooking',updatedBooking);
+            // context.commit({ type: 'setBooking', booking })
         },
 
 
