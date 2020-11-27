@@ -30,7 +30,6 @@ async function getUserById(userId) {
 async function getUsers() {
     // return httpService.get('user')
     const res = await axios.get(`${baseUrl}/user`)
-
     return res.data
 }
 // function updateUser(user) {

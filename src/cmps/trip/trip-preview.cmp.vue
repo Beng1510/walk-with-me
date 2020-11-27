@@ -9,7 +9,7 @@
           <i v-for="n in 5" :key="n" class="fas fa-star"></i>
       </p>
       <p>{{trip.capacity}}/10 trippers</p>
-      <p @click="emitFav"><i :class="fav"></i></p>
+      <p @click.stop="emitFav"><i :class="fav"></i></p>
   </section>
 </template>
 
