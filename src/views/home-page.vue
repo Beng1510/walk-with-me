@@ -27,44 +27,48 @@
 </template>
 
 <script>
-
 import tripFilter from "../cmps/trip/trip-filter.cmp.vue";
 import tripList from "../cmps/trip/trip-list.cmp.vue";
 import guideList from "../cmps/guide/guide-list.cmp.vue";
 
 export default {
-  name: "home-page",
+  name: 'home-page',
   data() {
     return {
       isLoading: false,
-      user: null
+      user: null,
     };
   },
   methods: {
     updateFilter(filterBy) {
       this.$store.commit({
-        type: "setFilterBy",
+        type: 'setFilterBy',
         filterBy,
       });
       this.$store.dispatch({
-        type: "loadTrips",
+        type: 'loadTrips',
       });
     },
     addToFavs(trip) {
-      var userFavs = this.user.favoriteTrips;
-      let isFav = userFavs.map(userFav => userFav._id.includes(trip._id));
+      let userFavs = this.user.favoriteTrips;
+      let isFav = userFavs.map((userFav) => userFav._id.includes(trip._id));
       if (isFav.includes(true)) {
-         const idx = userFavs.findIndex((fav) => fav._id === trip._id);
+        const idx = userFavs.findIndex((fav) => fav._id === trip._id);
         if (idx >= 0) {
           userFavs.splice(idx, 1);
         }
       } else {
-         userFavs.unshift({
+        userFavs.unshift({
           date: trip.date,
           name: trip.name,
           _id: trip._id,
         });
       }
+      this.$store.dispatch({
+        type: 'updateUser',
+        user: this.user,
+        trip,
+      });
     },
   },
   computed: {
@@ -85,7 +89,7 @@ export default {
     },
     guidesForDisplay() {
       return this.$store.getters.guidesForDisplay;
-    }
+    },
   },
   components: {
     tripFilter,
@@ -94,10 +98,10 @@ export default {
   },
   created() {
     this.$store.dispatch({
-      type: "loadTrips",
+      type: 'loadTrips',
     });
     this.$store.dispatch({
-      type: "loadUsers",
+      type: 'loadUsers',
     });
     this.user = this.$store.getters.loggedinUser;
   },

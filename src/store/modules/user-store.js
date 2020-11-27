@@ -106,9 +106,7 @@ export const userStore = {
         async loadReviews(context, { guideId }) {
             // const review = await userService.getReviewsByGuide();
             const user = await userService.getUserById(guideId);
-            console.log('user:', user)
             const reviews = user.guideInfo.reviews
-            console.log('reviews:', reviews)
             context.commit({ type: 'setReviews', reviews })
         },
 

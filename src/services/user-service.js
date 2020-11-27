@@ -24,18 +24,9 @@ async function getUserById(userId) {
 }
 
 async function saveReview(review, guideId) {
-    
-    
-    // console.log('review:Lest Time', review.txt)
-    // console.log('review:Lest Time', review.rate)
-
     const user = await getUserById(guideId)
-    console.log('user:', user)
     user.guideInfo.reviews.push(review)
-    console.log('user:', user)
-
     updateUser(user);
-    // return 
 }
 
 
