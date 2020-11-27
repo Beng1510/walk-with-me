@@ -13,10 +13,9 @@
     <hr />
     <h3>Your Bookings</h3>
     <ul>
-        <li v-for="booking in filterdBookings" :key="booking._id">
-    {{ booking.status }}
-
-        </li>
+      <li v-for="booking in filterdBookings" :key="booking._id">
+        {{ booking.status }}
+      </li>
     </ul>
     <hr />
     <!-- {{user.favoriteTrips}} -->
@@ -28,7 +27,7 @@ import { userService } from "../services/user-service.js";
 import { bookingService } from "../services/booking-service.js";
 
 export default {
-    name: "user-details",
+  name: "user-details",
   data() {
     return {
       user: null,
@@ -42,17 +41,19 @@ export default {
     console.log("userId", userId);
     // const trip = await tripService.getTripById(tripId);
     // this.trip = trip;
-    
+
     this.user = this.$store.getters.loggedinUser;
     console.log("this.user", this.user);
- this.$store.dispatch({
+    this.$store.dispatch({
       type: "loadBookings",
     });
 
     const bookings = this.$store.getters.bookings;
-    console.log('bookings',bookings);
-    this.filterdBookings = bookings.filter((booking) => booking.user._id === userId);
-    console.log('this.filterdBookings',this.filterdBookings);
+    console.log("bookings", bookings);
+    this.filterdBookings = bookings.filter(
+      (booking) => booking.user._id === userId
+    );
+    console.log("this.filterdBookings", this.filterdBookings);
 
     // bookingService.getBookingById(userId);
   },

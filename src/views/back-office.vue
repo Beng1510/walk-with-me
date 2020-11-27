@@ -8,6 +8,7 @@
     <ul>
       <li v-for="booking in filterdBookings" :key="booking._id">
         {{ booking.trip.name }} | Status: {{ booking.status }}
+        <button @click="approveBooking(booking._id)">Approve</button>
       </li>
     </ul>
   </section>
@@ -26,28 +27,32 @@ export default {
     };
   },
 
-  methods: {},
-  created() {
-    const guide = this.$store.getters.loggedinGuide;
-    console.log("guide", guide);
-    this.guide = guide;
-    // const trip = await tripService.getTripById(tripId);
-    // this.trip = trip;
-
-    //     this.user = this.$store.getters.loggedinUser;
-    //     console.log("this.user", this.user);
+  methods: {
+    async approveBooking(bookingId) {
+      const booking = await bookingService.getBookingById(bookingId)
+      booking.status = "approved"
+      console.log('book after approval',booking)
+      
+    }
+    },
+  computed: {
+  },
+  async created() {
+    this.guide = this.$store.getters.loggedinGuide;
+    console.log("guide", this.guide);
+    
     this.$store.dispatch({
       type: "loadBookings",
     });
 
     const bookings = this.$store.getters.bookings;
     console.log("bookings", bookings);
+
     this.filterdBookings = bookings.filter(
-      (booking) => booking.guide._id === guide._id
+      (booking) => booking.guide._id === this.guide._id
     );
     console.log("this.filterdBookings", this.filterdBookings);
 
-    // bookingService.getBookingById(userId);
   },
   components: {},
 };
