@@ -14,7 +14,7 @@
       />
       <input
         type="number"
-        v-model="newReview.rate"
+        v-model.number="newReview.rate"
         placeholder="Guide Rate (1-5)"
       />
       <div class="">
@@ -51,9 +51,15 @@ export default {
 
       // },
       newReview: {
-        By: "",
+        
         txt: "",
         rate: null,
+        reviewByUser:{
+          userName: "",
+          imgUrl: "",
+          _id: "",
+
+        }
       },
     };
   },
@@ -62,6 +68,7 @@ export default {
       this.$store.dispatch({
         type: "saveReview",
         review: this.newReview,
+        guideId: this.guideId
       });
     },
     showAddBtn() {

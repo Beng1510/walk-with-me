@@ -116,9 +116,11 @@ export const userStore = {
             context.commit({ type: 'setReviews', reviews })
         },
 
-        async saveReview({ commit }, { review }) {
+        async saveReview({ commit }, { review ,guideId } ) {
             
-            const savedReview = await userService.saveReview(review)
+          
+
+            const savedReview = await userService.saveReview(review ,guideId)
             commit({type: 'addReview', review})
             
         }
