@@ -11,9 +11,6 @@ export const tripStore = {
         currTrip: {}
     },
     getters: {
-        // tripsForHomeDisplay(state) {
-        //     return state.trips,slice(0,4)
-        // },
         tripsForDisplay(state) {
             return state.trips
         },
@@ -28,8 +25,7 @@ export const tripStore = {
         },
         cityTripsForDisplay(state) {
             return state.trips.filter(trip => trip.type === "city" )
-        },
-      
+        }
     },
     mutations: {
         setFilterBy(state, { filterBy }) {
@@ -63,6 +59,7 @@ export const tripStore = {
             commit({ type: 'setTrips', trips })
             // commit({ type: 'setIsLoading', isLoading: false })
         },
+        
         // async saveTrip({ commit }, { trip }) {
         //     const actionType = (trip._id) ? 'updateTrip' : 'addTrip';
         //     const savedTrip = await tripService.save(trip);

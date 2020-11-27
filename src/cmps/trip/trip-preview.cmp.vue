@@ -35,25 +35,6 @@ export default {
        emitFav(id) {
            this.$emit('emitFav', id);
            this.isFav = !this.isFav;
-            var userFavs = this.user.favoriteTrips;
-           const tripId = this.trip._id;
-           let isFavorite = userFavs.includes({tripId});
-           console.log(isFavorite);
-           if (isFavorite) {
-               this.isFav = false;
-               const idx = userFavs.findIndex(fav => fav._id === this.trip._id);
-               if (idx >= 0) {
-                   userFavs.splice(idx, 1);
-               }
-           } else {
-               this.isFav = true;
-               userFavs.push(
-               {
-                   date: this.trip.date,
-                   name: this.trip.name,
-                   _id: this.trip._id
-               }     
-           )} 
        },
          
        goToDetails(id) {
@@ -82,7 +63,7 @@ export default {
     },
 
     created() {
-        this.user = this.$store.getters.loggedinUser;
+        
     }
 }
 </script>
