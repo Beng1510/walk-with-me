@@ -54,7 +54,6 @@ export const userStore = {
         guidesForDisplay(state) {
             console.log('state at users',state);
             return state.users.filter(user => user.isGuide === true )
-            // return state.users
         },
         reviews(state){
             return state.reviews
@@ -73,9 +72,6 @@ export const userStore = {
         },
         addReview(state, { review }) {
             state.reviews.push(review)
-            
-            console.log('reviewsssssss:', state.reviews)
-
         },
        
     },
