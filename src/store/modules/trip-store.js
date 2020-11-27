@@ -11,10 +11,8 @@ export const tripStore = {
         currTrip: {}
     },
     getters: {
-        // tripsForHomeDisplay(state) {
-        //     return state.trips,slice(0,4)
-        // },
         tripsForDisplay(state) {
+            console.log('state.trips',state.trips);
             return state.trips
         },
         mountainTripsForDisplay(state) {

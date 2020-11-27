@@ -4,7 +4,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    // position: absolute;
 }
 
 .nav-bar a{
@@ -14,7 +13,14 @@
     font-size: 24px;
 }
 
-.logo {
+.logo-container a {
+    text-decoration: none;
+}
+
+.logo-container .logo {
     font-family: PerMark;
-    font-size: 36px;
+    font-size: 36px; 
+    text-decoration: none;
+    color: black;
+
 }
