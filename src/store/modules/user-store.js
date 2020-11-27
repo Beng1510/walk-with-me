@@ -88,7 +88,6 @@ export const userStore = {
         guidesForDisplay(state) {
             console.log('state at users',state);
             return state.users.filter(user => user.isGuide === true )
-            // return state.users
         },
         reviews(state){
             return state.reviews
@@ -108,6 +107,7 @@ export const userStore = {
         addReview(state, { review }) {
             state.reviews.push(review)
         },
+       
     },
     actions: {
         async login(context, { userCred }) {
@@ -132,7 +132,7 @@ export const userStore = {
             context.commit({ type: 'setUsers', users })
         },
         async updateUser(context, { user }) {
-            user.favoriteTrips = await userService.updateFavTrips(user);
+            user = await userService.updateUser(user);
             context.commit({ type: 'setUser', user })
         },
 
@@ -140,11 +140,19 @@ export const userStore = {
         async loadReviews(context, { guideId }) {
             // const review = await userService.getReviewsByGuide();
             const user = await userService.getUserById(guideId);
-            console.log('user:', user)
             const reviews = user.guideInfo.reviews
-            console.log('reviews:', reviews)
             context.commit({ type: 'setReviews', reviews })
         },
+
+        async saveReview({ commit }, { review ,guideId } ) {
+            
+          
+
+            const savedReview = await userService.saveReview(review ,guideId)
+            commit({type: 'addReview', review})
+            
+        }
+
         // async addReview(context, { review }) {
         //     const user = await userService.getUserById(userId);
         //     review = await userService.addReview(review)

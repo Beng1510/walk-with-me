@@ -2,10 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import home from "../views/home-page.vue";
 // import about from "../views/about.vue"
-import tripList from "../cmps/trip/trip-list.cmp.vue"
-import tripDetails from "../views/trip-details.vue"
-import userDetails from "../views/user-details.vue"
-import backOffice from "../views/back-office.vue"
+import tripList from "../cmps/trip/trip-list.cmp.vue";
+import tripDetails from "../views/trip-details.vue";
+import userDetails from "../views/user-details.vue";
+import backOffice from "../views/back-office.vue";
+import guideDetails from '../views/guide-details.vue';
 
 Vue.use(VueRouter);
 
@@ -35,6 +36,11 @@ const routes = [
     name: "back-office",
     component: backOffice
   },
+  {
+    path: '/guide/:id',
+    name: 'guide-details',
+    component: guideDetails
+  }
   // {
   //   path: "/about",
   //   name: "about",

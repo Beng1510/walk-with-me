@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import tripPreview from "./trip-preview.cmp.vue";
+import tripPreview from './trip-preview.cmp.vue';
 
 export default {
   props: {
@@ -22,21 +22,19 @@ export default {
     },
   },
 
-  name: "trip-list",
+  name: 'trip-list',
 
   components: {
     tripPreview,
   },
 
   methods: {
-    emitFav(id) {
-      this.$emit("emitFav", id);
+    emitFav(trip) {
+      this.$emit('emitFav', trip);
     },
 
-    //    goToDetails() {
     goToDetails(id) {
-      console.log("hi from list");
-      router.push({ name: "trip", params: { id } });
+      router.push({ name: 'trip', params: { id } });
     },
   },
 };

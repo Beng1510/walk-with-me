@@ -20,7 +20,6 @@
 
 <script>
 export default {
-  //What about stars? thought to create an array w/ loop and the v-for the icons. overkill?
   props: {
     trip: {
       type: Object,
@@ -30,6 +29,7 @@ export default {
 
   data() {
     return {
+      user: null,
       isFav: false,
     };
   },
@@ -37,8 +37,8 @@ export default {
   name: "trip-preview",
 
   methods: {
-    emitFav(id) {
-      this.$emit("emitFav", id);
+    emitFav(trip) {
+      this.$emit("emitFav", trip);
       this.isFav = !this.isFav;
     },
 

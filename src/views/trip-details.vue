@@ -36,26 +36,26 @@ import addReview from "../cmps/review/add-review.cmp.vue";
 import tripBook from "../cmps/trip/trip-book.cmp.vue";
 
 export default {
-  data() {
-    return {
-      trip: null,
-    };
-  },
-
-  methods: {
-    bookTrip(booking) {
-      this.$store.dispatch({ type: "addBooking", booking });
-    },
-  },
-  async created() {
-    const tripId = this.$route.params.id;
-    const trip = await tripService.getTripById(tripId);
-    this.trip = trip;
-  },
-  components: {
-    guideReview,
-    addReview,
-    tripBook,
-  },
+	data() {
+		return {
+			trip: null,            
+		};
+	},
+	
+	methods: {
+		bookTrip(booking) {
+			this.$store.dispatch({type:'addBooking', booking});
+		}
+	},
+	async created() { 
+		const tripId = this.$route.params.id;
+		const trip = await tripService.getTripById(tripId);
+		this.trip = trip;
+	},
+	components: {
+		guideReview,
+		addReview,
+		tripBook
+	},
 };
 </script>
