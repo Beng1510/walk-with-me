@@ -35,16 +35,9 @@ async function saveReview(review, guideId) {
     console.log('user:', user)
 
     updateUser(user);
-    // const res = await axios.post(`${baseUrl}/user`, review)
-
-
     // return 
 }
 
-// async function getGuideById (guideId){
-//     const res = await axios.get(`${baseUrl}/user/${guideId}`)
-//     return res.data
-// }
 
 async function getUsers() {
     // return httpService.get('user')
