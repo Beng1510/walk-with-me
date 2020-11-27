@@ -19,7 +19,7 @@ var defaultUser = {
             date: 9898989
         }
     ],
-    profileImgUrl: "",
+    profileImgUrl: "user1.jpeg",
     isGuide: false,
     guideInfo: {
         rate: "",
@@ -86,7 +86,7 @@ export const userStore = {
             return state.isGuide
         },
         guidesForDisplay(state) {
-            console.log('state at users',state);
+            // console.log('state at users',state);
             return state.users.filter(user => user.isGuide === true )
         },
         reviews(state){

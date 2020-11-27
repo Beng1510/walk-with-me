@@ -19,8 +19,8 @@ return res.data
 
 }
 
-function createBooking(booking) {
-   const res = axios.post(`${baseUrl}/booking`,booking)
+async function createBooking(booking) {
+   const res = await axios.post(`${baseUrl}/booking`,booking)
    return res.data
 }
 

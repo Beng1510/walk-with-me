@@ -1,9 +1,11 @@
 <template>
   <div class="home-page">
+    <div class="hero-container">
     <img class="hero" src="../assets/img/hero1.jpeg" />
+    </div>
     <h2>Let Us Guide You</h2>
     <span v-if="isLoading">Loading...</span>
-    <trip-filter @filterBy="updateFilter" />
+    <trip-filter @filterBy="updateFilter" :trips="tripsForDisplay" />
     <h3>All Trips</h3>
     <trip-list :trips="tripsForDisplay" @emitFav="addToFavs" />
     <hr />
@@ -103,7 +105,10 @@ export default {
     this.$store.dispatch({
       type: 'loadUsers',
     });
-    this.user = this.$store.getters.loggedinUser;
+    // this.user = this.$store.getters.loggedinUser;
   },
+  mounted() {
+    this.user = this.$store.getters.loggedinUser;
+  }
 };
 </script>

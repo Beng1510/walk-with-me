@@ -1,16 +1,32 @@
 <template>
   <section v-if="filterdBookings" class="back-office">
-    <h2>Guide Page</h2>
+    <h2>Back Office</h2>
     Hello {{ guide.name }}
     <hr />
+    Your Bookings:
+    <table class="back-office-table">
+      <thead>
+        <tr>
+          <th>Trip Name </th>
+          <th>Booked By</th>
+          <th>Amount of People</th>
+          <th>Special Requests</th>
+          <th>Status</th>
+          <th>Approve Booking</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="booking in filterdBookings" :key="booking._id">
+          <td scope="row">{{ booking.trip.name  }}</td>  
+       <td>{{ booking.user.name }}  </td> 
+       <td>{{ booking.peopleToSign }}  </td> 
+       <td>{{ booking.specialReq }}  </td> 
+       <td>{{ booking.status }}  </td> 
+       <td><button @click.stop="approveBooking(booking)">{{ btnText }}</button></td>
+       </tr>
+   </tbody>
 
-    My Bookings:
-    <ul>
-      <li v-for="booking in filterdBookings" :key="booking._id">
-        {{ booking.trip.name }} | Status: {{ booking.status }}
-        <button @click.stop="approveBooking(booking)">{{btnText}}</button>
-      </li>
-    </ul>
+</table>
   </section>
 </template>
 
@@ -24,13 +40,12 @@ export default {
     return {
       guide: null,
       filterdBookings: null,
-      btnText: 'Approve'
+      btnText: "Update",
     };
   },
 
   methods: {
     async approveBooking(booking) {
-      // const booking = await bookingService.getBookingById(bookingId)
       if (booking.status === "pending") {
         booking.status = "approved";
         // this.btnText = "Undo"
@@ -48,20 +63,29 @@ export default {
   },
   computed: {},
   async created() {
-    this.guide = this.$store.getters.loggedinGuide;
+    // this.guide = this.$store.getters.loggedinGuide;
     console.log("guide", this.guide);
 
     this.$store.dispatch({
       type: "loadBookings",
     });
 
+    // const bookings = this.$store.getters.bookings;
+    // console.log("bookings", bookings);
+
+    // this.filterdBookings = bookings.filter(
+    //   (booking) => booking.guide._id === this.guide._id
+    // );
+    // console.log("this.filterdBookings", this.filterdBookings);
+  },
+  mounted() {
+    this.guide = this.$store.getters.loggedinGuide;
     const bookings = this.$store.getters.bookings;
     console.log("bookings", bookings);
 
     this.filterdBookings = bookings.filter(
       (booking) => booking.guide._id === this.guide._id
     );
-    console.log("this.filterdBookings", this.filterdBookings);
   },
   components: {},
 };

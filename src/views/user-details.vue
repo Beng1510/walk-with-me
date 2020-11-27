@@ -1,8 +1,12 @@
 <template>
   <section v-if="filterdBookings" class="user-details">
-    <h2>User Page</h2>
-    {{ user.profileImgUrl }} <br />
-    {{ user.name }} <br />
+    <!-- <img
+      class="user-details-img"
+      :src="require('~@/assets/img/users/' + user.profileImgUrl)"
+    /> -->
+    {{user.profileImgUrl}}
+    <!-- {{ user.profileImgUrl }} <br /> -->
+    <h3>Hi {{ user.name }} Welcome Back</h3> <br />
     <h3>Favorite Trips</h3>
     <ul>
       <li v-for="trip in user.favoriteTrips" :key="trip._id">
@@ -13,7 +17,8 @@
     <hr />
     <h3>Your Bookings</h3>
     <ul>
-      <li v-for="booking in filterdBookings" :key="booking._id">
+      <li class="user-details-bookings" v-for="booking in filterdBookings" :key="booking._id">
+        {{ booking.trip.name }} |
         {{ booking.status }}
       </li>
     </ul>
@@ -38,7 +43,7 @@ export default {
   methods: {},
   async created() {
     const userId = this.$store.getters.loggedinUser._id;
-    console.log("userId", userId);
+    // console.log("userId", userId);
     // const trip = await tripService.getTripById(tripId);
     // this.trip = trip;
 
@@ -55,7 +60,7 @@ export default {
     );
     console.log("this.filterdBookings", this.filterdBookings);
 
-    // bookingService.getBookingById(userId);
+
   },
   components: {},
 };

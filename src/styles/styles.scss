@@ -3,6 +3,7 @@
 //Views
 @import 'views/home-page.scss';
 @import 'views/trip-details';
+@import 'views/back-office';
 
 //Components
 @import 'cmps/trip/trip-list.cmp';
@@ -10,4 +11,5 @@
 @import 'cmps/basic/main-header.scss';
 
 //Setup
-@import 'setup/fonts'
+@import 'setup/fonts';
+@import 'setup/base';
