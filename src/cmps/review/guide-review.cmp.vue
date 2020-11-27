@@ -1,6 +1,5 @@
 <template>
   <section class="reviews">
-    <!-- v-if="guideId" -->
     <h1>-----------------Reviews-----------------</h1>
     
       
@@ -83,9 +82,6 @@ export default {
     },
   },
   async created() {
-    console.log("guideIdwwwwwww", this.guideId);
-    // const guide = userService.getUserById(guideId);
-    // console.log("guideeee", guide);
     this.$store.dispatch({ type: "loadReviews", guideId: this.guideId });
   },
 };

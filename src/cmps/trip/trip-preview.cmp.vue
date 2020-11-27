@@ -9,7 +9,7 @@
           <i v-for="n in 5" :key="n" class="fas fa-star"></i>
       </p>
       <p>{{trip.capacity}}/10 trippers</p>
-      <p @click.stop="emitFav"><i :class="fav"></i></p>
+      <p @click.stop="emitFav(trip._id)"><i :class="fav"></i></p>
   </section>
 </template>
 
@@ -35,6 +35,25 @@ export default {
        emitFav(id) {
            this.$emit('emitFav', id);
            this.isFav = !this.isFav;
+            var userFavs = this.user.favoriteTrips;
+           const tripId = this.trip._id;
+           let isFavorite = userFavs.includes({tripId});
+           console.log(isFavorite);
+           if (isFavorite) {
+               this.isFav = false;
+               const idx = userFavs.findIndex(fav => fav._id === this.trip._id);
+               if (idx >= 0) {
+                   userFavs.splice(idx, 1);
+               }
+           } else {
+               this.isFav = true;
+               userFavs.push(
+               {
+                   date: this.trip.date,
+                   name: this.trip.name,
+                   _id: this.trip._id
+               }     
+           )} 
        },
          
        goToDetails(id) {
@@ -64,7 +83,6 @@ export default {
 
     created() {
         this.user = this.$store.getters.loggedinUser;
-        console.log(this.user);
     }
 }
 </script>
