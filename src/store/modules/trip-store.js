@@ -7,7 +7,11 @@ export const tripStore = {
     state: {
         isLoading: false,
         trips: [],
-        filterBy: {},
+        filterBy: {
+            name: "",
+            type: "",
+            location:"",
+          },
         currTrip: {}
     },
     getters: {
@@ -27,6 +31,9 @@ export const tripStore = {
         cityTripsForDisplay(state) {
             return state.trips.filter(trip => trip.type === "city" )
         },
+        filterBy(state) {
+            return state.filterBy
+        },
       
     },
     mutations: {
@@ -38,6 +45,9 @@ export const tripStore = {
         },
         setIsLoading(state, payload) {
             state.isLoading = payload.isLoading
+        },
+        setTypes(state, { types }) {
+            state.types = types
         },
         // addTrip(state, { trip }) {
         //     state.trips.push(trip)
@@ -52,15 +62,38 @@ export const tripStore = {
         // },
     },
     actions: {
-        async loadTrips({ commit, state }) {
+        async loadTrips({getters, commit}) {
             // commit({ type: 'setIsLoading', isLoading: true })
             // const trips = await tripService.query(state.filterBy)
-            const trips = await tripService.query()
+            const trips = await tripService.query(getters.filterBy)          
+            let types = {};
+            trips.forEach(trip => {
+                if (!types[trip.type]) types[trip.type] = trip.type
+            });
+            // console.log('trips:', trips)
+            // console.log('types:', types)
+
+                commit({ type: 'setTrips', trips })
+                commit({ type: 'setTypes', types })
+           
                 // commit({ type: 'setIsLoading', isLoading: false })
 
             commit({ type: 'setTrips', trips })
             // commit({ type: 'setIsLoading', isLoading: false })
         },
+
+        async filterTrips({ commit, state },  {filterBy }) {
+            
+            // console.log('filterBy11111111:', filterBy)
+            // const trips = await tripService.query(filterBy)
+            // console.log('trips:', trips)
+            commit({ type: 'setFilterBy', filterBy })
+
+            // state.dispatch({ type:'loadTrips', filterBy })
+            
+        },
+        
+
         // async saveTrip({ commit }, { trip }) {
         //     const actionType = (trip._id) ? 'updateTrip' : 'addTrip';
         //     const savedTrip = await tripService.save(trip);
