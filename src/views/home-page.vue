@@ -10,16 +10,16 @@
     <trip-list :trips="tripsForDisplay" @emitFav="addToFavs" />
     <hr /> -->
     <h3>Top Mountain Trips</h3>
-    <trip-list :trips="mountainTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="mountainTripsForDisplay"  @emitFav="addToFavs" />
     <hr />
     <h3>Top Forest Trips</h3>
-    <trip-list :trips="forestTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="forestTripsForDisplay"  @emitFav="addToFavs" />
     <hr />
     <h3>Top Seaside Trips</h3>
-    <trip-list :trips="seaTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="seaTripsForDisplay"  @emitFav="addToFavs" />
     <hr />
     <h3>Top City Trips</h3>
-    <trip-list :trips="cityTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="cityTripsForDisplay"  @emitFav="addToFavs" />
     <hr />
     <h3>Top Guides</h3>
 
@@ -53,6 +53,7 @@ export default {
       });
     },
     addToFavs(trip) {
+      console.log('trip at home page',trip);
       let userFavs = this.user.favoriteTrips;
       let isFav = userFavs.map((userFav) => userFav._id.includes(trip._id));
       if (isFav.includes(true)) {
