@@ -25,14 +25,13 @@
     <img class="guidImg" :src="trip.aboutGuide.imgUrl" alt="Image..." />
 
     <guide-review :guideId="trip.aboutGuide._id" />
-    <add-review />
+   
   </section>
 </template>
 
 <script>
 import { tripService } from "../services/trip-service.js";
 import guideReview from "../cmps/review/guide-review.cmp.vue";
-import addReview from "../cmps/review/add-review.cmp.vue";
 import tripBook from "../cmps/trip/trip-book.cmp.vue";
 
 export default {
@@ -54,7 +53,7 @@ export default {
 	},
 	components: {
 		guideReview,
-		addReview,
+	
 		tripBook
 	},
 };

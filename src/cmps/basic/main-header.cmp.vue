@@ -1,5 +1,7 @@
 <template>
   <section class="main-header">
+    
+    
     <div class="logo-container">
     
     <router-link to="/"><h2 class="logo">Walk With Me</h2></router-link> 
