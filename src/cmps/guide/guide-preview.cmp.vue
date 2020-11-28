@@ -11,9 +11,9 @@
       <p>
         <i v-for="n in 5" :key="n" class="fas fa-star trip-star-rate"></i>
       </p> <br/>
-     <p>{{user.guideInfo.description}}</p><br/>
+     <!-- <p>{{user.guideInfo.description}}</p><br/>
 
-     Review: "<p>{{user.guideInfo.reviews[0].txt}}</p>"
+     Review: "<p>{{user.guideInfo.reviews[0].txt}}</p>" -->
     </div>
   </section>
 </template>

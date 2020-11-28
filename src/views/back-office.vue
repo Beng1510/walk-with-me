@@ -2,6 +2,7 @@
   <section v-if="filterdBookings" class="back-office">
     <h2>Back Office</h2>
     Hello {{ guide.name }}
+    <button>Add Trip</button>
     <hr />
     Your Bookings:
     <table class="back-office-table">
