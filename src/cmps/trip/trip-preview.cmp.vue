@@ -20,7 +20,7 @@
         <div class="trip-preview-trip-details">
           <p class="trip-preview-date">{{ trip.date }}</p>
           <p>{{ trip.capacity }}/10 trippers</p>
-          <p @click="emitFav"><i :class="fav"></i></p>
+          <p @click.stop="emitFav(trip)"><i :class="fav"></i></p>
         </div>
 
       </div>
