@@ -64,7 +64,7 @@ function getEmptyTrip() {
         name: '',
         price: '',
         difficulty: '',
-        capacity: '',
+        capacity: 0,
         type: '',
         imgUrls: [
             'default1.jpeg'
