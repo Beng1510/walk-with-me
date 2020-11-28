@@ -7,10 +7,10 @@ const baseUrl = 'http://localhost:3000';
 
 export const tripService = {
     query,
-    getTripById
+    getTripById,
     // remove,
-    // save,
-    // getEmptyTrip
+    save,
+    getEmptyTrip
 }
 
 
@@ -55,28 +55,36 @@ async function getTripById(tripId) {
 //     return httpService.delete(`toy/${tripId}`)
 // }
 
-// function save(trip) {
-//     const savedTrip = trip._id ? _update(trip) : _add(trip)
-//     return savedTrip
-// }
+function save(trip) {
+    const savedTrip = trip._id ? _update(trip) : _add(trip)
+    return savedTrip
+}
 
-// function _add(trip) {
-//     return httpService.post(`trip`, trip)
-// }
+function _add(trip) {
+
+    const res = axios.post(`${baseUrl}/trip`, trip)
+    return res.data
+
+    // return httpService.post(`trip`, trip)
+}
 
 // function update(trip) {
 //     return httpService.put(`trip/${trip._id}`, trip)
 // }
 
-// function getEmptyTrip() {
-//     return {
-//         name: '',
-//         price: '',
-//         difficulty: '',
-//         capacity: '',
-//         tags:[]
-//     }
-// }
+function getEmptyTrip() {
+    return {
+        name: '',
+        price: '',
+        difficulty: '',
+        capacity: 0,
+        type: '',
+        imgUrls: [
+            'default1.jpeg'
+          ],
+       
+    }
+}
 
 
 
