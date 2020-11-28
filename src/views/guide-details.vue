@@ -16,7 +16,7 @@ export default {
     },
 
     async created() {
-        const guideId = this.$rote.params.id;
+        const guideId = this.$route.params.id;
         const guide = userService.getUserById(guideId);
     }
 }
