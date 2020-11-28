@@ -110,6 +110,7 @@ export default {
   },
   mounted() {
     this.user = this.$store.getters.loggedinUser;
+    
   }
 };
 </script>
