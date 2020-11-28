@@ -1,10 +1,23 @@
 <template>
-  <h1>Hi Guide!!</h1>
+<section class="guide-info" v-if="guide">
+    <h1>{{guide.name}}</h1>
+    <img class="guide-preview-img"
+    src="../assets/img/users/user3.jpeg" />
+    <h3>Rating: {{guide.guideInfo.rate}}</h3>
+    <p>{{guide.guideInfo.description}}</p>
+    <h3>All Trips:</h3>
+     <trip-list :trips="tripsForDisplay" />
+    <h3>All Reviews:</h3>
+    <guide-review :guideId="guide._id" />
+    <button class="back-btn"><router-link to="/">Back</router-link></button>
+</section>
 </template>
 
 <script>
 
 import {userService} from '../services/user-service.js';
+import tripList from '../cmps/trip/trip-list.cmp.vue';
+import guideReview from '../cmps/review/guide-review.cmp.vue';
 
 export default {
     name: 'guide-details',
@@ -15,9 +28,21 @@ export default {
         }
     },
 
+    computed: {
+        tripsForDisplay() {
+        return this.$store.getters.tripsForDisplay;
+        }
+    },
+
     async created() {
         const guideId = this.$route.params.id;
-        const guide = userService.getUserById(guideId);
+        const guide = await userService.getUserById(guideId);
+        this.guide = guide;
+    },
+
+    components: {
+        tripList,
+        guideReview
     }
 }
 </script>

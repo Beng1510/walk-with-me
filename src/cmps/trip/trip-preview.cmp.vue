@@ -8,7 +8,6 @@
       <h2 class="trip-preview-title">{{ trip.name }}</h2>
 
       <div class="trip=preview-info-container flex space-around">
-
         <div class="trip-preview-guide-details">
           <p>Guide: {{ trip.aboutGuide.name }}</p>
           <p>{{ trip.aboutGuide.rate }}</p>
@@ -22,9 +21,7 @@
           <p>{{ trip.capacity }}/10 trippers</p>
           <p @click.stop="emitFav(trip)"><i :class="fav"></i></p>
         </div>
-
       </div>
-
     </div>
   </section>
 </template>
@@ -49,7 +46,7 @@ export default {
 
   methods: {
     emitFav(trip) {
-      console.log('trip',trip);
+      console.log("trip", trip);
       this.$emit("emitFav", trip);
       this.isFav = !this.isFav;
     },
@@ -81,5 +78,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
