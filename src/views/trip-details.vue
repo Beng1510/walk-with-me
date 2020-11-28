@@ -21,7 +21,6 @@
     <h2>Guide Details</h2>
     <h3>Guide name: {{ trip.aboutGuide.name }}</h3>
     <h3>Guide rate: {{ trip.aboutGuide.rate }}</h3>
-    <h3>ID {{ trip.aboutGuide._id }} just for checking!!!!!</h3>
     <img class="guidImg" :src="trip.aboutGuide.imgUrl" alt="Image..." />
 
     <guide-review :guideId="trip.aboutGuide._id" />

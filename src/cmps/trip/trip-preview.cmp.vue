@@ -37,7 +37,6 @@ export default {
 
   data() {
     return {
-      user: null,
       isFav: false,
     };
   },
@@ -53,6 +52,7 @@ export default {
     goToDetails(id) {
       this.$router.push(`/trip/${id}`);
     },
+    
   },
 
   computed: {
@@ -73,7 +73,7 @@ export default {
     dateForDisplay() {
       return this.trip.date.toLocaleDateString();
     },
-  },
+  }
 };
 </script>
 
