@@ -11,12 +11,13 @@ export default {
 
     data() {
         return {
-            user: null
+            guide: null
         }
     },
 
     async created() {
-        
+        const guideId = this.$rote.params.id;
+        const guide = userService.getUserById(guideId);
     }
 }
 </script>
