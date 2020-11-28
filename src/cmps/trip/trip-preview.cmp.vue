@@ -46,7 +46,6 @@ export default {
 
   methods: {
     emitFav(trip) {
-      console.log("trip", trip);
       this.$emit("emitFav", trip);
       this.isFav = !this.isFav;
     },

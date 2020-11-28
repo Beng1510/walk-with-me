@@ -7,19 +7,19 @@
     <span v-if="isLoading">Loading...</span>
     <trip-filter @filterBy="updateFilter" :trips="tripsForDisplay" />
     <!-- <h3>All Trips</h3>
-    <trip-list :trips="tripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="tripsForDisplay" @emitFav="toggleFav" />
     <hr /> -->
     <h3>Top Mountain Trips</h3>
-    <trip-list :trips="mountainTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
     <hr />
     <h3>Top Forest Trips</h3>
-    <trip-list :trips="forestTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
     <hr />
     <h3>Top Seaside Trips</h3>
-    <trip-list :trips="seaTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="seaTripsForDisplay" @emitFav="toggleFav" />
     <hr />
     <h3>Top City Trips</h3>
-    <trip-list :trips="cityTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
     <hr />
     <h3>Top Guides</h3>
 
@@ -52,27 +52,12 @@ export default {
         type: 'loadTrips',
       });
     },
-    addToFavs(trip) {
-      let userFavs = this.user.favoriteTrips;
-      let isFav = userFavs.map((userFav) => userFav._id.includes(trip._id));
-      if (isFav.includes(true)) {
-        const idx = userFavs.findIndex((fav) => fav._id === trip._id);
-        if (idx >= 0) {
-          userFavs.splice(idx, 1);
-        }
-      } else {
-        userFavs.unshift({
-          date: trip.date,
-          name: trip.name,
-          _id: trip._id,
-        });
-      }
+    toggleFav(trip) {
       this.$store.dispatch({
-        type: 'updateUser',
-        user: this.user,
-        trip,
+        type: 'toggleFavs',
+        trip
       });
-    },
+    }
   },
   computed: {
     tripsForDisplay() {
