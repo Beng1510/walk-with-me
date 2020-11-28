@@ -15,11 +15,11 @@ var defaultUser = {
         },
         {
             _id: "t102",
-            tripName: "Tuscany Vineyards",
+            name: "Tuscany Vineyards",
             date: 9898989
         }
     ],
-    profileImgUrl: "",
+    profileImgUrl: "user1.jpeg",
     isGuide: false,
     guideInfo: {
         rate: "",
@@ -28,6 +28,36 @@ var defaultUser = {
         reviews: []
     }
 }
+var defaultGuide = {
+    
+        _id: "u101",
+        name: "Puki Globali",
+        favoriteTrips: [],
+        profileImgUrl: "",
+        isGuide: true,
+        guideInfo: {
+          rate: 4,
+          description: "professional guide, with great vibes",
+          lang: [
+            "English",
+            "Hebrew",
+            "Welsh"
+          ],
+          reviews: [
+            {
+              id: "r101",
+              txt: "A great guide to hike with..",
+              rate: 5,
+              reviewByUser: {
+                _id: "u102",
+                userName: "Shuki Locali",
+                imgUrl: "img.jpg"
+              }
+            }
+          ]
+        }
+      }
+
 
 var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
@@ -40,6 +70,7 @@ export const userStore = {
     state: {
         users: [],
         loggedinUser: localLoggedinUser,
+        loggedinGuide: defaultGuide,
         favoriteTrips: [],
         // isGuide: false,
         reviews: []
@@ -48,11 +79,14 @@ export const userStore = {
         loggedinUser(state) {
             return state.loggedinUser
         },
+        loggedinGuide(state) {
+            return state.loggedinGuide
+        },
         isGuide(state) {
             return state.isGuide
         },
         guidesForDisplay(state) {
-            console.log('state at users',state);
+            // console.log('state at users',state);
             return state.users.filter(user => user.isGuide === true )
         },
         reviews(state){

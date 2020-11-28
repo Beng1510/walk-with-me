@@ -1,0 +1,41 @@
+.user-details h3 {
+    text-align: center;
+}
+
+
+.user-details-favorite-table {
+    border: 1px solid black;
+    margin:0 auto 20px auto;
+    border-spacing:0; 
+    border-collapse: collapse; 
+    width: 500px;
+    & th {
+        border-right: 1px solid black;   
+        padding: 5px;
+    }
+    & td {
+        border-top: 1px solid black; 
+        border-right: 1px solid black;
+        padding: 10px;; 
+        width: 150px;
+        text-align: center;
+    }
+}
+.user-details-table {
+    border: 1px solid black;
+    margin: 0 auto;
+    border-spacing:0; 
+    border-collapse: collapse; 
+    width: 500px;
+    & th {
+        border-right: 1px solid black;   
+        padding: 5px;
+    }
+    & td {
+        border-top: 1px solid black; 
+        border-right: 1px solid black;
+        padding: 10px;; 
+        width: 150px;
+        text-align: center;
+    }
+}

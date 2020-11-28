@@ -1,5 +1,16 @@
+.home-page {
+    background-image: url('/src/assets/img/back1.jpeg');
+    margin: 0 auto;
+}
+
+.hero-container {
+   display: flex;
+   justify-content: center; 
+}
 .hero {
-    width: 100%;
+    width: 1300px;
+    height: 800px;
+   
  
 
 }
