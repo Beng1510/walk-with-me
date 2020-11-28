@@ -27,6 +27,9 @@ export const tripStore = {
         cityTripsForDisplay(state) {
             return state.trips.filter(trip => trip.type === "city" )
         },
+        getTripsByGuide(state, {id}) {
+            return state.trips.filter(trip => trip.aboutGuide._id === id)
+        }
       
     },
     mutations: {

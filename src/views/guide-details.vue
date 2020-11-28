@@ -2,21 +2,21 @@
 <section class="guide-info" v-if="guide">
     <h1>{{guide.name}}</h1>
     <img class="guide-preview-img"
-    src="../assets/img/users/user3.jpeg" />
+    :src="require('@/assets/img/users/' + guide.profileImgUrl)" />
     <h3>Rating: {{guide.guideInfo.rate}}</h3>
     <p>{{guide.guideInfo.description}}</p>
+    <button class="back-btn"><router-link to="/">Back</router-link></button>
     <h3>All Trips:</h3>
-     <trip-list :trips="tripsForDisplay" />
+     <!-- <trip-list :trips="getTripsByGuide(guide._id)" /> -->
     <h3>All Reviews:</h3>
     <guide-review :guideId="guide._id" />
-    <button class="back-btn"><router-link to="/">Back</router-link></button>
 </section>
 </template>
 
 <script>
 
 import {userService} from '../services/user-service.js';
-import tripList from '../cmps/trip/trip-list.cmp.vue';
+// import tripList from '../cmps/trip/trip-list.cmp.vue';
 import guideReview from '../cmps/review/guide-review.cmp.vue';
 
 export default {
@@ -29,8 +29,8 @@ export default {
     },
 
     computed: {
-        tripsForDisplay() {
-        return this.$store.getters.tripsForDisplay;
+        getTripsByGuide(id) {
+        return this.$store.getters.getTripsByGuide;
         }
     },
 
@@ -41,7 +41,7 @@ export default {
     },
 
     components: {
-        tripList,
+        // tripList,
         guideReview
     }
 }
