@@ -23,8 +23,9 @@
     </form>
     <ul class="">
       <li class="review-card" v-for="review in reviews" :key="review._id">
-        <!-- <img class="userImg" :src="review.reviewByUser.imgUrl" alt="Image..." /> -->
-        <!-- <h3>By: {{ review.reviewByUser.userName }}</h3> -->
+
+        <img class="userImg" :src="review.reviewByUser.imgUrl" alt="Image..." />
+        <h3>By: {{ review.reviewByUser.userName }}</h3>
         <h2>{{ review.txt }}</h2>
         <h3>User Rate: {{ review.rate }}</h3>
       </li>
@@ -55,7 +56,7 @@ export default {
         rate: null,
         reviewByUser:{
           userName: "",
-          imgUrl: "",
+          imgUrl: "user1.jpeg",
           _id: "",
 
         }
@@ -89,6 +90,8 @@ export default {
   },
   async created() {
     this.$store.dispatch({ type: "loadReviews", guideId: this.guideId });
+  
+  
   },
 };
 </script>
