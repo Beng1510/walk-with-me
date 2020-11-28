@@ -10,7 +10,7 @@
     />
     <!-- {{user.profileImgUrl}} -->
     <!-- {{ user.profileImgUrl }} <br /> -->
-    <h3>Hi {{ user.name }} Welcome Back</h3>
+    <h2>Hi {{ user.name }}, Welcome Back</h2>
     <br />
     <h3>Favorite Trips</h3>
 
@@ -86,6 +86,8 @@ export default {
       (booking) => booking.user._id === userId
     );
     console.log("this.filterdBookings", this.filterdBookings);
+
+    
   },
   components: {},
 };

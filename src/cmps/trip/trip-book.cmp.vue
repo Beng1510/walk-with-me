@@ -1,19 +1,19 @@
 <template>
   <section v-if="trip" class="trip-book">
       <h1>Join The Trip!</h1>
-      <p>{{trip.date}}</p>
+      
       <form @submit.prevent="emitBook">
           <label for="peopleToSign">How many trippers?
-              <input type="number" 
+              <input class="trip-book-peopleToSign" type="number" 
               v-model.number="booking.peopleToSign" 
               id="peopleToSign" name="peopleToSign" min="1" max="10"
               @change="totalPrice"
               >
-          </label>
+          </label> 
           <label for="specialReq">Any special requests?
-              <input type="text" v-model="booking.specialReq" id="specialReq" name="specialReq" placeholder="e.g.: I want a vegan option for lunch">
+              <input class="trip-book-specialReq" type="text" v-model="booking.specialReq" id="specialReq" name="specialReq" placeholder="e.g.: I want a vegan option for lunch">
           </label>
-          <p>total: {{booking.sum}}$</p>
+          <p>Total Price: {{booking.sum}}$</p>
           <button>Book Trip</button>
       </form>
   </section>

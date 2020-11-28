@@ -1,19 +1,22 @@
 .main-header {
     // background-color: aquamarine;
-    height: 100px;
+    height: 120px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     background: url('~@/assets/img/back1.jpeg');
+    background-size: cover;
     
-
 }
 
 .nav-bar a{
     text-decoration: none;
-    color: black;
     font-family: PerMark;
     font-size: 24px;
+    // color: black;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+
 }
 
 .logo-container a {
@@ -24,6 +27,9 @@
     font-family: PerMark;
     font-size: 36px; 
     text-decoration: none;
-    color: black;
+    // color: black;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+
 
 }

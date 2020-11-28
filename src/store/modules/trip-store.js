@@ -39,9 +39,9 @@ export const tripStore = {
         setIsLoading(state, payload) {
             state.isLoading = payload.isLoading
         },
-        // addTrip(state, { trip }) {
-        //     state.trips.push(trip)
-        // },
+        addTrip(state, { trip }) {
+            state.trips.push(trip)
+        },
         // updateTrip(state, { trip }) {
         //     const idx = state.trips.findIndex(prd => prd._id === trip._id)
         //     state.trips.splice(idx, 1, trip)
@@ -61,12 +61,12 @@ export const tripStore = {
             commit({ type: 'setTrips', trips })
             // commit({ type: 'setIsLoading', isLoading: false })
         },
-        // async saveTrip({ commit }, { trip }) {
-        //     const actionType = (trip._id) ? 'updateTrip' : 'addTrip';
-        //     const savedTrip = await tripService.save(trip);
-        //     commit({ type: actionType, trip: savedTrip })
-        //     return savedTrip;
-        // },
+        async saveTrip({ commit }, { trip }) {
+            console.log('newtrip',trip);
+            const savedTrip = await tripService.save(trip);
+            commit({ type: 'addTrip', trip: savedTrip })
+            // return savedTrip;
+        },
         // async removeTrip({ commit }, payload) {
         //     await tripService.remove(payload.tripId)
         //     commit(payload)

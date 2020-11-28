@@ -100,8 +100,8 @@ export default {
     tripList,
     guideList,
   },
-  created() {
-    this.$store.dispatch({
+  async created() {
+    await this.$store.dispatch({
       type: 'loadTrips',
     });
     this.$store.dispatch({
