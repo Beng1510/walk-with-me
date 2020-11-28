@@ -12,7 +12,7 @@ export const tripStore = {
     },
     getters: {
         tripsForDisplay(state) {
-            console.log('state.trips',state.trips);
+            // console.log('state.trips',state.trips);
             return state.trips
         },
         mountainTripsForDisplay(state) {

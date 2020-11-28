@@ -6,15 +6,26 @@
     />
     <div class="trip-preview-info">
       <h2 class="trip-preview-title">{{ trip.name }}</h2>
-      <h3 class="trip-preview-date">{{ trip.date }}</h3>
-      <p>{{ trip.aboutGuide.name }}</p>
-      <p>{{ trip.aboutGuide.rate }}</p>
+
+      <div class="trip=preview-info-container flex space-around">
+
+        <div class="trip-preview-guide-details">
+          <p>Guide: {{ trip.aboutGuide.name }}</p>
+          <p>{{ trip.aboutGuide.rate }}</p>
+          <p>
+            <i v-for="n in 5" :key="n" class="fas fa-star trip-star-rate"></i>
+          </p>
+        </div>
+
+        <div class="trip-preview-trip-details">
+          <p class="trip-preview-date">{{ trip.date }}</p>
+          <p>{{ trip.capacity }}/10 trippers</p>
+          <p @click="emitFav"><i :class="fav"></i></p>
+        </div>
+
+      </div>
+
     </div>
-    <p>
-      <i v-for="n in 5" :key="n" class="fas fa-star"></i>
-    </p>
-    <p>{{ trip.capacity }}/10 trippers</p>
-    <p @click="emitFav"><i :class="fav"></i></p>
   </section>
 </template>
 

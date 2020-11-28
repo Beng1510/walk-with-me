@@ -15,7 +15,7 @@ var defaultUser = {
         },
         {
             _id: "t102",
-            tripName: "Tuscany Vineyards",
+            name: "Tuscany Vineyards",
             date: 9898989
         }
     ],

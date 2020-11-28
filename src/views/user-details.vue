@@ -4,24 +4,51 @@
       class="user-details-img"
       :src="require('~@/assets/img/users/' + user.profileImgUrl)"
     /> -->
-    {{user.profileImgUrl}}
+    <img
+      class="guide-preview-img"
+      :src="require('@/assets/img/users/' + user.profileImgUrl)"
+    />
+    <!-- {{user.profileImgUrl}} -->
     <!-- {{ user.profileImgUrl }} <br /> -->
-    <h3>Hi {{ user.name }} Welcome Back</h3> <br />
+    <h3>Hi {{ user.name }} Welcome Back</h3>
+    <br />
     <h3>Favorite Trips</h3>
-    <ul>
-      <li v-for="trip in user.favoriteTrips" :key="trip._id">
-        {{ trip.name }}
-        {{ trip.date }}
-      </li>
-    </ul>
+
+    <table class="user-details-favorite-table">
+      <thead>
+        <tr>
+          <th>Trip Name</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="trip in user.favoriteTrips" :key="trip._id">
+          <td scope="row">{{ trip.name }}</td>
+
+          <td>{{ trip.date }}</td>
+        </tr>
+      </tbody>
+    </table>
+
     <hr />
     <h3>Your Bookings</h3>
-    <ul>
-      <li class="user-details-bookings" v-for="booking in filterdBookings" :key="booking._id">
-        {{ booking.trip.name }} |
-        {{ booking.status }}
-      </li>
-    </ul>
+
+    <table class="user-details-table">
+      <thead>
+        <tr>
+          <th>Trip Name</th>
+          <th>Guide Name</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="booking in filterdBookings" :key="booking._id">
+          <td scope="row">{{ booking.trip.name }}</td>
+          <td>{{ booking.guide.name }}</td>
+          <td>{{ booking.status }}</td>
+        </tr>
+      </tbody>
+    </table>
     <hr />
     <!-- {{user.favoriteTrips}} -->
   </section>
@@ -48,7 +75,7 @@ export default {
     // this.trip = trip;
 
     this.user = this.$store.getters.loggedinUser;
-    console.log("this.user", this.user);
+    // console.log("this.user", this.user);
     this.$store.dispatch({
       type: "loadBookings",
     });
@@ -59,8 +86,6 @@ export default {
       (booking) => booking.user._id === userId
     );
     console.log("this.filterdBookings", this.filterdBookings);
-
-
   },
   components: {},
 };

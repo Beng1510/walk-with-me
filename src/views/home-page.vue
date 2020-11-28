@@ -6,22 +6,23 @@
     <h2>Let Us Guide You</h2>
     <span v-if="isLoading">Loading...</span>
     <trip-filter @filterBy="updateFilter" :trips="tripsForDisplay" />
-    <h3>All Trips</h3>
+    <!-- <h3>All Trips</h3>
     <trip-list :trips="tripsForDisplay" @emitFav="addToFavs" />
-    <hr />
-    <h3>Mountain Trips</h3>
+    <hr /> -->
+    <h3>Top Mountain Trips</h3>
     <trip-list :trips="mountainTripsForDisplay" />
     <hr />
-    <h3>Forest Trips</h3>
+    <h3>Top Forest Trips</h3>
     <trip-list :trips="forestTripsForDisplay" />
     <hr />
-    <h3>Seaside Trips</h3>
+    <h3>Top Seaside Trips</h3>
     <trip-list :trips="seaTripsForDisplay" />
     <hr />
-    <h3>City Trips</h3>
+    <h3>Top City Trips</h3>
     <trip-list :trips="cityTripsForDisplay" />
     <hr />
-    <h3>Guide List</h3>
+    <h3>Top Guides</h3>
+
     <guide-list :users="guidesForDisplay" />
 
     <hr />

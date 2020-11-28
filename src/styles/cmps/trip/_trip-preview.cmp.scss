@@ -1,24 +1,35 @@
 .trip-preview {
-    width: 200px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
     border: 2px solid rgba(0, 0, 0, 0.376);
     border-radius: 10px;
     margin: 0 auto;
     cursor: pointer;
-    // display: inline;
+    
+    & > * {
+        margin: 0;
+    }
 }
-
 .trip-preview-img {
-    width: 150px;
-    margin-top: 10px; 
-    margin-bottom: 0;
+     width: 215px;
+     margin-top: 10px; 
+     border-radius: 10px;
+ }
+
+.trip-preview-info {
+    & > * {
+        margin: 0;
+        font-size: 16px;
+        padding: 5px;
+    }
 }
 
 .trip-preview-title {
-    margin-top: 0;
-    margin-bottom: 0;
+    // margin-bottom: 10px;
+    font-size: 20px;
 }
 
-.trip-preview-date {
-    margin: 0 auto;
+.trip-preview-guide-details  > *, .trip-preview-trip-details > * {
+margin: 0;
+margin-bottom: 5px;
 }
