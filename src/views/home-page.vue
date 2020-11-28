@@ -10,16 +10,16 @@
     <trip-list :trips="tripsForDisplay" @emitFav="addToFavs" />
     <hr /> -->
     <h3>Top Mountain Trips</h3>
-    <trip-list :trips="mountainTripsForDisplay" />
+    <trip-list :trips="mountainTripsForDisplay" @emitFav="addToFavs" />
     <hr />
     <h3>Top Forest Trips</h3>
-    <trip-list :trips="forestTripsForDisplay" />
+    <trip-list :trips="forestTripsForDisplay" @emitFav="addToFavs" />
     <hr />
     <h3>Top Seaside Trips</h3>
-    <trip-list :trips="seaTripsForDisplay" />
+    <trip-list :trips="seaTripsForDisplay" @emitFav="addToFavs" />
     <hr />
     <h3>Top City Trips</h3>
-    <trip-list :trips="cityTripsForDisplay" />
+    <trip-list :trips="cityTripsForDisplay" @emitFav="addToFavs" />
     <hr />
     <h3>Top Guides</h3>
 
