@@ -2,12 +2,20 @@
 
 //Views
 @import 'views/home-page.scss';
-
+@import 'views/trip-details';
+@import 'views/back-office';
+@import 'views/user-details';
 
 //Components
-@import 'cmps/trip/trip-list.cmp';
-@import 'cmps/trip/trip-preview.cmp';
 @import 'cmps/basic/main-header.scss';
 
+@import 'cmps/trip/trip-list.cmp';
+@import 'cmps/trip/trip-preview.cmp';
+
+@import 'cmps/guide/guide-list.cmp';
+@import 'cmps/guide/guide-preview.cmp';
+
 //Setup
-@import 'setup/fonts'
+@import 'setup/fonts';
+@import 'setup/base';
+@import 'setup/helpers';

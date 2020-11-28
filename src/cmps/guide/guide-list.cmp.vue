@@ -1,37 +1,30 @@
 <template>
   <section class="guide-list">
-      <guide-preview 
-      v-for="user in users" 
-      :key="user._id" 
-      :user="user" >
-      </guide-preview>
+    <guide-preview v-for="user in users" :key="user._id" :user="user">
+    </guide-preview>
   </section>
 </template>
 
 <script>
-
-import guidePreview from './guide-preview.cmp.vue';
+import guidePreview from "./guide-preview.cmp.vue";
 
 export default {
-    props: {
-        users: {
-            type: Array,
-            required: true
-        }
+  props: {
+    users: {
+      type: Array,
+      required: true,
     },
+  },
 
-    name: 'guide-list',
+  name: "guide-list",
 
-    components: {
-        guidePreview
-    }, 
+  components: {
+    guidePreview,
+  },
 
-    methods: {
-       
-    }
-}
+  methods: {},
+};
 </script>
 
 <style>
-
 </style>
