@@ -14,7 +14,10 @@
     <br />
     <h3>Favorite Trips</h3>
 
-    <table class="user-details-favorite-table">
+<trip-list v-if="user" :trips="user.favoriteTrips" @emitFav="toggleFav"/>
+
+
+    <!-- <table class="user-details-favorite-table">
       <thead>
         <tr>
           <th>Trip Name</th>
@@ -28,7 +31,7 @@
           <td>{{ trip.date }}</td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
 
     <hr />
     <h3>Your Bookings</h3>
@@ -57,6 +60,8 @@
 <script>
 import { userService } from "../services/user-service.js";
 import { bookingService } from "../services/booking-service.js";
+import tripList from '../cmps/trip/trip-list.cmp.vue'
+
 
 export default {
   name: "user-details",
@@ -69,7 +74,14 @@ export default {
   computed: {
     
   },
-  methods: {},
+  methods: {
+      toggleFav(trip) {
+      this.$store.dispatch({
+        type: 'toggleFavs',
+        trip
+      });
+    }
+  },
   async created() {
     const userId = this.$store.getters.loggedinUser._id;
     // console.log("userId", userId);
@@ -91,6 +103,8 @@ export default {
 
     
   },
-  components: {},
+  components: {
+    tripList
+  },
 };
 </script>
