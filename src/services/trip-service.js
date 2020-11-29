@@ -68,8 +68,9 @@ function getEmptyTrip() {
         type: '',
         imgUrls: [
             'default1.jpeg'
-          ],
-       
+        ],
+        createdAt: new Date(),
+
     }
 }
 

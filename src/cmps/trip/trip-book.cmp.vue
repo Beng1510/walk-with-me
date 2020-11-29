@@ -32,6 +32,7 @@ export default {
         return {
             
             booking: {
+                createdAt: new Date().toLocaleDateString(),
                 guide: {
                     _id: this.trip.aboutGuide._id,
                     name: this.trip.aboutGuide.name,

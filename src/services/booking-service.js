@@ -9,7 +9,8 @@ export const bookingService = {
     getBookings,
     createBooking,
     getBookingById,
-    updateBooking
+    updateBooking,
+    remove
   
 }
 
@@ -33,4 +34,9 @@ async function getBookingById(bookingId) {
 async function updateBooking(booking) {
     const res = await axios.put(`${baseUrl}/booking/${booking._id}`,booking)
     return res.data 
+}
+
+async function remove(booking) {
+    const res = await axios.delete(`${baseUrl}/booking/${booking._id}`)
+    return res.data
 }

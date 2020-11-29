@@ -49,7 +49,7 @@
 
     <h2>Guide Details</h2>
     <div class="trip-details-guide-container flex space-around">
-      <div class="trip-details-guide-info">
+      <div class="trip-details-guide-info" @click="goToGuide(trip.aboutGuide._id)">
         <img
           class="trip-details-guide-img"
           :src="require('@/assets/img/users/' + trip.aboutGuide.imgUrl)"
@@ -82,20 +82,25 @@ export default {
     bookTrip(booking) {
       this.$store.dispatch({ type: "addBooking", booking });
     },
+     goToGuide(id) {
+      this.$router.push(`/guide/${id}`);
+    },
   },
   async created() {
     const tripId = this.$route.params.id;
+    console.log('tripid',tripId);
     const trip = await tripService.getTripById(tripId);
     this.trip = trip;
     this.mapPos = this.trip.latlang;
 
-    this.$store.dispatch({
-      type: "loadBookings",
-    });
+    // this.$store.dispatch({
+    //   type: "loadBookings",
+    // });
 
     const bookings = this.$store.getters.bookings;
-    console.log("bookings", bookings);
-
+    
+    // console.log("bookings", bookings);
+    
     this.filterdBookings = bookings.filter(
       (booking) => booking.trip._id === tripId
     );

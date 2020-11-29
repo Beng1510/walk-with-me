@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <section class="home-page">
     <div class="hero-container">
     <img class="hero" src="../assets/img/hero1.jpeg" />
     </div>
@@ -26,7 +26,9 @@
     <guide-list :users="guidesForDisplay" />
 
     <hr />
-  </div>
+
+    
+  </section>
 </template>
 
 <script>
@@ -106,6 +108,9 @@ export default {
     });
     this.$store.dispatch({
       type: 'loadUsers',
+    });
+      this.$store.dispatch({
+      type: "loadBookings",
     });
     // this.user = this.$store.getters.loggedinUser;
   },

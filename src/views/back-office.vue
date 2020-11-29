@@ -24,7 +24,8 @@
           <td>{{ booking.specialReq }}</td>
           <td>{{ booking.status }}</td>
           <td>
-            <button @click.stop="approveBooking(booking)">{{ btnText }}</button>
+            <button @click.stop="approveBooking(booking)">Approve</button>
+            <button @click.stop="removeBooking(booking)">Reject</button>
           </td>
         </tr>
       </tbody>
@@ -45,7 +46,7 @@ export default {
     return {
       guide: null,
       filterdBookings: null,
-      btnText: "Update",
+     
       
     };
   },
@@ -66,6 +67,15 @@ export default {
         booking,
       });
     },
+     removeBooking(booking) {
+      this.$store.dispatch({
+        type: "removeBooking",
+        booking
+      }),
+       this.$store.dispatch({
+      type: "loadBookings",
+    });
+    }
     
   },
   computed: {},
