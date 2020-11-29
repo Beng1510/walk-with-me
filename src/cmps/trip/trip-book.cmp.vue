@@ -6,7 +6,7 @@
           <label for="peopleToSign">How many trippers?
               <input class="trip-book-peopleToSign" type="number" 
               v-model.number="booking.peopleToSign" 
-              id="peopleToSign" name="peopleToSign" min="1" max="10"
+              id="peopleToSign" name="peopleToSign" min="1" :max="capacity"
               @change="totalPrice"
               >
           </label> 
@@ -43,6 +43,7 @@ export default {
                     _id: this.trip._id,
                     name: this.trip.name, 
                     imgUrl: this.trip.imgUrls,
+                    capacity: this.trip.capacity
                 },
                 status: 'pending',
                 peopleToSign: 1,
@@ -53,19 +54,31 @@ export default {
     },
 
     computed: {
-       
+       capacity() {
+           const signed = this.trip.capacity;
+           let openSlots = 10 - signed;
+           return openSlots;
+       }
     },
 
     methods: {
         emitBook() {
+            this.updateCapacity();
             this.$emit('bookTrip', this.booking);
         },
 
-         totalPrice() {
+        totalPrice() {
             const price = this.trip.price;
             const numOfPeople = this.booking.peopleToSign;
             this.booking.sum = (price * numOfPeople).toFixed(2);
             return this.booking.sum;
+        },
+
+        updateCapacity() {
+            let capacity = this.booking.trip.capacity;
+            const peopleToSign = this.booking.peopleToSign;
+            capacity += peopleToSign;
+            this.$store.dispatch({type:'updateCapacity', id: this.trip._id, capacity})
         }
     }
 }

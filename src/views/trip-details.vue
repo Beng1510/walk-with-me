@@ -88,7 +88,6 @@ export default {
   },
   async created() {
     const tripId = this.$route.params.id;
-    console.log('tripid',tripId);
     const trip = await tripService.getTripById(tripId);
     this.trip = trip;
     this.mapPos = this.trip.latlang;

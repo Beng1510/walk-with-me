@@ -37,7 +37,7 @@ export default {
 
   data() {
     return {
-      isFav: false,
+      isFav: false
     };
   },
 
@@ -53,6 +53,12 @@ export default {
       this.$router.push(`/trip/${id}`);
     },
     
+    checkIsFav() {
+      const user = this.getCurrUser;
+      const userFavs = user.favoriteTrips;
+      let isInFav = userFavs.some((userFav) => userFav._id.includes(this.trip._id));
+      this.isFav = isInFav;
+    }
   },
 
   computed: {
@@ -70,9 +76,13 @@ export default {
       else return "far fa-heart";
     },
 
-    dateForDisplay() {
-      return this.trip.date.toLocaleDateString();
-    },
+    getCurrUser() {
+      return this.$store.getters.loggedinUser;
+    }
+  },
+
+  created() {
+    this.checkIsFav();
   }
 };
 </script>
