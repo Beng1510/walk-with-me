@@ -26,11 +26,7 @@ export const bookingStore = {
         },
         removeBooking(state, { booking }) {
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
-<<<<<<< HEAD
             if (idx === -1) return
-=======
-            if (idx === -1) return;
->>>>>>> 3198fe49062f5ec121c2d6360676b352895db072
             state.bookings.splice(idx, 1);
         }
     },

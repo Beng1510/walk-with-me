@@ -73,9 +73,6 @@ export default {
         this.$store.dispatch({
           type: "loadBookings",
         });
-<<<<<<< HEAD
-    
-=======
     },
   },
   computed: {
@@ -85,7 +82,6 @@ export default {
     },
     guide() {
       return this.$store.getters.loggedinGuide;
->>>>>>> 3198fe49062f5ec121c2d6360676b352895db072
     },
   },
   async created() {
