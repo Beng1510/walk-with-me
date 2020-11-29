@@ -94,12 +94,11 @@ export default {
     });
 
     const bookings = this.$store.getters.bookings;
-    console.log("bookings", bookings);
 
     this.filterdBookings = bookings.filter(
       (booking) => booking.trip._id === tripId
     );
-    console.log("filterdBookings at userDetails", this.filterdBookings);
+
   },
   components: {
     guideReview,
