@@ -2,8 +2,18 @@
   <section class="trip-filter">
     <form @submit.prevent="emitFilter">
       <input type="text" v-model="filterBy.name" @input="emitFilter" placeholder="let's search together"/>
+      <label for="all-tag">
+        All
+        <input
+          type="radio"
+          id="all-tag"
+          value="All"
+          v-model="filterBy.type"
+          @select="emitFilter"
+        />
+        </label>
       <label for="mountain-tag">
-        mountain
+        Mountain
         <input
           type="radio"
           id="mountain-tag"
@@ -13,7 +23,7 @@
         />
       </label>
       <label for="seaside-tag">
-        seaside
+        Seaside
         <input
           type="radio"
           id="seaside-tag"
@@ -23,7 +33,7 @@
         />
       </label>
       <label for="city-tag">
-        city
+        City
         <input
           type="radio"
           id="city-tag"
@@ -73,7 +83,7 @@ export default {
     return {
       filterBy: {
         name: "",
-        type: "",
+        type: "All",
         location:"",
         
       },
@@ -85,9 +95,10 @@ export default {
     emitFilter(filter) {
      
       
+      console.log('this.filterBy:', this.filterBy)
       const filterByCopy = JSON.parse(JSON.stringify(this.filterBy));
-      // console.log('filterByCopy:', filterByCopy)
-      
+      console.log('filterByCopy:', filterByCopy)
+        
       this.$emit("filterBy", filterByCopy);
     },
     // location() {

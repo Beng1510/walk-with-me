@@ -146,12 +146,8 @@ export const userStore = {
         },
 
         async saveReview({ commit }, { review ,guideId } ) {
-            
-          
-
             const savedReview = await userService.saveReview(review ,guideId)
             commit({type: 'addReview', review})
-            
         },
 
         toggleFavs(context, {trip}) {

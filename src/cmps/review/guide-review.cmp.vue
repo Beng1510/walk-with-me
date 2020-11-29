@@ -2,31 +2,35 @@
   <section class="guide-reviews">
     <h2>-----------------Reviews-----------------</h2>
 
-      <button @click="showAddBtn">Add</button>
-    <form @submit.prevent="handleReview" v-if="isAdding">
-      <input
-        type="text"
-        v-model="newReview.txt"
-        placeholder="What do you think about this gouide  ?"
-      />
-      <input
-        type="number"
-        v-model.number="newReview.rate"
-        placeholder="Guide Rate (1-5)"
-      />
-      <div class="">
-        <button>Submit</button>
-        <button type="button" @click="cancelReview">Cancel</button>
-      </div>
-    </form>
-    <ul class="">
-      <li class="review-card" v-for="review in reviews" :key="review._id">
-        <!-- <img class="userImg" :src="review.reviewByUser.imgUrl" alt="Image..." /> -->
-        <h3>By: {{ review.reviewByUser.userName }}</h3>
-        <h2>{{ review.txt }}</h2>
-        <h3>User Rate: {{ review.rate }}</h3>
-      </li>
-    </ul>
+    <button @click="showAddBtn">Add</button>
+      <form @submit.prevent="handleReview" v-if="isAdding">
+        <input
+          type="text"
+          v-model="newReview.txt"
+          placeholder="What do you think about this gouide  ?"
+        />
+        <input
+          type="number"
+          v-model.number="newReview.rate"
+          placeholder="Guide Rate (1-5)"
+        />
+        <div class="">
+          <button>Submit</button>
+          <button type="button" @click="cancelReview">Cancel</button>
+        </div>
+      </form>
+      <ul class="review-container">
+        <li class="review-card" v-for="review in reviews" :key="review._id">
+          <!-- <img class="userImg" :src="review.reviewByUser.imgUrl" alt="Image..." /> -->
+          <h3>By: {{ review.reviewByUser.userName }}</h3>
+          <h2>{{ review.txt }}</h2>
+          <h3>User Rate: {{ review.rate }}</h3>
+        </li>
+      </ul>
+
+    <div>
+    </div>
+
   </section>
 </template>
 
@@ -48,15 +52,13 @@ export default {
 
       // },
       newReview: {
-        
         txt: "",
         rate: null,
-        reviewByUser:{
+        reviewByUser: {
           userName: "",
           imgUrl: "user1.jpeg",
           _id: "",
-
-        }
+        },
       },
     };
   },
@@ -65,7 +67,7 @@ export default {
       this.$store.dispatch({
         type: "saveReview",
         review: this.newReview,
-        guideId: this.guideId
+        guideId: this.guideId,
       });
     },
     showAddBtn() {
@@ -87,8 +89,6 @@ export default {
   },
   async created() {
     this.$store.dispatch({ type: "loadReviews", guideId: this.guideId });
-  
-  
   },
 };
 </script>

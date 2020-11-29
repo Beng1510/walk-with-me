@@ -1,8 +1,8 @@
 <template>
-  <section v-if="filterdBookings" class="back-office">
+  <section v-if="bookingToShow" class="back-office">
     <h2>Back Office</h2>
     Hello {{ guide.name }}
- <!-- <button @click="showAddBtn">Add Trip</button> -->
+    <!-- <button @click="showAddBtn">Add Trip</button> -->
     <hr />
     Your Bookings:
     <table class="back-office-table">
@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="booking in filterdBookings" :key="booking._id">
+        <tr v-for="booking in bookingToShow" :key="booking._id">
           <td scope="row">{{ booking.trip.name }}</td>
           <td>{{ booking.user.name }}</td>
           <td>{{ booking.peopleToSign }}</td>
@@ -44,10 +44,8 @@ export default {
   name: "back-office",
   data() {
     return {
-      guide: null,
+      // guide: null,
       filterdBookings: null,
-     
-      
     };
   },
 
@@ -67,18 +65,25 @@ export default {
         booking,
       });
     },
-     removeBooking(booking) {
+    removeBooking(booking) {
       this.$store.dispatch({
         type: "removeBooking",
-        booking
+        booking,
       }),
-       this.$store.dispatch({
-      type: "loadBookings",
-    });
-    }
-    
+        this.$store.dispatch({
+          type: "loadBookings",
+        });
+    },
   },
-  computed: {},
+  computed: {
+    bookingToShow() {
+      const bookings = this.$store.getters.bookings;
+      return bookings.filter((booking) => booking.guide._id === this.guide._id);
+    },
+    guide() {
+      return this.$store.getters.loggedinGuide;
+    },
+  },
   async created() {
     // this.guide = this.$store.getters.loggedinGuide;
     console.log("guide", this.guide);
@@ -96,13 +101,12 @@ export default {
     // console.log("this.filterdBookings", this.filterdBookings);
   },
   mounted() {
-    this.guide = this.$store.getters.loggedinGuide;
-    const bookings = this.$store.getters.bookings;
-    console.log("bookings", bookings);
-
-    this.filterdBookings = bookings.filter(
-      (booking) => booking.guide._id === this.guide._id
-    );
+    //   this.guide = this.$store.getters.loggedinGuide;
+    //   const bookings = this.$store.getters.bookings;
+    //   console.log("bookings", bookings);
+    //   this.filterdBookings = bookings.filter(
+    //     (booking) => booking.guide._id === this.guide._id
+    //   );
   },
   components: {
     addTrip,
