@@ -152,7 +152,28 @@ export const userStore = {
             const savedReview = await userService.saveReview(review ,guideId)
             commit({type: 'addReview', review})
             
-        }
+        },
+
+        toggleFavs(context, {trip}) {
+            let userFavs = context.state.loggedinUser.favoriteTrips;
+            let isFav = userFavs.map((userFav) => userFav._id.includes(trip._id));
+            if (isFav.includes(true)) {
+                const idx = userFavs.findIndex((fav) => fav._id === trip._id);
+                if (idx >= 0) {
+                    userFavs.splice(idx, 1);
+              }
+            } else {
+              userFavs.unshift({
+                date: trip.date,
+                name: trip.name,
+                _id: trip._id,
+              });
+            }
+            context.dispatch({
+                type: 'updateUser',
+                user: context.state.loggedinUser
+            })
+          },
 
         // async addReview(context, { review }) {
         //     const user = await userService.getUserById(userId);

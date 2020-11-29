@@ -22,9 +22,9 @@
     <ul class="">
       <li class="review-card" v-for="review in reviews" :key="review._id">
         <!-- <img class="userImg" :src="review.reviewByUser.imgUrl" alt="Image..." /> -->
-        <!-- <h3>By: {{ review.reviewByUser.userName }}</h3> -->
-        <h3>"{{ review.txt }}"  {{ review.rate }}/5</h3>
-        <p>By: {{ review.reviewByUser.userName }}</p>
+        <h3>By: {{ review.reviewByUser.userName }}</h3>
+        <h2>{{ review.txt }}</h2>
+        <h3>User Rate: {{ review.rate }}</h3>
       </li>
     </ul>
   </section>

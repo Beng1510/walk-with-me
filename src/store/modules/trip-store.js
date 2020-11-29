@@ -8,7 +8,8 @@ export const tripStore = {
         isLoading: false,
         trips: [],
         filterBy: {},
-        currTrip: {}
+        currTrip: {},
+        guideId: ''
     },
     getters: {
         tripsForDisplay(state) {
@@ -27,7 +28,10 @@ export const tripStore = {
         cityTripsForDisplay(state) {
             return state.trips.filter(trip => trip.type === "city" )
         },
-      
+        getTripsByGuide(state) {
+            return state.trips.filter(trip => trip.aboutGuide._id === state.guideId)
+        }
+        
     },
     mutations: {
         setFilterBy(state, { filterBy }) {
@@ -42,6 +46,9 @@ export const tripStore = {
         addTrip(state, { trip }) {
             state.trips.push(trip)
         },
+        setGuideId(state, {guideId}) {
+            state.guideId = guideId
+        }
         // updateTrip(state, { trip }) {
         //     const idx = state.trips.findIndex(prd => prd._id === trip._id)
         //     state.trips.splice(idx, 1, trip)
