@@ -21,11 +21,10 @@
     </form>
     <ul class="review-container ">
       <li class="review-card flex column" v-for="review in reviews" :key="review._id">
+        <div class="top-review flex space-between" >
         <img class="userImg" :src="require('@/assets/img/users/' + review.reviewByUser.imgUrl)" alt="Image..." />
-        
-        <!-- <h3 class="byName">IMG URL: {{ review.reviewByUser.imgUrl }}</h3> -->
-        <h3 class="byName">By: {{ review.reviewByUser.userName }}</h3>
-       
+        <h3 >By: {{ review.reviewByUser.userName }}</h3>
+       </div>
         <span > 
         <p >{{ review.txt }}</p>
         <p class="rate-review">User Rate: {{ review.rate }} <span class="fas fa-star"></span></p>
@@ -58,7 +57,7 @@ export default {
         txt: "",
         rate: null,
         reviewByUser: {
-          userName: "",
+          userName: "Shuki Locali",
           imgUrl: "user1.jpeg",
           _id: "",
         },
