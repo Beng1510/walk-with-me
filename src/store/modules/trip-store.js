@@ -67,11 +67,9 @@ export const tripStore = {
             trips.forEach(trip => {
                 if (!types[trip.type]) types[trip.type] = trip.type
             });
-            // console.log('trips:', trips)
-            // console.log('types:', types)
-
+        
                 commit({ type: 'setTrips', trips })
-                commit({ type: 'setTypes', types })
+                // commit({ type: 'setTypes', types })
            
                 // commit({ type: 'setIsLoading', isLoading: false })
 

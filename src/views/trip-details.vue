@@ -48,11 +48,6 @@
     </div>
 
     <h2>Guide Details</h2>
-<<<<<<< HEAD
-    <h3>Guide name: {{ trip.aboutGuide.name }}</h3>
-    <h3>Guide rate: {{ trip.aboutGuide.rate }}</h3>
-    <!-- <img class="guidImg" :src="trip.aboutGuide.imgUrl" alt="Image..." /> -->
-=======
     <div class="trip-details-guide-container flex space-around">
       <div class="trip-details-guide-info">
         <img
@@ -63,7 +58,6 @@
           {{ trip.aboutGuide.name }} --- Rate: {{ trip.aboutGuide.rate }}/5
         </h3>
       </div>
->>>>>>> 5ded464faf2545751884697fb8c3389971b8c63d
 
       <guide-review :guideId="trip.aboutGuide._id" />
     </div>
