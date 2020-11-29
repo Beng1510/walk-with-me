@@ -13,10 +13,7 @@
     <h2>Hi {{ user.name }}, Welcome Back</h2>
     <br />
     <h3>Favorite Trips</h3>
-
-<trip-list v-if="user" :trips="user.favoriteTrips" @emitFav="toggleFav"/>
-
-
+    <trip-list v-if="user" :trips="user.favoriteTrips" @emitFav="toggleFav" />
     <!-- <table class="user-details-favorite-table">
       <thead>
         <tr>
@@ -60,8 +57,7 @@
 <script>
 import { userService } from "../services/user-service.js";
 import { bookingService } from "../services/booking-service.js";
-import tripList from '../cmps/trip/trip-list.cmp.vue'
-
+import tripList from '../cmps/trip/trip-list.cmp.vue';
 
 export default {
   name: "user-details",
@@ -69,18 +65,16 @@ export default {
     return {
       user: null,
       filterdBookings: null,
-    };
-  },
-  computed: {
-    
-  },
-  methods: {
-      toggleFav(trip) {
-      this.$store.dispatch({
-        type: 'toggleFavs',
-        trip
-      });
     }
+  },
+
+  methods: {
+        toggleFav(trip) {
+            this.$store.dispatch({
+                type: 'toggleFavs',
+                trip
+            });
+        }
   },
   async created() {
     const userId = this.$store.getters.loggedinUser._id;
@@ -95,13 +89,9 @@ export default {
     });
 
     const bookings = this.$store.getters.bookings;
-    console.log("bookings", bookings);
     this.filterdBookings = bookings.filter(
       (booking) => booking.user._id === userId
     );
-    console.log("this.filterdBookings", this.filterdBookings);
-
-    
   },
   components: {
     tripList

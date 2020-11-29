@@ -15,7 +15,6 @@ export const tripService = {
 
 
 async function query(filterBy = {}) {
-    console.log('filterService:', filterBy)
     let qst = ''
     if (filterBy) {
         qst = getQueryStrPrms(filterBy)
@@ -37,9 +36,6 @@ function getQueryStrPrms(filterBy) {
     if (filterBy.type) {
         str += `type=${filterBy.type}`
     }
-    
-    console.log('str:', str)
-   
     return str
 }
 
@@ -60,17 +56,18 @@ function save(trip) {
     return savedTrip
 }
 
-function _add(trip) {
-
-    const res = axios.post(`${baseUrl}/trip`, trip)
+async function _add(trip) {
+    const res = await axios.post(`${baseUrl}/trip`, trip)
     return res.data
 
     // return httpService.post(`trip`, trip)
 }
 
-// function update(trip) {
-//     return httpService.put(`trip/${trip._id}`, trip)
-// }
+async function _update(trip) {
+    // return httpService.put(`trip/${trip._id}`, trip)
+    const res = await axios.put(`${baseUrl}/trip/${trip._id}`, trip);
+    return res.data;
+}
 
 function getEmptyTrip() {
     return {

@@ -133,7 +133,6 @@ export const userStore = {
         },
         async updateUser(context, { user }) {
             user = await userService.updateUser(user);
-            console.log('user at store',user);
             context.commit({ type: 'setUser', user })
         },
 
@@ -151,9 +150,10 @@ export const userStore = {
         },
 
         toggleFavs(context, {trip}) {
-            let userFavs = context.state.loggedinUser.favoriteTrips;
-            let isFav = userFavs.map((userFav) => userFav._id.includes(trip._id));
-            if (isFav.includes(true)) {
+            const userCopy = JSON.parse(JSON.stringify(context.state.loggedinUser));
+            let userFavs = userCopy.favoriteTrips;
+            let isFav = userFavs.some((userFav) => userFav._id.includes(trip._id));
+            if (isFav) {
                 const idx = userFavs.findIndex((fav) => fav._id === trip._id);
                 if (idx >= 0) {
                     userFavs.splice(idx, 1);
@@ -162,13 +162,11 @@ export const userStore = {
               userFavs.unshift({
                 date: trip.date,
                 name: trip.name,
-                _id: trip._id,
-              });
+                _id: trip._id
+            });
             }
-            context.dispatch({
-                type: 'updateUser',
-                user: context.state.loggedinUser
-            })
+            context.commit({ type: 'setUser', user: userCopy });
+            context.dispatch({ type: 'updateUser',user: context.state.loggedinUser});
           },
 
         // async addReview(context, { review }) {

@@ -16,7 +16,6 @@ export const tripStore = {
     },
     getters: {
         tripsForDisplay(state) {
-            // console.log('state.trips',state.trips);
             return state.trips
         },
         mountainTripsForDisplay(state) {
@@ -34,10 +33,9 @@ export const tripStore = {
         getTripsByGuide(state) {
             return state.trips.filter(trip => trip.aboutGuide._id === state.guideId)
         },
-        
         filterBy(state) {
             return state.filterBy
-        },
+        }
       
     },
     mutations: {
@@ -55,11 +53,11 @@ export const tripStore = {
         },
         setGuideId(state, {guideId}) {
             state.guideId = guideId
+        },
+        updateTrip(state, { trip }) {
+            const idx = state.trips.findIndex(prd => prd._id === trip._id);
+            if (idx >= 0) state.trips.splice(idx, 1, trip);
         }
-        // updateTrip(state, { trip }) {
-        //     const idx = state.trips.findIndex(prd => prd._id === trip._id)
-        //     state.trips.splice(idx, 1, trip)
-        // },
         // removeTrip(state, { tripId }) {
         //     const idx = state.trips.findIndex(trip => trip._id === tripId)
         //     state.trips.splice(idx, 1)
@@ -104,15 +102,21 @@ export const tripStore = {
         //     return savedTrip;
         // },
         async saveTrip({ commit }, { trip }) {
-            console.log('newtrip',trip);
             const savedTrip = await tripService.save(trip);
             commit({ type: 'addTrip', trip: savedTrip })
-            // return savedTrip;
         },
         // async removeTrip({ commit }, payload) {
         //     await tripService.remove(payload.tripId)
         //     commit(payload)
         // },
+        async updateCapacity({commit}, {id, capacity}) {
+            const trip = await tripService.getTripById(id);
+            const tripCopy = JSON.parse(JSON.stringify(trip))
+            tripCopy.capacity = capacity;
+            const savedTrip = await tripService.save(tripCopy);
+            console.log(savedTrip)
+            commit({ type: 'updateTrip', trip: savedTrip })
+        }
 
     },
 
