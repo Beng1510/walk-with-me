@@ -94,9 +94,10 @@ export default {
     this.$store.dispatch({
       type: "loadUsers",
     });
-      this.$store.dispatch({
-      type: "loadBookings",
-    });
+    //   this.$store.dispatch({
+    //   type: "loadBookings",
+    // });
+    
     // this.user = this.$store.getters.loggedinUser;
   },
   mounted() {

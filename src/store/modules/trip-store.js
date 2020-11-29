@@ -69,6 +69,7 @@ export const tripStore = {
         async loadTrips({getters, commit}) {
             // commit({ type: 'setIsLoading', isLoading: true })
             // const trips = await tripService.query(state.filterBy)
+            console.log('getters.filterBy:', getters.filterBy)
             const trips = await tripService.query(getters.filterBy)          
             let types = {};
             trips.forEach(trip => {

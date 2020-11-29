@@ -2,7 +2,7 @@
   <section class="guide-reviews">
     <h2>-----------------Reviews-----------------</h2>
 
-      <button @click="showAddBtn">Add</button>
+    <button @click="showAddBtn">Add</button>
     <form @submit.prevent="handleReview" v-if="isAdding">
       <input
         type="text"
@@ -19,14 +19,17 @@
         <button type="button" @click="cancelReview">Cancel</button>
       </div>
     </form>
-    <ul class="">
+    <ul class="review-container">
       <li class="review-card" v-for="review in reviews" :key="review._id">
-        <!-- <img class="userImg" :src="review.reviewByUser.imgUrl" alt="Image..." /> -->
-        <h3>By: {{ review.reviewByUser.userName }}</h3>
-        <h2>{{ review.txt }}</h2>
-        <h3>User Rate: {{ review.rate }}</h3>
+        <img class="userImg" :src="require('@/assets/img/users/' + review.reviewByUser.imgUrl)" alt="Image..." />
+        <!-- <h3 class="byName">IMG URL: {{ review.reviewByUser.imgUrl }}</h3> -->
+        <h3 class="byName">By: {{ review.reviewByUser.userName }}</h3>
+        <p >{{ review.txt }}</p>
+        <h4>User Rate: {{ review.rate }}</h4>
       </li>
     </ul>
+
+    <div></div>
   </section>
 </template>
 
@@ -48,15 +51,13 @@ export default {
 
       // },
       newReview: {
-        
         txt: "",
         rate: null,
-        reviewByUser:{
+        reviewByUser: {
           userName: "",
           imgUrl: "user1.jpeg",
           _id: "",
-
-        }
+        },
       },
     };
   },
@@ -65,7 +66,7 @@ export default {
       this.$store.dispatch({
         type: "saveReview",
         review: this.newReview,
-        guideId: this.guideId
+        guideId: this.guideId,
       });
     },
     showAddBtn() {
@@ -87,8 +88,6 @@ export default {
   },
   async created() {
     this.$store.dispatch({ type: "loadReviews", guideId: this.guideId });
-  
-  
   },
 };
 </script>

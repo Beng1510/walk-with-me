@@ -24,9 +24,13 @@ export const bookingStore = {
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
             state.bookings.splice(idx, 1, booking)
         },
-        removeBooking(state, {booking}) {
+        removeBooking(state, { booking }) {
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
+<<<<<<< HEAD
             if (idx === -1) return
+=======
+            if (idx === -1) return;
+>>>>>>> 3198fe49062f5ec121c2d6360676b352895db072
             state.bookings.splice(idx, 1);
         }
     },
@@ -55,9 +59,15 @@ export const bookingStore = {
             const updatedBooking = await bookingService.updateBooking(booking)
             context.commit({ type: 'setBooking', booking })
         },
+<<<<<<< HEAD
         async removeBooking(context, {booking}) {
             const deletedBooking = await bookingService.remove(booking)
             context.commit({type: 'removeBooking', deletedBooking})
+=======
+        async removeBooking(context, { booking }) {
+            const deletedBooking = await bookingService.remove(booking)
+            context.commit({ type: 'removeBooking', booking })
+>>>>>>> 3198fe49062f5ec121c2d6360676b352895db072
         }
 
 
