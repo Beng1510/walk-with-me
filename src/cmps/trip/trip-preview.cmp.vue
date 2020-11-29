@@ -1,5 +1,5 @@
 <template>
-  <section v-if="this.trip" class="trip-preview" @click="goToDetails(trip._id)">
+  <section v-if="this.trip" class="trip-preview" @click="goToDetails(tripId)">
     <img
       class="trip-preview-img"
       :src="require('../../assets/img/trips/' + this.trip.imgUrls[0])"
@@ -19,7 +19,7 @@
         <div class="trip-preview-trip-details">
           <p class="trip-preview-date">{{ this.trip.date }}</p>
           <p>{{ this.trip.capacity }}/10 trippers</p>
-          <p @click.stop="emitFav(this.trip)"><i :class="fav"></i></p>
+          <p @click.stop="emitFav(trip)"><i :class="fav"></i></p>
         </div>
       </div>
     </div>
@@ -31,10 +31,6 @@ import {tripService} from '../../services/trip-service.js';
 
 export default {
   props: {
-    // trip: {
-    //   type: Object,
-    //   required: true,
-    // },
     tripId: {
       type: String,
       required: true
