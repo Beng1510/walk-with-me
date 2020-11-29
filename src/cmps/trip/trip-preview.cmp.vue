@@ -37,6 +37,7 @@ export default {
     // },
     tripId: {
       type: String,
+      required: true
     }
   },
 
