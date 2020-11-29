@@ -55,15 +55,9 @@ export const bookingStore = {
             const updatedBooking = await bookingService.updateBooking(booking)
             context.commit({ type: 'setBooking', booking })
         },
-<<<<<<< HEAD
         async removeBooking(context, {booking}) {
             const deletedBooking = await bookingService.remove(booking)
             context.commit({type: 'removeBooking', deletedBooking})
-=======
-        async removeBooking(context, { booking }) {
-            const deletedBooking = await bookingService.remove(booking)
-            context.commit({ type: 'removeBooking', booking })
->>>>>>> 3198fe49062f5ec121c2d6360676b352895db072
         }
 
 
