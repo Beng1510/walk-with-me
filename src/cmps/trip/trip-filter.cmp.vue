@@ -42,17 +42,19 @@
           @select="emitFilter"
         />
       </label>
-      <select v-model="selected">
+      <select v-model="selected" >
         <option disabled value="">Please select a destination</option>
+        <option  value="Usa">United States</option>
+        <option  value="Erup">Europe</option>
+        <option  value="Asia">Asia</option>
 
-        <option v-for="trip in trips" :key="trip._id">
-          {{trip.location }}
-        </option>
-
-        <!-- <option>B</option>
-        <option>C</option> -->
+        <!-- <option v-for="trip in trips" :key="trip._id">
+          <label >{{trip.location }}</label>
+        </option> -->
       </select>
+
       <span>Selected: {{ selected }}</span>
+      <button>Search 🍳</button>
     </form>
   </section>
 </template>
@@ -72,15 +74,20 @@ export default {
       filterBy: {
         name: "",
         type: "",
+        location:"",
+        
       },
       selected: "",
     };
   },
 
   methods: {
-    emitFilter() {
-      console.log("emitting");
+    emitFilter(filter) {
+     
+      
       const filterByCopy = JSON.parse(JSON.stringify(this.filterBy));
+      // console.log('filterByCopy:', filterByCopy)
+      
       this.$emit("filterBy", filterByCopy);
     },
     // location() {

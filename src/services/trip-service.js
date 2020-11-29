@@ -14,21 +14,34 @@ export const tripService = {
 }
 
 
-async function query() {
-    // function query(filterBy) {
-    // console.log('filter by is:', filterBy)
-    const res = await axios.get(`${baseUrl}/trip`)
+async function query(filterBy = {}) {
+    console.log('filterService:', filterBy)
+    let qst = ''
+    if (filterBy) {
+        qst = getQueryStrPrms(filterBy)
+     
+    }
+    const res = await axios.get(`${baseUrl}/trip${qst}`)
+    
     return res.data
-
 
     // const trips = httpService.get(_buildQuery(filterBy));
     // return trips;
 }
-// /?? good for filter?
-// function _buildQuery({ name, tags, difficulty }) {
-//     return `trip?name=${name}&tags=${tags}&difficulty=${difficulty}`;
-// }
-
+function getQueryStrPrms(filterBy) {
+    
+    let str = '?'
+    if (filterBy.name) {
+        str += `q=${filterBy.name}&`
+    }
+    if (filterBy.type) {
+        str += `type=${filterBy.type}`
+    }
+    
+    console.log('str:', str)
+   
+    return str
+}
 
 async function getTripById(tripId) {
 

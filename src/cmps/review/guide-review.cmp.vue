@@ -53,7 +53,7 @@ export default {
         rate: null,
         reviewByUser:{
           userName: "",
-          imgUrl: "",
+          imgUrl: "user1.jpeg",
           _id: "",
 
         }
@@ -87,6 +87,8 @@ export default {
   },
   async created() {
     this.$store.dispatch({ type: "loadReviews", guideId: this.guideId });
+  
+  
   },
 };
 </script>

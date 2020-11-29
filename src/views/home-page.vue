@@ -1,16 +1,16 @@
 <template>
   <section class="home-page">
     <div class="hero-container">
-    <img class="hero" src="../assets/img/hero1.jpeg" />
+      <img class="hero" src="../assets/img/hero1.jpeg" />
     </div>
     <h2>Let Us Guide You</h2>
     <span v-if="isLoading">Loading...</span>
     <trip-filter @filterBy="updateFilter" :trips="tripsForDisplay" />
-    <!-- <h3>All Trips</h3>
-    <trip-list :trips="tripsForDisplay" @emitFav="toggleFav" />
-    <hr /> -->
+    <h3>All Trips</h3>
+    <trip-list :trips="tripsForDisplay" @emitFav="addToFavs" />
+    <hr />
     <h3>Top Mountain Trips</h3>
-    <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
+    <trip-list :trips="mountainTripsForDisplay" @emitFav="addToFavs" />
     <hr />
     <h3>Top Forest Trips</h3>
     <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
@@ -37,7 +37,7 @@ import tripList from "../cmps/trip/trip-list.cmp.vue";
 import guideList from "../cmps/guide/guide-list.cmp.vue";
 
 export default {
-  name: 'home-page',
+  name: "home-page",
   data() {
     return {
       isLoading: false,
@@ -46,12 +46,13 @@ export default {
   },
   methods: {
     updateFilter(filterBy) {
-      this.$store.commit({
-        type: 'setFilterBy',
+      this.$store.dispatch({
+        type: "filterTrips",
         filterBy,
       });
+
       this.$store.dispatch({
-        type: 'loadTrips',
+        type: "loadTrips",
       });
     },
     toggleFav(trip) {
@@ -86,12 +87,12 @@ export default {
     tripList,
     guideList,
   },
-  async created() {
-    await this.$store.dispatch({
-      type: 'loadTrips',
+  created() {
+    this.$store.dispatch({
+      type: "loadTrips",
     });
     this.$store.dispatch({
-      type: 'loadUsers',
+      type: "loadUsers",
     });
       this.$store.dispatch({
       type: "loadBookings",
@@ -100,7 +101,6 @@ export default {
   },
   mounted() {
     this.user = this.$store.getters.loggedinUser;
-    
-  }
+  },
 };
 </script>
