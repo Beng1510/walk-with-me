@@ -9,11 +9,22 @@
     border: 1px solid black;
     margin-bottom: 5px;
     width: 500px;
+    // height: 300px;
 
     & img{
         width: 100px;
         height: 100px;
         border-radius: 50%;
     }
+    & .fa-star{
+        color: rgb(255, 225, 94);
+        font-size: 25px;
+        
+    }
+    & .rate-review {
+        font-size: 25px;
+        text-align: end;
+    }
+    
 
 }

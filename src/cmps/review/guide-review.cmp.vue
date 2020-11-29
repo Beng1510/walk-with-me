@@ -19,13 +19,17 @@
         <button type="button" @click="cancelReview">Cancel</button>
       </div>
     </form>
-    <ul class="review-container">
-      <li class="review-card" v-for="review in reviews" :key="review._id">
+    <ul class="review-container ">
+      <li class="review-card flex column" v-for="review in reviews" :key="review._id">
         <img class="userImg" :src="require('@/assets/img/users/' + review.reviewByUser.imgUrl)" alt="Image..." />
+        
         <!-- <h3 class="byName">IMG URL: {{ review.reviewByUser.imgUrl }}</h3> -->
         <h3 class="byName">By: {{ review.reviewByUser.userName }}</h3>
+       
+        <span > 
         <p >{{ review.txt }}</p>
-        <h4>User Rate: {{ review.rate }}</h4>
+        <p class="rate-review">User Rate: {{ review.rate }} <span class="fas fa-star"></span></p>
+       </span>
       </li>
     </ul>
 
