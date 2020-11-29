@@ -36,61 +36,44 @@
 <script>
 import { eventBusService, SHOW_MSG } from "../../services/eventBus-service.js";
 export default {
-    props: {
-      trip: {
-        type: Object,
-        required: true,
-      },
+  props: {
+    trip: {
+      type: Object,
+      required: true,
     },
-    
-    data() {
-        return {
-            
-            booking: {
-                createdAt: new Date().toLocaleDateString(),
-                guide: {
-                    _id: this.trip.aboutGuide._id,
-                    name: this.trip.aboutGuide.name,
-                    imgUrl: this.trip.aboutGuide.imgUrl
-                },
-                
-                trip: {
-                    _id: this.trip._id,
-                    name: this.trip.name, 
-                    imgUrl: this.trip.imgUrls,
-                    capacity: this.trip.capacity
-                },
-                status: 'pending',
-                peopleToSign: 1,
-                specialReq: '',
-                sum: this.trip.price
-            }
-        }
-    },
+  },
 
-    computed: {
-       capacity() {
-           const signed = this.trip.capacity;
-           let openSlots = 10 - signed;
-           return openSlots;
-       }
-    },
-    
- computed: {
-        totalPrice() {
-            const price = this.trip.price;
-            const numOfPeople = this.booking.peopleToSign;
-            this.booking.sum = (price * numOfPeople).toFixed(2);
-            return this.booking.sum;
+  data() {
+    return {
+      booking: {
+        createdAt: new Date().toLocaleDateString(),
+        guide: {
+          _id: this.trip.aboutGuide._id,
+          name: this.trip.aboutGuide.name,
+          imgUrl: this.trip.aboutGuide.imgUrl,
         },
 
-        updateCapacity() {
-            let capacity = this.booking.trip.capacity;
-            const peopleToSign = this.booking.peopleToSign;
-            capacity += peopleToSign;
-            this.$store.dispatch({type:'updateCapacity', id: this.trip._id, capacity})
-        }
-    },
+        trip: {
+          _id: this.trip._id,
+          name: this.trip.name,
+          imgUrl: this.trip.imgUrls,
+          capacity: this.trip.capacity,
+        },
+        status: "pending",
+        peopleToSign: 1,
+        specialReq: "",
+        sum: this.trip.price,
+      },
+    };
+  },
+
+  computed: {
+    capacity() {
+      const signed = this.trip.capacity;
+      let openSlots = 10 - signed;
+      return openSlots;
+    }
+  },
 
   methods: {
     emitBook() {
@@ -108,6 +91,16 @@ export default {
       const numOfPeople = this.booking.peopleToSign;
       this.booking.sum = (price * numOfPeople).toFixed(2);
       return this.booking.sum;
+    },
+    updateCapacity() {
+      let capacity = this.booking.trip.capacity;
+      const peopleToSign = this.booking.peopleToSign;
+      capacity += peopleToSign;
+      this.$store.dispatch({
+        type: "updateCapacity",
+        id: this.trip._id,
+        capacity,
+      });
     },
   },
 };
