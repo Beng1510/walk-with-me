@@ -12,7 +12,7 @@
           id="peopleToSign"
           name="peopleToSign"
           min="1"
-          max="10"
+          :max="capacity"
           @change="totalPrice"
         />
       </label>
