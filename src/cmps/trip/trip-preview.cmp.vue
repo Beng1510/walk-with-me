@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import {tripService} from '../../services/trip-service.js';
+import {tripService} from '@/services/trip-service.js';
 
 export default {
   props: {
