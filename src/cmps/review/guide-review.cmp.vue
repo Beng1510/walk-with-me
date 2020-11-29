@@ -3,34 +3,33 @@
     <h2>-----------------Reviews-----------------</h2>
 
     <button @click="showAddBtn">Add</button>
-      <form @submit.prevent="handleReview" v-if="isAdding">
-        <input
-          type="text"
-          v-model="newReview.txt"
-          placeholder="What do you think about this gouide  ?"
-        />
-        <input
-          type="number"
-          v-model.number="newReview.rate"
-          placeholder="Guide Rate (1-5)"
-        />
-        <div class="">
-          <button>Submit</button>
-          <button type="button" @click="cancelReview">Cancel</button>
-        </div>
-      </form>
-      <ul class="review-container">
-        <li class="review-card" v-for="review in reviews" :key="review._id">
-          <!-- <img class="userImg" :src="review.reviewByUser.imgUrl" alt="Image..." /> -->
-          <h3>By: {{ review.reviewByUser.userName }}</h3>
-          <h2>{{ review.txt }}</h2>
-          <h3>User Rate: {{ review.rate }}</h3>
-        </li>
-      </ul>
+    <form @submit.prevent="handleReview" v-if="isAdding">
+      <input
+        type="text"
+        v-model="newReview.txt"
+        placeholder="What do you think about this gouide  ?"
+      />
+      <input
+        type="number"
+        v-model.number="newReview.rate"
+        placeholder="Guide Rate (1-5)"
+      />
+      <div class="">
+        <button>Submit</button>
+        <button type="button" @click="cancelReview">Cancel</button>
+      </div>
+    </form>
+    <ul class="review-container">
+      <li class="review-card" v-for="review in reviews" :key="review._id">
+        <img class="userImg" :src="require('@/assets/img/users/' + review.reviewByUser.imgUrl)" alt="Image..." />
+        <!-- <h3 class="byName">IMG URL: {{ review.reviewByUser.imgUrl }}</h3> -->
+        <h3 class="byName">By: {{ review.reviewByUser.userName }}</h3>
+        <p >{{ review.txt }}</p>
+        <h4>User Rate: {{ review.rate }}</h4>
+      </li>
+    </ul>
 
-    <div>
-    </div>
-
+    <div></div>
   </section>
 </template>
 
