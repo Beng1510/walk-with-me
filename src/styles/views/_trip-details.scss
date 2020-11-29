@@ -1,4 +1,28 @@
+.trip-details {
+// padding: 15px;
+text-align: center;
+}
+
+
 .trip-main-img {
-    width: 700px;
+    width: 600px;
     margin: 0 auto;
+    display: inline;
+    height: 400px;
+}
+
+.trip-details-info-container {
+    width: 1300px;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid darkolivegreen;
+    border-radius: 10px;
+}
+
+.trip-details-guide-info {
+    cursor: pointer;
+}
+.trip-details-guide-img {
+    width: 200px;
 }

@@ -1,31 +1,66 @@
 <template>
   <section v-if="trip" class="trip-details">
     <button class="back-btn"><router-link to="/">Back</router-link></button>
-    <h2>trip Details</h2>
-    <img class="trip-main-img" :src="require('../assets/img/trips/' + trip.imgUrls[0]) " />
-    <!-- <img class="hero" src="../assets/img/trips/scotland1.jpeg" /> -->
 
-    <!-- <img  class="tripImg" :src="trip.imgUrls[1]" alt="Image..." /> -->
-    <!-- <img  class="tripImg" :src="trip.imgUrls[2]" alt="Image..." /> -->
-    <h2>Name: {{ trip.name }}</h2>
-    <!-- <h3>Type: {{ trip.type }}</h3> -->
-    <h3>Trip date: {{ trip.date }}</h3>
-    <h3>Trip type: {{ trip.tags }}</h3>
-    <h3>Price: {{ trip.price }}$</h3>
-    <h3>Trip capacity: {{ trip.capacity }}/10</h3>
-    <h3>Trip difficulty: {{ trip.difficulty }}</h3>
-    <p>Description {{ trip.description }}</p>
+    <div class="trip-details-header flex space-between">
+      <div class="trip-details-img-container">
+        <img
+          class="trip-main-img"
+          :src="require('../assets/img/trips/' + trip.imgUrls[0])"
+        />
+      </div>
 
-    <trip-book :trip="trip" @bookTrip="bookTrip" />
+      <div class="trip-details-map">
+        <GmapMap
+          :center="mapPos"
+          :zoom="12"
+          map-type-id="terrain"
+          style="width: 600px; height: 400px"
+        >
+          <GmapMarker
+            :position="mapPos"
+            :clickable="true"
+            :draggable="true"
+            @click="center = mapPos"
+          />
+        </GmapMap>
+      </div>
+    </div>
+    <div class="trip-details-info-container">
+      <h2>{{ trip.name }} --- {{ trip.date }}</h2>
+      <!-- <h3>Type: {{ trip.type }}</h3> -->
+      <!-- <h3>Trip date: {{ trip.date }}</h3> -->
+      <!-- <h3>Trip type: {{ trip.tags }}</h3> -->
+      <h3>
+        Price: {{ trip.price }}$ - Trip capacity: {{ trip.capacity }}/10 -
+        Difficulty: {{ trip.difficulty }}/5
+      </h3>
+      <!-- <h3>Trip capacity: {{ trip.capacity }}/10</h3>
+    <h3>Trip difficulty: {{ trip.difficulty }}</h3> -->
+      <p>{{ trip.description }}</p>
+      Join These Trippers:
+      <ul>
+        <li v-for="booking in this.filterdBookings" :key="booking._id">
+          {{ booking.user.name }}
+        </li>
+      </ul>
+      <trip-book :trip="trip" @bookTrip="bookTrip" />
+    </div>
 
     <h2>Guide Details</h2>
-    <h3>Guide name: {{ trip.aboutGuide.name }}</h3>
-    <h3>Guide rate: {{ trip.aboutGuide.rate }}</h3>
-    <h3>ID {{ trip.aboutGuide._id }} just for chacking!!!!!</h3>
-    <img class="guidImg" :src="trip.aboutGuide.imgUrl" alt="Image..." />
+    <div class="trip-details-guide-container flex space-around">
+      <div class="trip-details-guide-info" @click="goToGuide(trip.aboutGuide._id)">
+        <img
+          class="trip-details-guide-img"
+          :src="require('@/assets/img/users/' + trip.aboutGuide.imgUrl)"
+        />
+        <h3>
+          {{ trip.aboutGuide.name }} --- Rate: {{ trip.aboutGuide.rate }}/5
+        </h3>
+      </div>
 
-    <guide-review :guideId="trip.aboutGuide._id" />
-   
+      <guide-review :guideId="trip.aboutGuide._id" />
+    </div>
   </section>
 </template>
 
@@ -35,26 +70,45 @@ import guideReview from "../cmps/review/guide-review.cmp.vue";
 import tripBook from "../cmps/trip/trip-book.cmp.vue";
 
 export default {
-	data() {
-		return {
-			trip: null,            
-		};
-	},
-	
-	methods: {
-		bookTrip(booking) {
-			this.$store.dispatch({type:'addBooking', booking});
-		}
-	},
-	async created() { 
-		const tripId = this.$route.params.id;
-		const trip = await tripService.getTripById(tripId);
-		this.trip = trip;
-	},
-	components: {
-		guideReview,
-	
-		tripBook
-	},
+  data() {
+    return {
+      trip: null,
+      mapPos: null,
+      filterdBookings: null,
+    };
+  },
+
+  methods: {
+    bookTrip(booking) {
+      this.$store.dispatch({ type: "addBooking", booking });
+    },
+     goToGuide(id) {
+      this.$router.push(`/guide/${id}`);
+    },
+  },
+  async created() {
+    const tripId = this.$route.params.id;
+    console.log('tripid',tripId);
+    const trip = await tripService.getTripById(tripId);
+    this.trip = trip;
+    this.mapPos = this.trip.latlang;
+
+    // this.$store.dispatch({
+    //   type: "loadBookings",
+    // });
+
+    const bookings = this.$store.getters.bookings;
+    
+    // console.log("bookings", bookings);
+    
+    this.filterdBookings = bookings.filter(
+      (booking) => booking.trip._id === tripId
+    );
+    console.log("filterdBookings at userDetails", this.filterdBookings);
+  },
+  components: {
+    guideReview,
+    tripBook,
+  },
 };
 </script>

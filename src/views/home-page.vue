@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <section class="home-page">
     <div class="hero-container">
     <img class="hero" src="../assets/img/hero1.jpeg" />
     </div>
@@ -10,23 +10,25 @@
     <trip-list :trips="tripsForDisplay" @emitFav="addToFavs" />
     <hr /> -->
     <h3>Top Mountain Trips</h3>
-    <trip-list :trips="mountainTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="mountainTripsForDisplay"  @emitFav="addToFavs" />
     <hr />
     <h3>Top Forest Trips</h3>
-    <trip-list :trips="forestTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="forestTripsForDisplay"  @emitFav="addToFavs" />
     <hr />
     <h3>Top Seaside Trips</h3>
-    <trip-list :trips="seaTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="seaTripsForDisplay"  @emitFav="addToFavs" />
     <hr />
     <h3>Top City Trips</h3>
-    <trip-list :trips="cityTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="cityTripsForDisplay"  @emitFav="addToFavs" />
     <hr />
     <h3>Top Guides</h3>
 
     <guide-list :users="guidesForDisplay" />
 
     <hr />
-  </div>
+
+    
+  </section>
 </template>
 
 <script>
@@ -53,6 +55,7 @@ export default {
       });
     },
     addToFavs(trip) {
+      console.log('trip at home page',trip);
       let userFavs = this.user.favoriteTrips;
       let isFav = userFavs.map((userFav) => userFav._id.includes(trip._id));
       if (isFav.includes(true)) {
@@ -99,12 +102,15 @@ export default {
     tripList,
     guideList,
   },
-  created() {
-    this.$store.dispatch({
+  async created() {
+    await this.$store.dispatch({
       type: 'loadTrips',
     });
     this.$store.dispatch({
       type: 'loadUsers',
+    });
+      this.$store.dispatch({
+      type: "loadBookings",
     });
     // this.user = this.$store.getters.loggedinUser;
   },

@@ -2,13 +2,13 @@
   <section v-if="filterdBookings" class="back-office">
     <h2>Back Office</h2>
     Hello {{ guide.name }}
-    <button>Add Trip</button>
+ <!-- <button @click="showAddBtn">Add Trip</button> -->
     <hr />
     Your Bookings:
     <table class="back-office-table">
       <thead>
         <tr>
-          <th>Trip Name </th>
+          <th>Trip Name</th>
           <th>Booked By</th>
           <th>Amount of People</th>
           <th>Special Requests</th>
@@ -18,22 +18,27 @@
       </thead>
       <tbody>
         <tr v-for="booking in filterdBookings" :key="booking._id">
-          <td scope="row">{{ booking.trip.name  }}</td>  
-       <td>{{ booking.user.name }}  </td> 
-       <td>{{ booking.peopleToSign }}  </td> 
-       <td>{{ booking.specialReq }}  </td> 
-       <td>{{ booking.status }}  </td> 
-       <td><button @click.stop="approveBooking(booking)">{{ btnText }}</button></td>
-       </tr>
-   </tbody>
+          <td scope="row">{{ booking.trip.name }}</td>
+          <td>{{ booking.user.name }}</td>
+          <td>{{ booking.peopleToSign }}</td>
+          <td>{{ booking.specialReq }}</td>
+          <td>{{ booking.status }}</td>
+          <td>
+            <button @click.stop="approveBooking(booking)">Approve</button>
+            <button @click.stop="removeBooking(booking)">Reject</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-</table>
+    <add-trip :guide="this.guide" />
   </section>
 </template>
 
 <script>
 import { userService } from "../services/user-service.js";
 import { bookingService } from "../services/booking-service.js";
+import addTrip from "../cmps/trip/add-trip.cmp.vue";
 
 export default {
   name: "back-office",
@@ -41,7 +46,8 @@ export default {
     return {
       guide: null,
       filterdBookings: null,
-      btnText: "Update",
+     
+      
     };
   },
 
@@ -61,6 +67,16 @@ export default {
         booking,
       });
     },
+     removeBooking(booking) {
+      this.$store.dispatch({
+        type: "removeBooking",
+        booking
+      }),
+       this.$store.dispatch({
+      type: "loadBookings",
+    });
+    }
+    
   },
   computed: {},
   async created() {
@@ -88,6 +104,8 @@ export default {
       (booking) => booking.guide._id === this.guide._id
     );
   },
-  components: {},
+  components: {
+    addTrip,
+  },
 };
 </script>

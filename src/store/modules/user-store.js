@@ -133,6 +133,7 @@ export const userStore = {
         },
         async updateUser(context, { user }) {
             user = await userService.updateUser(user);
+            console.log('user at store',user);
             context.commit({ type: 'setUser', user })
         },
 
