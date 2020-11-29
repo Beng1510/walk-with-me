@@ -26,6 +26,7 @@ export const bookingStore = {
         },
         removeBooking(state, {booking}) {
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
+            if (idx === -1) return
             state.bookings.splice(idx, 1);
         }
     },
@@ -55,8 +56,8 @@ export const bookingStore = {
             context.commit({ type: 'setBooking', booking })
         },
         async removeBooking(context, {booking}) {
-            const deletedToy = bookingService.remove(booking)
-            context.commit({type: 'removeBooking', booking})
+            const deletedBooking = await bookingService.remove(booking)
+            context.commit({type: 'removeBooking', deletedBooking})
         }
 
 

@@ -66,7 +66,9 @@ export default {
       filterdBookings: null,
     };
   },
-
+  computed: {
+    
+  },
   methods: {},
   async created() {
     const userId = this.$store.getters.loggedinUser._id;
