@@ -18,6 +18,12 @@ text-align: center;
     text-align: center;
     border: 1px solid darkolivegreen;
     border-radius: 10px;
+
+    & p {
+        text-align: justify;
+        padding:10px 50px 0 50px;
+        line-height: 1.75;
+    }
 }
 
 .trip-details-guide-info {

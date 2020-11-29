@@ -6,8 +6,8 @@
     <h2>Let Us Guide You</h2>
     <span v-if="isLoading">Loading...</span>
     <trip-filter @filterBy="updateFilter" :trips="tripsForDisplay" />
-    <h3>All Trips</h3>
-    <trip-list :trips="tripsForDisplay" @emitFav="toggleFav" />
+    <!-- <h3>All Trips</h3>
+    <trip-list :trips="tripsForDisplay" @emitFav="toggleFav" /> -->
     <hr />
     <h3>Top Mountain Trips</h3>
     <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />

@@ -5,8 +5,7 @@ import { bookingService } from "../../services/booking-service.js";
 export const bookingStore = {
     strict: true,
     state: {
-        bookings: [],
-        // user: localLoggedinUser
+        bookings: []
     },
     getters: {
         bookings(state) {
@@ -22,19 +21,17 @@ export const bookingStore = {
         },
         setBooking(state, { booking }) {
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
-            state.bookings.splice(idx, 1, booking)
+            if (idx >= 0) state.bookings.splice(idx, 1, booking)
         },
         removeBooking(state, { booking }) {
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
-            if (idx === -1) return;
-            state.bookings.splice(idx, 1);
+            if (idx >= 0) state.bookings.splice(idx, 1);
         }
     },
     actions: {
 
         async loadBookings(context) {
             const bookings = await bookingService.getBookings();
-            // console.log('bookings at store', bookings);
             context.commit({ type: 'setBookings', bookings })
         },
 
@@ -44,9 +41,6 @@ export const bookingStore = {
                 name: context.rootGetters.loggedinUser.name,
                 imgUrl: context.rootGetters.loggedinUser.profileImgUrl,
             };
-            // booking.user = context.rootGetters.loggedinUser
-            // console.log('booking', booking);
-
             const newBooking = await bookingService.createBooking(booking);
             context.commit({ type: 'addBooking', newBooking })
         },
@@ -55,9 +49,9 @@ export const bookingStore = {
             const updatedBooking = await bookingService.updateBooking(booking)
             context.commit({ type: 'setBooking', booking })
         },
-        async removeBooking(context, { booking }) {
+        async removeBooking(context, {booking}) {
             const deletedBooking = await bookingService.remove(booking)
-            context.commit({ type: 'removeBooking', booking })
+            context.commit({type: 'removeBooking', deletedBooking})
         }
 
 

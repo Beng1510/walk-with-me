@@ -1,25 +1,25 @@
 <template>
-  <section class="trip-preview" @click="goToDetails(trip._id)">
+  <section v-if="this.trip" class="trip-preview" @click="goToDetails(trip._id)">
     <img
       class="trip-preview-img"
-      :src="require('../../assets/img/trips/' + trip.imgUrls[0])"
+      :src="require('../../assets/img/trips/' + this.trip.imgUrls[0])"
     />
     <div class="trip-preview-info">
-      <h2 class="trip-preview-title">{{ trip.name }}</h2>
+      <h2 class="trip-preview-title">{{ this.trip.name }}</h2>
 
       <div class="trip=preview-info-container flex space-around">
         <div class="trip-preview-guide-details">
-          <p>Guide: {{ trip.aboutGuide.name }}</p>
-          <p>{{ trip.aboutGuide.rate }}</p>
+          <p>Guide: {{ this.trip.aboutGuide.name }}</p>
+          <p>{{ this.trip.aboutGuide.rate }}</p>
           <p>
             <i v-for="n in 5" :key="n" class="fas fa-star trip-star-rate"></i>
           </p>
         </div>
 
         <div class="trip-preview-trip-details">
-          <p class="trip-preview-date">{{ trip.date }}</p>
-          <p>{{ trip.capacity }}/10 trippers</p>
-          <p @click.stop="emitFav(trip)"><i :class="fav"></i></p>
+          <p class="trip-preview-date">{{ this.trip.date }}</p>
+          <p>{{ this.trip.capacity }}/10 trippers</p>
+          <p @click.stop="emitFav(this.trip)"><i :class="fav"></i></p>
         </div>
       </div>
     </div>
@@ -27,17 +27,23 @@
 </template>
 
 <script>
+import {tripService} from '../../services/trip-service.js';
+
 export default {
   props: {
-    trip: {
-      type: Object,
-      required: true,
-    },
+    // trip: {
+    //   type: Object,
+    //   required: true,
+    // },
+    tripId: {
+      type: String,
+    }
   },
 
   data() {
     return {
       isFav: false,
+      trip: null
     };
   },
 
@@ -53,6 +59,12 @@ export default {
       this.$router.push(`/trip/${id}`);
     },
     
+    checkIsFav() {
+      const user = this.getCurrUser;
+      const userFavs = user.favoriteTrips;
+      let isInFav = userFavs.some((userFav) => userFav._id.includes(this.trip._id));
+      this.isFav = isInFav;
+    }
   },
 
   computed: {
@@ -70,9 +82,14 @@ export default {
       else return "far fa-heart";
     },
 
-    dateForDisplay() {
-      return this.trip.date.toLocaleDateString();
-    },
+    getCurrUser() {
+      return this.$store.getters.loggedinUser;
+    }
+  },
+
+  async created() {
+    this.trip = await tripService.getTripById(this.tripId);
+    this.checkIsFav();
   }
 };
 </script>
