@@ -37,7 +37,7 @@
       </h3>
       <!-- <h3>Trip capacity: {{ trip.capacity }}/10</h3>
     <h3>Trip difficulty: {{ trip.difficulty }}</h3> -->
-      <p>{{ trip.description }}</p>
+      <p class="trip-details-description">{{ trip.description }}</p>
       Join These Trippers:
       <ul>
         <li v-for="booking in this.filterdBookings" :key="booking._id">

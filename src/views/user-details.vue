@@ -13,7 +13,14 @@
     <h2>Hi {{ user.name }}, Welcome Back</h2>
     <br />
     <h3>Favorite Trips</h3>
+<<<<<<< HEAD
     <trip-list v-if="user" :trips="user.favoriteTrips" @emitFav="toggleFav" />
+=======
+
+<trip-list v-if="user" :trips="user.favoriteTrips" @emitFav="toggleFav"/>
+
+
+>>>>>>> origin/bens-branch
     <!-- <table class="user-details-favorite-table">
       <thead>
         <tr>
@@ -57,7 +64,12 @@
 <script>
 import { userService } from "../services/user-service.js";
 import { bookingService } from "../services/booking-service.js";
+<<<<<<< HEAD
 import tripList from '../cmps/trip/trip-list.cmp.vue';
+=======
+import tripList from '../cmps/trip/trip-list.cmp.vue'
+
+>>>>>>> origin/bens-branch
 
 export default {
   name: "user-details",
@@ -67,6 +79,7 @@ export default {
       filterdBookings: null,
     }
   },
+<<<<<<< HEAD
 
   methods: {
         toggleFav(trip) {
@@ -75,6 +88,18 @@ export default {
                 trip
             });
         }
+=======
+  computed: {
+    
+  },
+  methods: {
+      toggleFav(trip) {
+      this.$store.dispatch({
+        type: 'toggleFavs',
+        trip
+      });
+    }
+>>>>>>> origin/bens-branch
   },
   async created() {
     const userId = this.$store.getters.loggedinUser._id;

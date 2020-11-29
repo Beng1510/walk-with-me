@@ -2,7 +2,7 @@
   <section v-if="filterdBookings" class="back-office">
     <h2>Back Office</h2>
     Hello {{ guide.name }}
- <!-- <button @click="showAddBtn">Add Trip</button> -->
+    <!-- <button @click="showAddBtn">Add Trip</button> -->
     <hr />
     Your Bookings:
     <table class="back-office-table">
@@ -46,8 +46,6 @@ export default {
     return {
       guide: null,
       filterdBookings: null,
-     
-      
     };
   },
 
@@ -67,16 +65,16 @@ export default {
         booking,
       });
     },
-     removeBooking(booking) {
+    removeBooking(booking) {
       this.$store.dispatch({
         type: "removeBooking",
-        booking
+        booking,
       }),
-       this.$store.dispatch({
-      type: "loadBookings",
-    });
-    }
+        this.$store.dispatch({
+          type: "loadBookings",
+        });
     
+    },
   },
   computed: {},
   async created() {

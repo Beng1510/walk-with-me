@@ -7,7 +7,8 @@
 @import 'views/user-details';
 
 //Components
-@import 'cmps/basic/main-header.scss';
+@import 'cmps/basic/main-header';
+@import 'cmps/basic/user-msg.cmp';
 
 @import 'cmps/trip/trip-list.cmp';
 @import 'cmps/trip/trip-preview.cmp';

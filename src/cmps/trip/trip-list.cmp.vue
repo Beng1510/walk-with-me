@@ -3,7 +3,7 @@
     <trip-preview
       v-for="trip in trips"
       :key="trip._id"
-      :trip="trip"
+      :tripId="trip._id"
       @emitFav="emitFav"
       @click="goToDetails(trip._id)"
     >
