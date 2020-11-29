@@ -7,10 +7,10 @@
     <span v-if="isLoading">Loading...</span>
     <trip-filter @filterBy="updateFilter" :trips="tripsForDisplay" />
     <h3>All Trips</h3>
-    <trip-list :trips="tripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="tripsForDisplay" @emitFav="toggleFav" />
     <hr />
     <h3>Top Mountain Trips</h3>
-    <trip-list :trips="mountainTripsForDisplay" @emitFav="addToFavs" />
+    <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
     <hr />
     <h3>Top Forest Trips</h3>
     <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
