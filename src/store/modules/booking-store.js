@@ -24,6 +24,7 @@ export const bookingStore = {
             if (idx >= 0) state.bookings.splice(idx, 1, booking)
         },
         removeBooking(state, { booking }) {
+            console.log(booking);
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
             if (idx >= 0) state.bookings.splice(idx, 1);
         }
