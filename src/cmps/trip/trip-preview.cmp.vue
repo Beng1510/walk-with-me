@@ -10,15 +10,16 @@
       <div class="trip=preview-info-container flex space-around">
         <div class="trip-preview-guide-details">
           <p>Guide: {{ this.trip.aboutGuide.name }}</p>
-          <p>{{ this.trip.aboutGuide.rate }}</p>
           <p>
-            <i v-for="n in 5" :key="n" class="fas fa-star trip-star-rate"></i>
+            <i class="fas fa-star trip-star-rate"></i>
+            {{ this.trip.aboutGuide.rate }}
+            {{rateOfGuide}}
           </p>
         </div>
 
         <div class="trip-preview-trip-details">
           <p class="trip-preview-date">{{ this.trip.date }}</p>
-          <p>{{ this.trip.capacity }}/10 trippers</p>
+          <p>{{ this.trip.capacity }}/10 hikers</p>
           <p @click.stop="emitFav(trip)"><i :class="fav"></i></p>
         </div>
       </div>
@@ -27,20 +28,21 @@
 </template>
 
 <script>
-import {tripService} from '@/services/trip-service.js';
+import { tripService } from "@/services/trip-service.js";
+import { userService } from "../../services/user-service";
 
 export default {
   props: {
     tripId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
     return {
       isFav: false,
-      trip: null
+      trip: null,
     };
   },
 
@@ -55,13 +57,28 @@ export default {
     goToDetails(id) {
       this.$router.push(`/trip/${id}`);
     },
-    
+
     checkIsFav() {
       const user = this.getCurrUser;
       const userFavs = user.favoriteTrips;
-      let isInFav = userFavs.some((userFav) => userFav._id.includes(this.trip._id));
+      let isInFav = userFavs.some((userFav) =>
+        userFav._id.includes(this.trip._id)
+      );
       this.isFav = isInFav;
-    }
+    },
+    getGuideRate(trip) {
+      const tripGuideId = trip.aboutGuide._id;
+      // const user = await userService.getUserById(id);
+      // console.log("user.guideInfo.rate", user.guideInfo.rate);
+      // const rate = user.guideInfo.rate;
+      // console.log("rate", rate);
+      // return user.guideInfo.rate;
+
+      this.$store.dispatch({
+        type: "getGuideRate",
+        tripGuideId,
+      });
+    },
   },
 
   computed: {
@@ -81,13 +98,17 @@ export default {
 
     getCurrUser() {
       return this.$store.getters.loggedinUser;
+    },
+    rateOfGuide() {
+      return this.$store.getters.getGuideRate
     }
   },
 
   async created() {
     this.trip = await tripService.getTripById(this.tripId);
     this.checkIsFav();
-  }
+    this.getGuideRate(this.trip);
+  },
 };
 </script>
 

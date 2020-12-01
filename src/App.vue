@@ -1,7 +1,7 @@
 <template>
   <main>
 
-    <main-header />
+    <main-header :user="defaultUserForDisplay" />
     <router-view />
     <main-footer />
   </main>
@@ -15,6 +15,16 @@ export default {
    components: {
         mainHeader,
         mainFooter
+    },
+    computed: {
+      defaultUserForDisplay() {
+        return this.$store.getters.loggedinUser;
+      }
+    },
+    created() {
+       this.$store.dispatch({
+      type: "loadTrips",
+    });
     }
 }
 </script>

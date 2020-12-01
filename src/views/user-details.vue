@@ -1,5 +1,5 @@
 <template>
-  <section v-if="filterdBookings" class="user-details">
+  <section v-if="!user.isGuide" class="user-details">
     <!-- <img
       class="user-details-img"
       :src="require('~@/assets/img/users/' + user.profileImgUrl)"
@@ -31,6 +31,7 @@
     </table> -->
 
     <hr />
+    <div class="user-bookings-list " v-if="bookingToShow">
     <h3>Your Bookings</h3>
 
     <table class="user-details-table">
@@ -42,13 +43,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="booking in filterdBookings" :key="booking._id">
+        <tr v-for="booking in bookingToShow" :key="booking._id">
           <td scope="row">{{ booking.trip.name }}</td>
           <td>{{ booking.guide.name }}</td>
           <td>{{ booking.status }}</td>
         </tr>
       </tbody>
     </table>
+    </div>
     <hr />
     <!-- {{user.favoriteTrips}} -->
   </section>
@@ -76,8 +78,16 @@ export default {
             });
         }
   },
-  async created() {
-    const userId = this.$store.getters.loggedinUser._id;
+  computed: {
+bookingToShow() {
+      const bookings = this.$store.getters.bookings;
+      return bookings.filter(
+      (booking) => booking.user._id ===  this.user._id
+    );
+    },
+  },
+  created() {
+    // const userId = this.$store.getters.loggedinUser._id;
     // console.log("userId", userId);
     // const trip = await tripService.getTripById(tripId);
     // this.trip = trip;
@@ -88,10 +98,10 @@ export default {
       type: "loadBookings",
     });
 
-    const bookings = this.$store.getters.bookings;
-    this.filterdBookings = bookings.filter(
-      (booking) => booking.user._id === userId
-    );
+    // const bookings = this.$store.getters.bookings;
+    // this.filterdBookings = bookings.filter(
+    //   (booking) => booking.user._id === userId
+    // );
   },
   components: {
     tripList
