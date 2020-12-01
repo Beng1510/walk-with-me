@@ -1,0 +1,58 @@
+<template>
+  <section class="all-trips-list">
+     <h3>All Trips</h3>
+     <trip-filter @filterBy="updateFilter" :trips="tripsForDisplay" />
+    <trip-list class="all-trips-list-container wrap" :trips="tripsForDisplay" @emitFav="toggleFav" />
+  </section>
+</template>
+
+<script>
+import { userService } from "../services/user-service.js";
+import { bookingService } from "../services/booking-service.js";
+import tripList from '../cmps/trip/trip-list.cmp.vue';
+import tripFilter from "../cmps/trip/trip-filter.cmp.vue";
+
+
+export default {
+  name: "all-trips-list",
+  data() {
+    return {
+     
+    }
+  },
+
+  methods: {
+      updateFilter(filterBy) {
+      this.$store.dispatch({
+        type: "filterTrips",
+        filterBy,
+      });
+
+      this.$store.dispatch({
+        type: "loadTrips",
+      });
+    },
+    toggleFav(trip) {
+      this.$store.dispatch({
+        type: 'toggleFavs',
+        trip
+      });
+    },
+  },
+  computed: {
+ tripsForDisplay() {
+      return this.$store.getters.tripsForDisplay;
+    },
+   
+  },
+  created() {
+    this.$store.dispatch({
+      type: "loadTrips",
+    });
+  },
+  components: {
+   tripList,
+   tripFilter
+  },
+};
+</script>
