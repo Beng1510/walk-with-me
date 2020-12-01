@@ -50,11 +50,9 @@
         Go To Europe Trips
       </button>
       <hr />
+      <h3>Guides of the Month</h3>
+      <guide-list :users="guidesForDisplay" />
     </div>
-
-    <h3>Guides of the Month</h3>
-    <guide-list :users="guidesForDisplay" />
-
     <hr />
   </section>
 </template>
