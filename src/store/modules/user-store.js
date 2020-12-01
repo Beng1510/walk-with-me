@@ -1,20 +1,20 @@
-import {userService} from "../../services/user-service.js";
+import { userService } from "../../services/user-service.js";
 var defaultUser = {
     _id: "u102",
     name: "Shuki Locali",
     favoriteTrips: [
         {
-            _id: "t104",
+            _id: "t101-2",
             "name": "Switzerland Mountains",
             "date": 9898989
         },
         {
-            _id: "t101",
+            _id: "t101-1",
             name: "Scotland Heights",
             date: 9898989
         },
         {
-            _id: "t102",
+            _id: "t102-1",
             name: "Tuscany Vineyards",
             date: 9898989
         }
@@ -29,41 +29,41 @@ var defaultUser = {
     }
 }
 var defaultGuide = {
-    
-        _id: "u101",
-        name: "Puki Globali",
-        favoriteTrips: [],
-        profileImgUrl: "",
-        isGuide: true,
-        guideInfo: {
-          rate: 4,
-          description: "professional guide, with great vibes",
-          lang: [
+
+    _id: "u101",
+    name: "Puki Globali",
+    favoriteTrips: [],
+    profileImgUrl: "",
+    isGuide: true,
+    guideInfo: {
+        rate: 4,
+        description: "professional guide, with great vibes",
+        lang: [
             "English",
             "Hebrew",
             "Welsh"
-          ],
-          reviews: [
+        ],
+        reviews: [
             {
-              id: "r101",
-              txt: "A great guide to hike with..",
-              rate: 5,
-              reviewByUser: {
-                _id: "u102",
-                userName: "Shuki Locali",
-                imgUrl: "img.jpg"
-              }
+                id: "r101",
+                txt: "A great guide to hike with..",
+                rate: 5,
+                reviewByUser: {
+                    _id: "u102",
+                    userName: "Shuki Locali",
+                    imgUrl: "img.jpg"
+                }
             }
-          ]
-        }
-      }
+        ]
+    }
+}
 
 
 var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
 else {
     localLoggedinUser = defaultUser
-} 
+}
 
 export const userStore = {
     strict: true,
@@ -73,7 +73,8 @@ export const userStore = {
         loggedinGuide: defaultGuide,
         favoriteTrips: [],
         // isGuide: false,
-        reviews: []
+        reviews: [],
+        guideRate: null
     },
     getters: {
         loggedinUser(state) {
@@ -87,10 +88,13 @@ export const userStore = {
         },
         guidesForDisplay(state) {
             // console.log('state at users',state);
-            return state.users.filter(user => user.isGuide === true )
+            return state.users.filter(user => user.isGuide === true)
         },
-        reviews(state){
+        reviews(state) {
             return state.reviews
+        },
+        getGuideRate(state) {
+            return state.guideRate
         }
     },
     mutations: {
@@ -107,7 +111,14 @@ export const userStore = {
         addReview(state, { review }) {
             state.reviews.push(review)
         },
-       
+        setGuideRate(state, { rate }) {
+            state.guideRate = rate
+        }
+        // updateUser(state, { user }) {
+        //     const idx = state.users.findIndex(prd => prd._id === user._id);
+        //     if (idx >= 0) state.trips.splice(idx, 1, trip);
+        // },
+
     },
     actions: {
         async login(context, { userCred }) {
@@ -115,7 +126,7 @@ export const userStore = {
             context.commit({ type: 'setUser', user })
             return user;
         },
-        
+
         async signup(context, { userCred }) {
             const user = await userService.signup(userCred)
             context.commit({ type: 'setUser', user })
@@ -140,16 +151,31 @@ export const userStore = {
         async loadReviews(context, { guideId }) {
             // const review = await userService.getReviewsByGuide();
             const user = await userService.getUserById(guideId);
+
             const reviews = user.guideInfo.reviews
             context.commit({ type: 'setReviews', reviews })
         },
 
-        async saveReview({ commit }, { review ,guideId } ) {
-            const savedReview = await userService.saveReview(review ,guideId)
-            commit({type: 'addReview', review})
+        async saveReview({ commit }, { review, guideId, user }) {
+            console.log('review, guideId, user', review, guideId, user);
+            const guide = await userService.getUserById(guideId);
+            console.log('guide before', guide);
+
+            const sum = guide.guideInfo.reviews.reduce(
+                (acc, item) => acc + item.rate,
+                0
+            );
+            const avg = sum / guide.guideInfo.reviews.length;
+            guide.guideInfo.rate = avg.toFixed(1)
+
+            console.log('guide after', guide);
+            // const updatedRateAtUser = await userService.updateUser(guide)
+            const savedReview = await userService.saveReview(review, guide)
+            commit({ type: 'addReview', review })
+           
         },
 
-        toggleFavs(context, {trip}) {
+        toggleFavs(context, { trip }) {
             const userCopy = JSON.parse(JSON.stringify(context.state.loggedinUser));
             let userFavs = userCopy.favoriteTrips;
             let isFav = userFavs.some((userFav) => userFav._id.includes(trip._id));
@@ -157,23 +183,34 @@ export const userStore = {
                 const idx = userFavs.findIndex((fav) => fav._id === trip._id);
                 if (idx >= 0) {
                     userFavs.splice(idx, 1);
-              }
+                }
             } else {
-              userFavs.unshift({
-                date: trip.date,
-                name: trip.name,
-                _id: trip._id
-            });
+                userFavs.unshift({
+                    date: trip.date,
+                    name: trip.name,
+                    _id: trip._id
+                });
             }
             context.commit({ type: 'setUser', user: userCopy });
-            context.dispatch({ type: 'updateUser',user: context.state.loggedinUser});
-          },
+            context.dispatch({ type: 'updateUser', user: context.state.loggedinUser });
+        },
+        async getGuideRate(context, { tripGuideId }) {
+            console.log('tripGuideId', tripGuideId);
+            const user = await userService.getUserById(tripGuideId)
+            console.log('user', user);
 
+            const rate = user.guideInfo.rate;
+            console.log('rate at store,', rate);
+            context.commit({ type: 'setGuideRate', rate });
+
+
+
+        }
         // async addReview(context, { review }) {
         //     const user = await userService.getUserById(userId);
         //     review = await userService.addReview(review)
         //     user.guideInfo.reviews.push(review)
-            // context.commit({ type: 'addReview', review })
+        // context.commit({ type: 'addReview', review })
         //     return review;
         // },
     }

@@ -10,8 +10,11 @@ export const tripStore = {
         filterBy: {
             name: "",
             type: "",
-            location:"",
-          },
+            location: "",
+            region: "",
+        },
+        isShowAll: false,
+        showBy: null,
         currTrip: {}
     },
     getters: {
@@ -19,16 +22,43 @@ export const tripStore = {
             return state.trips
         },
         mountainTripsForDisplay(state) {
-            return state.trips.filter(trip => trip.type === "mountain" )
+            // const newArray = state.trips.slice(0,4)
+            if (state.showBy === "mountain" && state.isShowAll === true) {
+                return state.trips.filter(trip => trip.type === "mountain")
+            } else {
+                const mountainTrips = state.trips.filter(trip => trip.type === "mountain")
+                return mountainTrips.slice(0, 4)
+            }
+
         },
         forestTripsForDisplay(state) {
-            return state.trips.filter(trip => trip.type === "forest" )
+            return state.trips.filter(trip => trip.type === "forest")
         },
         seaTripsForDisplay(state) {
-            return state.trips.filter(trip => trip.type === "seaside" )
+            return state.trips.filter(trip => trip.type === "seaside")
         },
         cityTripsForDisplay(state) {
-            return state.trips.filter(trip => trip.type === "city" )
+            return state.trips.filter(trip => trip.type === "city")
+        },
+        difficultTripsForDisplay(state) {
+            if (state.showBy === "Extreme" && state.isShowAll === true) {
+                return state.trips.filter(trip => trip.difficulty >= 4)
+            } else {
+                const extremeTrips = state.trips.filter(trip => trip.difficulty >= 4)
+                return extremeTrips.slice(0, 4)
+
+            }
+
+            // return state.trips.filter(trip => trip.difficulty >= 4)
+        },
+        europeTripsForDisplay(state) {
+            if (state.showBy === "Europe" && state.isShowAll === true) {
+                return state.trips.filter(trip => trip.region === "Europe")
+            } else {
+                const europeTrips = state.trips.filter(trip => trip.region === "Europe")
+                return europeTrips.slice(0, 4)
+
+            }
         },
         getTripsByGuide(state) {
             return state.trips.filter(trip => trip.aboutGuide._id === state.guideId)
@@ -36,7 +66,7 @@ export const tripStore = {
         filterBy(state) {
             return state.filterBy
         }
-      
+
     },
     mutations: {
         setFilterBy(state, { filterBy }) {
@@ -51,12 +81,16 @@ export const tripStore = {
         addTrip(state, { trip }) {
             state.trips.push(trip)
         },
-        setGuideId(state, {guideId}) {
+        setGuideId(state, { guideId }) {
             state.guideId = guideId
         },
         updateTrip(state, { trip }) {
             const idx = state.trips.findIndex(prd => prd._id === trip._id);
             if (idx >= 0) state.trips.splice(idx, 1, trip);
+        },
+        showByParams(state, { showBy }) {
+            state.isShowAll = !state.isShowAll
+            state.showBy = showBy
         }
         // removeTrip(state, { tripId }) {
         //     const idx = state.trips.findIndex(trip => trip._id === tripId)
@@ -64,43 +98,33 @@ export const tripStore = {
         // },
     },
     actions: {
-        async loadTrips({getters, commit}) {
+        async loadTrips({ getters, commit }) {
             // commit({ type: 'setIsLoading', isLoading: true })
             // const trips = await tripService.query(state.filterBy)
-            console.log('getters.filterBy:', getters.filterBy)
-            const trips = await tripService.query(getters.filterBy)          
+            const trips = await tripService.query(getters.filterBy)
             let types = {};
             trips.forEach(trip => {
                 if (!types[trip.type]) types[trip.type] = trip.type
             });
-        
-                commit({ type: 'setTrips', trips })
-                // commit({ type: 'setTypes', types })
-           
-                // commit({ type: 'setIsLoading', isLoading: false })
 
             commit({ type: 'setTrips', trips })
+           
+
             // commit({ type: 'setIsLoading', isLoading: false })
+
         },
 
-        async filterTrips({ commit, state },  {filterBy }) {
-            
-            // console.log('filterBy11111111:', filterBy)
+        async filterTrips({ commit, state }, { filterBy }) {
+
+            console.log('filterBy at store:', filterBy)
             // const trips = await tripService.query(filterBy)
             // console.log('trips:', trips)
             commit({ type: 'setFilterBy', filterBy })
 
-            // state.dispatch({ type:'loadTrips', filterBy })
-            
+            // state.dispatch({ type:'loadTrips', filterBy }
         },
-        
 
-        // async saveTrip({ commit }, { trip }) {
-        //     const actionType = (trip._id) ? 'updateTrip' : 'addTrip';
-        //     const savedTrip = await tripService.save(trip);
-        //     commit({ type: actionType, trip: savedTrip })
-        //     return savedTrip;
-        // },
+
         async saveTrip({ commit }, { trip }) {
             const savedTrip = await tripService.save(trip);
             commit({ type: 'addTrip', trip: savedTrip })
@@ -109,14 +133,19 @@ export const tripStore = {
         //     await tripService.remove(payload.tripId)
         //     commit(payload)
         // },
-        async updateCapacity({commit}, {id, capacity}) {
+        async updateCapacity({ commit }, { id, capacity }) {
             const trip = await tripService.getTripById(id);
             const tripCopy = JSON.parse(JSON.stringify(trip))
             tripCopy.capacity = capacity;
             const savedTrip = await tripService.save(tripCopy);
             console.log(savedTrip)
             commit({ type: 'updateTrip', trip: savedTrip })
-        }
+        },
+        toggleShow(context, { showBy }) {
+            console.log('showBy', showBy);
+            context.commit({ type: 'showByParams', showBy })
+        },
+        // updateRateAtTrip(context, )
 
     },
 

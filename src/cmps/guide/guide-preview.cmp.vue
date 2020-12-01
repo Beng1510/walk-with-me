@@ -7,11 +7,13 @@
     />
     <div class="guide-preview-info-container">
       <h2>{{ user.name }}</h2>
-      Guide Rating: <p>{{ user.guideInfo.rate }}</p> <br/>
-      <p>
-        <i v-for="n in 5" :key="n" class="fas fa-star trip-star-rate"></i>
-      </p> <br/>
-     <!-- <p>{{user.guideInfo.description}}</p><br/>
+      Guide Rating:
+      <p>{{ rateGuide }} ({{rateAmount}}) </p>
+      <br />
+      <p><i class="fas fa-star trip-star-rate"></i></p>
+      <br />
+
+      <!-- <p>{{user.guideInfo.description}}</p><br/>
 
      Review: "<p>{{user.guideInfo.reviews[0].txt}}</p>" -->
     </div>
@@ -20,14 +22,32 @@
 
 <script>
 export default {
+  name: "guide-preview",
   props: {
     user: {
       type: Object,
       required: true,
     },
   },
-
-  name: "guide-preview",
+  data() {
+    return {
+      totalRates: 0,
+    };
+  },
+  computed: {
+    rateGuide() {
+      const sum = this.user.guideInfo.reviews.reduce(
+        (acc, item) => acc + item.rate,
+        0
+      );
+      const avg = sum / this.user.guideInfo.reviews.length;
+      // this.user.rate = this.avg
+      return avg.toFixed(1);
+    },
+    rateAmount() {
+      return this.user.guideInfo.reviews.length
+    }
+  },
 
   methods: {
     goToGuide(id) {

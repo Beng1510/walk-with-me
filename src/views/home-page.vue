@@ -9,8 +9,15 @@
     <!-- <h3>All Trips</h3>
     <trip-list :trips="tripsForDisplay" @emitFav="toggleFav" /> -->
     <hr />
+    <button class="see-all-btn" @click="goToAllTrips()">See All</button>
     <h3>Top Mountain Trips</h3>
     <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
+    <button
+      class="see-all-mountain-btn"
+      @click="toggleShowTrips((showBy = 'mountain'))"
+    >
+      See All Mountain Trips
+    </button>
     <hr />
     <h3>Top Forest Trips</h3>
     <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
@@ -21,13 +28,36 @@
     <h3>Top City Trips</h3>
     <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
     <hr />
-    <h3>Top Guides</h3>
+    <h3>Check Out Our Extreme Trips</h3>
+    <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" />
+    <button
+      class="see-all-extreme-btn"
+      @click="toggleShowTrips((showBy = 'Extreme'))"
+    >
+      See All Extreme Trips
+    </button>
 
-    <guide-list :users="guidesForDisplay" />
+    <hr />
+    <h3>One Day Trips in Europe</h3>
+    <trip-list :trips="europeTripsForDisplay" @emitFav="toggleFav" />
+    <button
+      class="see-all-europe-btn"
+      @click="toggleShowTrips((showBy = 'Europe'))"
+    >
+      See All Europe Trips
+    </button>
+    <button class="go-to-all-europe-btn"  @click="updateFilterPage('Europe')">
+      Go To Europe Trips
+    </button>
+
+
 
     <hr />
 
-    
+    <h3>Guides of the Month</h3>
+    <guide-list :users="guidesForDisplay" />
+
+    <hr />
   </section>
 </template>
 
@@ -42,9 +72,22 @@ export default {
     return {
       isLoading: false,
       user: null,
+      filterBy: {
+        name: "",
+        type: "All",
+        location: "",
+        region: ""
+      },
     };
   },
   methods: {
+    updateFilterPage(param) {
+      console.log("param", param);
+      console.log("this.filterBy", this.filterBy);
+      this.filterBy.region = param;
+      console.log(" this.filterBy.region", this.filterBy.region);
+      console.log("this.filterBy", this.filterBy);
+    },
     updateFilter(filterBy) {
       this.$store.dispatch({
         type: "filterTrips",
@@ -57,10 +100,19 @@ export default {
     },
     toggleFav(trip) {
       this.$store.dispatch({
-        type: 'toggleFavs',
-        trip
+        type: "toggleFavs",
+        trip,
       });
-    }
+    },
+    goToAllTrips() {
+      this.$router.push("/trip");
+    },
+    toggleShowTrips(showBy) {
+      this.$store.dispatch({
+        type: "toggleShow",
+        showBy,
+      });
+    },
   },
   computed: {
     tripsForDisplay() {
@@ -77,6 +129,12 @@ export default {
     },
     cityTripsForDisplay() {
       return this.$store.getters.cityTripsForDisplay;
+    },
+    difficultTripsForDisplay() {
+      return this.$store.getters.difficultTripsForDisplay;
+    },
+    europeTripsForDisplay() {
+      return this.$store.getters.europeTripsForDisplay;
     },
     guidesForDisplay() {
       return this.$store.getters.guidesForDisplay;
@@ -97,7 +155,7 @@ export default {
     //   this.$store.dispatch({
     //   type: "loadBookings",
     // });
-    
+
     // this.user = this.$store.getters.loggedinUser;
   },
   mounted() {

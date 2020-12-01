@@ -23,10 +23,10 @@ async function getUserById(userId) {
     // return httpService.get(`user/${userId}`)
 }
 
-async function saveReview(review, guideId) {
-    const user = await getUserById(guideId)
-    user.guideInfo.reviews.push(review)
-    updateUser(user);
+async function saveReview(review, guide) {
+    // const user = await getUserById(guideId)
+    guide.guideInfo.reviews.push(review)
+    updateUser(guide);
 }
 
 
