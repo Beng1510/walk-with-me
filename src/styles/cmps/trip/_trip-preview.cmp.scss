@@ -1,35 +1,56 @@
-.trip-preview {
-    width: 300px;
-    height: 300px;
-    border: 2px solid rgba(0, 0, 0, 0.376);
-    border-radius: 10px;
-    margin: 0 auto;
-    cursor: pointer;
-    
-    & > * {
-        margin: 0;
+.preview-card {
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 0 6px 10px clr5;
+  cursor: pointer;
+  transition: box-shadow 0.4s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 6px 10px $clr4;
+  }
+
+  h2 {
+    font-size: em(21px);
+  }
+
+  h2,
+  p {
+    margin-bottom: 0.5em;
+  }
+
+  & .details {
+    padding: 0.6em 1em;
+    width: 100%;
+
+    display: inline-block;
+
+    .price {
+      font-size: em(20px);
     }
-}
-.trip-preview-img {
-     width: 215px;
-     margin-top: 10px; 
-     border-radius: 10px;
- }
 
-.trip-preview-info {
-    & > * {
-        margin: 0;
-        font-size: 16px;
-        padding: 5px;
+    hr {
+      margin-top: 0;
     }
-}
 
-.trip-preview-title {
-    // margin-bottom: 10px;
-    font-size: 20px;
-}
+    .guide-info {
+      color: $clr4;
 
-.trip-preview-guide-details  > *, .trip-preview-trip-details > * {
-margin: 0;
-margin-bottom: 5px;
+      .guide-img {
+        margin-inline-end: 10px;
+      }
+    }
+  }
+
+  .trip-preview-img {
+    border-radius: 15px 15px 0 0;
+  }
+
+  .toggle-fav {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    display: inline-block;
+    font-size: em(20px);
+  }
+
 }

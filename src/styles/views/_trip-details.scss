@@ -15,13 +15,13 @@ text-align: center;
     width: 1300px;
     margin: 0 auto;
     padding: 10px;
-    text-align: center;
+    text-align: justify;
     border: 1px solid darkolivegreen;
     border-radius: 10px;
 
     & p {
         text-align: justify;
-        padding:10px 50px 0 50px;
+        // padding:10px 50px 0 50px;
         line-height: 1.75;
     }
 }

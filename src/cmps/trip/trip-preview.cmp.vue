@@ -1,25 +1,40 @@
 <template>
-  <section v-if="this.trip" class="trip-preview" @click="goToDetails(tripId)">
+  <section
+    v-if="this.trip"
+    class="trip-preview preview-card"
+    @click="goToDetails(tripId)"
+  >
     <img
-      class="trip-preview-img"
+      class="trip-preview-img ratio-card"
       :src="require('../../assets/img/trips/' + this.trip.imgUrls[0])"
     />
-    <div class="trip-preview-info">
+    <p class="toggle-fav" @click.stop="emitFav(trip)"><i :class="fav"></i></p>
+    <div class="details">
       <h2 class="trip-preview-title">{{ this.trip.name }}</h2>
-
-      <div class="trip=preview-info-container flex space-around">
-        <div class="trip-preview-guide-details">
-          <p>Guide: {{ this.trip.aboutGuide.name }}</p>
-          <p>{{ this.trip.aboutGuide.rate }}</p>
+      <div class="trip-preview-trip-details">
+        <p class="trip-preview-date">{{ this.trip.date }}</p>
+        <p>{{ this.trip.capacity }}/10 hikers</p>
+        <div class="booking-info flex space-between align-center ">
           <p>
-            <i v-for="n in 5" :key="n" class="fas fa-star trip-star-rate"></i>
+            <span class="price bold">{{ this.trip.price }}$</span> / person
+          </p>
+          <p>
+            <span class="bold">{{ this.trip.capacity }}</span
+            >/10 joined!
           </p>
         </div>
-
-        <div class="trip-preview-trip-details">
-          <p class="trip-preview-date">{{ this.trip.date }}</p>
-          <p>{{ this.trip.capacity }}/10 trippers</p>
-          <p @click.stop="emitFav(trip)"><i :class="fav"></i></p>
+        <hr />
+        <div class="guide-info flex space-between">
+          <div class="guide-profile flex">
+            <img
+              class="guide-img profile-img-s"
+              :src="
+                require('@/assets/img/users/' + this.trip.aboutGuide.imgUrl)
+              "
+            />
+            <p>{{ this.trip.aboutGuide.name }}</p>
+          </div>
+          <p><i class="fas fa-star trip-star-rate"></i> {{ rateOfGuide }}</p>
         </div>
       </div>
     </div>
@@ -27,20 +42,21 @@
 </template>
 
 <script>
-import {tripService} from '@/services/trip-service.js';
+import { tripService } from "@/services/trip-service.js";
+import { userService } from "../../services/user-service";
 
 export default {
   props: {
     tripId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
 
   data() {
     return {
       isFav: false,
-      trip: null
+      trip: null,
     };
   },
 
@@ -55,13 +71,28 @@ export default {
     goToDetails(id) {
       this.$router.push(`/trip/${id}`);
     },
-    
+
     checkIsFav() {
       const user = this.getCurrUser;
       const userFavs = user.favoriteTrips;
-      let isInFav = userFavs.some((userFav) => userFav._id.includes(this.trip._id));
+      let isInFav = userFavs.some((userFav) =>
+        userFav._id.includes(this.trip._id)
+      );
       this.isFav = isInFav;
-    }
+    },
+    getGuideRate(trip) {
+      const tripGuideId = trip.aboutGuide._id;
+      // const user = await userService.getUserById(id);
+      // console.log("user.guideInfo.rate", user.guideInfo.rate);
+      // const rate = user.guideInfo.rate;
+      // console.log("rate", rate);
+      // return user.guideInfo.rate;
+
+      this.$store.dispatch({
+        type: "getGuideRate",
+        tripGuideId,
+      });
+    },
   },
 
   computed: {
@@ -81,13 +112,17 @@ export default {
 
     getCurrUser() {
       return this.$store.getters.loggedinUser;
-    }
+    },
+    rateOfGuide() {
+      return this.$store.getters.getGuideRate;
+    },
   },
 
   async created() {
     this.trip = await tripService.getTripById(this.tripId);
     this.checkIsFav();
-  }
+    this.getGuideRate(this.trip);
+  },
 };
 </script>
 

@@ -4,7 +4,7 @@
 
     <form @submit.prevent="emitBook">
       <label for="peopleToSign"
-        >How many trippers?
+        >How many hikers?
         <input
           class="trip-book-peopleToSign"
           type="number"

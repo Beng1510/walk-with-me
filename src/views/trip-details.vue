@@ -38,7 +38,7 @@
       <!-- <h3>Trip capacity: {{ trip.capacity }}/10</h3>
     <h3>Trip difficulty: {{ trip.difficulty }}</h3> -->
       <p class="trip-details-description">{{ trip.description }}</p>
-      Join These Trippers:
+      Join These Hikers:
       <ul>
         <li v-for="booking in this.filterdBookings" :key="booking._id">
           {{ booking.user.name }}
@@ -59,7 +59,7 @@
         </h3>
       </div>
 
-      <guide-review :guideId="trip.aboutGuide._id" />
+      <guide-review :guideId="trip.aboutGuide._id" :user="loggedInUser" />
     </div>
   </section>
 </template>
@@ -83,6 +83,11 @@ export default {
       this.$store.dispatch({ type: "addBooking", booking });
     },
   },
+  computed: {
+    loggedInUser() {
+      return this.$store.getters.loggedinUser;
+    },
+  },
   async created() {
     const tripId = this.$route.params.id;
     const trip = await tripService.getTripById(tripId);
@@ -94,12 +99,11 @@ export default {
     });
 
     const bookings = this.$store.getters.bookings;
-    console.log("bookings", bookings);
 
     this.filterdBookings = bookings.filter(
       (booking) => booking.trip._id === tripId
     );
-    console.log("filterdBookings at userDetails", this.filterdBookings);
+
   },
   components: {
     guideReview,

@@ -28,13 +28,16 @@ async function query(filterBy = {}) {
     return trips;
 }
 function getQueryStrPrms(filterBy) {
-    
+    console.log('filterBy',filterBy);
     let str = '?'
     if (filterBy.name) {
         str += `q=${filterBy.name}&`
     }
     if (filterBy.type) {
         str += `type=${filterBy.type}`
+    }
+    if (filterBy.region) {
+        str += `region=${filterBy.region}`
     }
     return str
 }

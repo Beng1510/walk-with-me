@@ -1,36 +1,32 @@
+
 .main-header {
-    // background-color: aquamarine;
-    height: 120px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    // background: url('~@/assets/img/back1.jpeg');
-    background-image: url('~@/assets/img/background2.jpeg');
-    background-size: cover;
+    padding: .5em 0;
+}
+
+.logo { 
+    text-decoration: none;
+    display: inline-block;
     
+    & h2 {
+        color: $clr3;
+        font-family: PerMark;
+        font-size: em(36px);
+        margin: 1rem 0 1rem;
+    }
 }
 
-.nav-bar a{
-    text-decoration: none;
-    font-family: PerMark;
-    font-size: 24px;
-    color: black;
-    // color: white;
-    // text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+.nav-bar {
+
+    & a {
+        color: $clr3;
+        font-size: em(20px);
+        margin: 1rem .5rem 1rem;
+
+        &:last-child {
+            margin-inline-end: 0;
+        }
+    }
 
 }
 
-.logo-container a {
-    text-decoration: none;
-}
 
-.logo-container .logo {
-    font-family: PerMark;
-    font-size: 36px; 
-    text-decoration: none;
-    color: black;
-    // color: white;
-    // text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-
-
-}

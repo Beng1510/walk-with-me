@@ -1,7 +1,7 @@
 <template>
-  <section class="trip-list">
+  <section class="trip-list card-grid">
     <trip-preview
-      v-for="trip in trips"
+      v-for="trip in sortedTrips"
       :key="trip._id"
       :tripId="trip._id"
       @emitFav="emitFav"
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import tripPreview from './trip-preview.cmp.vue';
+import tripPreview from "./trip-preview.cmp.vue";
 
 export default {
   props: {
@@ -22,19 +22,23 @@ export default {
     },
   },
 
-  name: 'trip-list',
+  name: "trip-list",
 
   components: {
     tripPreview,
   },
-
+  computed: {
+      sortedTrips() {
+      return _.orderBy(this.trips, 'date', 'asc' )
+    }
+  },
   methods: {
     emitFav(trip) {
-      this.$emit('emitFav', trip);
+      this.$emit("emitFav", trip);
     },
 
     goToDetails(id) {
-      router.push({ name: 'trip', params: { id } });
+      router.push({ name: "trip", params: { id } });
     },
   },
 };
