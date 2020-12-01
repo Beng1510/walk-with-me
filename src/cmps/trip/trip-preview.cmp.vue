@@ -1,27 +1,30 @@
 <template>
-  <section v-if="this.trip" class="trip-preview" @click="goToDetails(tripId)">
+  <section v-if="this.trip" class="trip-preview preview-card" @click="goToDetails(tripId)">
     <img
-      class="trip-preview-img"
+      class="trip-preview-img ratio-card"
       :src="require('../../assets/img/trips/' + this.trip.imgUrls[0])"
     />
-    <div class="trip-preview-info">
+    <p class="toggle-fav" @click.stop="emitFav(trip)"><i :class="fav"></i></p>
+    <div class="preview-card details">
       <h2 class="trip-preview-title">{{ this.trip.name }}</h2>
-
-      <div class="trip=preview-info-container flex space-around">
-        <div class="trip-preview-guide-details">
-          <p>Guide: {{ this.trip.aboutGuide.name }}</p>
-          <p>
-            <i class="fas fa-star trip-star-rate"></i>
-            {{ this.trip.aboutGuide.rate }}
-            {{rateOfGuide}}
-          </p>
-        </div>
-
         <div class="trip-preview-trip-details">
           <p class="trip-preview-date">{{ this.trip.date }}</p>
           <p>{{ this.trip.capacity }}/10 hikers</p>
-          <p @click.stop="emitFav(trip)"><i :class="fav"></i></p>
+      <p class="trip-preview-date">{{ this.trip.date }}</p>
+      <div class="booking-info flex space-between align-center ">
+        <p><span class="price bold">{{this.trip.price}}$</span> / person</p>
+        <p><span class="bold">{{ this.trip.capacity }}</span>/10 joined!</p>
+      </div>
+      <hr/>
+      <div class="guide-info flex space-between">
+        <div class="guide-profile flex">
+          <img
+            class="guide-img profile-img-s"
+            :src="require('@/assets/img/users/' + this.trip.aboutGuide.imgUrl)"
+          />
+          <p>{{ this.trip.aboutGuide.name }}</p>
         </div>
+        <p><i class="fas fa-star trip-star-rate"></i> {{rateOfGuide}}</p>
       </div>
     </div>
   </section>

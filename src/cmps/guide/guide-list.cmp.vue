@@ -1,5 +1,5 @@
 <template>
-  <section class="guide-list">
+   <section class="guide-list card-grid">
     <!-- <guide-preview v-for="(user) in users" :key="user._id" :user="user"> -->
     <guide-preview v-for="(user) in sortedUsers" :key="user._id" :user="user">
     </guide-preview>
