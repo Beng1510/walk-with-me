@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: openSansReg;
+    line-height: 1.8;
+    color: $clr3;
+}
+
+body {
+    margin: 0;
+    max-width: 1300px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 1em;
+    font-family: openSansBold;
+    font-weight: normal;
+    line-height: 1.3;
+}
+
+a {
+    text-decoration: none;
+    font-family: openSansBold;
+    cursor: pointer;
+}
+
+p {
+    margin: 0 0 1em;
+    max-width: 54ch;
+}
+
+img {
+    width: 100%;
+}
+
+li {
+    list-style: none;
+}

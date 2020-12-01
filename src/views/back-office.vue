@@ -58,8 +58,6 @@ export default {
         booking.status = "pending";
         // this.btnText = "Approve"
       }
-      console.log("book after approval", booking);
-
       this.$store.dispatch({
         type: "updateBooking",
         booking,
@@ -86,8 +84,6 @@ export default {
   },
   async created() {
     // this.guide = this.$store.getters.loggedinGuide;
-    console.log("guide", this.guide);
-
     this.$store.dispatch({
       type: "loadBookings",
     });

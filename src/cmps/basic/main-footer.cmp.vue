@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <section class="main-footer full main-layout">
     <p>Coffee Rights</p>
-  </div>
+  </section>
 </template>
 
 <script>

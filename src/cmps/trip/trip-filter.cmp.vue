@@ -2,68 +2,62 @@
   <section class="trip-filter">
     <form @submit.prevent="emitFilter">
       <input type="text" v-model="filterBy.name" @input="emitFilter" placeholder="let's search together"/>
-      <label for="all-tag">
+      <label for="all-tag" class="tag">
         All
         <input
           type="radio"
           id="all-tag"
           value="All"
           v-model="filterBy.type"
-          @select="emitFilter"
+          @select="emitFilter" hidden checked
         />
         </label>
-      <label for="mountain-tag">
+      <label for="mountain-tag" class="tag">
         Mountain
         <input
           type="radio"
           id="mountain-tag"
           value="mountain"
           v-model="filterBy.type"
-          @select="emitFilter"
+          @select="emitFilter" hidden
         />
       </label>
-      <label for="seaside-tag">
+      <label for="seaside-tag" class="tag">
         Seaside
         <input
           type="radio"
           id="seaside-tag"
           value="seaside"
           v-model="filterBy.type"
-          @select="emitFilter"
+          @select="emitFilter" hidden
         />
       </label>
-      <label for="city-tag">
+      <label for="city-tag" class="tag">
         City
         <input
           type="radio"
           id="city-tag"
           value="city"
           v-model="filterBy.type"
-          @select="emitFilter"
+          @select="emitFilter" hidden
         />
       </label>
-      <label for="forest-tag">
-        forest
+      <label for="forest-tag" class="tag">
+        Forest
         <input
           type="radio"
           id="forest-tag"
           value="forest"
           v-model="filterBy.type"
-          @select="emitFilter"
+          @select="emitFilter" hidden
         />
       </label>
       <select v-model="selected" >
         <option disabled value="">Please select a destination</option>
         <option  value="Usa">United States</option>
-        <option  value="Erup">Europe</option>
+        <option  value="Europe">Europe</option>
         <option  value="Asia">Asia</option>
-
-        <!-- <option v-for="trip in trips" :key="trip._id">
-          <label >{{trip.location }}</label>
-        </option> -->
       </select>
-
-      <span>Selected: {{ selected }}</span>
       <button>Search 🍳</button>
     </form>
   </section>
