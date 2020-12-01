@@ -1,5 +1,5 @@
 <template>
-  <section class="trip-list">
+  <section class="trip-list card-grid">
     <trip-preview
       v-for="trip in trips"
       :key="trip._id"

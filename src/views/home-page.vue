@@ -1,31 +1,34 @@
 <template>
-  <section class="home-page">
-    <div class="hero-container">
-      <img class="hero" src="../assets/img/hero1.jpeg" />
+  <section class="home-page full">
+    <div class="hero-container full flex column align-center">
+      <img src="../assets/img/hero1.jpeg" />
+      <h1 class="hero-txt head">Dream, Explore, Discover</h1>
+      <h2 class="hero-txt small">Adventur awaits, let's find it together</h2>
     </div>
-    <h2>Let Us Guide You</h2>
-    <span v-if="isLoading">Loading...</span>
-    <trip-filter @filterBy="updateFilter" :trips="tripsForDisplay" />
-    <!-- <h3>All Trips</h3>
-    <trip-list :trips="tripsForDisplay" @emitFav="toggleFav" /> -->
-    <hr />
-    <h3>Top Mountain Trips</h3>
-    <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
-    <hr />
-    <h3>Top Forest Trips</h3>
-    <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
-    <hr />
-    <h3>Top Seaside Trips</h3>
-    <trip-list :trips="seaTripsForDisplay" @emitFav="toggleFav" />
-    <hr />
-    <h3>Top City Trips</h3>
-    <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
-    <hr />
-    <h3>Top Guides</h3>
+    <div class="home-page-content main-layout">
+      <span v-if="isLoading">Loading...</span>
+      <trip-filter @filterBy="updateFilter" :trips="tripsForDisplay" />
+      <!-- <h3>All Trips</h3>
+      <trip-list :trips="tripsForDisplay" @emitFav="toggleFav" /> -->
+      <hr />
+      <h3>Top Mountain Trips</h3>
+      <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
+      <hr />
+      <h3>Top Forest Trips</h3>
+      <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
+      <hr />
+      <h3>Top Seaside Trips</h3>
+      <trip-list :trips="seaTripsForDisplay" @emitFav="toggleFav" />
+      <hr />
+      <h3>Top City Trips</h3>
+      <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
+      <hr />
+      <h3>Top Guides</h3>
 
-    <guide-list :users="guidesForDisplay" />
+      <guide-list :users="guidesForDisplay" />
 
-    <hr />
+      <hr />
+    </div>
 
     
   </section>

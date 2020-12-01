@@ -1,0 +1,44 @@
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 
+    minmax(2rem, 1fr)
+    minmax(auto, 1300px)
+    minmax(2rem, 1fr);
+
+    > * {
+        grid-column: 2;
+    }
+
+    > .full {
+        grid-column: 1 / -1;
+    }
+
+    &#app {
+        min-height: 100vh;
+        width: 100vw;
+        grid-template-rows: auto 1fr;
+    }
+
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.profile-img-s {
+    border-radius: 50%;
+    max-height: 30px;
+    max-width: 30px;
+    object-fit: cover;
+}
+
+.profile-img-m {
+    border-radius: 50%;
+    max-height: 150px;
+    max-width: 150px;
+    object-fit: cover;
+    margin: 1em;
+}
