@@ -9,7 +9,7 @@
       :src="require('../../assets/img/trips/' + this.trip.imgUrls[0])"
     />
     <p class="toggle-fav" @click.stop="emitFav(trip)"><i :class="fav"></i></p>
-    <div class="preview-card details">
+    <div class="details">
       <h2 class="trip-preview-title">{{ this.trip.name }}</h2>
       <div class="trip-preview-trip-details">
         <p class="trip-preview-date">{{ this.trip.date }}</p>
