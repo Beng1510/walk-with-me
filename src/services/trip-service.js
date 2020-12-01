@@ -22,10 +22,10 @@ async function query(filterBy = {}) {
     }
     const res = await axios.get(`${baseUrl}/trip${qst}`)
     
-    return res.data
-
+    // return res.data
     // const trips = httpService.get(_buildQuery(filterBy));
-    // return trips;
+
+    return trips;
 }
 function getQueryStrPrms(filterBy) {
     
@@ -46,10 +46,6 @@ async function getTripById(tripId) {
     // return httpService.get(`trip/${tripId}`)
 }
 
-
-// function remove(tripId) {
-//     return httpService.delete(`toy/${tripId}`)
-// }
 
 function save(trip) {
     const savedTrip = trip._id ? _update(trip) : _add(trip)
