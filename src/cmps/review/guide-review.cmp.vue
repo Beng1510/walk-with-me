@@ -7,6 +7,8 @@
       <input
         type="text"
         v-model="newReview.txt"
+        min="1"
+        max="5"
         placeholder="What do you think about this gouide  ?"
       />
       <input

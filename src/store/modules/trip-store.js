@@ -69,6 +69,7 @@ export const tripStore = {
             state.filterBy = filterBy
         },
         setTrips(state, { trips }) {
+            // console.log(' state.trips', state.trips);
             state.trips = trips
         },
         setIsLoading(state, payload) {
@@ -102,6 +103,7 @@ export const tripStore = {
             // commit({ type: 'setFilterBy', filterBy })
 
             const trips = await tripService.query(getters.filterBy)
+
             // const trips = await tripService.query(filterBy)
             let types = {};
             trips.forEach(trip => {
@@ -138,13 +140,13 @@ export const tripStore = {
             const trip = await tripService.getTripById(id);
             const tripCopy = JSON.parse(JSON.stringify(trip))
             tripCopy.capacity = capacity;
-            console.log('tripCopy',tripCopy);
+            // console.log('tripCopy',tripCopy);
             const savedTrip = await tripService.save(tripCopy);
-            console.log('savedTrip',savedTrip)
+            // console.log('savedTrip',savedTrip)
             commit({ type: 'updateTrip', trip: savedTrip })
         },
         toggleShow(context, { showBy }) {
-            console.log('showBy', showBy);
+            // console.log('showBy', showBy);
             context.commit({ type: 'showByParams', showBy })
         },
       

@@ -29,7 +29,6 @@ function query(filterBy = {}) {
         queryParams.append('type',filterBy.type )
         queryParams.append('region',filterBy.region )
     }
-
     return httpService.get(`trip?${queryParams}`)
 
     // const trips = httpService.get(_buildQuery(filterBy));
@@ -37,23 +36,23 @@ function query(filterBy = {}) {
     // return trips;
 }
 
-function getQueryStrPrms(filterBy) {
-    let str = '?'
+// function getQueryStrPrms(filterBy) {
+//     let str = '?'
 
-    console.log('filterBy.nameee:', filterBy.name)
+//     console.log('filterBy.nameee:', filterBy.name)
 
-    if (filterBy.name) {
-        str += `name=${filterBy.name}&`
-    }
-    if (filterBy.type) {
-        str += `type=${filterBy.type}&`
-    }
-    if (filterBy.region) {
-        str += `region=${filterBy.region}`
-    }
-    console.log('str:', str)
-    return str
-}
+//     if (filterBy.name) {
+//         str += `name=${filterBy.name}&`
+//     }
+//     if (filterBy.type) {
+//         str += `type=${filterBy.type}&`
+//     }
+//     if (filterBy.region) {
+//         str += `region=${filterBy.region}`
+//     }
+//     console.log('str:', str)
+//     return str
+// }
 
 async function getTripById(tripId) {
 

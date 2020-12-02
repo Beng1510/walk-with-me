@@ -87,8 +87,6 @@ export const userStore = {
             return state.isGuide
         },
         guidesForDisplay(state) {
-            console.log('state:', state)
-            // console.log('state at users',state);
             return state.users.filter(user => user.isGuide === true)
         },
         reviews(state) {
@@ -114,7 +112,6 @@ export const userStore = {
         },
         setGuideRate(state, { rate }) {
             state.guideRate = rate
-            console.log('state.guideRate', state.guideRate);
         }
         // updateUser(state, { user }) {
         //     const idx = state.users.findIndex(prd => prd._id === user._id);

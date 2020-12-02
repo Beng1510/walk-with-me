@@ -12,10 +12,7 @@
       <button class="see-all-btn" @click="goToAllTrips()">See All</button>
       <h3>Top Mountain Trips</h3>
       <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
-      <button
-        class="see-all-mountain-btn"
-        @click="toggleShowTrips('mountain')"
-      >
+      <button class="see-all-mountain-btn" @click="toggleShowTrips('mountain')">
         See All Mountain Trips
       </button>
       <hr />
@@ -140,7 +137,10 @@ export default {
     guideList,
   },
   created() {
-    this.$store.commit({ type: "setFilterBy", filterBy: {} });
+    this.$store.commit({
+      type: "setFilterBy",
+      filterBy: { name: "", type: "", location: "", region: "" },
+    });
 
     this.$store.dispatch({
       type: "loadTrips",
