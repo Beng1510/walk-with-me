@@ -34,7 +34,7 @@ function query(filterBy = {}) {
 
     // const trips = httpService.get(_buildQuery(filterBy));
 
-    return trips;
+    // return trips;
 }
 
 function getQueryStrPrms(filterBy) {
