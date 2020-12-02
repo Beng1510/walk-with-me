@@ -19,7 +19,16 @@ export default {
   },
   computed: {
     defaultUserForDisplay() {
-      return this.$store.getters.loggedinUser;
+      const loggedUser= this.$store.getters.loggedinUser;
+       return loggedUser
+     
+//      if (loggedUser ) {
+//         return loggedUser
+//       } else { 
+//         user.name = "Guest"
+// console.log('user',user);
+//       return user
+//       }
     },
   },
   created() {

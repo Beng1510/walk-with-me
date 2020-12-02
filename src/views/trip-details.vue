@@ -27,24 +27,28 @@
       </div>
     </div>
     <div class="trip-details-info-container">
-      <h2>{{ trip.name }} --- {{ trip.date }}</h2>
+      <h2>{{ trip.name }} --- {{ getDateString }}</h2>
       <!-- <h3>Type: {{ trip.type }}</h3> -->
       <!-- <h3>Trip date: {{ trip.date }}</h3> -->
       <!-- <h3>Trip type: {{ trip.tags }}</h3> -->
       <h3>
-        Price: {{ trip.price }}$ - Trip capacity: {{ trip.capacity }}/10 -
-        Difficulty: {{ trip.difficulty }}/5
+        Price: {{ trip.price }}$ - Number of Hikers Booked:
+        {{ trip.totalBooked }}/10 - Difficulty: {{ trip.difficulty }}/5
       </h3>
-      <!-- <h3>Trip capacity: {{ trip.capacity }}/10</h3>
-    <h3>Trip difficulty: {{ trip.difficulty }}</h3> -->
+
       <p class="trip-details-description">{{ trip.description }}</p>
-      Join These Hikers:
+
+      {{ bookedMsg }}
+
+       <div v-if="this.filterdBookings"> Already Booked: </div>
+
       <ul>
         <li v-for="booking in this.filterdBookings" :key="booking._id">
-          {{ booking.user.name }}
+          {{ booking.user.name }} - {{booking.peopleToSign}} Tickets Booked
         </li>
       </ul>
-      <trip-book :trip="trip" @bookTrip="bookTrip" />
+
+      <trip-book :trip="trip" :user="loggedInUser" @bookTrip="bookTrip" />
     </div>
 
     <h2>Guide Details</h2>
@@ -70,11 +74,13 @@ import guideReview from "../cmps/review/guide-review.cmp.vue";
 import tripBook from "../cmps/trip/trip-book.cmp.vue";
 
 export default {
+  name: "trip-details",
   data() {
     return {
       trip: null,
       mapPos: null,
       filterdBookings: null,
+      isBooked: false,
     };
   },
 
@@ -82,11 +88,49 @@ export default {
     bookTrip(booking) {
       this.$store.dispatch({ type: "addBooking", booking });
     },
+    getBookingByUser(user) {
+      const bookings = this.$store.getters.bookings;
+      const filteredBookingsByUser = bookings.filter(
+        (booking) => booking.user._id === user._id
+      );
+
+      filteredBookingsByUser.some((booking) => {
+        if (booking.trip.name === this.trip.name) {
+          return (this.isBooked = true);
+        }
+      });
+    },
   },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedinUser;
     },
+    getDateString(trip) {
+      var date = new Date(this.trip.date);
+      return date.toLocaleDateString("en-GB");
+    },
+    bookedMsg() {
+      // console.log('this.isBooked',this.isBooked);
+      if (!this.isBooked && this.trip.totalBooked < 10) {
+        return "Come & Join The Trip ";
+      } else if (this.getBookingByUser === false) {
+        return "You've Already Booked This Trip";
+      } else return "Sorry, We're Fully Booked";
+    },
+
+    // getBookingByUser(user) {
+    //   const bookings = this.$store.getters.bookings;
+
+    //   const filteredBookingsByUser = bookings.filter(
+    //     (booking) => booking.user._id === this.user._id
+    //   );
+
+    //   filteredBookingsByUser.some((booking) => {
+    //     if (booking.trip.name === this.trip.name) {
+    //       return (this.isBooked = false);
+    //     }
+    //   });
+    // },
   },
   async created() {
     const tripId = this.$route.params.id;
@@ -99,11 +143,12 @@ export default {
     });
 
     const bookings = this.$store.getters.bookings;
-
-    this.filterdBookings = bookings.filter(
+    const filteredBookingsByTrip = bookings.filter(
       (booking) => booking.trip._id === tripId
     );
+    this.filterdBookings = filteredBookingsByTrip;
 
+    this.getBookingByUser(this.loggedInUser);
   },
   components: {
     guideReview,

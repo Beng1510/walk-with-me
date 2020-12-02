@@ -12,14 +12,17 @@
     <div class="details">
       <h2 class="trip-preview-title">{{ this.trip.name }}</h2>
       <div class="trip-preview-trip-details">
-        <p class="trip-preview-date">{{ this.trip.date }}</p>
-        <p>{{ this.trip.capacity }}/10 hikers</p>
-        <div class="booking-info flex space-between align-center ">
+        <!-- <p class="trip-preview-date">{{ this.trip.date }}</p> -->
+
+        <p class="trip-preview-date">{{ getDateString }}</p>
+
+        <p>{{ this.trip.totalBooked }}/10 hikers</p>
+        <div class="booking-info flex space-between align-center">
           <p>
             <span class="price bold">{{ this.trip.price }}$</span> / person
           </p>
           <p>
-            <span class="bold">{{ this.trip.capacity }}</span
+            <span class="bold">{{ this.trip.totalBooked }}</span
             >/10 joined!
           </p>
         </div>
@@ -34,7 +37,7 @@
             />
             <p>{{ this.trip.aboutGuide.name }}</p>
           </div>
-          <p><i class="fas fa-star trip-star-rate"></i> {{ rateOfGuide }}</p>
+          <p><i class="fas fa-star trip-star-rate"></i> {{ rateGuide }}</p>
         </div>
       </div>
     </div>
@@ -59,6 +62,7 @@ export default {
     return {
       isFav: false,
       trip: null,
+      rateGuide: null,
     };
   },
 
@@ -82,18 +86,14 @@ export default {
       );
       this.isFav = isInFav;
     },
-    getGuideRate(trip) {
+    async getGuideRate(trip) {
       const tripGuideId = trip.aboutGuide._id;
-      // const user = await userService.getUserById(id);
-      // console.log("user.guideInfo.rate", user.guideInfo.rate);
-      // const rate = user.guideInfo.rate;
-      // console.log("rate", rate);
-      // return user.guideInfo.rate;
-
-      this.$store.dispatch({
+      const rate = await this.$store.dispatch({
         type: "getGuideRate",
         tripGuideId,
       });
+
+      this.rateGuide = rate;
     },
   },
 
@@ -118,6 +118,10 @@ export default {
     rateOfGuide() {
       return this.$store.getters.getGuideRate;
     },
+    getDateString(trip) {
+      var date = new Date(this.trip.date);
+      return date.toLocaleDateString('en-GB')
+    },
   },
 
   async created() {
@@ -125,6 +129,9 @@ export default {
     
     this.checkIsFav();
     this.getGuideRate(this.trip);
+    // this.getDateString(this.trip);
+    // let m = moment()
+    // console.log('m',m);
   },
 };
 </script>

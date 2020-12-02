@@ -29,7 +29,6 @@ export const tripStore = {
                 const mountainTrips = state.trips.filter(trip => trip.type === "mountain")
                 return mountainTrips.slice(0, 4)
             }
-
         },
         forestTripsForDisplay(state) {
             return state.trips.filter(trip => trip.type === "forest")
@@ -46,10 +45,7 @@ export const tripStore = {
             } else {
                 const extremeTrips = state.trips.filter(trip => trip.difficulty >= 4)
                 return extremeTrips.slice(0, 4)
-
             }
-
-            // return state.trips.filter(trip => trip.difficulty >= 4)
         },
         europeTripsForDisplay(state) {
             if (state.showBy === "Europe" && state.isShowAll === true) {
@@ -73,6 +69,7 @@ export const tripStore = {
             state.filterBy = filterBy
         },
         setTrips(state, { trips }) {
+            // console.log(' state.trips', state.trips);
             state.trips = trips
         },
         setIsLoading(state, payload) {
@@ -101,28 +98,34 @@ export const tripStore = {
         async loadTrips({ getters, commit }) {
             // commit({ type: 'setIsLoading', isLoading: true })
             // const trips = await tripService.query(state.filterBy)
+
+            // console.log('getters.filterBy', getters.filterBy);
+            // commit({ type: 'setFilterBy', filterBy })
+
             const trips = await tripService.query(getters.filterBy)
+
+            // const trips = await tripService.query(filterBy)
             let types = {};
             trips.forEach(trip => {
                 if (!types[trip.type]) types[trip.type] = trip.type
             });
 
             commit({ type: 'setTrips', trips })
-           
+
 
             // commit({ type: 'setIsLoading', isLoading: false })
 
         },
 
-        async filterTrips({ commit, state }, { filterBy }) {
+        // async filterTrips({ commit, state }, { filterBy }) {
 
-            console.log('filterBy at storeeeeeee:', filterBy)
-            // const trips = await tripService.query(filterBy)
-            // console.log('trips:', trips)
-            commit({ type: 'setFilterBy', filterBy })
+        //     console.log('filterBy at store:', filterBy)
+        //     // const trips = await tripService.query(filterBy)
+        //     // console.log('trips:', trips)
+        //     commit({ type: 'setFilterBy', filterBy })
 
-            // state.dispatch({ type:'loadTrips', filterBy }
-        },
+        //     // state.dispatch({ type:'loadTrips', filterBy }
+        // },
 
 
         async saveTrip({ commit }, { trip }) {
@@ -133,19 +136,20 @@ export const tripStore = {
         //     await tripService.remove(payload.tripId)
         //     commit(payload)
         // },
-        async updateCapacity({ commit }, { id, capacity }) {
+        async updateTotalBooked({ commit }, { id, totalBooked }) {
             const trip = await tripService.getTripById(id);
             const tripCopy = JSON.parse(JSON.stringify(trip))
-            tripCopy.capacity = capacity;
+            tripCopy.totalBooked = totalBooked;
+            // console.log('tripCopy',tripCopy);
             const savedTrip = await tripService.save(tripCopy);
-            console.log(savedTrip)
+            // console.log('savedTrip',savedTrip)
             commit({ type: 'updateTrip', trip: savedTrip })
         },
         toggleShow(context, { showBy }) {
-            console.log('showBy', showBy);
+            // console.log('showBy', showBy);
             context.commit({ type: 'showByParams', showBy })
         },
-        // updateRateAtTrip(context, )
+      
 
     },
 

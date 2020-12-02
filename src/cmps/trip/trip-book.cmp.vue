@@ -1,8 +1,7 @@
 <template>
   <section v-if="trip" class="trip-book">
-    <h1>Join The Trip!</h1>
-
-    <form @submit.prevent="emitBook">
+    <form @submit.prevent="emitBook" v-if="isBooked">
+      <h1>Join The Trip!</h1>
       <label for="peopleToSign"
         >How many hikers?
         <input
@@ -12,7 +11,7 @@
           id="peopleToSign"
           name="peopleToSign"
           min="1"
-          :max="capacity"
+          :max="openSlotsForHikers"
           @change="totalPrice"
         />
       </label>
@@ -30,6 +29,8 @@
       <p>Total Price: {{ booking.sum }}$</p>
       <button>Book Trip</button>
     </form>
+
+    <div v-else>You Are Already Booked For This Trip</div>
   </section>
 </template>
 
@@ -38,6 +39,10 @@ import { eventBusService, SHOW_MSG } from "../../services/eventBus-service.js";
 export default {
   props: {
     trip: {
+      type: Object,
+      required: true,
+    },
+    user: {
       type: Object,
       required: true,
     },
@@ -57,22 +62,23 @@ export default {
           _id: this.trip._id,
           name: this.trip.name,
           imgUrl: this.trip.imgUrls,
-          capacity: this.trip.capacity,
+          totalBooked: this.trip.totalBooked,
         },
         status: "pending",
         peopleToSign: 1,
         specialReq: "",
         sum: this.trip.price,
       },
+      isBooked: true,
     };
   },
 
   computed: {
-    capacity() {
-      const signed = this.trip.capacity;
+    openSlotsForHikers() {
+      const signed = this.trip.totalBooked;
       let openSlots = 10 - signed;
       return openSlots;
-    }
+    },
   },
 
   methods: {
@@ -85,6 +91,7 @@ export default {
         subTxt: "Please wait for guide's final approval",
         type: "success",
       });
+      this.updateTotalBooked()
     },
 
     totalPrice() {
@@ -93,16 +100,34 @@ export default {
       this.booking.sum = (price * numOfPeople).toFixed(2);
       return this.booking.sum;
     },
-    updateCapacity() {
-      let capacity = this.booking.trip.capacity;
+    updateTotalBooked() {
+      let totalBooked = this.booking.trip.totalBooked;
       const peopleToSign = this.booking.peopleToSign;
-      capacity += peopleToSign;
+      totalBooked += peopleToSign;
+      console.log('totalBooked',totalBooked);
       this.$store.dispatch({
-        type: "updateCapacity",
+        type: "updateTotalBooked",
         id: this.trip._id,
-        capacity,
+        // totalBooked : JSON.parse(JSON.stringify(this.totalBooked))
+        totalBooked
       });
     },
+    getBookingByUser(user) {
+      const bookings = this.$store.getters.bookings;
+
+      const filteredBookings = bookings.filter(
+        (booking) => booking.user._id === this.user._id
+      );
+
+      filteredBookings.some((booking) => {
+        if (booking.trip.name === this.trip.name)
+          return (this.isBooked = false);
+      });
+    },
+  },
+ 
+  created() {
+    this.getBookingByUser(this.user);
   },
 };
 </script>
