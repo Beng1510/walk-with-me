@@ -1,7 +1,7 @@
 .preview-card {
   position: relative;
   border-radius: 15px;
-  box-shadow: 0 6px 10px clr5;
+  box-shadow: 0 6px 10px $clr5;
   cursor: pointer;
   transition: box-shadow 0.4s ease-in-out;
 
@@ -32,7 +32,7 @@
       margin-top: 0;
     }
 
-    .guide-info {
+    .guide-info, .date {
       color: $clr4;
 
       .guide-img {
@@ -43,6 +43,7 @@
 
   .trip-preview-img {
     border-radius: 15px 15px 0 0;
+    height: 200px;
   }
 
   .toggle-fav {
