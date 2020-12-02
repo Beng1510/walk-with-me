@@ -83,6 +83,7 @@ export default {
 
   methods: {
     emitBook() {
+      
       this.$emit("bookTrip", this.booking);
 
       eventBusService.$emit(SHOW_MSG, {
