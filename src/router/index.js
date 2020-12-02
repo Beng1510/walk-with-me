@@ -7,6 +7,7 @@ import tripDetails from "../views/trip-details.vue";
 import userDetails from "../views/user-details.vue";
 import backOffice from "../views/back-office.vue";
 import guideDetails from '../views/guide-details.vue';
+import login from '../views/login.vue'
 
 Vue.use(VueRouter);
 
@@ -40,7 +41,11 @@ const routes = [
     path: '/guide/:id',
     name: 'guide-details',
     component: guideDetails
-  }
+  },
+  {
+    path: '/login',
+    component: login
+  },
   // {
   //   path: "/about",
   //   name: "about",

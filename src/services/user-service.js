@@ -51,13 +51,15 @@ async function updateUser(user) {
 // }
 
 
-
 async function login(userCred) {
     const user = await httpService.post('auth/login', userCred)
     return _handleLogin(user)
 }
 async function signup(userCred) {
+    console.log('userCreddd:', userCred)
     const user = await httpService.post('auth/signup', userCred)
+    console.log('user:', user)
+
     return _handleLogin(user)
 }
 async function logout() {

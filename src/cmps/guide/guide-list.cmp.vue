@@ -1,6 +1,7 @@
 <template>
-  <section class="guide-list card-grid">
-    <guide-preview v-for="(user) in sortedUsers" :key="user._id" :user="user">
+   <section class="guide-list card-grid">
+   
+    <guide-preview v-for="(guide) in sortedGuides" :key="guide._id" :guide="guide">
     </guide-preview>
   </section>
 </template>
@@ -11,7 +12,7 @@ import guidePreview from "./guide-preview.cmp.vue";
 export default {
   name: "guide-list",
   props: {
-    users: {
+    guides: {
       type: Array,
       required: true,
     },
@@ -26,8 +27,8 @@ export default {
     // sorted_users() {
     //   return this.users.sort((a, b) => {return b.guideInfo.rate - a.guideInfo.rate});
     // },
-    sortedUsers() {
-      return _.orderBy(this.users, 'guideInfo.rate', 'desc' )
+    sortedGuides() {
+      return _.orderBy(this.guides, 'guideInfo.rate', 'desc' )
     }
   },
 };

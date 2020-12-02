@@ -76,18 +76,10 @@ export default {
         trip,
       });
     },
-    // bookingToShow() {
-    //   const bookings = this.$store.getters.bookings;
-    //   console.log('bookings:', bookings)
-
-    //   return bookings.filter((booking) => booking.user._id === this.user._id);
-    // },
   },
   computed: {
     bookingToShow() {
       const bookings = this.$store.getters.bookings;
-      console.log('bookings:', bookings)
-
       return bookings.filter((booking) => booking.user._id === this.user._id);
     },
   },

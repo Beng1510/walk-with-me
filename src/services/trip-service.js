@@ -29,7 +29,6 @@ function query(filterBy = {}) {
         queryParams.append('type',filterBy.type )
         queryParams.append('region',filterBy.region )
     }
-
     return httpService.get(`trip?${queryParams}`)
 
     // const trips = httpService.get(_buildQuery(filterBy));
@@ -37,25 +36,23 @@ function query(filterBy = {}) {
     // return trips;
 }
 
-function getQueryStrPrms(filterBy) {
+// function getQueryStrPrms(filterBy) {
+//     let str = '?'
 
-    console.log('filterBy:', filterBy)
-    let str = '?'
+//     console.log('filterBy.nameee:', filterBy.name)
 
-    console.log('filterBy.nameee:', filterBy.name)
-
-    if (filterBy.name) {
-        str += `name=${filterBy.name}&`
-    }
-    if (filterBy.type) {
-        str += `type=${filterBy.type}&`
-    }
-    if (filterBy.region) {
-        str += `region=${filterBy.region}`
-    }
-    console.log('str:', str)
-    return str
-}
+//     if (filterBy.name) {
+//         str += `name=${filterBy.name}&`
+//     }
+//     if (filterBy.type) {
+//         str += `type=${filterBy.type}&`
+//     }
+//     if (filterBy.region) {
+//         str += `region=${filterBy.region}`
+//     }
+//     console.log('str:', str)
+//     return str
+// }
 
 async function getTripById(tripId) {
 
@@ -71,16 +68,16 @@ function save(trip) {
 }
 
 async function _add(trip) {
-    const res = await axios.post(`${baseUrl}/trip`, trip)
-    return res.data
+    // const res = await axios.post(`${baseUrl}/trip`, trip)
+    // return res.data
 
-    // return httpService.post(`trip`, trip)
+    return httpService.post(`trip`, trip)
 }
 
 async function _update(trip) {
-    // return httpService.put(`trip/${trip._id}`, trip)
-    const res = await axios.put(`${baseUrl}/trip/${trip._id}`, trip);
-    return res.data;
+    return httpService.put(`trip/${trip._id}`, trip)
+    // const res = await axios.put(`${baseUrl}/trip/${trip._id}`, trip);
+    // return res.data;
 }
 
 function getEmptyTrip() {
@@ -88,7 +85,7 @@ function getEmptyTrip() {
         name: '',
         price: '',
         difficulty: '',
-        capacity: 0,
+        totalBooked: 0,
         type: '',
         imgUrls: [
             'default1.jpeg'
