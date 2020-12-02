@@ -17,14 +17,16 @@ export const bookingStore = {
             state.bookings = bookings
         },
         addBooking(state, { booking }) {
-            state.bookings.unshift(booking)
+            console.log('booooooooooking:', booking)
+            state.bookings.push(booking)
+            
         },
         setBooking(state, { booking }) {
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
             if (idx >= 0) state.bookings.splice(idx, 1, booking)
         },
         removeBooking(state, { booking }) {
-            console.log(booking);
+            
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
             if (idx >= 0) state.bookings.splice(idx, 1);
         }
@@ -42,8 +44,10 @@ export const bookingStore = {
                 name: context.rootGetters.loggedinUser.name,
                 imgUrl: context.rootGetters.loggedinUser.profileImgUrl,
             };
+            
             const newBooking = await bookingService.createBooking(booking);
-            context.commit({ type: 'addBooking', newBooking })
+            console.log('newBooking:', newBooking)
+            context.commit({ type: 'addBooking', booking: newBooking })
         },
 
         async updateBooking(context, { booking }) {

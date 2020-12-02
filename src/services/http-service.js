@@ -11,6 +11,7 @@ var axios = Axios.create({
 
 export const httpService = {
     get(endpoint, data) {
+
         return ajax(endpoint, 'GET', data)
     },
     post(endpoint, data) {
@@ -31,10 +32,10 @@ async function ajax(endpoint, method = 'get', data = null) {
             method,
             data
         })
-       
+
         return res.data;
     } catch (err) {
-        console.log('err',err);
+        console.log('err', err);
         if (err.response.status === 401) {
             router.push('/');
         }
@@ -42,4 +43,8 @@ async function ajax(endpoint, method = 'get', data = null) {
         throw err;
     }
 }
+
+
+
+
 

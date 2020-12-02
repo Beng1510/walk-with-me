@@ -116,7 +116,7 @@ export const tripStore = {
 
         async filterTrips({ commit, state }, { filterBy }) {
 
-            console.log('filterBy at store:', filterBy)
+            console.log('filterBy at storeeeeeee:', filterBy)
             // const trips = await tripService.query(filterBy)
             // console.log('trips:', trips)
             commit({ type: 'setFilterBy', filterBy })

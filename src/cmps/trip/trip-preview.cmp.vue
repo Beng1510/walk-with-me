@@ -41,6 +41,8 @@
   </section>
 </template>
 
+
+
 <script>
 import { tripService } from "@/services/trip-service.js";
 import { userService } from "../../services/user-service";
@@ -120,6 +122,7 @@ export default {
 
   async created() {
     this.trip = await tripService.getTripById(this.tripId);
+    
     this.checkIsFav();
     this.getGuideRate(this.trip);
   },
