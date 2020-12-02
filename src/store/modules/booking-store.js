@@ -43,12 +43,12 @@ export const bookingStore = {
                 imgUrl: context.rootGetters.loggedinUser.profileImgUrl,
             };
             const newBooking = await bookingService.createBooking(booking);
-            context.commit({ type: 'addBooking', newBooking })
+            context.commit({ type: 'addBooking', booking: newBooking })
         },
 
         async updateBooking(context, { booking }) {
             const updatedBooking = await bookingService.updateBooking(booking)
-            context.commit({ type: 'setBooking', booking })
+            context.commit({ type: 'setBooking', booking: updatedBooking })
         },
         async removeBooking(context, {booking}) {
             const deletedBooking = await bookingService.remove(booking)

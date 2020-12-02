@@ -14,7 +14,7 @@
       <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
       <button
         class="see-all-mountain-btn"
-        @click="toggleShowTrips((showBy = 'mountain'))"
+        @click="toggleShowTrips('mountain')"
       >
         See All Mountain Trips
       </button>
@@ -30,32 +30,23 @@
       <hr />
       <h3>Check Out Our Extreme Trips</h3>
       <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" />
-      <button
-        class="see-all-extreme-btn"
-        @click="toggleShowTrips((showBy = 'Extreme'))"
-      >
+      <button class="see-all-extreme-btn" @click="toggleShowTrips('Extreme')">
         See All Extreme Trips
       </button>
 
       <hr />
       <h3>One Day Trips in Europe</h3>
       <trip-list :trips="europeTripsForDisplay" @emitFav="toggleFav" />
-      <button
-        class="see-all-europe-btn"
-        @click="toggleShowTrips((showBy = 'Europe'))"
-      >
+      <button class="see-all-europe-btn" @click="toggleShowTrips('Europe')">
         See All Europe Trips
       </button>
       <button class="go-to-all-europe-btn" @click="updateFilterPage('Europe')">
         Go To Europe Trips
       </button>
       <hr />
+      <h3>Guides of the Month</h3>
+      <guide-list :guides="guidesForDisplay" />
     </div>
-
-    <h3>Guides of the Month</h3>
-    <guide-list :users="guidesForDisplay" />
-
-    <hr />
   </section>
 </template>
 
@@ -72,7 +63,7 @@ export default {
       user: null,
       filterBy: {
         name: "",
-        type: "All",
+        type: "",
         location: "",
         region: "",
       },
@@ -80,18 +71,23 @@ export default {
   },
   methods: {
     updateFilterPage(param) {
-      console.log("param", param);
-      console.log("this.filterBy", this.filterBy);
       this.filterBy.region = param;
-      console.log(" this.filterBy.region", this.filterBy.region);
-      console.log("this.filterBy", this.filterBy);
-    },
-    updateFilter(filterBy) {
-      this.$store.dispatch({
-        type: "filterTrips",
-        filterBy,
-      });
+      this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
 
+      // this.$store.dispatch({
+      //   type: "filterTrips",
+      //   filterBy: this.filterBy,
+      // });
+
+      this.$router.push("/trip");
+    },
+
+    updateFilter(filterBy) {
+      // this.$store.dispatch({
+      //   type: "filterTrips",
+      //   filterBy,
+      // });
+      this.$store.commit({ type: "setFilterBy", filterBy });
       this.$store.dispatch({
         type: "loadTrips",
       });
@@ -144,6 +140,8 @@ export default {
     guideList,
   },
   created() {
+    this.$store.commit({ type: "setFilterBy", filterBy: {} });
+
     this.$store.dispatch({
       type: "loadTrips",
     });

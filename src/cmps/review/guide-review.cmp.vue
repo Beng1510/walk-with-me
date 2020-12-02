@@ -30,7 +30,6 @@
         <h3 class="byName">By: {{ review.reviewByUser.userName }}</h3>
         <p>{{ review.txt }}</p>
         <h4>User Rate: {{ review.rate }}</h4>
-        
       </li>
     </ul>
 
@@ -74,15 +73,14 @@ export default {
     handleReview() {
       this.$store.dispatch({
         type: "saveReview",
-        review: this.newReview,
+        review: JSON.parse(JSON.stringify(this.newReview)), 
         guideId: this.guideId,
-        user: this.user
+        user: this.user,
       });
     },
     showAddBtn() {
       this.isAdding = !this.isAdding;
     },
-    // this.newReview = { txt: "", guideId: this.guideId };
     cancelReview() {
       this.newReview = { txt: "", guideId: this.guideId };
       this.isAdding = !this.isAdding;

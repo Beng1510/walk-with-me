@@ -28,7 +28,6 @@ async function query(filterBy = {}) {
     // return trips;
 }
 function getQueryStrPrms(filterBy) {
-    console.log('filterBy',filterBy);
     let str = '?'
     if (filterBy.name) {
         str += `q=${filterBy.name}&`

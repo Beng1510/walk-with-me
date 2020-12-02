@@ -36,7 +36,7 @@ var defaultGuide = {
     profileImgUrl: "",
     isGuide: true,
     guideInfo: {
-        rate: 4,
+        rate: "",
         description: "professional guide, with great vibes",
         lang: [
             "English",
@@ -93,9 +93,9 @@ export const userStore = {
         reviews(state) {
             return state.reviews
         },
-        getGuideRate(state) {
-            return state.guideRate
-        }
+        // getGuideRate(state) {
+        //     return state.guideRate
+        // }
     },
     mutations: {
         setUser(state, { user }) {
@@ -113,6 +113,7 @@ export const userStore = {
         },
         setGuideRate(state, { rate }) {
             state.guideRate = rate
+            console.log('state.guideRate', state.guideRate);
         }
         // updateUser(state, { user }) {
         //     const idx = state.users.findIndex(prd => prd._id === user._id);
@@ -157,10 +158,8 @@ export const userStore = {
         },
 
         async saveReview({ commit }, { review, guideId, user }) {
-            console.log('review, guideId, user', review, guideId, user);
-            const guide = await userService.getUserById(guideId);
-            console.log('guide before', guide);
 
+            const guide = await userService.getUserById(guideId);
             const sum = guide.guideInfo.reviews.reduce(
                 (acc, item) => acc + item.rate,
                 0
@@ -168,11 +167,8 @@ export const userStore = {
             const avg = sum / guide.guideInfo.reviews.length;
             guide.guideInfo.rate = avg.toFixed(1)
 
-            console.log('guide after', guide);
-            // const updatedRateAtUser = await userService.updateUser(guide)
             const savedReview = await userService.saveReview(review, guide)
             commit({ type: 'addReview', review })
-           
         },
 
         toggleFavs(context, { trip }) {
@@ -195,23 +191,17 @@ export const userStore = {
             context.dispatch({ type: 'updateUser', user: context.state.loggedinUser });
         },
         async getGuideRate(context, { tripGuideId }) {
-            console.log('tripGuideId', tripGuideId);
+            // console.log('tripGuideId', tripGuideId);
             const user = await userService.getUserById(tripGuideId)
-            console.log('user', user);
-
+            // console.log('user at store?', user);
             const rate = user.guideInfo.rate;
-            console.log('rate at store,', rate);
-            context.commit({ type: 'setGuideRate', rate });
+            // console.log('user.guideInfo.rate', user.guideInfo.rate);
+            // console.log('rate', rate);
 
+            return rate
+            // console.log('rate at store?',rate);
 
-
+            // context.commit({ type: 'setGuideRate', rate });
         }
-        // async addReview(context, { review }) {
-        //     const user = await userService.getUserById(userId);
-        //     review = await userService.addReview(review)
-        //     user.guideInfo.reviews.push(review)
-        // context.commit({ type: 'addReview', review })
-        //     return review;
-        // },
     }
 }
