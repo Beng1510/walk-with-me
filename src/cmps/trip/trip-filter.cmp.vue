@@ -144,7 +144,7 @@ export default {
 
   methods: {
     emitFilter(filter) {
-      console.log("this.filterBy:", this.filterBy);
+      console.log("this.filterBy4444:", this.filterBy);
       const filterByCopy = JSON.parse(JSON.stringify(this.filterBy));
       console.log("filterByCopy:", filterByCopy);
 

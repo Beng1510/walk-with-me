@@ -1,6 +1,6 @@
 <template>
   <section
-    v-if="this.trip"
+    v-if="trip"
     class="trip-preview preview-card"
     @click="goToDetails(tripId)"
   >
@@ -125,6 +125,7 @@ export default {
 
   async created() {
     this.trip = await tripService.getTripById(this.tripId);
+    
     this.checkIsFav();
     this.getGuideRate(this.trip);
   },
