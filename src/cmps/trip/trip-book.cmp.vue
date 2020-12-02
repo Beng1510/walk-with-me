@@ -1,8 +1,7 @@
 <template>
   <section v-if="trip" class="trip-book">
-    <h1>Join The Trip!</h1>
-
-    <form @submit.prevent="emitBook">
+    <form @submit.prevent="emitBook" v-if="isBooked">
+      <h1>Join The Trip!</h1>
       <label for="peopleToSign"
         >How many hikers?
         <input
@@ -12,7 +11,7 @@
           id="peopleToSign"
           name="peopleToSign"
           min="1"
-          :max="capacity"
+          :max="openSlotsForHikers"
           @change="totalPrice"
         />
       </label>
@@ -30,6 +29,8 @@
       <p>Total Price: {{ booking.sum }}$</p>
       <button>Book Trip</button>
     </form>
+
+    <div v-else>You Are Already Booked For This Trip</div>
   </section>
 </template>
 
@@ -38,6 +39,10 @@ import { eventBusService, SHOW_MSG } from "../../services/eventBus-service.js";
 export default {
   props: {
     trip: {
+      type: Object,
+      required: true,
+    },
+    user: {
       type: Object,
       required: true,
     },
@@ -64,15 +69,16 @@ export default {
         specialReq: "",
         sum: this.trip.price,
       },
+      isBooked: true,
     };
   },
 
   computed: {
-    capacity() {
+    openSlotsForHikers() {
       const signed = this.trip.capacity;
       let openSlots = 10 - signed;
       return openSlots;
-    }
+    },
   },
 
   methods: {
@@ -85,6 +91,7 @@ export default {
         subTxt: "Please wait for guide's final approval",
         type: "success",
       });
+      this.updateCapacity()
     },
 
     totalPrice() {
@@ -100,9 +107,25 @@ export default {
       this.$store.dispatch({
         type: "updateCapacity",
         id: this.trip._id,
-        capacity,
+        capacity : JSON.parse(JSON.stringify(this.capacity))
       });
     },
+    getBookingByUser(user) {
+      const bookings = this.$store.getters.bookings;
+
+      const filteredBookings = bookings.filter(
+        (booking) => booking.user._id === this.user._id
+      );
+
+      filteredBookings.some((booking) => {
+        if (booking.trip.name === this.trip.name)
+          return (this.isBooked = false);
+      });
+    },
+  },
+ 
+  created() {
+    this.getBookingByUser(this.user);
   },
 };
 </script>
