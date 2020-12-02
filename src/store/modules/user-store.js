@@ -1,20 +1,20 @@
 import { userService } from "../../services/user-service.js";
 var defaultUser = {
-    _id: "u102",
+    _id: "5fc531cfba5fd6d904aad38a",
     name: "Shuki Locali",
     favoriteTrips: [
         {
-            _id: "t101-2",
+            _id: "5fc538bcba5fd6d904aad393",
             "name": "Switzerland Mountains",
             "date": 9898989
         },
         {
-            _id: "t101-1",
+            _id: "5fc538bcba5fd6d904aad392",
             name: "Scotland Heights",
             date: 9898989
         },
         {
-            _id: "t102-1",
+            _id: "5fc538bcba5fd6d904aad397",
             name: "Tuscany Vineyards",
             date: 9898989
         }
@@ -30,8 +30,8 @@ var defaultUser = {
 }
 var defaultGuide = {
 
-    _id: "u101",
-    name: "Puki Globali",
+    _id: "5fc531cfba5fd6d904aad389",
+    name: "Puki Globali Grosman",
     favoriteTrips: [],
     profileImgUrl: "",
     isGuide: true,
@@ -49,7 +49,7 @@ var defaultGuide = {
                 txt: "A great guide to hike with..",
                 rate: 5,
                 reviewByUser: {
-                    _id: "u102",
+                    _id: "5fc531cfba5fd6d904aad38a",
                     userName: "Shuki Locali",
                     imgUrl: "img.jpg"
                 }
@@ -87,6 +87,7 @@ export const userStore = {
             return state.isGuide
         },
         guidesForDisplay(state) {
+            console.log('state:', state)
             // console.log('state at users',state);
             return state.users.filter(user => user.isGuide === true)
         },
@@ -195,12 +196,12 @@ export const userStore = {
             context.dispatch({ type: 'updateUser', user: context.state.loggedinUser });
         },
         async getGuideRate(context, { tripGuideId }) {
-            console.log('tripGuideId', tripGuideId);
+           
             const user = await userService.getUserById(tripGuideId)
-            console.log('user', user);
+            
 
             const rate = user.guideInfo.rate;
-            console.log('rate at store,', rate);
+            // console.log('rate at store,', rate);
             context.commit({ type: 'setGuideRate', rate });
 
 

@@ -16,8 +16,13 @@
           v-model="filterBy.type"
           @select="emitFilter" hidden checked
         />
+<<<<<<< HEAD
       </label>
       <label for="mountain-tag">
+=======
+        </label>
+      <label for="mountain-tag" class="tag">
+>>>>>>> Dor
         Mountain
         <input
           type="radio"
@@ -141,7 +146,7 @@ export default {
 
   methods: {
     emitFilter(filter) {
-      console.log("this.filterBy:", this.filterBy);
+      console.log("this.filterBy4444:", this.filterBy);
       const filterByCopy = JSON.parse(JSON.stringify(this.filterBy));
       console.log("filterByCopy:", filterByCopy);
 

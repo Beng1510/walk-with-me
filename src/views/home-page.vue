@@ -14,7 +14,7 @@
       <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
       <button
         class="see-all-mountain-btn"
-        @click="toggleShowTrips((showBy = 'mountain'))"
+        @click="toggleShowTrips('mountain')"
       >
         See All Mountain Trips
       </button>
@@ -32,9 +32,22 @@
       <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" />
       <button
         class="see-all-extreme-btn"
-        @click="toggleShowTrips((showBy = 'Extreme'))"
+        @click="toggleShowTrips(('Extreme'))"
       >
         See All Extreme Trips
+      </button>
+
+      <hr />
+      <h3>One Day Trips in Europe</h3>
+      <trip-list :trips="europeTripsForDisplay" @emitFav="toggleFav" />
+      <button
+        class="see-all-europe-btn"
+        @click="toggleShowTrips('Europe')"
+      >
+        See All Europe Trips
+      </button>
+      <button class="go-to-all-europe-btn" @click="updateFilterPage('Europe')">
+        Go To Europe Trips
       </button>
 
       <hr />
@@ -55,7 +68,6 @@
     <h3>Guides of the Month</h3>
     <guide-list :users="guidesForDisplay" />
 
-    <hr />
   </section>
 </template>
 
