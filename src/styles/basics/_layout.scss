@@ -28,13 +28,43 @@
 
 .main-header {
     z-index: 2;
+    max-height: 15vh;
+}
+
+.main-footer {
     max-height: 10vh;
+    text-align: center;
 }
 
 .card-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(300px, 1fr));
     gap: 20px;
+}
+
+button {
+    background-color: transparent;
+    border: 1px solid $clr3;
+    border-radius: 15px;
+    padding: 10px 15px;
+    margin: 10px;
+    color: $clr3;
+    font-family: openSansReg;
+    font-size: rem(16px);
+    transition: all .4s ease-in-out;
+
+    &:hover {
+        background-color: $clr3;
+        color: $clr6;
+    }
+
+    &:active {
+        transform: translateY(2px);
+    }
+
+    a:active {
+        color: $clr3;
+    }
 }
 
 .profile-img-s {
@@ -48,6 +78,14 @@
     border-radius: 50%;
     max-height: 150px;
     max-width: 150px;
+    object-fit: cover;
+    margin: 1em;
+}
+
+.profile-img-l {
+    border-radius: 50%;
+    max-height: 350px;
+    max-width: 350px;
     object-fit: cover;
     margin: 1em;
 }

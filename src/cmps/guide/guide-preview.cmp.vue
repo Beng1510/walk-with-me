@@ -1,10 +1,10 @@
 <template>
-  <section class="guide-preview preview-card flex column align-center" @click="goToGuide(user._id)">
+  <section v-if="guide" class="guide-preview preview-card flex column align-center" @click="goToGuide(guide._id)">
     <img
       class="profile-img-m"
-      :src="require('@/assets/img/users/' + user.profileImgUrl)"
+      :src="require('@/assets/img/users/' + guide.profileImgUrl)"
     />
-      <h2>{{ user.name }}</h2>
+      <h2>{{ guide.name }}</h2>
       <p><i class="fas fa-star trip-star-rate"></i> {{ rateGuide }} ({{rateAmount}}) </p>
   </section>
 </template>
@@ -13,7 +13,7 @@
 export default {
   name: "guide-preview",
   props: {
-    user: {
+    guide: {
       type: Object,
       required: true,
     },
@@ -25,16 +25,16 @@ export default {
   },
   computed: {
     rateGuide() {
-      const sum = this.user.guideInfo.reviews.reduce(
+      const sum = this.guide.guideInfo.reviews.reduce(
         (acc, item) => acc + item.rate,
         0
       );
-      const avg = sum / this.user.guideInfo.reviews.length;
+      const avg = sum / this.guide.guideInfo.reviews.length;
       // this.user.rate = this.avg
       return avg.toFixed(1);
     },
     rateAmount() {
-      return this.user.guideInfo.reviews.length
+      return this.guide.guideInfo.reviews.length
     }
   },
 

@@ -1,7 +1,7 @@
 <template>
   <section class="main-layout" id="app">
-    <main-header :user="defaultUserForDisplay" class="full" />
-    <hero @filterBy="updateFilter" />
+    <main-header :user="defaultUserForDisplay" :class="{full, dark:!homePage}" />
+    <hero v-if="homePage" @filterBy="updateFilter" />
     <main>
       <router-view />
       <main-footer />
@@ -20,9 +20,9 @@ export default {
     mainFooter,
     hero,
   },
+
   methods: {
     updateFilter(filterBy) {
-      console.log(filterBy);
       this.$store.dispatch({
         type: "filterTrips",
         filterBy,
@@ -33,6 +33,12 @@ export default {
     defaultUserForDisplay() {
       return this.$store.getters.loggedinUser;
     },
+
+    homePage() {
+    return (this.$route.path === '/');
+     
+
+     }
   },
   created() {
     this.$store.dispatch({

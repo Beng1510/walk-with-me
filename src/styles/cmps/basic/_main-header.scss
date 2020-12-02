@@ -2,6 +2,13 @@
 .main-header {
     padding: .5em 0;
     color: $clr6;
+
+    &.dark {
+        background-color: #a3a380;
+        .logo, a {
+            color: $clr3;
+        }
+    }
 }
 
 .logo { 
@@ -22,9 +29,14 @@
         color: $clr6;
         font-size: em(20px);
         margin: 1rem .5rem 1rem;
+        transition: all .4s ease-in-out;
 
         &:last-child {
             margin-inline-end: 0;
+        }
+
+        &:hover {
+            border-bottom: 2px solid $clr6;
         }
     }
 

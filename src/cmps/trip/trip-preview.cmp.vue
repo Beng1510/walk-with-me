@@ -12,15 +12,14 @@
     <div class="details">
       <h2 class="trip-preview-title">{{ this.trip.name }}</h2>
       <div class="trip-preview-trip-details">
-        <p class="trip-preview-date">{{ this.trip.date }}</p>
-        <p>{{ this.trip.capacity }}/10 hikers</p>
+        <p class="date">{{ this.trip.date }}</p>
         <div class="booking-info flex space-between align-center ">
           <p>
             <span class="price bold">{{ this.trip.price }}$</span> / person
           </p>
           <p>
             <span class="bold">{{ this.trip.capacity }}</span
-            >/10 joined!
+            >/10 joined
           </p>
         </div>
         <hr />

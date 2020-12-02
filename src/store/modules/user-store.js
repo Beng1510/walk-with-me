@@ -87,7 +87,6 @@ export const userStore = {
             return state.isGuide
         },
         guidesForDisplay(state) {
-            // console.log('state at users',state);
             return state.users.filter(user => user.isGuide === true)
         },
         reviews(state) {
@@ -157,9 +156,7 @@ export const userStore = {
         },
 
         async saveReview({ commit }, { review, guideId, user }) {
-            console.log('review, guideId, user', review, guideId, user);
             const guide = await userService.getUserById(guideId);
-            console.log('guide before', guide);
 
             const sum = guide.guideInfo.reviews.reduce(
                 (acc, item) => acc + item.rate,
@@ -168,7 +165,6 @@ export const userStore = {
             const avg = sum / guide.guideInfo.reviews.length;
             guide.guideInfo.rate = avg.toFixed(1)
 
-            console.log('guide after', guide);
             // const updatedRateAtUser = await userService.updateUser(guide)
             const savedReview = await userService.saveReview(review, guide)
             commit({ type: 'addReview', review })
@@ -195,12 +191,8 @@ export const userStore = {
             context.dispatch({ type: 'updateUser', user: context.state.loggedinUser });
         },
         async getGuideRate(context, { tripGuideId }) {
-            console.log('tripGuideId', tripGuideId);
-            const user = await userService.getUserById(tripGuideId)
-            console.log('user', user);
-
+            const user = await userService.getUserById(tripGuideId);
             const rate = user.guideInfo.rate;
-            console.log('rate at store,', rate);
             context.commit({ type: 'setGuideRate', rate });
 
 

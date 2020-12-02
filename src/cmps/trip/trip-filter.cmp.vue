@@ -1,7 +1,7 @@
 <template>
   <section class="trip-filter">
     <form @submit.prevent="emitFilter">
-      <div class="selector-filter flex space-between">
+      <div class="selector-filter flex space-between align-center">
         <div class="input flex column">
           <label for="txt-input">Free text</label>
           <input

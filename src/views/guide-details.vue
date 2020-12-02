@@ -2,7 +2,7 @@
   <section class="guide-info" v-if="guide">
     <h1>{{ guide.name }}</h1>
     <img
-      class="guide-preview-img"
+      class="guide-preview-img profile-img-l "
       :src="require('@/assets/img/users/' + guide.profileImgUrl)"
     />
     <h3>Rating: {{ guide.guideInfo.rate }}</h3>

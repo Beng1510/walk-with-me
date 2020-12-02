@@ -15,7 +15,7 @@
 
         <router-link to="/back-office" v-if="user.isGuide">
           {{ userName(user) }}'s Office</router-link>
-        <button @click="becomeGuide(user)">Become a Guide</button>
+        <a @click="becomeGuide(user)">Become a Guide</a>
       </div>
     </div>
   </section>
