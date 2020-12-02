@@ -62,7 +62,7 @@ export default {
           _id: this.trip._id,
           name: this.trip.name,
           imgUrl: this.trip.imgUrls,
-          capacity: this.trip.capacity,
+          totalBooked: this.trip.totalBooked,
         },
         status: "pending",
         peopleToSign: 1,
@@ -75,7 +75,7 @@ export default {
 
   computed: {
     openSlotsForHikers() {
-      const signed = this.trip.capacity;
+      const signed = this.trip.totalBooked;
       let openSlots = 10 - signed;
       return openSlots;
     },
@@ -91,7 +91,7 @@ export default {
         subTxt: "Please wait for guide's final approval",
         type: "success",
       });
-      this.updateCapacity()
+      this.updateTotalBooked()
     },
 
     totalPrice() {
@@ -100,14 +100,16 @@ export default {
       this.booking.sum = (price * numOfPeople).toFixed(2);
       return this.booking.sum;
     },
-    updateCapacity() {
-      let capacity = this.booking.trip.capacity;
+    updateTotalBooked() {
+      let totalBooked = this.booking.trip.totalBooked;
       const peopleToSign = this.booking.peopleToSign;
-      capacity += peopleToSign;
+      totalBooked += peopleToSign;
+      console.log('totalBooked',totalBooked);
       this.$store.dispatch({
-        type: "updateCapacity",
+        type: "updateTotalBooked",
         id: this.trip._id,
-        capacity : JSON.parse(JSON.stringify(this.capacity))
+        // totalBooked : JSON.parse(JSON.stringify(this.totalBooked))
+        totalBooked
       });
     },
     getBookingByUser(user) {

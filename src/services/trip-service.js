@@ -68,16 +68,16 @@ function save(trip) {
 }
 
 async function _add(trip) {
-    const res = await axios.post(`${baseUrl}/trip`, trip)
-    return res.data
+    // const res = await axios.post(`${baseUrl}/trip`, trip)
+    // return res.data
 
-    // return httpService.post(`trip`, trip)
+    return httpService.post(`trip`, trip)
 }
 
 async function _update(trip) {
-    // return httpService.put(`trip/${trip._id}`, trip)
-    const res = await axios.put(`${baseUrl}/trip/${trip._id}`, trip);
-    return res.data;
+    return httpService.put(`trip/${trip._id}`, trip)
+    // const res = await axios.put(`${baseUrl}/trip/${trip._id}`, trip);
+    // return res.data;
 }
 
 function getEmptyTrip() {
@@ -85,7 +85,7 @@ function getEmptyTrip() {
         name: '',
         price: '',
         difficulty: '',
-        capacity: 0,
+        totalBooked: 0,
         type: '',
         imgUrls: [
             'default1.jpeg'

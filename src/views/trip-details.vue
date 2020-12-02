@@ -33,18 +33,18 @@
       <!-- <h3>Trip type: {{ trip.tags }}</h3> -->
       <h3>
         Price: {{ trip.price }}$ - Number of Hikers Booked:
-        {{ trip.capacity }}/10 - Difficulty: {{ trip.difficulty }}/5
+        {{ trip.totalBooked }}/10 - Difficulty: {{ trip.difficulty }}/5
       </h3>
 
       <p class="trip-details-description">{{ trip.description }}</p>
 
       {{ bookedMsg }}
 
-       Hikers Already Booked:
+       <div v-if="this.filterdBookings"> Already Booked: </div>
 
       <ul>
         <li v-for="booking in this.filterdBookings" :key="booking._id">
-          {{ booking.user.name }}
+          {{ booking.user.name }} - {{booking.peopleToSign}} Tickets Booked
         </li>
       </ul>
 
@@ -111,8 +111,7 @@ export default {
     },
     bookedMsg() {
       // console.log('this.isBooked',this.isBooked);
-      // console.log(' this.trip.capacity', this.trip.capacity);
-      if (!this.isBooked && this.trip.capacity < 10) {
+      if (!this.isBooked && this.trip.totalBooked < 10) {
         return "Come & Join The Trip ";
       } else if (this.getBookingByUser === false) {
         return "You've Already Booked This Trip";

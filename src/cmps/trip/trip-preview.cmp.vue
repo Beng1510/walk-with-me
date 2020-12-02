@@ -16,13 +16,13 @@
 
         <p class="trip-preview-date">{{ getDateString }}</p>
 
-        <p>{{ this.trip.capacity }}/10 hikers</p>
+        <p>{{ this.trip.totalBooked }}/10 hikers</p>
         <div class="booking-info flex space-between align-center">
           <p>
             <span class="price bold">{{ this.trip.price }}$</span> / person
           </p>
           <p>
-            <span class="bold">{{ this.trip.capacity }}</span
+            <span class="bold">{{ this.trip.totalBooked }}</span
             >/10 joined!
           </p>
         </div>

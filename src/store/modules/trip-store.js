@@ -136,10 +136,10 @@ export const tripStore = {
         //     await tripService.remove(payload.tripId)
         //     commit(payload)
         // },
-        async updateCapacity({ commit }, { id, capacity }) {
+        async updateTotalBooked({ commit }, { id, totalBooked }) {
             const trip = await tripService.getTripById(id);
             const tripCopy = JSON.parse(JSON.stringify(trip))
-            tripCopy.capacity = capacity;
+            tripCopy.totalBooked = totalBooked;
             // console.log('tripCopy',tripCopy);
             const savedTrip = await tripService.save(tripCopy);
             // console.log('savedTrip',savedTrip)
