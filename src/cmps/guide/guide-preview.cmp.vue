@@ -15,7 +15,7 @@ export default {
   props: {
     guide: {
       type: Object,
-      required: true,
+      // required: true,
     },
   },
   data() {
