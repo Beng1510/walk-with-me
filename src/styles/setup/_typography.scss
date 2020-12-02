@@ -1,7 +1,3 @@
-@font-face {
-    font-family: PerMark;
-    src: url(~@/assets/fonts/PermanentMarker-Regular.ttf);
-}
 
 @font-face {
     font-family: openSansReg;
@@ -10,7 +6,7 @@
 
 @font-face {
     font-family: openSansBold;
-    src: url(~@/assets/fonts/Open_Sans/OpenSans-Bold.ttf);
+    src: url(~@/assets/fonts/Open_Sans/OpenSans-SemiBold.ttf);
 }
 
 @font-face {
@@ -19,6 +15,16 @@
 }
 
 @font-face {
-    font-family: Mukta;
-    src: url(~@/assets/fonts/Mukta-Regular.ttf);
+    font-family: montserratReg;
+    src: url(~@/assets/fonts/Montserrat/Montserrat-Regular.ttf);
+}
+
+@font-face {
+    font-family: montserratBold;
+    src: url(~@/assets/fonts/Montserrat/Montserrat-Bold.ttf);
+}
+
+@font-face {
+    font-family: montserratLight;
+    src: url(~@/assets/fonts/Montserrat/Montserrat-Light.ttf);
 }

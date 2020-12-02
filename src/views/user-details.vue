@@ -5,7 +5,7 @@
       :src="require('~@/assets/img/users/' + user.profileImgUrl)"
     /> -->
     <img
-      class="guide-preview-img"
+      class="guide-preview-img profile-img-l "
       :src="require('@/assets/img/users/' + user.profileImgUrl)"
     />
     <!-- {{user.profileImgUrl}} -->

@@ -16,15 +16,15 @@
 			</template>
 
       <div class="nav-bar">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link> |
-        <router-link to="/user/:id" >
+        <router-link to="/">Home</router-link> •
+        <router-link to="/about">About</router-link> •
+        <router-link to="/user/:id" v-if="!user.isGuide">
           {{ userName(user) }}</router-link
-        >
+        > •
 
         <router-link to="/back-office">
           {{ userName(user) }}'s Office</router-link>
-        <button @click="becomeGuide(user)">Become a Guide</button>
+        <a @click="becomeGuide(user)">Become a Guide</a>
       </div>
     </div>
   </section>
@@ -42,7 +42,6 @@ export default {
   methods: {
     userName(user) {
       var loggedUser = this.user.name;
-      // var res = str.slice(0, 5);
       var userFullName = loggedUser.split(" ");
       return userFullName[0];
     },

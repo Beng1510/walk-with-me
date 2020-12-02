@@ -86,6 +86,8 @@ export default {
       
       this.$emit("bookTrip", this.booking);
 
+      this.updateCapacity()
+
       eventBusService.$emit(SHOW_MSG, {
         txt: "Trip Booked!",
         subTxt: "Please wait for guide's final approval",

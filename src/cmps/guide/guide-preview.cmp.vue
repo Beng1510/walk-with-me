@@ -1,5 +1,5 @@
 <template>
-  <section class="guide-preview preview-card flex column align-center" @click="goToGuide(guide._id)">
+  <section v-if="guide" class="guide-preview preview-card flex column align-center" @click="goToGuide(guide._id)">
     <img
       class="profile-img-m"
       :src="require('@/assets/img/users/' + guide.profileImgUrl)"
