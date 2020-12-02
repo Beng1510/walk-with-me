@@ -1,4 +1,5 @@
 import { userService } from "../../services/user-service.js";
+
 var defaultUser = {
     _id: "5fc531cfba5fd6d904aad38a",
     name: "Shuki Locali",
@@ -26,7 +27,8 @@ var defaultUser = {
         description: "",
         lang: [],
         reviews: []
-    }
+    },
+    isLogin:false,
 }
 var defaultGuide = {
 
@@ -58,11 +60,16 @@ var defaultGuide = {
     }
 }
 
+// import store from "../index.js";
+
 
 var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
 else {
-    localLoggedinUser = defaultUser
+          
+    userService.login({name: "Shuki Locali", password:"123456"}).then(user => localLoggedinUser = user)
+    // localLoggedinUser = defaultUser
+    
 }
 
 export const userStore = {
@@ -74,7 +81,8 @@ export const userStore = {
         favoriteTrips: [],
         // isGuide: false,
         reviews: [],
-        guideRate: null
+        guideRate: null,
+        isLogin: false,
     },
     getters: {
         loggedinUser(state) {
@@ -96,13 +104,17 @@ export const userStore = {
         },
         getGuideRate(state) {
             return state.guideRate
-        }
+        },
+        isLogin(state) {
+			return state.isLogin;
+		},
     },
     mutations: {
         setUser(state, { user }) {
             state.loggedinUser = user;
         },
         setUsers(state, { users }) {
+            // console.log('userssssss:', users)
             state.users = users;
         },
 
@@ -114,7 +126,11 @@ export const userStore = {
         },
         setGuideRate(state, { rate }) {
             state.guideRate = rate
-        }
+        },
+        setLoginSignUp(state, { action }) {
+			if (action === 'login') state.isLogin = true;
+			else state.isLogin = false;
+		},
         // updateUser(state, { user }) {
         //     const idx = state.users.findIndex(prd => prd._id === user._id);
         //     if (idx >= 0) state.trips.splice(idx, 1, trip);
