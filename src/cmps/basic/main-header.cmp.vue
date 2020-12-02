@@ -7,11 +7,11 @@
       <user-msg></user-msg>
 
       <div class="nav-bar">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link> |
+        <router-link to="/">Home</router-link> •
+        <router-link to="/about">About</router-link> •
         <router-link to="/user/:id" v-if="!user.isGuide">
           {{ userName(user) }}</router-link
-        >
+        > •
 
         <router-link to="/back-office" v-if="user.isGuide">
           {{ userName(user) }}'s Office</router-link>
@@ -33,7 +33,6 @@ export default {
   methods: {
     userName(user) {
       var loggedUser = this.user.name;
-      // var res = str.slice(0, 5);
       var userFullName = loggedUser.split(" ");
       return userFullName[0];
     },

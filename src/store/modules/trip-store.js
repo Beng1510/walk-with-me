@@ -138,7 +138,7 @@ export const tripStore = {
             const tripCopy = JSON.parse(JSON.stringify(trip))
             tripCopy.capacity = capacity;
             const savedTrip = await tripService.save(tripCopy);
-            console.log(savedTrip)
+            console.log('savedTrip',savedTrip)
             commit({ type: 'updateTrip', trip: savedTrip })
         },
         toggleShow(context, { showBy }) {

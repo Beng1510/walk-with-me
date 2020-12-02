@@ -22,6 +22,15 @@
 
 }
 
+.main-header, .hero {
+    grid-row: 1;
+}
+
+.main-header {
+    z-index: 2;
+    max-height: 10vh;
+}
+
 .card-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(300px, 1fr));

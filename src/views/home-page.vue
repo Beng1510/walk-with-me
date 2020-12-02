@@ -1,14 +1,6 @@
 <template>
-  <section class="home-page full">
-    <div class="hero-container full flex column align-center">
-      <img src="../assets/img/hero1.jpeg" />
-      <h1 class="hero-txt head">Dream, Explore, Discover</h1>
-      <h2 class="hero-txt small">Adventure awaits, let's find it together</h2>
-    </div>
+  <section class="home-page">
     <span v-if="isLoading">Loading...</span>
-    <trip-filter @filterBy="updateFilter" :trips="tripsForDisplay" />
-    <div class="home-page-content main-layout">
-      <hr />
       <button class="see-all-btn" @click="goToAllTrips()">See All</button>
       <h3>Top Mountain Trips</h3>
       <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
@@ -18,16 +10,12 @@
       >
         See All Mountain Trips
       </button>
-      <hr />
       <h3>Top Forest Trips</h3>
       <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
-      <hr />
       <h3>Top Seaside Trips</h3>
       <trip-list :trips="seaTripsForDisplay" @emitFav="toggleFav" />
-      <hr />
       <h3>Top City Trips</h3>
       <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
-      <hr />
       <h3>Check Out Our Extreme Trips</h3>
       <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" />
       <button
@@ -36,8 +24,6 @@
       >
         See All Extreme Trips
       </button>
-
-      <hr />
       <h3>One Day Trips in Europe</h3>
       <trip-list :trips="europeTripsForDisplay" @emitFav="toggleFav" />
       <button
@@ -49,11 +35,8 @@
       <button class="go-to-all-europe-btn" @click="updateFilterPage('Europe')">
         Go To Europe Trips
       </button>
-      <hr />
       <h3>Guides of the Month</h3>
       <guide-list :users="guidesForDisplay" />
-    </div>
-    <hr />
   </section>
 </template>
 
@@ -78,11 +61,7 @@ export default {
   },
   methods: {
     updateFilterPage(param) {
-      console.log("param", param);
-      console.log("this.filterBy", this.filterBy);
       this.filterBy.region = param;
-      console.log(" this.filterBy.region", this.filterBy.region);
-      console.log("this.filterBy", this.filterBy);
     },
     updateFilter(filterBy) {
       this.$store.dispatch({
@@ -111,9 +90,6 @@ export default {
     },
   },
   computed: {
-    tripsForDisplay() {
-      return this.$store.getters.tripsForDisplay;
-    },
     mountainTripsForDisplay() {
       return this.$store.getters.mountainTripsForDisplay;
     },
@@ -137,9 +113,8 @@ export default {
     },
   },
   components: {
-    tripFilter,
     tripList,
-    guideList,
+    guideList
   },
   created() {
     this.$store.dispatch({

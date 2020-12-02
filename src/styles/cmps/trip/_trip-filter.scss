@@ -1,17 +1,57 @@
-.tag {
-    font-size: em(18px);
-    color: $clr3;
-    padding: 8px 10px;
-    margin: 5px;
+.input {
     border-radius: 25px;
-    border: 1px solid $clr4;
-    cursor: pointer;
+}
 
-    &:hover {
-        background-color: $clr5;
-    }
+.selector-filter,
+.el-input--suffix .el-input__inner {
+    background-color: $clr6; 
+    border-radius: 45px;
+    font-family: openSansReg;
 
-    // & input:checked {
-    //     background-color: $clr5;
-    // }
+    &::placeholder {
+        color: $clr5;
+        font-size: rem(15px);
+      }
+}
+
+.el-input--suffix .el-input__inner {
+    padding: 1rem;
+}
+
+.el-select .el-input .el-select__caret {
+    color: $clr3;
+}
+
+.el-input__inner, .el-input__inner:hover,
+ .el-select-dropdown__item.hover,
+  .el-select-dropdown__item:hover,
+  .txt-input:hover,
+  .search-btn:hover {
+    border: none;
+    color: $clr3;
+    transition: all 0.4s ease-in-out;
+}
+
+.el-input__inner:hover, .el-select-dropdown__item.hover, 
+.el-select-dropdown__item:hover,
+.txt-input:hover,
+.search-btn:hover  {
+    background-color: rgb(223, 222, 222); 
+}
+
+.el-select-dropdown__item.selected {
+    color: #409EFF;
+}
+
+.txt-input, .search-btn {
+    border-radius: 45px;
+    font-size: rem(15px);
+    padding: 1rem;
+    border: none;
+    font-family: openSansReg;
+    background-color: $clr6;
+
+    &::placeholder {
+        color: $clr5;
+      }
 }

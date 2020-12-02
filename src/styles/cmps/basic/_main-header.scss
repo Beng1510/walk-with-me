@@ -1,6 +1,7 @@
 
 .main-header {
     padding: .5em 0;
+    color: $clr6;
 }
 
 .logo { 
@@ -8,8 +9,8 @@
     display: inline-block;
     
     & h2 {
-        color: $clr3;
-        font-family: PerMark;
+        color: $clr6;
+        font-family: montserratBold;
         font-size: em(36px);
         margin: 1rem 0 1rem;
     }
@@ -18,7 +19,7 @@
 .nav-bar {
 
     & a {
-        color: $clr3;
+        color: $clr6;
         font-size: em(20px);
         margin: 1rem .5rem 1rem;
 

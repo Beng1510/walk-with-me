@@ -79,6 +79,8 @@ export default {
     emitBook() {
       this.$emit("bookTrip", this.booking);
 
+      this.updateCapacity()
+
       eventBusService.$emit(SHOW_MSG, {
         txt: "Trip Booked!",
         subTxt: "Please wait for guide's final approval",
@@ -94,8 +96,10 @@ export default {
     },
     updateCapacity() {
       let capacity = this.booking.trip.capacity;
+      console.log(capacity)
       const peopleToSign = this.booking.peopleToSign;
       capacity += peopleToSign;
+      console.log(capacity)
       this.$store.dispatch({
         type: "updateCapacity",
         id: this.trip._id,
