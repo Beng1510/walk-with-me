@@ -85,7 +85,7 @@ HEAD
               value=""
               v-model="filterBy.type"
               @select="emitFilter"
-              label="all"
+              label="All"
             >
             </el-option>
             <el-option
