@@ -90,7 +90,11 @@ export default {
 
   methods: {
     bookTrip(booking) {
+      // console.log('bookingssssssss:', booking)
+
       this.$store.dispatch({ type: "addBooking", booking });
+
+
     },
     getBookingByUser(user) {
       const bookings = this.$store.getters.bookings;
