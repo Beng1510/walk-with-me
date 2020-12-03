@@ -10,7 +10,7 @@ export const tripStore = {
         filterBy: {
             name: "",
             type: "",
-            location: "",
+            // location: "",
             region: "",
         },
         isShowAll: false,
@@ -31,13 +31,12 @@ export const tripStore = {
             }
         },
         forestTripsForDisplay(state) {
-            return state.trips.filter(trip => trip.type === "forest")
-        },
-        seaTripsForDisplay(state) {
-            return state.trips.filter(trip => trip.type === "seaside")
+            const forestTrips = state.trips.filter(trip => trip.type === "forest")
+            return forestTrips.slice(0, 4)
         },
         cityTripsForDisplay(state) {
-            return state.trips.filter(trip => trip.type === "city")
+            const cityTrips =state.trips.filter(trip => trip.type === "city")
+            return cityTrips.slice(0, 4)
         },
         difficultTripsForDisplay(state) {
             if (state.showBy === "Extreme" && state.isShowAll === true) {
