@@ -1,12 +1,12 @@
 <template>
-  <section v-if="trip" class="trip-book">
-    <form @submit.prevent="emitBook" v-if="isBooked">
-      <h1>Join The Trip!</h1>
+  <section v-if="trip" class="trip-book flex column">
+    <h3>Price: ${{trip.price}}</h3>
+    <form @submit.prevent="emitBook" class=" flex column" v-if="isBooked">
       <label for="peopleToSign"
         >How many hikers?
-        <input
+        <el-input-number
+          size="small"
           class="trip-book-peopleToSign"
-          type="number"
           v-model.number="booking.peopleToSign"
           id="peopleToSign"
           name="peopleToSign"
@@ -18,7 +18,7 @@
       <label for="specialReq"
         >Any special requests?
         <input
-          class="trip-book-specialReq"
+          class="specialReq"
           type="text"
           v-model="booking.specialReq"
           id="specialReq"
@@ -26,10 +26,9 @@
           placeholder="e.g.: I want a vegan option for lunch"
         />
       </label>
-      <p>Total Price: {{ booking.sum }}$</p>
+      <p>Total: ${{ booking.sum }}</p>
       <button>Book Trip</button>
     </form>
-
     <div v-else>You Are Already Booked For This Trip</div>
   </section>
 </template>
@@ -109,7 +108,6 @@ export default {
       this.$store.dispatch({
         type: "updateTotalBooked",
         id: this.trip._id,
-        // totalBooked : JSON.parse(JSON.stringify(this.totalBooked))
         totalBooked
       });
     },

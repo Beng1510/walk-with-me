@@ -1,53 +1,43 @@
 <template>
   <section v-if="trip" class="trip-details">
-    <button class="back-btn"><router-link to="/">Back</router-link></button>
-      <div class="img-container">
-        <img
-          v-for="n in 5"
-          :key="n"
-          class="trip-main-img"
-          :src="require('../assets/img/trips/' + trip.imgUrls[0])"
-        />
-      </div>
 
     <div class="img-container"  v-for="(n) in 4"
           :key="n">
         <img
           class="trip-main-img"
           :src="require('../assets/img/trips/' + trip.imgUrls[n-1])"
-        />
+       />
       </div>
+ <h1>{{ trip.name }}</h1>
+  
+    <div class="main-grid">
 
-    <div class="info-container">
-      <h1>{{ trip.name }}</h1>
-      <h3>{{ trip.date }}</h3>
-      <h3>
-        Price: {{ trip.price }}$ - Number of Hikers Booked:
-        {{ trip.totalBooked }}/10 - Difficulty: {{ trip.difficulty }}/5
-      </h3>
+      <div class="start">
 
-<ul>
-  <li v-for="(desc, idx) in this.trip.description" :key="idx">
-<p>{{desc}}</p>
-  </li>
-</ul>
+        <div class="info-trip">
+          <h3>{{ trip.totalBooked }}/10 signed</h3>
+          <h3>Difficulty: {{ trip.difficulty }}/5</h3>
+          <h3>{{ trip.duration }}</h3>
+          <h3>{{ trip.region }}</h3>
+        </div>
 
-      {{ bookedMsg }}
+        <div class="about-trip">
+          <p v-for="(desc, idx) in this.trip.description" :key="idx">
+            {{ desc }}
+          </p>
+           <div v-if="this.filterdBookings">Already Booked:</div>
+          <ul>
+            <li v-for="booking in this.filterdBookings" :key="booking._id">
+              {{ booking.user.name }} - {{ booking.peopleToSign }} Tickets
+              Booked
+              <img
+                class="trip-details-guide-img profile-img-s"
+                :src="require('@/assets/img/users/' + booking.user.imgUrl)"
+              />
+            </li>
+          </ul>
+        </div>
 
-       <div v-if="this.filterdBookings"> Already Booked: </div>
-
-      <ul>
-        <li v-for="booking in this.filterdBookings" :key="booking._id">
-          {{ booking.user.name }} - {{booking.peopleToSign}} Tickets Booked
-          <img
-            class="trip-details-guide-img profile-img-s"
-            :src="require('@/assets/img/users/' + booking.user.imgUrl)"
-          />
-        </li>
-      </ul>
-
-      <trip-book :trip="trip" :user="loggedInUser" @bookTrip="bookTrip" />
-    </div>
         <div class="map">
           <GmapMap
             :center="mapPos"
@@ -63,10 +53,19 @@
             />
           </GmapMap>
         </div>
-
-    <h2>Guide Details</h2>
-    <guide-preview :guide="this.guide" />
-    <guide-review :guideId="trip.aboutGuide._id" :user="loggedInUser" />
+      </div>
+        </div>
+        
+      <div class="end">
+        {{ bookedMsg }}
+        <trip-book :trip="trip" @bookTrip="bookTrip" />
+        <div class="about-guide">
+          <h1>Meet Your Guide</h1>
+          <guide-preview :guide="this.guide" />
+          <guide-review :guideId="trip.aboutGuide._id" :user="loggedInUser" />
+        </div>
+      </div>
+    
   </section>
 </template>
 
