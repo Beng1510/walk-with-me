@@ -10,7 +10,7 @@
           v-model.number="booking.peopleToSign"
           id="peopleToSign"
           name="peopleToSign"
-          min="1"
+          :min="1"
           :max="openSlotsForHikers"
           @change="totalPrice"
         />
