@@ -18,9 +18,6 @@
         />
       </div>
 
-
-
-
     <div class="info-container">
       <h1>{{ trip.name }}</h1>
       <h3>{{ trip.date }}</h3>
