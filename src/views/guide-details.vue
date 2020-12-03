@@ -10,7 +10,10 @@
     <p>{{ guide.guideInfo.description }}</p>
     <button class="back-btn"><router-link to="/">Back</router-link></button>
     <h3>All Trips:</h3>
+    
     <trip-list v-if="guide" :trips="getTripsByGuide" @emitFav="toggleFav" />
+
+
     <h3>All Reviews:</h3>
     <guide-review :guideId="guide._id" :user="user" />
     <!-- <guide-review :guide="guide" /> -->

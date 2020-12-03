@@ -5,6 +5,15 @@
         <router-link to="/"><h2 class="logo">Walk With Me</h2></router-link>
       </div>
       <user-msg></user-msg>
+         <template v-show="!isLoggingIn">
+				<div v-if="loggedUser" class="login-btns">
+					<button @click="loginSignUp('login')">Login</button>
+					<button @click="loginSignUp('signUp')">Sign Up</button>
+				</div>
+				<template  class="logout">
+					<button @click="logout">Logout</button>
+				</template>
+			</template>
 
       <div class="nav-bar">
         <router-link to="/">Home</router-link> •
@@ -40,10 +49,27 @@ export default {
       user.isGuide = !user.isGuide;
       console.log("user", user);
     },
+    loginSignUp(action) {
+			this.$store.commit({ type: "setLoginSignUp", action });
+			if (this.$route.path !== "/login") this.$router.push("/login");
+    },
+    async logout() {
+      
+			await this.$store.dispatch({ type: "logout" });
+			this.$store.dispatch({ type: "loadTrip" });
+		},
     // guideName(user) {
     //   if (user.isGuide) return
     // },
   },
+  computed: {
+		isLoggingIn() {
+			return this.$route.path === "/login";
+		},
+		loggedUser() {
+			return this.$store.getters.loggedinUser;
+    },
+    },
   components: {
     userMsg,
   },

@@ -1,6 +1,6 @@
 <template>
   <section class="main-layout" id="app">
-    <main-header :user="defaultUserForDisplay" :class="{full, dark:!homePage}" />
+    <main-header :user="defaultUserForDisplay" :class="{ dark:!homePage}" />
     <hero v-if="homePage" @filterBy="updateFilter" />
     <main>
       <router-view />
@@ -23,8 +23,8 @@ export default {
 
   methods: {
     updateFilter(filterBy) {
-      this.$store.dispatch({
-        type: "filterTrips",
+      this.$store.commit({
+      type: "setFilterBy",
         filterBy,
       });
     },

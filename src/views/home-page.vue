@@ -1,42 +1,39 @@
 <template>
   <section class="home-page">
     <span v-if="isLoading">Loading...</span>
-      <button class="see-all-btn" @click="goToAllTrips()">See All</button>
-      <h3>Top Mountain Trips</h3>
-      <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
-      <button
-        class="see-all-mountain-btn"
-        @click="toggleShowTrips((showBy = 'mountain'))"
-      >
-        See All Mountain Trips
-      </button>
-      <h3>Top Forest Trips</h3>
-      <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
-      <h3>Top Seaside Trips</h3>
-      <trip-list :trips="seaTripsForDisplay" @emitFav="toggleFav" />
-      <h3>Top City Trips</h3>
-      <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
-      <h3>Check Out Our Extreme Trips</h3>
-      <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" />
-      <button
-        class="see-all-extreme-btn"
-        @click="toggleShowTrips((showBy = 'Extreme'))"
-      >
-        See All Extreme Trips
-      </button>
-      <h3>One Day Trips in Europe</h3>
-      <trip-list :trips="europeTripsForDisplay" @emitFav="toggleFav" />
-      <button
-        class="see-all-europe-btn"
-        @click="toggleShowTrips((showBy = 'Europe'))"
-      >
-        See All Europe Trips
-      </button>
-      <button class="go-to-all-europe-btn" @click="updateFilterPage('Europe')">
-        Go To Europe Trips
-      </button>
-      <h3>Guides of the Month</h3>
-      <guide-list :users="guidesForDisplay" />
+    <button class="see-all-btn" @click="goToAllTrips()">See All</button>
+    <h3>One Day Trips in Europe</h3>
+    <button class="go-to-all-europe-btn" @click="updateFilterPage('Europe')">
+      See All
+    </button>
+    <trip-list :trips="europeTripsForDisplay" @emitFav="toggleFav" />
+
+    <h3>Check Out Our Extreme Trips</h3>
+    <button class="see-all-btn" @click="toggleShowTrips('Extreme')">
+      See All
+    </button>
+    <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" />
+
+    <h3>Top Mountain Trips</h3>
+    <button class="see-all-btn" @click="updateFilterPage('mountain')">
+      See All
+    </button>
+    <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
+
+    <h3>Top Forest Trips</h3>
+    <button class="see-all-btn" @click="updateFilterPage('forest')">
+      See All
+    </button>
+    <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
+
+    <h3>Top City Trips</h3>
+    <button class="see-all-mountain-btn" @click="updateFilterPage('city')">
+      See All
+    </button>
+    <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
+
+    <h3>Guides of the Month</h3>
+    <guide-list :guides="guidesForDisplay" />
   </section>
 </template>
 
@@ -53,7 +50,7 @@ export default {
       user: null,
       filterBy: {
         name: "",
-        type: "All",
+        type: "",
         location: "",
         region: "",
       },
@@ -61,14 +58,30 @@ export default {
   },
   methods: {
     updateFilterPage(param) {
-      this.filterBy.region = param;
-    },
-    updateFilter(filterBy) {
-      this.$store.dispatch({
-        type: "filterTrips",
-        filterBy,
-      });
+      console.log("param", param);
+       this.filterBy.type = param;
+        this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
+        this.$router.push("/trip");
 
+      // if (param === "Europe" || "USA") {
+      //   this.filterBy.region = param;
+      //   this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
+      //   this.$router.push("/trip");
+      // } else if (param === "mountain" || "city" || "forest") {
+      //   this.filterBy.type = param;
+      //   this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
+      //   this.$router.push("/trip");
+      // } else {
+      //   this.$router.push("/trip");
+      // }
+    },
+
+    updateFilter(filterBy) {
+      // this.$store.dispatch({
+      //   type: "filterTrips",
+      //   filterBy,
+      // });
+      this.$store.commit({ type: "setFilterBy", filterBy });
       this.$store.dispatch({
         type: "loadTrips",
       });
@@ -114,9 +127,14 @@ export default {
   },
   components: {
     tripList,
-    guideList
+    guideList,
   },
   created() {
+    this.$store.commit({
+      type: "setFilterBy",
+      filterBy: { name: "", type: "", location: "", region: "" },
+    });
+
     this.$store.dispatch({
       type: "loadTrips",
     });
