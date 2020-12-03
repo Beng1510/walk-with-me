@@ -58,7 +58,7 @@
         
       <div class="end">
         {{ bookedMsg }}
-        <trip-book :trip="trip" :user="user" @bookTrip="bookTrip" />
+        <trip-book :trip="trip" :user="loggedInUser" @bookTrip="bookTrip" />
         <div class="about-guide">
           <h1>Meet Your Guide</h1>
           <guide-preview :guide="this.guide" />
