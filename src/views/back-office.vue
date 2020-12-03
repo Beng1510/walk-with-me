@@ -82,12 +82,11 @@ export default {
 
       filteredBookings.forEach((booking) => {
         booking.guide._id === this.guide._id;
-        console.log("booking", booking);
-        console.log("booking.status", booking.status);
+       
         if (booking.status === "approved") {
           return (this.showApproveBtn = false);
-          // } else return this.showRejectBtn = true;
-        }
+          } else return this.showRejectBtn = true;
+        
       });
     },
   },
