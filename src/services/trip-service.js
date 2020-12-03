@@ -15,14 +15,6 @@ export const tripService = {
 
 
 function query(filterBy = {}) {
-    // console.log('filterByFFirst:', filterBy)
-    // let qst = ''
-    // if (filterBy) {
-    //     qst = getQueryStrPrms(filterBy)
-
-    // }
-    // const res = await axios.get(`${baseUrl}/trip${qst}`)
-    // return res.data
     const queryParams = new URLSearchParams()
     if (filterBy) {
         queryParams.append('name',filterBy.name )
@@ -30,34 +22,9 @@ function query(filterBy = {}) {
         queryParams.append('region',filterBy.region )
     }
     return httpService.get(`trip?${queryParams}`)
-
-    // const trips = httpService.get(_buildQuery(filterBy));
-
-    // return trips;
 }
 
-// function getQueryStrPrms(filterBy) {
-//     let str = '?'
-
-//     console.log('filterBy.nameee:', filterBy.name)
-
-//     if (filterBy.name) {
-//         str += `name=${filterBy.name}&`
-//     }
-//     if (filterBy.type) {
-//         str += `type=${filterBy.type}&`
-//     }
-//     if (filterBy.region) {
-//         str += `region=${filterBy.region}`
-//     }
-//     console.log('str:', str)
-//     return str
-// }
-
 async function getTripById(tripId) {
-
-    // const res = await axios.get(`${baseUrl}/trip/${tripId}`)
-    // return res.data
     return httpService.get(`trip/${tripId}`)
 }
 
@@ -68,16 +35,11 @@ function save(trip) {
 }
 
 async function _add(trip) {
-    // const res = await axios.post(`${baseUrl}/trip`, trip)
-    // return res.data
-
     return httpService.post(`trip`, trip)
 }
 
 async function _update(trip) {
     return httpService.put(`trip/${trip._id}`, trip)
-    // const res = await axios.put(`${baseUrl}/trip/${trip._id}`, trip);
-    // return res.data;
 }
 
 function getEmptyTrip() {
@@ -91,7 +53,6 @@ function getEmptyTrip() {
             'default1.jpeg'
         ],
         createdAt: new Date(),
-
     }
 }
 

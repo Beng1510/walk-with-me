@@ -35,8 +35,8 @@ export default {
     },
 
     homePage() {
-      return this.$route.path === "/";
-    },
+    return (this.$route.path === '/');
+     }
   },
   created() {
     this.$store.dispatch({

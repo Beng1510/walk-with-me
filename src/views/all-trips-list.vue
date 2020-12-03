@@ -43,7 +43,6 @@ export default {
   computed: {
     tripsForDisplay() {
       const allTrips = this.$store.getters.tripsForDisplay;
-      console.log('allTrips',allTrips);
       return allTrips
     },
   },

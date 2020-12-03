@@ -2,32 +2,37 @@
   <section class="home-page">
     <span v-if="isLoading">Loading...</span>
     <button class="see-all-btn" @click="goToAllTrips()">See All</button>
-    <h3>One Day Trips in Europe</h3>
-    <button class="go-to-all-europe-btn" @click="updateFilterPage('Europe')">
+    <h3>Trips Across Europe</h3>
+    <button class="go-to-all-btn" @click="updateFilterPage('region','Europe')">
       See All
     </button>
     <trip-list :trips="europeTripsForDisplay" @emitFav="toggleFav" />
+    <h3>Trips Across America</h3>
+    <button class="go-to-all-btn" @click="updateFilterPage('region','USA')">
+      See All
+    </button>
+    <trip-list :trips="usaTripsForDisplay" @emitFav="toggleFav" />
 
-    <h3>Check Out Our Extreme Trips</h3>
+    <!-- <h3>Check Out Our Extreme Trips</h3>
     <button class="see-all-btn" @click="toggleShowTrips('Extreme')">
       See All
     </button>
-    <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" />
+    <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" /> -->
 
     <h3>Top Mountain Trips</h3>
-    <button class="see-all-btn" @click="updateFilterPage('mountain')">
+    <button class="go-to-all-btn" @click="updateFilterPage('type','mountain')">
       See All
     </button>
     <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
 
     <h3>Top Forest Trips</h3>
-    <button class="see-all-btn" @click="updateFilterPage('forest')">
+    <button class="go-to-all-btn" @click="updateFilterPage('type','forest')">
       See All
     </button>
     <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
 
     <h3>Top City Trips</h3>
-    <button class="see-all-mountain-btn" @click="updateFilterPage('city')">
+    <button class="see-all-mountain-btn" @click="updateFilterPage('type','city')">
       See All
     </button>
     <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
@@ -57,30 +62,12 @@ export default {
     };
   },
   methods: {
-    updateFilterPage(param) {
-      console.log("param", param);
-       this.filterBy.type = param;
+    updateFilterPage(prop, term) {
+      this.filterBy[prop] = term
         this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
         this.$router.push("/trip");
-
-      // if (param === "Europe" || "USA") {
-      //   this.filterBy.region = param;
-      //   this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
-      //   this.$router.push("/trip");
-      // } else if (param === "mountain" || "city" || "forest") {
-      //   this.filterBy.type = param;
-      //   this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
-      //   this.$router.push("/trip");
-      // } else {
-      //   this.$router.push("/trip");
-      // }
     },
-
     updateFilter(filterBy) {
-      // this.$store.dispatch({
-      //   type: "filterTrips",
-      //   filterBy,
-      // });
       this.$store.commit({ type: "setFilterBy", filterBy });
       this.$store.dispatch({
         type: "loadTrips",
@@ -123,6 +110,9 @@ export default {
     europeTripsForDisplay() {
       return this.$store.getters.europeTripsForDisplay;
     },
+    usaTripsForDisplay() {
+      return this.$store.getters.usaTripsForDisplay;
+    },
     guidesForDisplay() {
       return this.$store.getters.guidesForDisplay;
     },
@@ -143,11 +133,6 @@ export default {
     this.$store.dispatch({
       type: "loadUsers",
     });
-    //   this.$store.dispatch({
-    //   type: "loadBookings",
-    // });
-
-    // this.user = this.$store.getters.loggedinUser;
   },
   mounted() {
     this.user = this.$store.getters.loggedinUser;
