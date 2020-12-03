@@ -10,7 +10,7 @@
     </div>
  <h1>{{ trip.name }}</h1>
   
-    <div class="main-grid">
+    < class="main-grid">
 
       <div class="start">
 
@@ -54,7 +54,7 @@
           </GmapMap>
         </div>
       </div>
-        </div>
+        
         
       <div class="end">
         {{ bookedMsg }}
