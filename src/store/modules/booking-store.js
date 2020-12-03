@@ -1,7 +1,5 @@
 import { bookingService } from "../../services/booking-service.js";
 
-
-
 export const bookingStore = {
     strict: true,
     state: {
@@ -17,22 +15,18 @@ export const bookingStore = {
             state.bookings = bookings
         },
         addBooking(state, { booking }) {
-            console.log('booooooooooking:', booking)
             state.bookings.push(booking)
-            
         },
         setBooking(state, { booking }) {
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
             if (idx >= 0) state.bookings.splice(idx, 1, booking)
         },
         removeBooking(state, { booking }) {
-            
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
             if (idx >= 0) state.bookings.splice(idx, 1);
         }
     },
     actions: {
-
         async loadBookings(context) {
             const bookings = await bookingService.getBookings();
             context.commit({ type: 'setBookings', bookings })
@@ -44,9 +38,7 @@ export const bookingStore = {
                 name: context.rootGetters.loggedinUser.name,
                 imgUrl: context.rootGetters.loggedinUser.profileImgUrl,
             };
-            
             const newBooking = await bookingService.createBooking(booking);
-            console.log('newBooking:', newBooking)
             context.commit({ type: 'addBooking', booking: newBooking })
         },
 
@@ -54,12 +46,10 @@ export const bookingStore = {
             const updatedBooking = await bookingService.updateBooking(booking)
             context.commit({ type: 'setBooking', booking: updatedBooking })
         },
-        async removeBooking(context, {booking}) {
+        
+        async removeBooking(context, { booking }) {
             const deletedBooking = await bookingService.remove(booking)
-            context.commit({type: 'removeBooking', deletedBooking})
+            context.commit({ type: 'removeBooking', deletedBooking })
         }
-
-
-
     }
 }

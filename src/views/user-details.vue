@@ -1,34 +1,14 @@
 <template>
   <section v-if="!user.isGuide" class="user-details">
-    <!-- <img
-      class="user-details-img"
-      :src="require('~@/assets/img/users/' + user.profileImgUrl)"
-    /> -->
     <img
       class="guide-preview-img profile-img-l "
       :src="require('@/assets/img/users/' + user.profileImgUrl)"
     />
-    <!-- {{user.profileImgUrl}} -->
-    <!-- {{ user.profileImgUrl }} <br /> -->
+   
     <h2>Hi {{ user.name }}, Welcome Back</h2>
     <br />
     <h3>Favorite Trips</h3>
     <trip-list v-if="user" :trips="user.favoriteTrips" @emitFav="toggleFav" />
-    <!-- <table class="user-details-favorite-table">
-      <thead>
-        <tr>
-          <th>Trip Name</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="trip in user.favoriteTrips" :key="trip._id">
-          <td scope="row">{{ trip.name }}</td>
-
-          <td>{{ trip.date }}</td>
-        </tr>
-      </tbody>
-    </table> -->
 
     <hr />
     <div class="user-bookings-list" v-if="bookingToShow">
@@ -84,12 +64,7 @@ export default {
     },
   },
   created() {
-    // const userId = this.$store.getters.loggedinUser._id;
-    // console.log("userId", userId);
-    // const trip = await tripService.getTripById(tripId);
-    // this.trip = trip;
     this.user = this.$store.getters.loggedinUser;
-
     this.$store.dispatch({
       type: "loadBookings",
     });

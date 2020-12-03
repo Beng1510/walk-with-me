@@ -47,7 +47,6 @@ export default {
     },
     becomeGuide(user) {
       user.isGuide = !user.isGuide;
-      console.log("user", user);
     },
     loginSignUp(action) {
 			this.$store.commit({ type: "setLoginSignUp", action });

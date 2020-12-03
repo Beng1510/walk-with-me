@@ -28,7 +28,7 @@ var defaultUser = {
         lang: [],
         reviews: []
     },
-    isLogin:false,
+    isLogin: false,
 }
 var defaultGuide = {
 
@@ -66,10 +66,10 @@ var defaultGuide = {
 var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
 else {
-          
-    userService.login({name: "Shuki Locali", password:"123456"}).then(user => localLoggedinUser = user)
+
+    userService.login({ name: "Shuki Locali", password: "123456" }).then(user => localLoggedinUser = user)
     // localLoggedinUser = defaultUser
-    
+
 }
 
 export const userStore = {
@@ -100,10 +100,10 @@ export const userStore = {
         reviews(state) {
             return state.reviews
         },
-      
+
         isLogin(state) {
-			return state.isLogin;
-		},
+            return state.isLogin;
+        },
         // getGuideRate(state) {
         //     return state.guideRate
         // }
@@ -113,10 +113,8 @@ export const userStore = {
             state.loggedinUser = user;
         },
         setUsers(state, { users }) {
-            // console.log('userssssss:', users)
             state.users = users;
         },
-
         setReviews(state, { reviews }) {
             state.reviews = reviews;
         },
@@ -127,9 +125,9 @@ export const userStore = {
             state.guideRate = rate
         },
         setLoginSignUp(state, { action }) {
-			if (action === 'login') state.isLogin = true;
-			else state.isLogin = false;
-		},
+            if (action === 'login') state.isLogin = true;
+            else state.isLogin = false;
+        },
         // updateUser(state, { user }) {
         //     const idx = state.users.findIndex(prd => prd._id === user._id);
         //     if (idx >= 0) state.trips.splice(idx, 1, trip);
@@ -153,7 +151,6 @@ export const userStore = {
             context.commit({ type: 'setUsers', users: [] })
             context.commit({ type: 'setUser', user: null })
         },
-
         async loadUsers(context) {
             const users = await userService.getUsers();
             context.commit({ type: 'setUsers', users })
@@ -162,18 +159,12 @@ export const userStore = {
             user = await userService.updateUser(user);
             context.commit({ type: 'setUser', user })
         },
-
-
         async loadReviews(context, { guideId }) {
-            // const review = await userService.getReviewsByGuide();
             const user = await userService.getUserById(guideId);
-
             const reviews = user.guideInfo.reviews
             context.commit({ type: 'setReviews', reviews })
         },
-
         async saveReview({ commit }, { review, guideId, user }) {
-
             const guide = await userService.getUserById(guideId);
             const sum = guide.guideInfo.reviews.reduce(
                 (acc, item) => acc + item.rate,
@@ -186,7 +177,7 @@ export const userStore = {
             commit({ type: 'addReview', review })
         },
 
-        toggleFavs(context, { trip }) {
+        async toggleFavs(context, { trip }) {
             const userCopy = JSON.parse(JSON.stringify(context.state.loggedinUser));
             let userFavs = userCopy.favoriteTrips;
             let isFav = userFavs.some((userFav) => userFav._id.includes(trip._id));
@@ -202,21 +193,14 @@ export const userStore = {
                     _id: trip._id
                 });
             }
+            await context.dispatch({ type: 'updateUser', user: context.state.loggedinUser });
+
             context.commit({ type: 'setUser', user: userCopy });
-            context.dispatch({ type: 'updateUser', user: context.state.loggedinUser });
         },
         async getGuideRate(context, { tripGuideId }) {
-            // console.log('tripGuideId', tripGuideId);
             const user = await userService.getUserById(tripGuideId)
-            // console.log('user at store?', user);
             const rate = user.guideInfo.rate;
-            // console.log('user.guideInfo.rate', user.guideInfo.rate);
-            // console.log('rate', rate);
-
             return rate
-            // console.log('rate at store?',rate);
-
-            // context.commit({ type: 'setGuideRate', rate });
         }
     }
 }

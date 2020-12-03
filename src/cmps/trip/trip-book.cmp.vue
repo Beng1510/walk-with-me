@@ -106,7 +106,6 @@ export default {
       let totalBooked = this.booking.trip.totalBooked;
       const peopleToSign = this.booking.peopleToSign;
       totalBooked += peopleToSign;
-      console.log('totalBooked',totalBooked);
       this.$store.dispatch({
         type: "updateTotalBooked",
         id: this.trip._id,

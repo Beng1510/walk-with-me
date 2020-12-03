@@ -25,13 +25,12 @@
         Price: {{ trip.price }}$ - Number of Hikers Booked:
         {{ trip.totalBooked }}/10 - Difficulty: {{ trip.difficulty }}/5
       </h3>
-      <!-- <p class="trip-details-description">{{ trip.description }}</p> -->
+
 <ul>
   <li v-for="(desc, idx) in this.trip.description" :key="idx">
 <p>{{desc}}</p>
   </li>
 </ul>
-
 
       {{ bookedMsg }}
 
@@ -68,18 +67,6 @@
     <h2>Guide Details</h2>
     <guide-preview :guide="this.guide" />
     <guide-review :guideId="trip.aboutGuide._id" :user="loggedInUser" />
-    <!-- <div class="trip-details-guide-container flex space-around">
-      <div class="trip-details-guide-info">
-        <img
-          class="trip-details-guide-img profile-img-l"
-          :src="require('@/assets/img/users/' + trip.aboutGuide.imgUrl)"
-        />
-        <h3>
-          {{ trip.aboutGuide.name }} --- Rate: {{ trip.aboutGuide.rate }}/5
-        </h3>
-      </div>
-
-    </div> -->
   </section>
 </template>
 
@@ -128,27 +115,12 @@ export default {
       return date.toLocaleDateString("en-GB");
     },
     bookedMsg() {
-      // console.log('this.isBooked',this.isBooked);
       if (!this.isBooked && this.trip.totalBooked < 10) {
         return "Come & Join The Trip ";
       } else if (this.getBookingByUser === false) {
         return "You've Already Booked This Trip";
       } else return "Sorry, We're Fully Booked";
     },
-
-    // getBookingByUser(user) {
-    //   const bookings = this.$store.getters.bookings;
-
-    //   const filteredBookingsByUser = bookings.filter(
-    //     (booking) => booking.user._id === this.user._id
-    //   );
-
-    //   filteredBookingsByUser.some((booking) => {
-    //     if (booking.trip.name === this.trip.name) {
-    //       return (this.isBooked = false);
-    //     }
-    //   });
-    // },
   },
   async created() {
     const tripId = this.$route.params.id;

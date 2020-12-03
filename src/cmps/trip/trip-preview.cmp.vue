@@ -12,12 +12,13 @@
     <div class="details">
       <h2 class="trip-preview-title">{{ this.trip.name }}</h2>
       <div class="trip-preview-trip-details">
-        <!-- <p class="trip-preview-date">{{ this.trip.date }}</p> -->
+    
 
         <p class="date">{{ getDateString }}</p>
+        <p class="duration">{{ this.trip.duration }}</p>
         <div class="booking-info flex space-between align-center ">
           <p>
-            <span class="price bold">{{ this.trip.price }}$</span> / person
+            <span class="price bold">${{ this.trip.price }}</span> / person
           </p>
           <p>
             <span class="bold">{{ this.trip.totalBooked }}</span
@@ -124,12 +125,8 @@ export default {
 
   async created() {
     this.trip = await tripService.getTripById(this.tripId);
-    
     this.checkIsFav();
     this.getGuideRate(this.trip);
-    // this.getDateString(this.trip);
-    // let m = moment()
-    // console.log('m',m);
   },
 };
 </script>

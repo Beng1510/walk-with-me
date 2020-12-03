@@ -2,7 +2,6 @@
   <section v-if="bookingToShow" class="back-office">
     <h2>Back Office</h2>
     Hello {{ guide.name }}
-    <!-- <button @click="showAddBtn">Add Trip</button> -->
     <hr />
     Your Bookings:
     <table class="back-office-table">
@@ -24,8 +23,12 @@
           <td>{{ booking.specialReq }}</td>
           <td>{{ booking.status }}</td>
           <td>
-            <button @click.stop="approveBooking(booking)">Approve</button>
-            <button @click.stop="removeBooking(booking)">Reject</button>
+            <button v-if="showApproveBtn" @click.stop="approveBooking(booking)">
+              Approve
+            </button>
+            <button v-if="!showApproveBtn" @click.stop="removeBooking(booking)">
+              Reject
+            </button>
           </td>
         </tr>
       </tbody>
@@ -44,8 +47,9 @@ export default {
   name: "back-office",
   data() {
     return {
-      // guide: null,
       filterdBookings: null,
+      showApproveBtn: false,
+      showRejectBtn: false,
     };
   },
 
@@ -53,10 +57,8 @@ export default {
     async approveBooking(booking) {
       if (booking.status === "pending") {
         booking.status = "approved";
-        // this.btnText = "Undo"
       } else {
         booking.status = "pending";
-        // this.btnText = "Approve"
       }
       this.$store.dispatch({
         type: "updateBooking",
@@ -72,6 +74,22 @@ export default {
           type: "loadBookings",
         });
     },
+    async getStatusBooking() {
+      const bookings = await this.$store.getters.bookings;
+      const filteredBookings = bookings.filter(
+        (booking) => booking.guide._id === this.guide._id
+      );
+
+      filteredBookings.forEach((booking) => {
+        booking.guide._id === this.guide._id;
+        console.log("booking", booking);
+        console.log("booking.status", booking.status);
+        if (booking.status === "approved") {
+          return (this.showApproveBtn = false);
+          // } else return this.showRejectBtn = true;
+        }
+      });
+    },
   },
   computed: {
     bookingToShow() {
@@ -83,26 +101,10 @@ export default {
     },
   },
   async created() {
-    // this.guide = this.$store.getters.loggedinGuide;
     this.$store.dispatch({
       type: "loadBookings",
     });
-
-    // const bookings = this.$store.getters.bookings;
-    // console.log("bookings", bookings);
-
-    // this.filterdBookings = bookings.filter(
-    //   (booking) => booking.guide._id === this.guide._id
-    // );
-    // console.log("this.filterdBookings", this.filterdBookings);
-  },
-  mounted() {
-    //   this.guide = this.$store.getters.loggedinGuide;
-    //   const bookings = this.$store.getters.bookings;
-    //   console.log("bookings", bookings);
-    //   this.filterdBookings = bookings.filter(
-    //     (booking) => booking.guide._id === this.guide._id
-    //   );
+    this.getStatusBooking();
   },
   components: {
     addTrip,

@@ -36,8 +36,6 @@ export default {
 
     homePage() {
     return (this.$route.path === '/');
-     
-
      }
   },
   created() {
