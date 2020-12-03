@@ -55,13 +55,13 @@ export default {
       if (this.isLogin) {
         eventBusService.$emit(SHOW_MSG, {
           txt: `Welcome ${this.user.name}`,
-          subTxt: "Login Success",
+          subTxt: "Login Successful",
           type: "success",
         });
       } else {
         eventBusService.$emit(SHOW_MSG, {
           txt: `Welcome ${this.user.name}`,
-          subTxt: "Signup  Success",
+          subTxt: "Signup Successful",
           type: "success",
         });
       }

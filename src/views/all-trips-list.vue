@@ -24,8 +24,8 @@ export default {
 
   methods: {
     updateFilter(filterBy) {
-      this.$store.dispatch({
-        type: "filterTrips",
+       this.$store.commit({
+      type: "setFilterBy",
         filterBy,
       });
 
@@ -43,7 +43,6 @@ export default {
   computed: {
     tripsForDisplay() {
       const allTrips = this.$store.getters.tripsForDisplay;
-      console.log('allTrips',allTrips);
       return allTrips
     },
   },

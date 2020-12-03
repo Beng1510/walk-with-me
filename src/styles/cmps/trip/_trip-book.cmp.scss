@@ -1,4 +1,10 @@
-input.trip-book-specialReq {
-    width: 350px;
-    margin-left: 20px;
-} 
+.trip-book {
+    max-width: 45vw;
+
+    .specialReq {
+        border-radius: 15px;
+        padding: .5rem 1rem;
+        min-width: 40ch;
+        border: .5px solid $clr5;
+    }
+}

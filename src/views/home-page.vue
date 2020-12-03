@@ -1,33 +1,44 @@
 <template>
   <section class="home-page">
     <span v-if="isLoading">Loading...</span>
-      <button class="see-all-btn" @click="goToAllTrips()">See All</button>
-      <h3>Top Mountain Trips</h3>
-      <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
-      <button class="see-all-mountain-btn" @click="toggleShowTrips('mountain')">
-        See All Mountain Trips
-      </button>
-      <h3>Top Forest Trips</h3>
-      <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
-      <h3>Top Seaside Trips</h3>
-      <trip-list :trips="seaTripsForDisplay" @emitFav="toggleFav" />
-      <h3>Top City Trips</h3>
-      <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
-      <h3>Check Out Our Extreme Trips</h3>
-      <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" />
-      <button class="see-all-extreme-btn" @click="toggleShowTrips('Extreme')">
-        See All Extreme Trips
-      </button>
-      <h3>One Day Trips in Europe</h3>
-      <trip-list :trips="europeTripsForDisplay" @emitFav="toggleFav" />
-      <button class="see-all-europe-btn" @click="toggleShowTrips('Europe')">
-        See All Europe Trips
-      </button>
-      <button class="go-to-all-europe-btn" @click="updateFilterPage('Europe')">
-        Go To Europe Trips
-      </button>
-      <h3>Guides of the Month</h3>
-      <guide-list :guides="guidesForDisplay" />
+    <button class="see-all-btn" @click="goToAllTrips()">See All</button>
+    <h3>Trips Across Europe</h3>
+    <button class="go-to-all-btn" @click="updateFilterPage('region','Europe')">
+      See All
+    </button>
+    <trip-list :trips="europeTripsForDisplay" @emitFav="toggleFav" />
+    <h3>Trips Across America</h3>
+    <button class="go-to-all-btn" @click="updateFilterPage('region','USA')">
+      See All
+    </button>
+    <trip-list :trips="usaTripsForDisplay" @emitFav="toggleFav" />
+
+    <!-- <h3>Check Out Our Extreme Trips</h3>
+    <button class="see-all-btn" @click="toggleShowTrips('Extreme')">
+      See All
+    </button>
+    <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" /> -->
+
+    <h3>Top Mountain Trips</h3>
+    <button class="go-to-all-btn" @click="updateFilterPage('type','mountain')">
+      See All
+    </button>
+    <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
+
+    <h3>Top Forest Trips</h3>
+    <button class="go-to-all-btn" @click="updateFilterPage('type','forest')">
+      See All
+    </button>
+    <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
+
+    <h3>Top City Trips</h3>
+    <button class="see-all-mountain-btn" @click="updateFilterPage('type','city')">
+      See All
+    </button>
+    <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
+
+    <h3>Guides of the Month</h3>
+    <guide-list :guides="guidesForDisplay" />
   </section>
 </template>
 
@@ -51,23 +62,12 @@ export default {
     };
   },
   methods: {
-    updateFilterPage(param) {
-      this.filterBy.region = param;
-      this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
-
-      // this.$store.dispatch({
-      //   type: "filterTrips",
-      //   filterBy: this.filterBy,
-      // });
-
-      this.$router.push("/trip");
+    updateFilterPage(prop, term) {
+      this.filterBy[prop] = term
+        this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
+        this.$router.push("/trip");
     },
-
     updateFilter(filterBy) {
-      // this.$store.dispatch({
-      //   type: "filterTrips",
-      //   filterBy,
-      // });
       this.$store.commit({ type: "setFilterBy", filterBy });
       this.$store.dispatch({
         type: "loadTrips",
@@ -110,13 +110,16 @@ export default {
     europeTripsForDisplay() {
       return this.$store.getters.europeTripsForDisplay;
     },
+    usaTripsForDisplay() {
+      return this.$store.getters.usaTripsForDisplay;
+    },
     guidesForDisplay() {
       return this.$store.getters.guidesForDisplay;
     },
   },
   components: {
     tripList,
-    guideList
+    guideList,
   },
   created() {
     this.$store.commit({
@@ -130,11 +133,6 @@ export default {
     this.$store.dispatch({
       type: "loadUsers",
     });
-    //   this.$store.dispatch({
-    //   type: "loadBookings",
-    // });
-
-    // this.user = this.$store.getters.loggedinUser;
   },
   mounted() {
     this.user = this.$store.getters.loggedinUser;

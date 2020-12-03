@@ -23,8 +23,8 @@ export default {
 
   methods: {
     updateFilter(filterBy) {
-      this.$store.dispatch({
-        type: "filterTrips",
+      this.$store.commit({
+      type: "setFilterBy",
         filterBy,
       });
     },
@@ -35,8 +35,8 @@ export default {
     },
 
     homePage() {
-      return this.$route.path === "/";
-    },
+    return (this.$route.path === '/');
+     }
   },
   created() {
     this.$store.dispatch({
