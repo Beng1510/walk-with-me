@@ -23,10 +23,10 @@
           <td>{{ booking.specialReq }}</td>
           <td>{{ booking.status }}</td>
           <td>
-            <button v-if="showApproveBtn" @click.stop="approveBooking(booking)">
+            <button v-if="booking.status === 'pending'" @click.stop="approveBooking(booking)">
               Approve
             </button>
-            <button v-if="!showApproveBtn" @click.stop="removeBooking(booking)">
+            <button v-if="booking.status === 'approved'" @click.stop="removeBooking(booking)">
               Reject
             </button>
           </td>
@@ -48,8 +48,7 @@ export default {
   data() {
     return {
       filterdBookings: null,
-      showApproveBtn: false,
-      showRejectBtn: false,
+     
     };
   },
 
@@ -74,21 +73,23 @@ export default {
           type: "loadBookings",
         });
     },
-    async getStatusBooking() {
-      const bookings = await this.$store.getters.bookings;
-      const filteredBookings = bookings.filter(
-        (booking) => booking.guide._id === this.guide._id
-      );
+    // async getStatusBooking() {
+    //   const bookings = await this.$store.getters.bookings;
+    //   const filteredBookings = bookings.filter(
+    //     (booking) => booking.guide._id === this.guide._id
+    //   );
 
-      filteredBookings.forEach((booking) => {
-        booking.guide._id === this.guide._id;
+    //   filteredBookings.forEach((booking) => {
+    //     booking.guide._id === this.guide._id;
        
-        if (booking.status === "approved") {
-          return (this.showApproveBtn = false);
-          } else return this.showRejectBtn = true;
+    //     if (booking.status === "approved") {
+    //       return (this.showApproveBtn = false);
+    //       // } else return this.showRejectBtn = true;
         
-      });
-    },
+
+    //     }
+      // });
+    // },
   },
   computed: {
     bookingToShow() {
@@ -103,7 +104,7 @@ export default {
     this.$store.dispatch({
       type: "loadBookings",
     });
-    this.getStatusBooking();
+    // this.getStatusBooking();
   },
   components: {
     addTrip,
