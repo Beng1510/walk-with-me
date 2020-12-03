@@ -14,8 +14,8 @@
       <div class="trip-preview-trip-details">
         <!-- <p class="trip-preview-date">{{ this.trip.date }}</p> -->
 
+        <p class="date">{{ getDateString }}</p>
         <div class="booking-info flex space-between align-center ">
-        <p class="trip-preview-date">{{ getDateString }}</p>
           <p>
             <span class="price bold">{{ this.trip.price }}$</span> / person
           </p>

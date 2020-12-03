@@ -1,13 +1,13 @@
 <template>
   <section class="trip-filter">
     <form @submit.prevent="emitFilter">
-HEAD
+<!-- 
       <el-input
         type="text"
         v-model="filterBy.name"
         @input="emitFilter"
         placeholder="let's search together"
-      />
+      /> -->
       <!-- <label for="all-tag">
         All
         <input
@@ -59,7 +59,7 @@ HEAD
         />
       </label> -->
       <br />
-=======
+
       <div class="selector-filter flex space-between align-center">
         <div class="input flex column">
           <label for="txt-input">Free text</label>
@@ -138,7 +138,7 @@ HEAD
             <el-option value="Asia">Asia</el-option>
           </el-select>
         </div>
->>>>>>> Gal
+
 
         <button @click="emitFilter" class="search-btn">
           <i class="fas fa-search"></i>
