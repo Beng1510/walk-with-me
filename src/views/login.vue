@@ -1,18 +1,21 @@
 <template>
-  <section class="login flex f-col f-center">
-    <h1>{{ titleToShow }}</h1>
-    <form @submit.prevent="sendUserDetails" class="flex f-col">
-      <input type="text" v-model="user.name" placeholder="Enter Username" />
-
-      <div class="pass">
+  <section class="login-page flex f-col f-center">
+    <form @submit.prevent="sendUserDetails" class="from-box">
+      <h1 class="title">{{ titleToShow }}</h1>
+      <div class="input-box">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <input type="text" v-model="user.name" placeholder="Enter Your Name" />
+      </div>
+      <div class="input-box">
+        <i class="fa fa-key" aria-hidden="true"></i>
         <input
           :type="showPass"
           v-model="user.password"
           placeholder="Enter Password"
         /><i :class="showPassClass" @click="isShowPass = !isShowPass"></i>
       </div>
-      <button>{{ btnTextToShow }}</button>
-      <button @click="homePage">Back to the home page</button>
+      <button class="login-btn">{{ btnTextToShow }}</button>
+      <button class="login-btn" @click="homePage">Back to the home page</button>
     </form>
   </section>
 </template>
@@ -49,7 +52,6 @@ export default {
         console.log("err", res.err);
       }
 
-      
       if (this.isLogin) {
         eventBusService.$emit(SHOW_MSG, {
           txt: `Welcome ${this.user.name}`,

@@ -9,6 +9,15 @@
           :src="require('../assets/img/trips/' + trip.imgUrls[0])"
         />
       </div>
+
+    <div class="img-container"  v-for="(n) in 4"
+          :key="n">
+        <img
+          class="trip-main-img"
+          :src="require('../assets/img/trips/' + trip.imgUrls[n-1])"
+        />
+      </div>
+
     <div class="info-container">
       <h1>{{ trip.name }}</h1>
       <h3>{{ trip.date }}</h3>
@@ -16,7 +25,13 @@
         Price: {{ trip.price }}$ - Number of Hikers Booked:
         {{ trip.totalBooked }}/10 - Difficulty: {{ trip.difficulty }}/5
       </h3>
-      <p class="trip-details-description">{{ trip.description }}</p>
+      <!-- <p class="trip-details-description">{{ trip.description }}</p> -->
+<ul>
+  <li v-for="(desc, idx) in this.trip.description" :key="idx">
+<p>{{desc}}</p>
+  </li>
+</ul>
+
 
       {{ bookedMsg }}
 
