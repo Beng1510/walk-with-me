@@ -1,13 +1,13 @@
 <template>
   <section v-if="trip" class="trip-details">
-
-    <div class="img-container"  v-for="(n) in 4"
-          :key="n">
-        <img
-          class="trip-main-img"
-          :src="require('../assets/img/trips/' + trip.imgUrls[n-1])"
-       />
-      </div>
+    <div class="img-container">
+      <img
+        v-for="n in 4"
+        :key="n"
+        class="trip-img"
+        :src="require('../assets/img/trips/' + trip.imgUrls[n - 1])"
+      />
+    </div>
  <h1>{{ trip.name }}</h1>
   
     <div class="main-grid">
