@@ -1,8 +1,7 @@
 <template>
   <section class="trip-filter">
     <form @submit.prevent="emitFilter">
-<!-- 
-      <el-input
+      <!-- <el-input
         type="text"
         v-model="filterBy.name"
         @input="emitFilter"
@@ -75,53 +74,38 @@
         <div class="input flex column">
           <label for="type-input">Trip type</label>
           <el-select
-            v-model="selected"
+            v-model="filterBy.type"
             placeholder="Select a type"
             id="type-input"
           >
             <el-option
-              type="radio"
               id="all-tag"
-              value=""
-              v-model="filterBy.type"
+              value="All"
               @select="emitFilter"
-              label="all"
+              label="All"
             >
             </el-option>
             <el-option
-              type="radio"
               id="mountain-tag"
               value="mountain"
-              v-model="filterBy.type"
               @select="emitFilter"
-              label="mountain"
+              label="Mountain"
               >Mountain
             </el-option>
+
             <el-option
-              type="radio"
-              id="seaside-tag"
-              value="seaside"
-              v-model="filterBy.type"
-              @select="emitFilter"
-              label="seaside"
-              >Seaside
-            </el-option>
-            <el-option
-              type="radio"
               id="city-tag"
               value="city"
-              v-model="filterBy.type"
               @select="emitFilter"
-              label="city"
+              label="City"
               >City
             </el-option>
             <el-option
-              type="radio"
               id="forest-tag"
               value="forest"
-              v-model="filterBy.type"
+             
               @select="emitFilter"
-              label="forest"
+              label="Forest"
               >Forest
             </el-option>
           </el-select>
@@ -129,16 +113,17 @@
         <div class="input flex column">
           <label for="dest-input">Trip destination</label>
           <el-select
-            v-model="selected"
-            placeholder="Selaect a destination"
+           v-model="filterBy.region"
+            placeholder="Select a destination"
             id="dest-input"
           >
-            <el-option value="Usa">United States</el-option>
+            <el-option value="All">All</el-option>
+            <el-option value="USA">USA</el-option>
             <el-option value="Europe">Europe</el-option>
             <el-option value="Asia">Asia</el-option>
+            <el-option value="Australia">Australia</el-option>
           </el-select>
         </div>
-
 
         <button @click="emitFilter" class="search-btn">
           <i class="fas fa-search"></i>
@@ -162,8 +147,8 @@ export default {
     return {
       filterBy: {
         name: "",
-        type: "All",
-        location: "",
+        type: "",
+        // location: "",
         region: "",
       },
       selected: "",
@@ -183,7 +168,11 @@ export default {
     //   console.log('this.trips,loc',this.trips);
     // },
   },
-  created() {},
+  created() {
+    const filterObj = JSON.parse(JSON.stringify(this.$store.getters.filterBy))
+    this.filterBy = filterObj
+    
+  },
 };
 </script>
 
