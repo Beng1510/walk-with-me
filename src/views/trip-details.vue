@@ -1,13 +1,13 @@
 <template>
   <section v-if="trip" class="trip-details">
-
-    <div class="img-container"  v-for="(n) in 4"
-          :key="n">
-        <img
-          class="trip-main-img"
-          :src="require('../assets/img/trips/' + trip.imgUrls[n-1])"
-       />
-      </div>
+    <div class="img-container">
+      <img
+        v-for="n in 4"
+        :key="n"
+        class="trip-img"
+        :src="require('../assets/img/trips/' + trip.imgUrls[n - 1])"
+      />
+    </div>
  <h1>{{ trip.name }}</h1>
   
     <div class="main-grid">
@@ -58,7 +58,7 @@
         
       <div class="end">
         {{ bookedMsg }}
-        <trip-book :trip="trip" @bookTrip="bookTrip" />
+        <trip-book :trip="trip" :user="user" @bookTrip="bookTrip" />
         <div class="about-guide">
           <h1>Meet Your Guide</h1>
           <guide-preview :guide="this.guide" />
