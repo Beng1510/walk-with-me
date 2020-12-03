@@ -13,12 +13,6 @@
     </button>
     <trip-list :trips="usaTripsForDisplay" @emitFav="toggleFav" />
 
-    <!-- <h3>Check Out Our Extreme Trips</h3>
-    <button class="see-all-btn" @click="toggleShowTrips('Extreme')">
-      See All
-    </button>
-    <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" /> -->
-
     <h3>Top Mountain Trips</h3>
     <button class="go-to-all-btn" @click="updateFilterPage('type','mountain')">
       See All
@@ -81,12 +75,6 @@ export default {
     },
     goToAllTrips() {
       this.$router.push("/trip");
-    },
-    toggleShowTrips(showBy) {
-      this.$store.dispatch({
-        type: "toggleShow",
-        showBy,
-      });
     },
   },
   computed: {
