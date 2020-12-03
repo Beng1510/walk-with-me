@@ -1,22 +1,20 @@
 <template>
   <section v-if="trip" class="trip-details">
-    <button class="back-btn"><router-link to="/">Back</router-link></button>
-      <div class="img-container">
-        <img
-          v-for="n in 5"
-          :key="n"
-          class="trip-main-img"
-          :src="require('../assets/img/trips/' + trip.imgUrls[0])"
-        />
-      </div>
+    <!-- <button class="back-btn"><router-link to="/">Back</router-link></button> -->
+    <div class="img-container">
+      <img
+        v-for="n in 5"
+        :key="n"
+        class="trip-main-img"
+        :src="require('../assets/img/trips/' + trip.imgUrls[0])"
+      />
+    </div>
+    <h1>{{ trip.name }}</h1>
     <div class="info-container">
-      <h1>{{ trip.name }}</h1>
       <h3>{{ trip.date }}</h3>
-      <h3>
-        Price: {{ trip.price }}$ - Trip capacity: {{ trip.capacity }}/10 -
-        Difficulty: {{ trip.difficulty }}/5
-      </h3>
-      <p class="trip-details-description">{{ trip.description }}</p>
+      <h3>4 Houres</h3>
+      <h3>Difficulty: {{ trip.difficulty }}/5</h3>
+      <h3>Trip capacity: {{ trip.capacity }}/10</h3>
       Join These Hikers:
       <ul>
         <li v-for="booking in this.filterdBookings" :key="booking._id">
@@ -27,39 +25,31 @@
           {{ booking.user.name }}
         </li>
       </ul>
-      <trip-book :trip="trip" @bookTrip="bookTrip" />
     </div>
-        <div class="map">
-          <GmapMap
-            :center="mapPos"
-            :zoom="12"
-            map-type-id="terrain"
-            style="width: 600px; height: 400px"
-          >
-            <GmapMarker
-              :position="mapPos"
-              :clickable="true"
-              :draggable="true"
-              @click="center = mapPos"
-            />
-          </GmapMap>
-        </div>
-
-    <h2>Guide Details</h2>
-    <guide-preview :guide="this.guide" />
-    <guide-review :guideId="trip.aboutGuide._id" :user="loggedInUser" />
-    <!-- <div class="trip-details-guide-container flex space-around">
-      <div class="trip-details-guide-info">
-        <img
-          class="trip-details-guide-img profile-img-l"
-          :src="require('@/assets/img/users/' + trip.aboutGuide.imgUrl)"
+    <div class="about-trip">
+      <p class="description">{{ trip.description }}</p>
+    </div>
+    <trip-book :trip="trip" @bookTrip="bookTrip" />
+    <div class="about-guide">
+      <h2>Guide Details</h2>
+      <guide-preview :guide="this.guide" />
+      <guide-review :guideId="trip.aboutGuide._id" :user="loggedInUser" />
+    </div>
+    <div class="map">
+      <GmapMap
+        :center="mapPos"
+        :zoom="12"
+        map-type-id="terrain"
+        style="width: 600px; height: 400px"
+      >
+        <GmapMarker
+          :position="mapPos"
+          :clickable="true"
+          :draggable="true"
+          @click="center = mapPos"
         />
-        <h3>
-          {{ trip.aboutGuide.name }} --- Rate: {{ trip.aboutGuide.rate }}/5
-        </h3>
-      </div>
-
-    </div> -->
+      </GmapMap>
+    </div>
   </section>
 </template>
 

@@ -1,13 +1,12 @@
 <template>
-  <section v-if="trip" class="trip-book">
-    <h1>Join The Trip!</h1>
-
-    <form @submit.prevent="emitBook">
+  <section v-if="trip" class="trip-book flex column">
+    <h3>Price: ${{trip.price}}</h3>
+    <form @submit.prevent="emitBook" class=" flex column">
       <label for="peopleToSign"
         >How many hikers?
-        <input
+        <el-input-number
+          size="small"
           class="trip-book-peopleToSign"
-          type="number"
           v-model.number="booking.peopleToSign"
           id="peopleToSign"
           name="peopleToSign"
@@ -27,7 +26,7 @@
           placeholder="e.g.: I want a vegan option for lunch"
         />
       </label>
-      <p>Total Price: {{ booking.sum }}$</p>
+      <p>Total: ${{ booking.sum }}</p>
       <button>Book Trip</button>
     </form>
   </section>
@@ -72,14 +71,14 @@ export default {
       const signed = this.trip.capacity;
       let openSlots = 10 - signed;
       return openSlots;
-    }
+    },
   },
 
   methods: {
     emitBook() {
       this.$emit("bookTrip", this.booking);
 
-      this.updateCapacity()
+      this.updateCapacity();
 
       eventBusService.$emit(SHOW_MSG, {
         txt: "Trip Booked!",
@@ -96,10 +95,8 @@ export default {
     },
     updateCapacity() {
       let capacity = this.booking.trip.capacity;
-      console.log(capacity)
       const peopleToSign = this.booking.peopleToSign;
       capacity += peopleToSign;
-      console.log(capacity)
       this.$store.dispatch({
         type: "updateCapacity",
         id: this.trip._id,
