@@ -68,8 +68,10 @@ export default {
 
   methods: {
     emitFav(trip) {
-      this.$emit("emitFav", trip);
+
       this.isFav = !this.isFav;
+      this.$emit("emitFav", trip);
+      
     },
 
     goToDetails(id) {

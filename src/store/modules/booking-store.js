@@ -1,5 +1,5 @@
 import { bookingService } from "../../services/booking-service.js";
-
+import  socketService  from '../../services/socket-service.js';
 
 
 export const bookingStore = {
@@ -17,7 +17,7 @@ export const bookingStore = {
             state.bookings = bookings
         },
         addBooking(state, { booking }) {
-            console.log('booooooooooking:', booking)
+            // console.log('booooooooooking:', booking)
             state.bookings.push(booking)
             
         },
@@ -46,7 +46,11 @@ export const bookingStore = {
             };
             
             const newBooking = await bookingService.createBooking(booking);
-            console.log('newBooking:', newBooking)
+
+            socketService.setup();
+            // socketService.emit('guideId', newBooking.guide._id);
+            socketService.emit('addBooking',newBooking)
+            // console.log('newBooking:', newBooking)
             context.commit({ type: 'addBooking', booking: newBooking })
         },
 

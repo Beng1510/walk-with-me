@@ -86,7 +86,7 @@ export default {
       
       this.$emit("bookTrip", this.booking);
 
-      this.updateCapacity()
+      // this.updateCapacity()
 
       eventBusService.$emit(SHOW_MSG, {
         txt: "Trip Booked!",

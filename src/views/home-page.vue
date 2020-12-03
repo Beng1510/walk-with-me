@@ -74,8 +74,10 @@ export default {
       });
     },
     toggleFav(trip) {
+      
+
       this.$store.dispatch({
-        type: "toggleFavs",
+        type: "saveTrip",
         trip,
       });
     },

@@ -131,6 +131,7 @@ export const tripStore = {
         async saveTrip({ commit }, { trip }) {
             const savedTrip = await tripService.save(trip);
             commit({ type: 'addTrip', trip: savedTrip })
+            
         },
         // async removeTrip({ commit }, payload) {
         //     await tripService.remove(payload.tripId)
@@ -145,11 +146,13 @@ export const tripStore = {
             // console.log('savedTrip',savedTrip)
             commit({ type: 'updateTrip', trip: savedTrip })
         },
-        toggleShow(context, { showBy }) {
-            // console.log('showBy', showBy);
-            context.commit({ type: 'showByParams', showBy })
+        async toggleFavs(context, { tripe }) {
+            console.log('tripe:', tripe)
+
+            // const trip = await tripService.save(id);
+            // context.commit({ type: 'showByParams', showBy })
         },
-      
+
 
     },
 

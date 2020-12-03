@@ -6,7 +6,13 @@ import store from './store';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+// import VueSocketIO from 'vue-socket.io'
 var _ = require('lodash');
+
+// const BASE_URL = process.env.NODE_ENV === 'production'
+//     ? '/api/'
+//     : '//localhost:3030'
+
 // var moment = require('moment');
 
 //Styles
@@ -18,6 +24,12 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places',
   },
 });
+
+// Vue.use(new VueSocketIO({
+//   debug: true,
+//   connection: BASE_URL,
+// }))
+
 
 Vue.use(ElementUI);
 
