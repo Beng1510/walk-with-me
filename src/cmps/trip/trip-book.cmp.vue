@@ -18,7 +18,7 @@
       <label for="specialReq"
         >Any special requests?
         <input
-          class="trip-book-specialReq"
+          class="specialReq"
           type="text"
           v-model="booking.specialReq"
           id="specialReq"
@@ -29,7 +29,6 @@
       <p>Total: ${{ booking.sum }}</p>
       <button>Book Trip</button>
     </form>
-
     <div v-else>You Are Already Booked For This Trip</div>
   </section>
 </template>
