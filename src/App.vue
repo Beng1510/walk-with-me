@@ -1,6 +1,6 @@
 <template>
   <section class="main-layout" id="app">
-    <main-header :user="defaultUserForDisplay" :class="{ dark:!homePage}" />
+    <main-header :user="defaultUserForDisplay" :class="{ dark: !homePage }" />
     <hero v-if="homePage" @filterBy="updateFilter" />
     <main>
       <router-view />
@@ -42,6 +42,12 @@ export default {
     this.$store.dispatch({
       type: "loadTrips",
     });
+
+    console.log('this.defaultUserForDisplay.isGuide:', this.defaultUserForDisplay.isGuide)
+    if(this.defaultUserForDisplay.isGuide){
+      
+      console.log("im aguide");
+    }
   },
 };
 </script>

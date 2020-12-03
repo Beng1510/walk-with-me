@@ -1,4 +1,6 @@
 import { bookingService } from "../../services/booking-service.js";
+import  socketService  from '../../services/socket-service.js';
+
 
 export const bookingStore = {
     strict: true,
@@ -39,6 +41,11 @@ export const bookingStore = {
                 imgUrl: context.rootGetters.loggedinUser.profileImgUrl,
             };
             const newBooking = await bookingService.createBooking(booking);
+
+            socketService.setup();
+            // socketService.emit('guideId', newBooking.guide._id);
+            socketService.emit('addBooking',newBooking)
+            // console.log('newBooking:', newBooking)
             context.commit({ type: 'addBooking', booking: newBooking })
         },
 
