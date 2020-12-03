@@ -1,8 +1,6 @@
 <template>
   <section class="main-layout" id="app">
-    <main-header :user="defaultUserForDisplay" :class="{dark:!homePage}" />
-    <!-- <main-header :user="defaultUserForDisplay" :class="{full, dark:!homePage}" /> -->
-    <!-- <main-header :user="defaultUserForDisplay"  /> -->
+    <main-header :user="defaultUserForDisplay" :class="{ dark:!homePage}" />
     <hero v-if="homePage" @filterBy="updateFilter" />
     <main>
       <router-view />

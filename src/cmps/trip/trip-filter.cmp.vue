@@ -7,7 +7,6 @@
         @input="emitFilter"
         placeholder="let's search together"
       /> -->
-
       <!-- <label for="all-tag">
         All
         <input
