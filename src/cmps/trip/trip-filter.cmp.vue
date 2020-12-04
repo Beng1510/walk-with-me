@@ -1,6 +1,6 @@
 <template>
   <section class="trip-filter">
-    <form @submit.prevent="emitFilter">
+    <form @submit.prevent="updateFilterPage(filterBy)">
       <div class="selector-filter flex space-between align-center">
         <div class="input flex column">
           <label for="txt-input">Free Text</label>
@@ -24,14 +24,14 @@
               id="all-tag"
               value=""
               @select="emitFilter"
-              label="All"
+             
             >
             </el-option>
             <el-option
               id="mountain-tag"
               value="mountain"
               @select="emitFilter"
-              label="Mountain"
+              
               >Mountain
             </el-option>
 
@@ -39,15 +39,14 @@
               id="city-tag"
               value="city"
               @select="emitFilter"
-              label="City"
+              
               >City
             </el-option>
             <el-option
               id="forest-tag"
               value="forest"
-             
               @select="emitFilter"
-              label="Forest"
+             
               >Forest
             </el-option>
           </el-select>
@@ -67,7 +66,7 @@
           </el-select>
         </div>
 
-        <button @click="emitFilter" class="search-btn">
+        <button class="search-btn">
           <i class="fas fa-search"></i>
         </button>
       </div>
@@ -102,6 +101,11 @@ export default {
       const filterByCopy = JSON.parse(JSON.stringify(this.filterBy));
 
       this.$emit("filterBy", filterByCopy);
+    },
+    updateFilterPage(filterBy) {
+      console.log('filterBy ???',filterBy);
+        this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
+        this.$router.push("/trip");
     },
   },
   created() {
