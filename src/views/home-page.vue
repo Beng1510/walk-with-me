@@ -2,34 +2,40 @@
   <section class="home-page">
     <span v-if="isLoading">Loading...</span>
     <button class="see-all-btn" @click="goToAllTrips()">See All</button>
-    <h3>One Day Trips in Europe</h3>
-    <button class="go-to-all-europe-btn" @click="updateFilterPage('Europe')">
-      See All
-    </button>
+    <div class="trips-by flex space-between">
+      <h3>One Day Trips in Europe</h3>
+      <button class="go-to-all-europe-btn" @click="updateFilterPage('Europe')">
+        See All
+      </button>
+    </div>
     <trip-list :trips="europeTripsForDisplay" @emitFav="toggleFav" />
-
-    <h3>Check Out Our Extreme Trips</h3>
-    <button class="see-all-btn" @click="toggleShowTrips('Extreme')">
-      See All
-    </button>
+    <div class="trips-by flex space-between">
+      <h3>Check Out Our Extreme Trips</h3>
+      <button class="see-all-btn" @click="toggleShowTrips('Extreme')">
+        See All
+      </button>
+    </div>
     <trip-list :trips="difficultTripsForDisplay" @emitFav="toggleFav" />
-
-    <h3>Top Mountain Trips</h3>
-    <button class="see-all-btn" @click="updateFilterPage('mountain')">
-      See All
-    </button>
+    <div class="trips-by flex space-between">
+      <h3>Top Mountain Trips</h3>
+      <button class="see-all-btn" @click="updateFilterPage('mountain')">
+        See All
+      </button>
+    </div>
     <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
-
-    <h3>Top Forest Trips</h3>
-    <button class="see-all-btn" @click="updateFilterPage('forest')">
-      See All
-    </button>
+    <div class="trips-by flex space-between">
+      <h3>Top Forest Trips</h3>
+      <button class="see-all-btn" @click="updateFilterPage('forest')">
+        See All
+      </button>
+    </div>
     <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
-
-    <h3>Top City Trips</h3>
-    <button class="see-all-mountain-btn" @click="updateFilterPage('city')">
-      See All
-    </button>
+    <div class="trips-by flex space-between">
+      <h3>Top City Trips</h3>
+      <button class="see-all-mountain-btn" @click="updateFilterPage('city')">
+        See All
+      </button>
+    </div>
     <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
 
     <h3>Guides of the Month</h3>
@@ -59,9 +65,9 @@ export default {
   methods: {
     updateFilterPage(param) {
       console.log("param", param);
-       this.filterBy.type = param;
-        this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
-        this.$router.push("/trip");
+      this.filterBy.type = param;
+      this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
+      this.$router.push("/trip");
 
       // if (param === "Europe" || "USA") {
       //   this.filterBy.region = param;

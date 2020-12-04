@@ -27,6 +27,9 @@ export default {
       type: "setFilterBy",
         filterBy,
       });
+       this.$store.dispatch({
+        type: "loadTrips",
+      });
     },
   },
   computed: {
