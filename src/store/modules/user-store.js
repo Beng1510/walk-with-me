@@ -2,7 +2,7 @@ import { userService } from "../../services/user-service.js";
 
 var defaultUser = {
     _id: "5fc531cfba5fd6d904aad38a",
-    name: "Shuki Locali",
+    name: "Charlie McBride",
     favoriteTrips: [
         {
             _id: "5fc538bcba5fd6d904aad393",
@@ -52,7 +52,7 @@ var defaultGuide = {
                 rate: 5,
                 reviewByUser: {
                     _id: "5fc531cfba5fd6d904aad38a",
-                    userName: "Shuki Locali",
+                    userName: "Charlie McBride",
                     imgUrl: "img.jpg"
                 }
             }
@@ -67,7 +67,7 @@ var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
 else {
 
-    userService.login({ name: "Shuki Locali", password: "123456" }).then(user => localLoggedinUser = user)
+    userService.login({ name: "Charlie McBride", password: "123456" }).then(user => localLoggedinUser = user)
    
     // localLoggedinUser = defaultUser
 
