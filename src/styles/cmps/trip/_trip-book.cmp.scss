@@ -1,10 +1,29 @@
 .trip-book {
-    max-width: 45vw;
+    @include bordered-box;
+    padding: 2rem;
+    margin-block-end: 1.25rem;
+
+    label {
+        margin-block-end: .75em;
+    }
+
+    button {
+        margin: 0;
+    }
+
+    .specialReq, .el-input-number {
+        border: .5px solid $clr5;
+        border-radius: 15px;
+        width: 100%;
+        margin-block-end: 1.25rem;
+        line-height: 38px;
+        overflow: hidden;
+    }
 
     .specialReq {
-        border-radius: 15px;
-        padding: .5rem 1rem;
-        min-width: 40ch;
-        border: .5px solid $clr5;
+        padding: .5rem;
+    }
+    .el-input-number__decrease:hover, .el-input-number__increase:hover {
+        color: #409EFF;
     }
 }
