@@ -12,8 +12,6 @@
     <div class="details">
       <h2 class="trip-preview-title">{{ this.trip.name }}</h2>
       <div class="trip-preview-trip-details">
-    
-
         <p class="date">{{ getDateString }}</p>
         <p class="duration">{{ this.trip.duration }}</p>
         <div class="booking-info flex space-between align-center ">

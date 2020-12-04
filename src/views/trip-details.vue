@@ -13,35 +13,40 @@
     <div class="main-grid">
       <div class="start">
         <div class="info-trip">
-          <h3>{{ trip.totalBooked }}/10 signed</h3>
-          <h3>Difficulty: {{ trip.difficulty }}/5</h3>
-          <h3>{{ trip.duration }}</h3>
-          <h3>{{ trip.region }}</h3>
+          <h3><i class="fas fa-user-friends"></i> {{ trip.totalBooked }}/10 signed</h3>
+          <h3><i class="fas fa-dumbbell"></i> Difficulty: {{ trip.difficulty }}/5</h3>
+          <h3><i class="fas fa-hourglass"></i> {{ trip.duration }}</h3>
+          <h3><i class="fas fa-map-marked"></i> {{ trip.region }}</h3>
         </div>
 
         <div class="about-trip">
           <p v-for="(desc, idx) in this.trip.description" :key="idx">
             {{ desc }}
           </p>
-          <div v-if="this.filterdBookings">Already Booked:</div>
+        </div>
+           <div v-if="this.filterdBookings" class="booked-by">
+             <h3>Already Booked:</h3>
           <ul>
-            <li v-for="booking in this.filterdBookings" :key="booking._id">
-              {{ booking.user.name }} - {{ booking.peopleToSign }} Tickets
-              Booked
+            <li v-for="booking in this.filterdBookings" :key="booking._id" class="user-booked flex">
               <img
                 class="trip-details-guide-img profile-img-s"
                 :src="require('@/assets/img/users/' + booking.user.imgUrl)"
               />
+              <p>
+              <span class="bold">{{ booking.user.name }}</span> - {{ booking.peopleToSign }} Tickets
+              Booked
+              </p>
             </li>
           </ul>
-        </div>
+          </div>
 
         <div class="map">
+          <h3>Where To</h3>
           <GmapMap
             :center="mapPos"
             :zoom="12"
             map-type-id="terrain"
-            style="width: 600px; height: 400px"
+            style="width: 100%; height: 400px; border-radius: 10px; overflow: hidden;"
           >
             <GmapMarker
               :position="mapPos"
@@ -54,10 +59,10 @@
       </div>
 
       <div class="end">
-        {{ bookedMsg }}
+       <h2>{{ bookedMsg }}</h2>
         <trip-book :trip="trip" :user="loggedInUser" @bookTrip="bookTrip" />
         <div class="about-guide">
-          <h1>Meet Your Guide</h1>
+          <h2>Meet Your Guide</h2>
           <guide-preview :guide="this.guide" />
           <guide-review :guideId="trip.aboutGuide._id" :user="loggedInUser" />
         </div>

@@ -2,10 +2,17 @@
   <section v-if="trip" class="trip-book flex column">
     <h3>Price: ${{trip.price}}</h3>
     <form @submit.prevent="emitBook" class=" flex column" v-if="isBooked">
-      <label for="peopleToSign"
-        >How many hikers?
+      <label for="specialReq">Any special requests?</label>
+        <textarea
+          class="specialReq"
+          rows="2"
+          v-model="booking.specialReq"
+          id="specialReq"
+          name="specialReq"
+          placeholder="e.g.: I want a vegan option for lunch"
+        />
+      <label for="peopleToSign">How many hikers?</label>
         <el-input-number
-          size="small"
           class="trip-book-peopleToSign"
           v-model.number="booking.peopleToSign"
           id="peopleToSign"
@@ -14,18 +21,6 @@
           :max="openSlotsForHikers"
           @change="totalPrice"
         />
-      </label>
-      <label for="specialReq"
-        >Any special requests?
-        <input
-          class="specialReq"
-          type="text"
-          v-model="booking.specialReq"
-          id="specialReq"
-          name="specialReq"
-          placeholder="e.g.: I want a vegan option for lunch"
-        />
-      </label>
       <p>Total: ${{ booking.sum }}</p>
       <button>Book Trip</button>
     </form>
