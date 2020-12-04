@@ -25,9 +25,9 @@
          </router-link
         >
         <router-link to="/user/:id" v-if="!user.isGuide">
-          {{ userName(user) }}</router-link
+          {{ userName(user) }} •</router-link
         >
-        •
+        
 
         <router-link to="/back-office" v-if="user.isGuide">
           {{ userName(user) }}'s Office</router-link>
