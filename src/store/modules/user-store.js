@@ -33,7 +33,7 @@ var defaultUser = {
 var defaultGuide = {
 
     _id: "5fc531cfba5fd6d904aad389",
-    name: "Puki Globali Grosman",
+    name: "Arnold Wellington",
     favoriteTrips: [],
     profileImgUrl: "",
     isGuide: true,
@@ -87,6 +87,7 @@ export const userStore = {
     },
     getters: {
         loggedinUser(state) {
+            console.log('state???', state);
             return state.loggedinUser
         },
         loggedinGuide(state) {
@@ -111,6 +112,8 @@ export const userStore = {
     },
     mutations: {
         setUser(state, { user }) {
+            console.log('user?!!!!?', user);
+
             state.loggedinUser = user;
         },
         setUsers(state, { users }) {
@@ -138,6 +141,7 @@ export const userStore = {
     actions: {
         async login(context, { userCred }) {
             const user = await userService.login(userCred);
+            console.log('user??????', user);
             context.commit({ type: 'setUser', user })
             return user;
         },

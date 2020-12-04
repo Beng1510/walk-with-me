@@ -1,6 +1,12 @@
 <template>
   <section class="main-layout" id="app">
-    <main-header :user="defaultUserForDisplay" :class="{ dark: !homePage }" />
+    <main-header 
+      :user="defaultUserForDisplay"
+      :class="{ dark: !homePage }"
+    />
+    <!-- <main-header
+      :class="{ dark: !homePage }"
+    /> -->
     <hero v-if="homePage" @filterBy="updateFilter" />
     <main>
       <router-view />
@@ -20,19 +26,26 @@ export default {
     mainFooter,
     hero,
   },
+  // data() {
+  //   // return {
+  //   //   defaultUserForDisplay: null,
+  //   // };
+  // },
 
   methods: {
     updateFilter(filterBy) {
    
       this.$store.commit({
-      type: "setFilterBy",
+        type: "setFilterBy",
         filterBy,
       });
-      this.$store.dispatch({
+        this.$store.dispatch({
       type: "loadTrips",
-        filterBy,
-      });
+    });
     },
+    // async getDefaultUserForDisplay() {
+    //   return this.defaultUserForDisplay;
+    // },
   },
   computed: {
     defaultUserForDisplay() {
@@ -49,9 +62,11 @@ export default {
       type: "loadTrips",
     });
 
-    // console.log('this.defaultUserForDisplay.isGuide:', this.defaultUserForDisplay.isGuide)
+    
+    // getDefaultUserForDisplay = this.$store.getters.loggedinUser;
+    // console.log("this.defaultUserForDisplay:", this.defaultUserForDisplay);
     // if(this.defaultUserForDisplay.isGuide){
-      
+
     //   console.log("im aguide");
     // }
   },

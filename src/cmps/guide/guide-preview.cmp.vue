@@ -1,11 +1,13 @@
 <template>
-  <section v-if="guide" class="guide-preview preview-card flex column align-center" @click="goToGuide(guide._id)">
+  <section v-if="guide" class="guide-preview preview-card" @click="goToGuide(guide._id)">
     <img
       class="profile-img-m"
       :src="require('@/assets/img/users/' + guide.profileImgUrl)"
     />
+    <div class="guide-info">
       <h2>{{ guide.name }}</h2>
       <p><i class="fas fa-star trip-star-rate"></i> {{ rateGuide }} ({{rateAmount}}) </p>
+    </div>
   </section>
 </template>
 

@@ -16,8 +16,9 @@ export default {
 
   computed: {
     tripsForDisplay() {
-      return this.$store.getters.tripsForDisplay;
-    }
+      const allTrips = this.$store.getters.tripsForDisplay;
+      return allTrips
+    },
   },
 
   methods: {
@@ -25,7 +26,12 @@ export default {
       
       this.$emit("filterBy", filter);
     }
-  }
+  },
+   created() {
+    this.$store.dispatch({
+      type: "loadTrips",
+    });
+  },
 };
 </script>
 

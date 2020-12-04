@@ -1,12 +1,12 @@
 .preview-card {
   position: relative;
   border-radius: 15px;
-  box-shadow: 0 6px 10px $clr5;
   cursor: pointer;
-  transition: box-shadow 0.4s ease-in-out;
+  transition: transform 0.24s ease-out;
 
   &:hover {
-    box-shadow: 0 6px 10px $clr4;
+    transform: translateY(-3px);
+    transform: scale(1.02);
   }
 
   h2 {
@@ -15,11 +15,11 @@
 
   h2,
   p {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.2em;
   }
 
   & .details {
-    padding: 0.6em 1em;
+    // padding: 0.6em 1em;
     width: 100%;
 
     display: inline-block;
@@ -30,6 +30,9 @@
 
     hr {
       margin-top: 0;
+      margin-bottom: .55rem;
+      color: $clr5;
+      opacity: .35;
     }
 
     .guide-info, .date {
@@ -42,7 +45,7 @@
   }
 
   .trip-preview-img {
-    border-radius: 15px 15px 0 0;
+    border-radius: 15px;
     height: 200px;
   }
 
@@ -51,7 +54,7 @@
     top: 0.5rem;
     right: 0.75rem;
     display: inline-block;
-    font-size: em(20px);
+    font-size: 1.85em;
   }
 
 }
