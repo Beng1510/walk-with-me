@@ -4,7 +4,7 @@
       <h2 class="title">Reviews</h2>
       <button @click="showAddBtn">Add</button>
     </div>
-    <!-- <form @submit.prevent="handleReview" v-show="isAdding">
+    <form @submit.prevent="handleReview" v-show="isAdding">
       <input
         type="text"
         v-model="newReview.txt"
@@ -19,7 +19,7 @@
       />
         <button>Submit</button>
         <button type="button" @click.prevent="cancelReview">Cancel</button>
-    </form> -->
+    </form>
     <ul class="review-container">
       <li class="review-card" v-for="review in reviews" :key="review._id">
         <p>{{ review.txt }}</p>
