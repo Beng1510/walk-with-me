@@ -22,6 +22,7 @@ export default {
 
   methods: {
     emitFilter(filter) {
+      
       this.$emit("filterBy", filter);
     }
   }

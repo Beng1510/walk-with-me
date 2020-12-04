@@ -34,6 +34,7 @@
                 class="trip-details-guide-img profile-img-s"
                 :src="require('@/assets/img/users/' + booking.user.imgUrl)"
               />
+              />
             </li>
           </ul>
         </div>
@@ -85,6 +86,7 @@ export default {
       filterdBookings: null,
       isBooked: false,
       guide: null,
+      user: null,
     };
   },
 

@@ -68,6 +68,7 @@ if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
 else {
 
     userService.login({ name: "Shuki Locali", password: "123456" }).then(user => localLoggedinUser = user)
+   
     // localLoggedinUser = defaultUser
 
 }

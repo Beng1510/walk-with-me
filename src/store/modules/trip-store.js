@@ -98,6 +98,7 @@ export const tripStore = {
     },
     actions: {
         async loadTrips({ getters, commit }) {
+            
             const trips = await tripService.query(getters.filterBy)
             let types = {};
             trips.forEach(trip => {

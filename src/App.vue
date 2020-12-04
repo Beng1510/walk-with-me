@@ -23,14 +23,20 @@ export default {
 
   methods: {
     updateFilter(filterBy) {
+   
       this.$store.commit({
       type: "setFilterBy",
+        filterBy,
+      });
+      this.$store.dispatch({
+      type: "loadTrips",
         filterBy,
       });
     },
   },
   computed: {
     defaultUserForDisplay() {
+      
       return this.$store.getters.loggedinUser;
     },
 
@@ -43,11 +49,11 @@ export default {
       type: "loadTrips",
     });
 
-    console.log('this.defaultUserForDisplay.isGuide:', this.defaultUserForDisplay.isGuide)
-    if(this.defaultUserForDisplay.isGuide){
+    // console.log('this.defaultUserForDisplay.isGuide:', this.defaultUserForDisplay.isGuide)
+    // if(this.defaultUserForDisplay.isGuide){
       
-      console.log("im aguide");
-    }
+    //   console.log("im aguide");
+    // }
   },
 };
 </script>

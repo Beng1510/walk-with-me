@@ -80,6 +80,7 @@ export default {
     },
 
     checkIsFav() {
+      
       const user = this.getCurrUser;
       const userFavs = user.favoriteTrips;
       let isInFav = userFavs.some((userFav) =>
@@ -126,6 +127,9 @@ export default {
   },
 
   async created() {
+
+    
+    console.log('this.trip:', this.isFav)
     this.trip = await tripService.getTripById(this.tripId);
     this.checkIsFav();
     this.getGuideRate(this.trip);
