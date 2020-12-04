@@ -7,8 +7,20 @@ import { bookingStore } from './modules/booking-store.js'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    isLoading: false
+  },
+  getters: {
+    isLoading(state) {
+        return state.isLoading
+    }
+},
+mutations: {
+  setIsLoading(state, { isLoading }) {
+      console.log('is Loading?:', isLoading);
+      state.isLoading = isLoading
+  }
+},
   actions: {},
   modules: {
     tripStore,

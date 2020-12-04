@@ -68,10 +68,8 @@ export default {
       });
     },
     toggleFav(trip) {
-      
-
       this.$store.dispatch({
-        type: "saveTrip",
+        type: "toggleFavs",
         trip,
       });
     },
@@ -121,6 +119,7 @@ export default {
     this.$store.dispatch({
       type: "loadUsers",
     });
+     this.user = this.$store.getters.loggedinUser;
   },
   mounted() {
     this.user = this.$store.getters.loggedinUser;

@@ -2,7 +2,7 @@ import { userService } from "../../services/user-service.js";
 
 var defaultUser = {
     _id: "5fc531cfba5fd6d904aad38a",
-    name: "Shuki Locali",
+    name: "Charlie McBride",
     favoriteTrips: [
         {
             _id: "5fc538bcba5fd6d904aad393",
@@ -33,7 +33,7 @@ var defaultUser = {
 var defaultGuide = {
 
     _id: "5fc531cfba5fd6d904aad389",
-    name: "Puki Globali Grosman",
+    name: "Arnold Wellington",
     favoriteTrips: [],
     profileImgUrl: "",
     isGuide: true,
@@ -52,7 +52,7 @@ var defaultGuide = {
                 rate: 5,
                 reviewByUser: {
                     _id: "5fc531cfba5fd6d904aad38a",
-                    userName: "Shuki Locali",
+                    userName: "Charlie McBride",
                     imgUrl: "img.jpg"
                 }
             }
@@ -67,8 +67,10 @@ var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
 else {
 
-    userService.login({ name: "Shuki Locali", password: "123456" }).then(user => localLoggedinUser = user)
-    // localLoggedinUser = defaultUser
+    userService.login({ name: "Charlie McBride", password: "123456" })
+        .then(user => localLoggedinUser = user)
+        // .then(context.commit({ type: 'setUser', localLoggedinUser }))
+
 
 }
 
@@ -86,6 +88,7 @@ export const userStore = {
     },
     getters: {
         loggedinUser(state) {
+            console.log('state???', state);
             return state.loggedinUser
         },
         loggedinGuide(state) {
@@ -110,6 +113,8 @@ export const userStore = {
     },
     mutations: {
         setUser(state, { user }) {
+            console.log('user?!!!!?', user);
+
             state.loggedinUser = user;
         },
         setUsers(state, { users }) {
@@ -137,6 +142,7 @@ export const userStore = {
     actions: {
         async login(context, { userCred }) {
             const user = await userService.login(userCred);
+            console.log('user??????', user);
             context.commit({ type: 'setUser', user })
             return user;
         },

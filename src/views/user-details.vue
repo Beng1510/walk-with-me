@@ -20,14 +20,16 @@
             <th>Trip Name</th>
             <th>Guide Name</th>
             <th>Status</th>
+            <th>Cancel</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="booking in bookingToShow" :key="booking._id">
+        <tbody v-for="booking in bookingToShow" :key="booking._id">
+          <booking-list :booking="booking" :key="booking._id" /> 
+          <!-- <tr v-for="booking in bookingToShow" :key="booking._id">
             <td scope="row">{{ booking.trip.name }}</td>
             <td>{{ booking.guide.name }}</td>
             <td>{{ booking.status }}</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
@@ -39,6 +41,7 @@
 import { userService } from "../services/user-service.js";
 import { bookingService } from "../services/booking-service.js";
 import tripList from "../cmps/trip/trip-list.cmp.vue";
+import bookingList from "../cmps/basic/booking-list.vue";
 
 export default {
   name: "user-details",
@@ -71,6 +74,7 @@ export default {
   },
   components: {
     tripList,
+    bookingList
   },
 };
 </script>

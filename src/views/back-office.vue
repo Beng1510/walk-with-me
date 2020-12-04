@@ -15,8 +15,10 @@
           <th>Approve Booking</th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="booking in bookingToShow" :key="booking._id">
+      <tbody v-for="booking in bookingToShow" :key="booking._id">
+        <!-- <approve-booking :bookings="bookingToShow" :key="booking._id" /> -->
+        <approve-booking :booking="booking" :key="booking._id" />
+        <!-- <tr v-for="booking in bookingToShow" :key="booking._id">
           <td scope="row">{{ booking.trip.name }}</td>
           <td>{{ booking.user.name }}</td>
           <td>{{ booking.peopleToSign }}</td>
@@ -30,7 +32,7 @@
               Reject
             </button>
           </td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
 
@@ -42,7 +44,7 @@
 import { userService } from "../services/user-service.js";
 import { bookingService } from "../services/booking-service.js";
 import addTrip from "../cmps/trip/add-trip.cmp.vue";
-
+import approveBooking from '../cmps/basic/approve-booking.vue'
 export default {
   name: "back-office",
   data() {
@@ -108,6 +110,7 @@ export default {
   },
   components: {
     addTrip,
+    approveBooking
   },
 };
 </script>

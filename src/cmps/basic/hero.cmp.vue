@@ -16,15 +16,22 @@ export default {
 
   computed: {
     tripsForDisplay() {
-      return this.$store.getters.tripsForDisplay;
-    }
+      const allTrips = this.$store.getters.tripsForDisplay;
+      return allTrips
+    },
   },
 
   methods: {
     emitFilter(filter) {
+      console.log('filterhero',filter);
       this.$emit("filterBy", filter);
     }
-  }
+  },
+   created() {
+    this.$store.dispatch({
+      type: "loadTrips",
+    });
+  },
 };
 </script>
 

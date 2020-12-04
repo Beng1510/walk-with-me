@@ -69,7 +69,7 @@ export default {
 
   methods: {
     emitFav(trip) {
-
+console.log('emiting');
       this.isFav = !this.isFav;
       this.$emit("emitFav", trip);
       
