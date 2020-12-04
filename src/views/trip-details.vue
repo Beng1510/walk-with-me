@@ -8,12 +8,10 @@
         :src="require('../assets/img/trips/' + trip.imgUrls[n - 1])"
       />
     </div>
- <h1>{{ trip.name }}</h1>
-  
+    <h1>{{ trip.name }}</h1>
+
     <div class="main-grid">
-
       <div class="start">
-
         <div class="info-trip">
           <h3>{{ trip.totalBooked }}/10 signed</h3>
           <h3>Difficulty: {{ trip.difficulty }}/5</h3>
@@ -25,7 +23,7 @@
           <p v-for="(desc, idx) in this.trip.description" :key="idx">
             {{ desc }}
           </p>
-           <div v-if="this.filterdBookings">Already Booked:</div>
+          <div v-if="this.filterdBookings">Already Booked:</div>
           <ul>
             <li v-for="booking in this.filterdBookings" :key="booking._id">
               {{ booking.user.name }} - {{ booking.peopleToSign }} Tickets
@@ -54,8 +52,7 @@
           </GmapMap>
         </div>
       </div>
-        </div>
-        
+
       <div class="end">
         {{ bookedMsg }}
         <trip-book :trip="trip" :user="loggedInUser" @bookTrip="bookTrip" />
@@ -65,7 +62,7 @@
           <guide-review :guideId="trip.aboutGuide._id" :user="loggedInUser" />
         </div>
       </div>
-    
+    </div>
   </section>
 </template>
 
@@ -93,8 +90,6 @@ export default {
       // console.log('bookingssssssss:', booking)
 
       this.$store.dispatch({ type: "addBooking", booking });
-
-
     },
     getBookingByUser(user) {
       const bookings = this.$store.getters.bookings;
