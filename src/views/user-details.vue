@@ -5,14 +5,14 @@
       :src="require('@/assets/img/users/' + user.profileImgUrl)"
     />
    
-    <h2>Hi {{ user.name }}, Welcome Back</h2>
+    <h2 user-titles>Hi {{ user.name }}, Welcome Back</h2>
     <br />
-    <h3>Favorite Trips</h3>
+    <h3 class="user-titles">Favorite Trips</h3>
     <trip-list v-if="user" :trips="user.favoriteTrips" @emitFav="toggleFav" />
 
     <hr />
-      <h3>Your Bookings</h3>
-    <div class="user-bookings-list" v-if="bookingToShow">
+      <h3 class="user-titles">Your Bookings</h3>
+    <div class="card-grid " v-if="bookingToShow">
 
       <!-- <table class="user-details-table">
         <thead>
@@ -26,7 +26,7 @@
         
         <div class="flex column" v-for="booking in bookingToShow" :key="booking._id">
 
-          <booking-list :booking="booking" :key="booking._id" /> 
+          <booking-list :booking="booking" :key="booking._id" class="d"  /> 
           <!-- <tr v-for="booking in bookingToShow" :key="booking._id">
             <td scope="row">{{ booking.trip.name }}</td>
             <td>{{ booking.guide.name }}</td>

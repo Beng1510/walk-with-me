@@ -1,5 +1,6 @@
 <template>
-<div class="flex column"> 
+ 
+<div class="flex column "> 
   <!-- <tr> -->
     <!-- <td scope="row">{{ booking.trip.name }}</td> -->
     <!-- <td>{{ booking.guide.name }}</td> -->
@@ -7,6 +8,7 @@
     <!-- <td> -->
       <!-- <trip-list :trips="tripsToShow" @emitFav="toggleFav" /> -->
 <trip-preview
+      calss="card=grid"
       v-for="trip in tripsToShow"
       :key="trip._id"
       :tripId="trip._id"
@@ -21,6 +23,7 @@
     <!-- </td> -->
   <!-- </tr> -->
 </div>
+
 </template>
 
 <script>
