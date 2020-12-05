@@ -57,9 +57,9 @@ export default {
     });
     // } else {
 
-      // socketService.on("sendBooking", (booking) => {
+      // socketService.on("sendApproveBooking", (booking) => {
       //   console.log('bookingdddddd:', this.booking)
-      //   this.msg = `${this.booking.name}  booked new trip now`;
+      //   this.msg = `The trip in the name of ${this.booking.trip.name} has been approved for you!`;
       //   setTimeout(() => {
       //     this.closeMgs();
       //   }, 3500);
