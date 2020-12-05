@@ -48,7 +48,8 @@ export default {
 
     // if(){
     socketService.on("sendBooking", (booking) => {
-      this.msg = `${this.user.name}  booked new trip now`;
+      this.msg = `${this.user.name}  booked new trip now, pending approval`;
+
       setTimeout(() => {
         this.closeMgs();
       }, 3500);

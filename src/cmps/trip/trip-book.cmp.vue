@@ -1,26 +1,26 @@
 <template>
   <section v-if="trip" class="trip-book flex column">
-    <h3>Price: ${{trip.price}}</h3>
-    <form @submit.prevent="emitBook" class=" flex column" v-if="isBooked">
+    <h3>Price: ${{ trip.price }}</h3>
+    <form @submit.prevent="emitBook" class="flex column" v-if="isBooked">
       <label for="specialReq">Any special requests?</label>
-        <textarea
-          class="specialReq"
-          rows="2"
-          v-model="booking.specialReq"
-          id="specialReq"
-          name="specialReq"
-          placeholder="e.g.: I want a vegan option for lunch"
-        />
+      <textarea
+        class="specialReq"
+        rows="2"
+        v-model="booking.specialReq"
+        id="specialReq"
+        name="specialReq"
+        placeholder="e.g.: I want a vegan option for lunch"
+      />
       <label for="peopleToSign">How many hikers?</label>
-        <el-input-number
-          class="trip-book-peopleToSign"
-          v-model.number="booking.peopleToSign"
-          id="peopleToSign"
-          name="peopleToSign"
-          :min="1"
-          :max="openSlotsForHikers"
-          @change="totalPrice"
-        />
+      <el-input-number
+        class="trip-book-peopleToSign"
+        v-model.number="booking.peopleToSign"
+        id="peopleToSign"
+        name="peopleToSign"
+        :min="1"
+        :max="openSlotsForHikers"
+        @change="totalPrice"
+      />
       <p>Total: ${{ booking.sum }}</p>
       <button class="action">Book Trip</button>
     </form>
@@ -77,17 +77,14 @@ export default {
 
   methods: {
     emitBook() {
-      
       this.$emit("bookTrip", this.booking);
-
-      
 
       eventBusService.$emit(SHOW_MSG, {
         txt: "Trip Booked!",
         subTxt: "Please wait for guide's final approval",
         type: "success",
       });
-      this.updateTotalBooked()
+      this.updateTotalBooked();
     },
 
     totalPrice() {
@@ -98,13 +95,16 @@ export default {
     },
     updateTotalBooked() {
       let totalBooked = this.booking.trip.totalBooked;
+      console.log("totalBooked after", totalBooked);
+
       const peopleToSign = this.booking.peopleToSign;
       totalBooked += peopleToSign;
       this.$store.dispatch({
         type: "updateTotalBooked",
         id: this.trip._id,
-        totalBooked
+        totalBooked: JSON.parse(JSON.stringify(totalBooked)),
       });
+      console.log("totalBooked after", totalBooked);
     },
     getBookingByUser(user) {
       const bookings = this.$store.getters.bookings;
@@ -119,7 +119,7 @@ export default {
       });
     },
   },
- 
+
   created() {
     this.getBookingByUser(this.user);
   },

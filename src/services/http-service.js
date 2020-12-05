@@ -9,6 +9,16 @@ var axios = Axios.create({
     withCredentials: true
 });
 
+axios.interceptors.request.use(config => {
+    NProgress.start()
+    return config
+  })
+
+  axios.interceptors.response.use(response => {
+    NProgress.done()
+    return response
+  })
+
 export const httpService = {
     get(endpoint, data) {
         

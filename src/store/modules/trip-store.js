@@ -85,6 +85,7 @@ export const tripStore = {
         addTrip(state, { trip }) {
             state.trips.push(trip)
         },
+
         setGuideId(state, { guideId }) {
             state.guideId = guideId
         },
@@ -112,9 +113,10 @@ export const tripStore = {
             commit({ type: 'setTrips', trips })
         },
         async saveTrip({ commit }, { trip }) {
+            const actionType = (trip._id) ? 'addTrip' : 'updateTrip';
             const savedTrip = await tripService.save(trip);
-            commit({ type: 'addTrip', trip: savedTrip })
-
+            commit({ type: actionType, trip: savedTrip })
+            
         },
         // async removeTrip({ commit }, payload) {
         //     await tripService.remove(payload.tripId)

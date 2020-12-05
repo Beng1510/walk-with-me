@@ -9,6 +9,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 // import VueSocketIO from 'vue-socket.io'
 var _ = require('lodash');
 
+// import Loading from 'vue-loading-overlay';
+// import 'vue-loading-overlay/dist/vue-loading.css';
+// Vue.component('loading-overlay', Loading)
+
 // const BASE_URL = process.env.NODE_ENV === 'production'
 //     ? '/api/'
 //     : '//localhost:3030'
