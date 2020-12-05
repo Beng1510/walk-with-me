@@ -67,9 +67,10 @@ var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
 else {
 
-    userService.login({ name: "Charlie McBride", password: "123456" }).then(user => localLoggedinUser = user)
-   
-    // localLoggedinUser = defaultUser
+    userService.login({ name: "Charlie McBride", password: "123456" })
+        .then(user => localLoggedinUser = user)
+    // .then(context.commit({ type: 'setUser', localLoggedinUser }))
+
 
 }
 
@@ -170,6 +171,8 @@ export const userStore = {
             context.commit({ type: 'setReviews', reviews })
         },
         async saveReview({ commit }, { review, guideId, user }) {
+            console.log('review???', review);
+
             const guide = await userService.getUserById(guideId);
             const sum = guide.guideInfo.reviews.reduce(
                 (acc, item) => acc + item.rate,

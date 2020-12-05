@@ -34,7 +34,9 @@ export const tripStore = {
         },
         cityTripsForDisplay(state) {
             const cityTrips = state.trips.filter(trip => trip.type === "city")
-            return cityTrips.slice(0, 4)
+            let random = cityTrips.sort(() => .5 - Math.random()).slice(0,4)
+            return random
+            // return cityTrips.slice(0, 4)
         },
         difficultTripsForDisplay(state) {
             if (state.showBy === "Extreme" && state.isShowAll === true) {
@@ -49,7 +51,9 @@ export const tripStore = {
                 return state.trips.filter(trip => trip.region === "Europe")
             } else {
                 const europeTrips = state.trips.filter(trip => trip.region === "Europe")
-                return europeTrips.slice(0, 4)
+                let random = europeTrips.sort(() => .5 - Math.random()).slice(0,4)
+            return random
+                // return europeTrips.slice(0, 4)
             }
         },
         usaTripsForDisplay(state) {

@@ -1,7 +1,7 @@
 <template>
   <section class="hero full flex column align-center justify-center">
-    <h1 class="hero-txt head">Dream, Explore, Discover</h1>
-    <h2 class="hero-txt small">Adventure awaits, let's find it together</h2>
+    <h1 class="hero-txt head">Adventure awaits, let's find it together</h1>
+    <h2 class="hero-txt small">Choose your destination, we'll provide the best guides</h2>
     <trip-filter @filterBy="emitFilter" :trips="tripsForDisplay" />
   </section>
 </template>

@@ -11,27 +11,30 @@
     <trip-list v-if="user" :trips="user.favoriteTrips" @emitFav="toggleFav" />
 
     <hr />
-    <div class="user-bookings-list" v-if="bookingToShow">
       <h3>Your Bookings</h3>
+    <div class="user-bookings-list" v-if="bookingToShow">
 
-      <table class="user-details-table">
+      <!-- <table class="user-details-table">
         <thead>
           <tr>
             <th>Trip Name</th>
-            <th>Guide Name</th>
+            <!<th>Guide Name</th>
             <th>Status</th>
-            <th>Cancel</th>
-          </tr>
-        </thead>
-        <tbody v-for="booking in bookingToShow" :key="booking._id">
+            <th>Cancel</th> -->
+          <!-- </tr> --> 
+        <!-- </thead> -->
+        
+        <div class="flex column" v-for="booking in bookingToShow" :key="booking._id">
+
           <booking-list :booking="booking" :key="booking._id" /> 
           <!-- <tr v-for="booking in bookingToShow" :key="booking._id">
             <td scope="row">{{ booking.trip.name }}</td>
             <td>{{ booking.guide.name }}</td>
             <td>{{ booking.status }}</td>
           </tr> -->
-        </tbody>
-      </table>
+        </div>
+        
+      <!-- </table> -->
     </div>
     <hr />
   </section>
@@ -65,6 +68,7 @@ export default {
       const bookings = this.$store.getters.bookings;
       return bookings.filter((booking) => booking.user._id === this.user._id);
     },
+   
   },
   created() {
     this.user = this.$store.getters.loggedinUser;

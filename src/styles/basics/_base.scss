@@ -42,3 +42,86 @@ ul {
 li {
     list-style: none;
 }
+
+button {
+    background-color: transparent;
+    border: 1px solid $clr3;
+    border-radius: 15px;
+    padding: 10px 15px;
+    color: $clr3;
+    font-family: openSansReg;
+    font-size: rem(16px);
+    transition: all .4s ease-in-out;
+    cursor: pointer;
+
+    &.action {
+        font-family: openSansBold;
+    }
+
+    &:hover {
+        background-color: $clr3;
+        color: $clr6;
+
+        &.action {
+            background-color: $primary;
+            border-color: $primary;
+        }
+    }
+
+    &:active {
+        transform: translateY(2px);
+    }
+
+    a:active {
+        color: $clr3;
+    }
+}
+
+.profile-img-s {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+}
+
+.profile-img-m {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
+.profile-img-l {
+    border-radius: 50%;
+    height: 350px;
+    width: 350px;
+    object-fit: cover;
+    margin: 1em;
+}
+
+.fa-star {
+    color: $primary;
+}
+
+.see-all-btn {
+    width: 40%;
+    margin-block: 1rem;
+}
+
+textarea {
+    font-family: openSansReg;
+    
+    &:focus {
+        -moz-outline-radius: 15px;
+    }
+}
+
+.all-trips-list {
+    h1 {
+        text-align: center;
+        font-size: 2rem;
+        font-family: montserratBold;
+        margin-block: 2rem;
+    }
+}
+
