@@ -2,23 +2,29 @@
   <section class="guide-reviews">
     <div class="reviews-header flex space-between align-center">
       <h2 class="title">Reviews</h2>
-      <button @click="showAddBtn">Add</button>
+      <button @click="showAddBtn" v-show="!isAdding" class="action">Add</button>
     </div>
-    <form @submit.prevent="handleReview" v-show="isAdding">
-      <input
-        type="text"
+
+    <form class="add flex column space-between" v-show="isAdding">
+      <star-rating 
+      v-model="newReview.rate" 
+      :increment="1" 
+      :star-size="25"
+      :rounded-corners="true"
+      active-color="#FF8A44"
+      :padding="1"
+      :active-on-click="true"
+      :clearable="true"/>
+
+      <textarea
         v-model="newReview.txt"
-        min="1"
-        max="5"
+        rows="4"
         placeholder="What do you think?"
       />
-      <input
-        type="number"
-        v-model.number="newReview.rate"
-        placeholder="Guide Rate (1-5)"
-      />
-        <button>Submit</button>
+      <div class="form-btns">
         <button type="button" @click.prevent="cancelReview">Cancel</button>
+        <button class="action" @click="handleReview">Submit</button>
+      </div>
     </form>
     <ul class="review-container">
       <li class="review-card" v-for="review in reviews" :key="review._id">
@@ -41,6 +47,7 @@
 
 <script>
 import { userService } from "../../services/user-service.js";
+import StarRating from 'vue-star-rating';
 
 export default {
   props: {
@@ -92,5 +99,8 @@ export default {
   async created() {
     this.$store.dispatch({ type: "loadReviews", guideId: this.guideId });
   },
+  components: {
+    StarRating
+  }
 };
 </script>

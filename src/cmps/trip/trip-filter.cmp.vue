@@ -10,7 +10,7 @@
             id="txt-input"
             v-model="filterBy.name"
             @input="emitFilter"
-            placeholder="Type to Search"
+            placeholder="e.g. Golan Heights"
           />
         </div>
         <div class="input flex column">
@@ -53,10 +53,10 @@
           </el-select>
         </div>
         <div class="input flex column">
-          <label for="dest-input">Trip Destination</label>
+          <label for="dest-input">Trip Region</label>
           <el-select
            v-model="filterBy.region"
-            placeholder="Select a Destination"
+            placeholder="Select a region"
             id="dest-input"
           >
             <el-option value="">All</el-option>
@@ -90,7 +90,6 @@ export default {
       filterBy: {
         name: "",
         type: "",
-        // location: "",
         region: "",
       },
       selected: "",

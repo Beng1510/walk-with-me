@@ -22,7 +22,7 @@
           @change="totalPrice"
         />
       <p>Total: ${{ booking.sum }}</p>
-      <button>Book Trip</button>
+      <button class="action">Book Trip</button>
     </form>
     <div v-else>You Are Already Booked For This Trip</div>
   </section>
