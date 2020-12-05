@@ -9,7 +9,7 @@
             class="txt-input"
             id="txt-input"
             v-model="filterBy.name"
-            @input="emitFilter"
+            @submit="emitFilter"
             placeholder="Type to Search"
           />
         </div>
@@ -20,18 +20,13 @@
             placeholder="Select a Type"
             id="type-input"
           >
-            <el-option
-              id="all-tag"
-              value=""
-              @select="emitFilter"
-             
-            >
-            </el-option>
+            <!-- <el-option id="all-tag" value="" @select="emitFilter" hidden> </el-option>  -->
+            <el-option id="all-tag" value="" @select="emitFilter" label="All"> </el-option> 
             <el-option
               id="mountain-tag"
               value="mountain"
               @select="emitFilter"
-              
+              label="Mountain"
               >Mountain
             </el-option>
 
@@ -39,14 +34,14 @@
               id="city-tag"
               value="city"
               @select="emitFilter"
-              
+              label="City"
               >City
             </el-option>
             <el-option
               id="forest-tag"
               value="forest"
               @select="emitFilter"
-             
+              label="Forest"
               >Forest
             </el-option>
           </el-select>
@@ -54,7 +49,7 @@
         <div class="input flex column">
           <label for="dest-input">Trip Destination</label>
           <el-select
-           v-model="filterBy.region"
+            v-model="filterBy.region"
             placeholder="Select a Destination"
             id="dest-input"
           >
@@ -103,15 +98,24 @@ export default {
       this.$emit("filterBy", filterByCopy);
     },
     updateFilterPage(filterBy) {
-      console.log('filterBy ???',filterBy);
+      console.log("filterBy ???", filterBy);
+      console.log("this.$route ???", this.$route);
+      if (this.$route.path === "/trip") {
+        const filterByCopy = JSON.parse(JSON.stringify(this.filterBy));
+
+        this.$emit("filterBy", filterByCopy);
+        this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
+      } else {
+        const filterByCopy = JSON.parse(JSON.stringify(this.filterBy));
+        this.$emit("filterBy", filterByCopy);
         this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
         this.$router.push("/trip");
+      }
     },
   },
   created() {
-    const filterObj = JSON.parse(JSON.stringify(this.$store.getters.filterBy))
-    this.filterBy = filterObj
-    
+    const filterObj = JSON.parse(JSON.stringify(this.$store.getters.filterBy));
+    this.filterBy = filterObj;
   },
 };
 </script>

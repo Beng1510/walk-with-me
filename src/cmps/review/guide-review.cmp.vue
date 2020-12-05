@@ -41,6 +41,7 @@
 
 <script>
 import { userService } from "../../services/user-service.js";
+import { utilService} from '../../services/util-service.js';
 
 export default {
   props: {
@@ -59,6 +60,7 @@ export default {
       newReview: {
         txt: "",
         rate: null,
+        _id: utilService.makeId(6),
         reviewByUser: {
           userName: this.user.name,
           imgUrl: this.user.profileImgUrl,

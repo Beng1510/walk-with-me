@@ -9,8 +9,8 @@
       <template v-show="!isLoggingIn">
          
         <div v-if="loggedUser" class="login-btns">
-          <button @click="loginSignUp('login')">Login</button>
-          <button @click="loginSignUp('signUp')">Sign Up</button>
+          <button v-if="!loggedUser" @click="loginSignUp('login')">Login</button>
+          <button v-if="!loggedUser" @click="loginSignUp('signUp')">Sign Up</button>
         </div>
         <template class="logout">
           <button @click="logout">Logout</button>
