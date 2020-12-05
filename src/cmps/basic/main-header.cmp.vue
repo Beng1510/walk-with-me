@@ -2,10 +2,11 @@
   <section class="main-header full main-layout">
     <div class="main-header-content flex space-between align-center">
       <div class="logo flex align-center">
-        <router-link to="/"><h2 class="logo">Walk With Me</h2></router-link>
+        <router-link to="/"><img v-if="isHome" src="@/assets/logo/logo-text-OW.svg" class="logo" />
+        <img v-else src="@/assets/logo/logo-O.svg" class="logo" />
+        </router-link>
       </div>
       <user-msg :user="this.user"></user-msg>
-      <!-- <user-msg ></user-msg> -->
       <template v-show="!isLoggingIn">
         <div v-if="loggedUser" class="login-btns">
           <button v-if="!loggedUser" @click="loginSignUp('login')">Login</button>
@@ -42,7 +43,17 @@ export default {
     user: {
       type: Object,
     },
+    isHome: {
+      type: Boolean
+    }
   },
+
+  data() {
+   return {
+      imgSrc: ''
+   }
+  },
+
   methods: {
     userName(user) {
       var loggedUser = this.user.name;
@@ -53,8 +64,6 @@ export default {
       user.isGuide = !user.isGuide;
       if (user.isGuide) {
         socketService.setup();
-        // socketService.emit('guideId', );
-        // socketService.emit('guideId', user._id);
       }
     },
     loginSignUp(action) {
@@ -65,9 +74,11 @@ export default {
       await this.$store.dispatch({ type: "logout" });
       this.$store.dispatch({ type: "loadTrip" });
     },
-    // guideName(user) {
-    //   if (user.isGuide) return
-    // },
+     isHomePage() {
+      let isHomePage = this.$route.path === "/";
+      if (isHomePage) return 'text-OW';
+      else return 'O';
+    },
   },
   computed: {
     isLoggingIn() {
@@ -76,7 +87,9 @@ export default {
     loggedUser() {
       return this.$store.getters.loggedinUser;
     },
+   
   },
+
   components: {
     userMsg,
   },

@@ -40,4 +40,12 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2.5rem;
+
+    @media screen and (max-width: $bp5-xl) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: $bp1-xs)  {
+        grid-template-columns: 1fr;
+    }
 }

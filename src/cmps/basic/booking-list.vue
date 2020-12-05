@@ -1,12 +1,7 @@
 <template>
-<div class="flex column"> 
-  <!-- <tr> -->
-    <!-- <td scope="row">{{ booking.trip.name }}</td> -->
-    <!-- <td>{{ booking.guide.name }}</td> -->
-    <!-- <td>{{ booking.status }}</td> -->
-    <!-- <td> -->
-      <!-- <trip-list :trips="tripsToShow" @emitFav="toggleFav" /> -->
-<trip-preview
+<section class="booking-list">
+  <div class="flex column">
+    <trip-preview
       v-for="trip in tripsToShow"
       :key="trip._id"
       :tripId="trip._id"
@@ -14,18 +9,13 @@
       @click="goToDetails(trip._id)"
     >
     </trip-preview>
-      <button @click.stop="removeBooking(booking)">Cancel</button>
-      <!-- <button v-if="booking.status === 'pending'" @click.stop="approveBooking(booking)"> -->
-      <!-- Approve -->
-      <!-- </button> -->
-    <!-- </td> -->
-  <!-- </tr> -->
-</div>
+    <button @click.stop="removeBooking(booking)">Cancel</button>
+  </div>
+</section>
 </template>
 
 <script>
-// import tripList from "../trip/trip-list.cmp.vue";
-import tripPreview from '../trip/trip-preview.cmp.vue'
+import tripPreview from "../trip/trip-preview.cmp.vue";
 export default {
   name: "booking-list",
   props: {
@@ -40,15 +30,17 @@ export default {
   },
   components: {
     // tripList,
-    tripPreview
+    tripPreview,
   },
 
   computed: {
     tripsToShow() {
       const trips = this.$store.getters.tripsForDisplay;
-      const filteredTrips = trips.filter((trip) => trip._id === this.booking.trip._id);
-      console.log('filteredTrips',filteredTrips);
-      return filteredTrips
+      const filteredTrips = trips.filter(
+        (trip) => trip._id === this.booking.trip._id
+      );
+      console.log("filteredTrips", filteredTrips);
+      return filteredTrips;
     },
   },
 
@@ -62,16 +54,16 @@ export default {
           type: "loadBookings",
         });
     },
-      toggleFav(trip) {
+    toggleFav(trip) {
       this.$store.dispatch({
         type: "toggleFavs",
         trip,
       });
     },
   },
-  created(){
-    console.log('trip',this.booking.trip);
-  }
+  created() {
+    console.log("trip", this.booking.trip);
+  },
 };
 </script>
 

@@ -2,7 +2,7 @@
   <section class="trip-filter">
     <form @submit.prevent="updateFilterPage(filterBy)">
       <div class="selector-filter flex space-between align-center">
-        <div class="input flex column">
+        <div class="txt-search input flex column">
           <label for="txt-input">Trip Destination</label>
           <input
             type="text"
@@ -13,57 +13,59 @@
             placeholder="e.g. Sherwood Forest"
           />
         </div>
-        <div class="input flex column">
-          <label for="type-input">Trip Type</label>
-          <el-select
-            v-model="filterBy.type"
-            placeholder="Select a Type"
-            id="type-input"
-          >
-            <!-- <el-option id="all-tag" value="" @select="emitFilter" hidden> </el-option>  -->
-            <el-option id="all-tag" value="" @select="emitFilter" label="All"> </el-option> 
-            <el-option
-              id="mountain-tag"
-              value="mountain"
-              @select="emitFilter"
-              label="Mountain"
-              >Mountain
-            </el-option>
+        <span class="extra-search flex  space-between align-center">
+          <div class="input flex column">
+            <label for="type-input">Trip Type</label>
+            <el-select
+              v-model="filterBy.type"
+              placeholder="Select a Type"
+              id="type-input"
+            >
+              <el-option id="all-tag" value="" @select="emitFilter" label="All">
+              </el-option>
+              <el-option
+                id="mountain-tag"
+                value="mountain"
+                @select="emitFilter"
+                label="Mountain"
+                >Mountain
+              </el-option>
 
-            <el-option
-              id="city-tag"
-              value="city"
-              @select="emitFilter"
-              label="City"
-              >City
-            </el-option>
-            <el-option
-              id="forest-tag"
-              value="forest"
-              @select="emitFilter"
-              label="Forest"
-              >Forest
-            </el-option>
-          </el-select>
-        </div>
-        <div class="input flex column">
-          <label for="dest-input">Trip Region</label>
-          <el-select
-           v-model="filterBy.region"
-            placeholder="Select a region"
-            id="dest-input"
-          >
-            <el-option value="">All</el-option>
-            <el-option value="USA">USA</el-option>
-            <el-option value="Europe">Europe</el-option>
-            <el-option value="Asia">Asia</el-option>
-            <el-option value="Australia">Australia</el-option>
-          </el-select>
-        </div>
+              <el-option
+                id="city-tag"
+                value="city"
+                @select="emitFilter"
+                label="City"
+                >City
+              </el-option>
+              <el-option
+                id="forest-tag"
+                value="forest"
+                @select="emitFilter"
+                label="Forest"
+                >Forest
+              </el-option>
+            </el-select>
+          </div>
+          <div class="input flex column">
+            <label for="dest-input">Trip Region</label>
+            <el-select
+              v-model="filterBy.region"
+              placeholder="Select a region"
+              id="dest-input"
+            >
+              <el-option value="">All</el-option>
+              <el-option value="USA">USA</el-option>
+              <el-option value="Europe">Europe</el-option>
+              <el-option value="Asia">Asia</el-option>
+              <el-option value="Australia">Australia</el-option>
+            </el-select>
+          </div>
 
-        <button class="search-btn">
-          <i class="fas fa-search"></i>
-        </button>
+          <button class="search-btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </span>
       </div>
     </form>
   </section>
