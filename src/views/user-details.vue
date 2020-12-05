@@ -4,12 +4,13 @@
       class="guide-preview-img profile-img-l "
       :src="require('@/assets/img/users/' + user.profileImgUrl)"
     />
-
-    <h2>Hi {{ user.name }}, Welcome Back</h2>
-    <h3>Favorite Trips</h3>
+   
+    <h2 user-titles>Hi {{ user.name }}, Welcome Back</h2>
+    <br />
+    <h3 class="user-titles">Favorite Trips</h3>
     <trip-list v-if="user" :trips="user.favoriteTrips" @emitFav="toggleFav" />
     <hr />
-    <h3>Your Bookings</h3>
+    <h3 class="user-titles">Your Bookings</h3>
     <div class="card-grid" v-if="bookingToShow">
       <div
         class="flex column"
@@ -54,6 +55,8 @@ export default {
   },
   created() {
     this.user = this.$store.getters.loggedinUser;
+    console.log('this.user :', this.user )
+
     this.$store.dispatch({
       type: "loadBookings",
     });

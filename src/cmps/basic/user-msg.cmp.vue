@@ -44,14 +44,27 @@ export default {
     //     }, delay)
    
     // })
-    socketService.setup();
+      socketService.setup();
+
+    // if(){
     socketService.on("sendBooking", (booking) => {
       this.msg = `${this.user.name}  booked new trip now`;
-
       setTimeout(() => {
         this.closeMgs();
       }, 3500);
     });
+    // } else {
+
+      // socketService.on("sendApproveBooking", (booking) => {
+      //   console.log('bookingdddddd:', this.booking)
+      //   this.msg = `The trip in the name of ${this.booking.trip.name} has been approved for you!`;
+      //   setTimeout(() => {
+      //     this.closeMgs();
+      //   }, 3500);
+      // });
+    // }
+
+
   },
 }
 </script>

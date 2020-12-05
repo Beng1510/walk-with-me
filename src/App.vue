@@ -26,6 +26,7 @@ export default {
   },
   methods: {
     updateFilter(filterBy) {
+   
       this.$store.commit({
         type: "setFilterBy",
         filterBy,
@@ -37,14 +38,13 @@ export default {
   },
   computed: {
     defaultUserForDisplay() {
-      const userLogged = this.$store.getters.loggedinUser
-      console.log('userLogged',userLogged);
-        return userLogged
-      },
+      
+      return this.$store.getters.loggedinUser;
+    },
 
     homePage() {
-      return this.$route.path === "/";
-    },
+    return (this.$route.path === '/');
+     }
   },
   created() {
     this.$store.dispatch({

@@ -57,6 +57,8 @@ export default {
   methods: {
     userName(user) {
       var loggedUser = this.user.name;
+      
+
       var userFullName = loggedUser.split(" ");
       return userFullName[0];
     },
@@ -93,5 +95,8 @@ export default {
   components: {
     userMsg,
   },
+  created(){
+    // console.log('user main header:', this.user)
+  }
 };
 </script>

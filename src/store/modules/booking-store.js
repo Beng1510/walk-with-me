@@ -45,7 +45,7 @@ export const bookingStore = {
 
             socketService.setup();
             // socketService.emit('guideId', newBooking.guide._id);
-            socketService.emit('addBooking',newBooking)
+            // socketService.emit('addBooking',newBooking)
             // console.log('newBooking:', newBooking)
             context.commit({ type: 'addBooking', booking: newBooking })
         },

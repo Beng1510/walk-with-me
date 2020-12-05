@@ -87,6 +87,7 @@ export default {
       filterdBookings: null,
       isBooked: false,
       guide: null,
+      user: null,
     };
   },
 
