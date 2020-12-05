@@ -1,4 +1,5 @@
 <template>
+
   <tr>
     <td scope="row">{{ booking.trip.name }}</td>
     <td>{{ booking.guide.name }}</td>
@@ -10,6 +11,11 @@
       <!-- </button> -->
     </td>
   </tr>
+
+      <!-- <button @click.stop="removeBooking(booking)">Cancel</button> -->
+
+
+
 </template>
 
 <script>
@@ -40,6 +46,9 @@ export default {
         });
     },
   },
+  created(){
+    console.log('trip',this.booking.trip);
+  }
 };
 </script>
 

@@ -48,11 +48,11 @@ export default {
     // })
     socketService.setup();
     socketService.on("sendBooking", (booking) => {
-      this.msg = `User Name ${this.user.name}  booked new trip now`;
+      this.msg = `${this.user.name}  booked new trip now`;
 
       setTimeout(() => {
         this.closeMgs();
-      }, 3000);
+      }, 3500);
     });
   },
 }
