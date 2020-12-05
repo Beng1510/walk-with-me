@@ -52,14 +52,15 @@
       </button>
     </div>
     <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
-
-    <h3>Top Forest Trips</h3>
-    <button
-      class="go-to-all-btn action"
-      @click="updateFilterPage('type', 'forest')"
-    >
-      See All
-    </button>
+    <div class="trips-by flex space-between">
+      <h3>Top Forest Trips</h3>
+      <button
+        class="go-to-all-btn action"
+        @click="updateFilterPage('type', 'forest')"
+      >
+        See All
+      </button>
+    </div>
     <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
 
     <div class="flex justify-center align-center">

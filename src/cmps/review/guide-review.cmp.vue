@@ -6,15 +6,16 @@
     </div>
 
     <form class="add flex column space-between" v-show="isAdding">
-      <star-rating 
-      v-model="newReview.rate" 
-      :increment="1" 
-      :star-size="25"
-      :rounded-corners="true"
-      active-color="#FF8A44"
-      :padding="1"
-      :active-on-click="true"
-      :clearable="true"/>
+      <star-rating
+        v-model="newReview.rate"
+        :increment="1"
+        :star-size="25"
+        :rounded-corners="true"
+        active-color="#FF8A44"
+        :padding="1"
+        :active-on-click="true"
+        :clearable="true"
+      />
 
       <textarea
         v-model="newReview.txt"
@@ -47,6 +48,7 @@
 
 <script>
 import { userService } from "../../services/user-service.js";
+import { utilService } from "@/services/util-service.js";
 import StarRating from 'vue-star-rating';
 import {utilService} from '../../services/util-service.js';
 
@@ -102,7 +104,7 @@ export default {
     this.$store.dispatch({ type: "loadReviews", guideId: this.guideId });
   },
   components: {
-    StarRating
-  }
+    StarRating,
+  },
 };
 </script>

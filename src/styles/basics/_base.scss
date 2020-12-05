@@ -53,6 +53,8 @@ button {
     font-size: rem(16px);
     transition: all .4s ease-in-out;
     cursor: pointer;
+    white-space: nowrap;
+    max-height: min-content;
 
     &.action {
         font-family: openSansBold;
@@ -74,6 +76,11 @@ button {
 
     a:active {
         color: $clr3;
+    }
+
+    @media screen and (max-width: $bp1-xs) {
+        font-size: rem(12px);
+        padding: 5px 10px;
     }
 }
 

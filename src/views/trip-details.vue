@@ -137,17 +137,11 @@ export default {
       return date.toLocaleDateString("en-GB");
     },
     bookedMsg() {
-      //   if (!this.isBooked && this.trip.totalBooked < 10) {
-      //     return "Come & Join The Trip ";
-      //   } else if (this.getBookingByUser === false) {
-      //     return "You've Already Booked This Trip";
-      //   } else return "Sorry, We're Fully Booked";
-      // },
-      if (this.isBooked) {
-        return "You've Already Booked This Trip";
-      } else if (this.trip.totalBooked >= 10) {
-        return "Sorry, We're Fully Booked";
-      } else return "Come & Join The Trip";
+      if (!this.isBooked && this.trip.totalBooked < 10) {
+        return "Come & Join The Trip ";
+      } else if (this.getBookingByUser === false) {
+        return  "Sorry, We're Fully Booked";
+      } else return "You've Already Booked This Trip";
     },
   },
   async created() {
