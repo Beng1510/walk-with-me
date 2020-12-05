@@ -47,7 +47,6 @@ export default {
     tripsToShow() {
       const trips = this.$store.getters.tripsForDisplay;
       const filteredTrips = trips.filter((trip) => trip._id === this.booking.trip._id);
-      console.log('filteredTrips',filteredTrips);
       return filteredTrips
     },
   },
@@ -68,9 +67,11 @@ export default {
         trip,
       });
     },
+     emitFav(trip) {
+      this.$emit("emitFav", trip);
+    },
   },
   created(){
-    console.log('trip',this.booking.trip);
   }
 };
 </script>

@@ -88,7 +88,7 @@ export const userStore = {
     },
     getters: {
         loggedinUser(state) {
-            console.log('state???', state);
+            console.log(' loggedinUser(state',state);
             return state.loggedinUser
         },
         loggedinGuide(state) {
@@ -113,7 +113,6 @@ export const userStore = {
     },
     mutations: {
         setUser(state, { user }) {
-            console.log('user?!!!!?', user);
 
             state.loggedinUser = user;
         },
@@ -142,7 +141,6 @@ export const userStore = {
     actions: {
         async login(context, { userCred }) {
             const user = await userService.login(userCred);
-            console.log('user??????', user);
             context.commit({ type: 'setUser', user })
             return user;
         },
@@ -171,7 +169,6 @@ export const userStore = {
             context.commit({ type: 'setReviews', reviews })
         },
         async saveReview({ commit }, { review, guideId, user }) {
-            console.log('review???', review);
 
             const guide = await userService.getUserById(guideId);
             const sum = guide.guideInfo.reviews.reduce(
@@ -206,9 +203,22 @@ export const userStore = {
             context.commit({ type: 'setUser', user: userCopy });
         },
         async getGuideRate(context, { tripGuideId }) {
-            const user = await userService.getUserById(tripGuideId)
-            const rate = user.guideInfo.rate;
+            const guide = await userService.getUserById(tripGuideId)
+            const rate = guide.guideInfo.rate;
             return rate
+        },
+        async getRateTotal(context, { tripGuideId }) {
+            const guide = await userService.getUserById(tripGuideId)
+            const total = guide.guideInfo.totalReviewCount
+            return total
+        },
+        loadDefaultUser({ getters, commit }) {
+        commit({ type: 'setIsLoading', isLoading: true })
+
+            const userLogged = this.$store.getters.loggedinUser
+            console.log('userLogged',userLogged);
+            commit({ type: 'setUser', userLogged })
+            commit({ type: 'setIsLoading', isLoading: false })
         }
     }
 }

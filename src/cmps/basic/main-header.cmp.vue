@@ -1,5 +1,6 @@
 <template>
   <section class="main-header full main-layout">
+    <!-- <p v-if="isLoading">Loading...</p> -->
     <div class="main-header-content flex space-between align-center">
       <div class="logo flex align-center">
         <router-link to="/"><h2 class="logo">Walk With Me</h2></router-link>
@@ -8,8 +9,12 @@
       <!-- <user-msg ></user-msg> -->
       <template v-show="!isLoggingIn">
         <div v-if="loggedUser" class="login-btns">
-          <button v-if="!loggedUser" @click="loginSignUp('login')">Login</button>
-          <button v-if="!loggedUser" @click="loginSignUp('signUp')">Sign Up</button>
+          <button v-if="!loggedUser" @click="loginSignUp('login')">
+            Login
+          </button>
+          <button v-if="!loggedUser" @click="loginSignUp('signUp')">
+            Sign Up
+          </button>
         </div>
         <template class="logout">
           <button @click="logout">Logout</button>
@@ -17,11 +22,11 @@
       </template>
 
       <div class="nav-bar">
-        <router-link to="/">Home</router-link> 
-        <router-link to="/about">About</router-link> 
+        <router-link to="/">Home</router-link>
+        <router-link to="/about">About</router-link>
         <router-link to="/user/:id" v-if="!user.isGuide">
-          {{ userName(user) }}</router-link>
-        
+          {{ userName(user) }}</router-link
+        >
 
         <router-link to="/back-office" v-if="user.isGuide">
           {{ userName(user) }}'s Office</router-link
@@ -75,6 +80,9 @@ export default {
     },
     loggedUser() {
       return this.$store.getters.loggedinUser;
+    },
+    isLoading() {
+      return this.$store.getters.isLoading;
     },
   },
   components: {

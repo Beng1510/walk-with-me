@@ -1,4 +1,5 @@
 <template>
+
   <section v-if="!user.isGuide" class="user-details">
     <img
       class="guide-preview-img profile-img-l "

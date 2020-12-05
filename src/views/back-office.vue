@@ -16,23 +16,7 @@
         </tr>
       </thead>
       <tbody v-for="booking in bookingToShow" :key="booking._id">
-        <!-- <approve-booking :bookings="bookingToShow" :key="booking._id" /> -->
         <approve-booking :booking="booking" :key="booking._id" />
-        <!-- <tr v-for="booking in bookingToShow" :key="booking._id">
-          <td scope="row">{{ booking.trip.name }}</td>
-          <td>{{ booking.user.name }}</td>
-          <td>{{ booking.peopleToSign }}</td>
-          <td>{{ booking.specialReq }}</td>
-          <td>{{ booking.status }}</td>
-          <td>
-            <button v-if="booking.status === 'pending'" @click.stop="approveBooking(booking)">
-              Approve
-            </button>
-            <button v-if="booking.status === 'approved'" @click.stop="removeBooking(booking)">
-              Reject
-            </button>
-          </td>
-        </tr> -->
       </tbody>
     </table>
 
@@ -50,7 +34,6 @@ export default {
   data() {
     return {
       filterdBookings: null,
-     
     };
   },
 

@@ -8,20 +8,22 @@
       class="trip-preview-img ratio-card"
       :src="require('../../assets/img/trips/' + this.trip.imgUrls[0])"
     />
-    <div :class="{hide: !isFav}">
-    <p class="toggle-fav" @click.stop="emitFav(trip)"><i :class="fav"></i></p>
+    <div :class="{ hide: !isFav }">
+      <p class="toggle-fav" @click.stop="emitFav(trip)"><i :class="fav"></i></p>
     </div>
     <div class="details">
       <h2 class="trip-preview-title">{{ this.trip.name }}</h2>
       <div class="trip-preview-trip-details">
         <div class="flex">
-        <p class="date">{{ getDateString }}</p> <span class="seperator">∙</span>
-        <p class="duration">{{ this.trip.duration }}</p>
+          <p class="date">{{ getDateString }}</p>
+          <span class="seperator">∙</span>
+          <p class="duration">{{ this.trip.duration }}</p>
         </div>
         <div class="booking-info flex">
           <p>
             <span class="price bold">${{ this.trip.price }}</span> / person
-          </p> <span class="seperator">∙</span>
+          </p>
+          <span class="seperator">∙</span>
           <p>
             <span class="bold">{{ this.trip.totalBooked }}</span
             >/10 joined
@@ -38,14 +40,14 @@
             />
             <p>{{ this.trip.aboutGuide.name }}</p>
           </div>
-          <p><i class="fas fa-star trip-star-rate"></i> {{ rateGuide }}</p>
+          <p>
+            <i class="fas fa-star trip-star-rate"></i> {{ rateGuide }}({{ rateTotal }})
+          </p>
         </div>
       </div>
     </div>
   </section>
 </template>
-
-
 
 <script>
 import { tripService } from "@/services/trip-service.js";
@@ -58,22 +60,20 @@ export default {
       required: true,
     },
   },
-
   data() {
     return {
       isFav: false,
       trip: null,
       rateGuide: null,
+      guide: null,
+      rateTotal: null,
     };
   },
-
   name: "trip-preview",
-
   methods: {
     emitFav(trip) {
       this.isFav = !this.isFav;
       this.$emit("emitFav", trip);
-      
     },
 
     goToDetails(id) {
@@ -88,6 +88,7 @@ export default {
       );
       this.isFav = isInFav;
     },
+
     async getGuideRate(trip) {
       const tripGuideId = trip.aboutGuide._id;
       const rate = await this.$store.dispatch({
@@ -96,6 +97,15 @@ export default {
       });
 
       this.rateGuide = rate;
+    },
+
+    async getRateTotal(trip) {
+       const tripGuideId = trip.aboutGuide._id;
+       const total = await this.$store.dispatch({
+         type: "getRateTotal",
+         tripGuideId
+       });
+       this.rateTotal = total 
     },
   },
 
@@ -108,21 +118,16 @@ export default {
       }
       return starsAmount;
     },
-
     fav() {
       if (this.isFav) return "fas fa-heart";
       else return "far fa-heart";
     },
-
     getCurrUser() {
       return this.$store.getters.loggedinUser;
     },
-    rateOfGuide() {
-      return this.$store.getters.getGuideRate;
-    },
     getDateString(trip) {
       var date = new Date(this.trip.date);
-      return date.toLocaleDateString('en-GB')
+      return date.toLocaleDateString("en-GB");
     },
   },
 
@@ -130,6 +135,9 @@ export default {
     this.trip = await tripService.getTripById(this.tripId);
     this.checkIsFav();
     this.getGuideRate(this.trip);
+
+    this.guide = await userService.getUserById(this.trip.aboutGuide._id);
+    this.getRateTotal(this.trip);
   },
 };
 </script>

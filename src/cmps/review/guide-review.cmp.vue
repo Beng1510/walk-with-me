@@ -48,6 +48,7 @@
 <script>
 import { userService } from "../../services/user-service.js";
 import StarRating from 'vue-star-rating';
+import {utilService} from '../../services/util-service.js';
 
 export default {
   props: {

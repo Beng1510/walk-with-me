@@ -12,16 +12,18 @@ export default new Vuex.Store({
   },
   getters: {
     isLoading(state) {
-        return state.isLoading
-    }
+      console.log('state???',state);
+      return state.isLoading
+  },
 },
 mutations: {
-  setIsLoading(state, { isLoading }) {
-      console.log('is Loading?:', isLoading);
-      state.isLoading = isLoading
-  }
+  setIsLoading(state, payload) {
+    state.isLoading = payload.isLoading
 },
-  actions: {},
+},
+  actions: {
+    
+  },
   modules: {
     tripStore,
     userStore,
