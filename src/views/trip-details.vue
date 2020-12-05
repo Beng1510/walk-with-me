@@ -92,7 +92,6 @@ export default {
 
   methods: {
     bookTrip(booking) {
-      // console.log('bookingssssssss:', booking)
 
       this.$store.dispatch({ type: "addBooking", booking });
     },
@@ -121,8 +120,8 @@ export default {
       if (!this.isBooked && this.trip.totalBooked < 10) {
         return "Come & Join The Trip ";
       } else if (this.getBookingByUser === false) {
-        return "You've Already Booked This Trip";
-      } else return "Sorry, We're Fully Booked";
+        return  "Sorry, We're Fully Booked";
+      } else return "You've Already Booked This Trip";
     },
   },
   async created() {

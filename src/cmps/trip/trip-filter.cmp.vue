@@ -3,14 +3,14 @@
     <form @submit.prevent="updateFilterPage(filterBy)">
       <div class="selector-filter flex space-between align-center">
         <div class="input flex column">
-          <label for="txt-input">Free Text</label>
+          <label for="txt-input">Trip Destination</label>
           <input
             type="text"
             class="txt-input"
             id="txt-input"
             v-model="filterBy.name"
             @input="emitFilter"
-            placeholder="e.g. Golan Heights"
+            placeholder="e.g. Sherwood Forest"
           />
         </div>
         <div class="input flex column">

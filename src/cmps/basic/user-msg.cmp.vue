@@ -1,8 +1,6 @@
 <template>
   <section v-if="msg" class="user-msg">
     <div class="alert" :class="alertClass">
-      <!-- <h2>{{ msg.txt }}</h2>
-      <p>{{ msg.subTxt }}</p> -->
       <h1 >{{ msg }}</h1>
     </div>
   </section>
@@ -44,7 +42,6 @@ export default {
     //     setTimeout(() => {
       //         this.alive = false;
     //     }, delay)
-    console.log('user',this.user)
     // })
     socketService.setup();
     socketService.on("sendBooking", (booking) => {
