@@ -42,6 +42,7 @@ export default {
     //     setTimeout(() => {
       //         this.alive = false;
     //     }, delay)
+   
     // })
     socketService.setup();
     socketService.on("sendBooking", (booking) => {
