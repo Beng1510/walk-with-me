@@ -1,6 +1,6 @@
 <template>
   <section class="all-trips-list">
-    <h3>All Trips</h3>
+    <h1>All Trips</h1>
     <trip-filter @filterBy="updateFilter" :trips="tripsForDisplay" />
     <trip-list
       class="all-trips-list-container wrap"

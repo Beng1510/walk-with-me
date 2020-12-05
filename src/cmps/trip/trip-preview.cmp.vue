@@ -8,16 +8,20 @@
       class="trip-preview-img ratio-card"
       :src="require('../../assets/img/trips/' + this.trip.imgUrls[0])"
     />
+    <div :class="{hide: !isFav}">
     <p class="toggle-fav" @click.stop="emitFav(trip)"><i :class="fav"></i></p>
+    </div>
     <div class="details">
       <h2 class="trip-preview-title">{{ this.trip.name }}</h2>
       <div class="trip-preview-trip-details">
-        <p class="date">{{ getDateString }}</p>
+        <div class="flex">
+        <p class="date">{{ getDateString }}</p> <span class="seperator">∙</span>
         <p class="duration">{{ this.trip.duration }}</p>
-        <div class="booking-info flex space-between align-center ">
+        </div>
+        <div class="booking-info flex">
           <p>
             <span class="price bold">${{ this.trip.price }}</span> / person
-          </p>
+          </p> <span class="seperator">∙</span>
           <p>
             <span class="bold">{{ this.trip.totalBooked }}</span
             >/10 joined
@@ -67,7 +71,6 @@ export default {
 
   methods: {
     emitFav(trip) {
-console.log('emiting');
       this.isFav = !this.isFav;
       this.$emit("emitFav", trip);
       

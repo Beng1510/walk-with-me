@@ -1,17 +1,24 @@
 
 .selector-filter {
     padding: 0 1rem;
-    height: 80px;
+    height: 85px;
+    box-shadow: $shadow-soft;
+    margin-bottom: 2rem;
+    transition: box-shadow .4s ease-out;
+
+    &:hover {
+        box-shadow: $shadow-medium;
+    }
 }
 
 .input {
     border-radius: 35px;
-    padding: .5rem .5rem;
+    padding: .75rem .5rem .5rem .5rem;
 
     label {
         padding-inline-start: 1rem;
         border-radius: 25px;
-        font-size: rem(14px);
+        font-size: rem(12px);
     }
 }
 
@@ -20,7 +27,6 @@
     background-color: $clr6; 
     border-radius: 45px;
     font-family: openSansReg;
-    // height: rem(40px);
 
     &::placeholder {
         color: $clr5;
@@ -35,8 +41,7 @@
 .el-input__inner, .el-input__inner:hover,
  .el-select-dropdown__item.hover,
   .el-select-dropdown__item:hover,
-  .txt-input:hover,
-  .search-btn:hover {
+  .txt-input:hover {
     border: none;
     color: $clr3;
     transition: all 0.4s ease-in-out;
@@ -44,13 +49,12 @@
 
 .el-input__inner:hover, .el-select-dropdown__item.hover, 
 .el-select-dropdown__item:hover,
-.txt-input:hover,
-.search-btn:hover {
+.txt-input:hover {
     background-color: rgb(223, 222, 222); 
 }
 
 .el-select-dropdown__item.selected {
-    color: #409EFF;
+    color: $primary;
 }
 
 .txt-input {
@@ -74,5 +78,12 @@
     border: none;
     height: 60px;
     width: 60px;
+    color: $primary;
+    transition: all 0.4s ease-in-out;
+
+    &:hover {
+        color: $clr6;
+        background-color: $primary;
+    }
     
 }

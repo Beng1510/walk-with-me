@@ -1,6 +1,6 @@
 <template>
   <section class="trip-filter">
-    <form @submit.prevent="emitFilter">
+    <form @submit.prevent="updateFilterPage(filterBy)">
       <div class="selector-filter flex space-between align-center">
         <div class="input flex column">
           <label for="txt-input">Free Text</label>
@@ -10,7 +10,7 @@
             id="txt-input"
             v-model="filterBy.name"
             @input="emitFilter"
-            placeholder="Type to Search"
+            placeholder="e.g. Golan Heights"
           />
         </div>
         <div class="input flex column">
@@ -20,13 +20,8 @@
             placeholder="Select a Type"
             id="type-input"
           >
-            <el-option
-              id="all-tag"
-              value=""
-              @select="emitFilter"
-              label="All"
-            >
-            </el-option>
+            <!-- <el-option id="all-tag" value="" @select="emitFilter" hidden> </el-option>  -->
+            <el-option id="all-tag" value="" @select="emitFilter" label="All"> </el-option> 
             <el-option
               id="mountain-tag"
               value="mountain"
@@ -45,7 +40,6 @@
             <el-option
               id="forest-tag"
               value="forest"
-             
               @select="emitFilter"
               label="Forest"
               >Forest
@@ -53,10 +47,10 @@
           </el-select>
         </div>
         <div class="input flex column">
-          <label for="dest-input">Trip Destination</label>
+          <label for="dest-input">Trip Region</label>
           <el-select
            v-model="filterBy.region"
-            placeholder="Select a Destination"
+            placeholder="Select a region"
             id="dest-input"
           >
             <el-option value="">All</el-option>
@@ -67,7 +61,7 @@
           </el-select>
         </div>
 
-        <button @click="emitFilter" class="search-btn">
+        <button class="search-btn">
           <i class="fas fa-search"></i>
         </button>
       </div>
@@ -90,7 +84,6 @@ export default {
       filterBy: {
         name: "",
         type: "",
-        // location: "",
         region: "",
       },
       selected: "",
@@ -103,11 +96,25 @@ export default {
 
       this.$emit("filterBy", filterByCopy);
     },
+    updateFilterPage(filterBy) {
+      console.log("filterBy ???", filterBy);
+      console.log("this.$route ???", this.$route);
+      if (this.$route.path === "/trip") {
+        const filterByCopy = JSON.parse(JSON.stringify(this.filterBy));
+
+        this.$emit("filterBy", filterByCopy);
+        this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
+      } else {
+        const filterByCopy = JSON.parse(JSON.stringify(this.filterBy));
+        this.$emit("filterBy", filterByCopy);
+        this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
+        this.$router.push("/trip");
+      }
+    },
   },
   created() {
-    const filterObj = JSON.parse(JSON.stringify(this.$store.getters.filterBy))
-    this.filterBy = filterObj
-    
+    const filterObj = JSON.parse(JSON.stringify(this.$store.getters.filterBy));
+    this.filterBy = filterObj;
   },
 };
 </script>
