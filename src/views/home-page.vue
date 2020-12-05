@@ -23,7 +23,7 @@
     </div>
     <trip-list :trips="usaTripsForDisplay" @emitFav="toggleFav" />
 
- <div class="trips-by flex space-between">
+    <div class="trips-by flex space-between">
       <h3>Top City Trips</h3>
       <button
         class="see-all-mountain-btn action"
@@ -33,7 +33,6 @@
       </button>
     </div>
     <trip-list :trips="cityTripsForDisplay" @emitFav="toggleFav" />
-
 
     <div class="trips-by flex space-between">
       <h3>Top Mountain Trips</h3>
@@ -55,7 +54,11 @@
     </button>
     <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
 
-   
+    <div class="flex justify-center align-center">
+      <button class="see-all-btn action" @click="goToAllTrips()">
+        See All Trips
+      </button>
+    </div>
 
     <h3>Our Most Active Guides</h3>
     <guide-list :guides="guidesForDisplay" />
