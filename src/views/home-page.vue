@@ -1,11 +1,10 @@
 <template>
   <section class="home-page">
     <span v-if="isLoading">Loading...</span>
-    <button class="see-all-btn" @click="goToAllTrips()">See All</button>
     <div class="trips-by flex space-between">
       <h3>Trips Across Europe</h3>
       <button
-        class="go-to-all-btn"
+        class="go-to-all-btn action"
         @click="updateFilterPage('region', 'Europe')"
       >
         See All
@@ -15,7 +14,10 @@
 
     <div class="trips-by flex space-between">
       <h3>Trips Across America</h3>
-      <button class="go-to-all-btn" @click="updateFilterPage('region', 'USA')">
+      <button
+        class="go-to-all-btn action"
+        @click="updateFilterPage('region', 'USA')"
+      >
         See All
       </button>
     </div>
@@ -24,7 +26,7 @@
  <div class="trips-by flex space-between">
       <h3>Top City Trips</h3>
       <button
-        class="see-all-mountain-btn"
+        class="see-all-mountain-btn action"
         @click="updateFilterPage('type', 'city')"
       >
         See All
@@ -36,7 +38,7 @@
     <div class="trips-by flex space-between">
       <h3>Top Mountain Trips</h3>
       <button
-        class="go-to-all-btn"
+        class="go-to-all-btn action"
         @click="updateFilterPage('type', 'mountain')"
       >
         See All
@@ -45,14 +47,17 @@
     <trip-list :trips="mountainTripsForDisplay" @emitFav="toggleFav" />
 
     <h3>Top Forest Trips</h3>
-    <button class="go-to-all-btn" @click="updateFilterPage('type', 'forest')">
+    <button
+      class="go-to-all-btn action"
+      @click="updateFilterPage('type', 'forest')"
+    >
       See All
     </button>
     <trip-list :trips="forestTripsForDisplay" @emitFav="toggleFav" />
 
    
 
-    <h3>Guides of the Month</h3>
+    <h3>Our Most Active Guides</h3>
     <guide-list :guides="guidesForDisplay" />
   </section>
 </template>
@@ -78,9 +83,9 @@ export default {
   },
   methods: {
     updateFilterPage(prop, term) {
-      this.filterBy[prop] = term
-        this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
-        this.$router.push("/trip");
+      this.filterBy[prop] = term;
+      this.$store.commit({ type: "setFilterBy", filterBy: this.filterBy });
+      this.$router.push("/trip");
     },
     updateFilter(filterBy) {
       this.$store.commit({ type: "setFilterBy", filterBy });
@@ -140,7 +145,7 @@ export default {
     this.$store.dispatch({
       type: "loadUsers",
     });
-     this.user = this.$store.getters.loggedinUser;
+    this.user = this.$store.getters.loggedinUser;
   },
   mounted() {
     this.user = this.$store.getters.loggedinUser;
