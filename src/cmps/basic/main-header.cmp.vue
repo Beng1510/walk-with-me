@@ -3,8 +3,13 @@
     <!-- <p v-if="isLoading">Loading...</p> -->
     <div class="main-header-content flex space-between align-center">
       <div class="logo flex align-center">
-        <router-link to="/"><img v-if="isHome" src="@/assets/logo/logo-text-OW.svg" class="logo" />
-        <img v-else src="@/assets/logo/logo-O.svg" class="logo" />
+        <router-link to="/"
+          ><img
+            v-if="isHome"
+            src="@/assets/logo/logo-text-OW.svg"
+            class="logo"
+          />
+          <img v-else src="@/assets/logo/logo-O.svg" class="logo" />
         </router-link>
       </div>
       <user-msg :user="this.user"></user-msg>
@@ -22,7 +27,7 @@
         </template>
       </template>
 
-      <div class="nav-bar">
+      <div v-if="user" class="nav-bar">
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
         <router-link to="/user/:id" v-if="!user.isGuide">
@@ -33,7 +38,8 @@
           {{ userName(user) }}'s Office</router-link
         >
 
-        <a @click="becomeGuide(user)">Become a Guide</a>
+        <!-- <a @click="becomeGuide(user)">Become a Guide</a> -->
+        <a @click="loginGuide(user)">Become a Guide</a>
       </div>
     </div>
   </section>
@@ -49,27 +55,40 @@ export default {
       type: Object,
     },
     isHome: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
 
   data() {
-   return {
-      imgSrc: ''
-   }
+    return {
+      imgSrc: "",
+    };
   },
 
   methods: {
     userName(user) {
       var loggedUser = this.user.name;
+      
+
       var userFullName = loggedUser.split(" ");
       return userFullName[0];
     },
     becomeGuide(user) {
-      user.isGuide = !user.isGuide;
-      if (user.isGuide) {
-        socketService.setup();
-      }
+      // user.isGuide = !user.isGuide;
+      // if (user.isGuide) {
+      //   socketService.setup();
+      // }
+      this.$store.dispatch({
+        type:"login",
+        userCred:{  name: "Arnold Wellington", password: "123456" }
+
+      })
+    },
+    loginGuide() {
+      this.$store.dispatch({
+        type: "login",
+        userCred: { name: "Arnold Wellington", password: "123456" },
+      });
     },
     loginSignUp(action) {
       this.$store.commit({ type: "setLoginSignUp", action });
@@ -79,10 +98,10 @@ export default {
       await this.$store.dispatch({ type: "logout" });
       this.$store.dispatch({ type: "loadTrip" });
     },
-     isHomePage() {
+    isHomePage() {
       let isHomePage = this.$route.path === "/";
-      if (isHomePage) return 'text-OW';
-      else return 'O';
+      if (isHomePage) return "text-OW";
+      else return "O";
     },
   },
   computed: {
@@ -92,11 +111,13 @@ export default {
     loggedUser() {
       return this.$store.getters.loggedinUser;
     },
-   
   },
 
   components: {
     userMsg,
   },
+  created(){
+    // console.log('user main header:', this.user)
+  }
 };
 </script>

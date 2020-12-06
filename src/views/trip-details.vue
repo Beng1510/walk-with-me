@@ -31,11 +31,12 @@
         <div v-if="this.filterdBookings" class="booked-by">
           <h3>Already Booked:</h3>
           <!-- need to add if -->
-          <ul>
+          <ul >
             <li
               v-for="booking in this.filterdBookings"
               :key="booking._id"
               class="user-booked flex"
+              
             >
               <img
                 class="trip-details-guide-img profile-img-s"
@@ -101,6 +102,7 @@ export default {
       filterdBookings: null,
       isBooked: false,
       guide: null,
+      user: null,
     };
   },
 

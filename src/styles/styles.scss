@@ -17,16 +17,18 @@
 @import 'views/user-details';
 @import 'views/login';
 
-   
 
 //Components
 @import 'cmps/basic/main-header';
 @import 'cmps/basic/user-msg.cmp';
+@import 'cmps/basic/booking-list';
+@import 'cmps/basic/main-footer.cmp';
 
 @import 'cmps/trip/trip-preview.cmp';
 @import 'cmps/trip/trip-filter';
 @import 'cmps/trip/trip-book.cmp';
 @import 'cmps/trip/add-trip.cmp';
+
 
 @import 'cmps/guide/guide-preview.cmp';
 @import 'cmps/guide/guide-review.cmp';

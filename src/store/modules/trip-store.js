@@ -104,6 +104,7 @@ export const tripStore = {
     },
     actions: {
         async loadTrips({ getters, commit }) {
+            
             const trips = await tripService.query(getters.filterBy)
             let types = {};
             trips.forEach(trip => {
@@ -128,8 +129,7 @@ export const tripStore = {
             const savedTrip = await tripService.save(tripCopy);
             commit({ type: 'updateTrip', trip: savedTrip })
         },
-      
+     
 
-    },
-
+    }
 }

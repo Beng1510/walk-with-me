@@ -12,23 +12,23 @@ export const bookingService = {
 }
 
 async function getBookings() {
-    return httpService.get('booking')
+    return await httpService.get('booking')
 }
 
 async function createBooking(booking) {
-    return httpService.post('booking',booking)
+    return await httpService.post('booking', booking)
 }
 
 async function getBookingById(bookingId) {
-    return httpService.get(`booking/${bookingId}`)
+    return await httpService.get(`booking/${bookingId}`)
 }
 
 async function updateBooking(booking) {
-    return httpService.put(`booking/${booking._id}`, booking)
+    return await httpService.put(`booking/${booking._id}`, booking)
 }
 
 async function remove(booking) {
-    console.log('bookingId',booking._id);
-    return httpService.delete(`booking/${booking._id}`)
-
+    console.log('bookingId', booking._id);
+    await httpService.delete(`booking/${booking._id}`)
+    return booking
 }
