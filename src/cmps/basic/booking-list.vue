@@ -45,11 +45,8 @@ export default {
     removeBooking(booking) {
       this.$store.dispatch({
         type: "removeBooking",
-        booking:this.booking
+        booking: this.booking
       })
-        // this.$store.dispatch({
-        //   type: "loadBookings",
-        // });
     },
     
     toggleFav(trip) {
@@ -58,7 +55,7 @@ export default {
         trip,
       });
     },
-     emitFav(trip) {
+    emitFav(trip) {
       this.$emit("emitFav", trip);
     },
   },

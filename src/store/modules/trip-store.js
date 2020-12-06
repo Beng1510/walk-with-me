@@ -21,12 +21,8 @@ export const tripStore = {
             return state.trips
         },
         mountainTripsForDisplay(state) {
-            if (state.showBy === "mountain" && state.isShowAll === true) {
-                return state.trips.filter(trip => trip.type === "mountain")
-            } else {
                 const mountainTrips = state.trips.filter(trip => trip.type === "mountain")
                 return mountainTrips.slice(0, 4)
-            }
         },
         forestTripsForDisplay(state) {
             const forestTrips = state.trips.filter(trip => trip.type === "forest")
@@ -36,7 +32,6 @@ export const tripStore = {
             const cityTrips = state.trips.filter(trip => trip.type === "city")
             let random = cityTrips.sort(() => .5 - Math.random()).slice(0,4)
             return random
-            // return cityTrips.slice(0, 4)
         },
         difficultTripsForDisplay(state) {
             if (state.showBy === "Extreme" && state.isShowAll === true) {
@@ -53,7 +48,6 @@ export const tripStore = {
                 const europeTrips = state.trips.filter(trip => trip.region === "Europe")
                 let random = europeTrips.sort(() => .5 - Math.random()).slice(0,4)
             return random
-                // return europeTrips.slice(0, 4)
             }
         },
         usaTripsForDisplay(state) {
@@ -97,10 +91,6 @@ export const tripStore = {
             state.isShowAll = !state.isShowAll
             state.showBy = showBy
         }
-        // removeTrip(state, { tripId }) {
-        //     const idx = state.trips.findIndex(trip => trip._id === tripId)
-        //     state.trips.splice(idx, 1)
-        // },
     },
     actions: {
         async loadTrips({ getters, commit }) {
