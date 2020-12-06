@@ -48,6 +48,7 @@ export default {
     });
 
     socketService.on("approveBooking", (booking) => {
+    console.log('bookingsssssssssssss:', booking)
     
       this.msg = `${booking.guide.name} approved your booking`;
       setTimeout(() => {

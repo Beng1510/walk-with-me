@@ -24,6 +24,7 @@ async function getBookingById(bookingId) {
 }
 
 async function updateBooking(booking) {
+    // console.log('booking:SSSService', booking._id)
     return await httpService.put(`booking/${booking._id}`, booking)
 }
 
