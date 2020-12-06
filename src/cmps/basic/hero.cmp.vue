@@ -23,7 +23,6 @@ export default {
 
   methods: {
     emitFilter(filter) {
-      console.log('filterhero',filter);
       this.$emit("filterBy", filter);
     }
   },

@@ -6,7 +6,7 @@
           <td>{{ booking.specialReq }}</td>
           <td>{{ booking.status }}</td>
           <td>
-            <button v-if="booking.status !== 'approved'"  @click.stop="approveBooking(booking)">
+            <button v-if="booking.status !== 'approved'" class="action"  @click.stop="approveBooking(booking)">
             <!-- <button v-if="booking.status === 'pending'" @click.stop="approveBooking(booking)"> -->
               Approve
             </button>

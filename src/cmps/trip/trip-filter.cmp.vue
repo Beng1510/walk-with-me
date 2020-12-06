@@ -99,8 +99,6 @@ export default {
       this.$emit("filterBy", filterByCopy);
     },
     updateFilterPage(filterBy) {
-      console.log("filterBy ???", filterBy);
-      console.log("this.$route ???", this.$route);
       if (this.$route.path === "/trip") {
         const filterByCopy = JSON.parse(JSON.stringify(this.filterBy));
 

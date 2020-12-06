@@ -38,7 +38,6 @@ export default {
   computed: {
     defaultUserForDisplay() {
       const userLogged = this.$store.getters.loggedinUser;
-      console.log("userLogged", userLogged);
       return userLogged;
     },
 

@@ -88,7 +88,6 @@ export const userStore = {
     },
     getters: {
         loggedinUser(state) {
-            console.log(' loggedinUser(state',state);
             return state.loggedinUser
         },
         loggedinGuide(state) {
@@ -216,7 +215,6 @@ export const userStore = {
         commit({ type: 'setIsLoading', isLoading: true })
 
             const userLogged = this.$store.getters.loggedinUser
-            console.log('userLogged',userLogged);
             commit({ type: 'setUser', userLogged })
             commit({ type: 'setIsLoading', isLoading: false })
         }

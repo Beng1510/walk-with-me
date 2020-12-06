@@ -12,7 +12,6 @@ export default new Vuex.Store({
   },
   getters: {
     isLoading(state) {
-      console.log('state???',state);
       return state.isLoading
   },
 },
