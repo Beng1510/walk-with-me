@@ -108,6 +108,7 @@ export default {
 
   methods: {
     bookTrip(booking) {
+      console.log('bookTrip', booking)
       this.$store.dispatch({ type: "addBooking", booking });
       let totalPplBooked = booking.trip.totalBooked;
 

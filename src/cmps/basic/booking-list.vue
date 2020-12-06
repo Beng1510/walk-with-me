@@ -36,6 +36,7 @@ export default {
   computed: {
     tripsToShow() {
       const trips = this.$store.getters.tripsForDisplay;
+
       const filteredTrips = trips.filter((trip) => trip._id === this.booking.trip._id);
       return filteredTrips
     },
