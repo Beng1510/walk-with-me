@@ -1,6 +1,6 @@
 <template>
   <section class="main-header full main-layout">
-    <div class="main-header-content flex space-between align-center">
+    <div class="main-header-content flex space-between">
       <div class="logo flex align-center">
         <router-link to="/"
           ><img
@@ -28,27 +28,35 @@
             class="avatar-img profile-img-s"
             :src="require('@/assets/img/users/' + this.user.profileImgUrl)"
           />
-        </div>
-      </div>
-      <div v-if="isMenuOpen" class="user-menu flex column">
-        <router-link to="/back-office" v-if="user.isGuide">
-          {{ userName(user) }}'s Office</router-link
-        >
-        <router-link to="/user/:id" v-if="!user.isGuide">
-          <!-- {{ userName(user) }} -->
-          Profile
-        </router-link>
-        <button @click="logout">Logout</button>
-        <template v-show="!isLoggingIn">
-          <div v-if="loggedUser" class="login-btns">
-            <button v-if="!loggedUser" @click="loginSignUp('login')">
-              Login
-            </button>
-            <button v-if="!loggedUser" @click="loginSignUp('signUp')">
-              Sign Up
-            </button>
+          <div class="user-menu flex column" :class="{ hide: !isMenuOpen }">
+            <router-link to="/back-office" v-if="user.isGuide">
+              {{ userName(user) }}'s Office</router-link
+            >
+            <router-link to="/user/:id" v-if="!user.isGuide">
+              Profile
+            </router-link>
+            <a @click="logout">Logout</a>
+            <template v-show="!isLoggingIn">
+              <div v-if="loggedUser" class="login-btns">
+                <a v-if="!loggedUser" @click="loginSignUp('login')">
+                  Login
+                </a>
+                <a v-if="!loggedUser" @click="loginSignUp('signUp')">
+                  Sign Up
+                </a>
+                <div class="s-nav-link">
+                  <router-link to="/">Home</router-link>
+                </div>
+                <div class="s-nav-link">
+                  <router-link to="/about">About</router-link>
+                </div>
+                <div class="s-nav-link">
+                  <a @click="becomeGuide(user)">Become a Guide</a>
+                </div>
+              </div>
+            </template>
           </div>
-        </template>
+        </div>
       </div>
     </div>
   </section>
