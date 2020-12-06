@@ -1,6 +1,7 @@
 .back-office-table {
     border: 1px solid black;
     margin: 0 auto;
+    margin-bottom: 20px;
     border-spacing:0; 
     border-collapse: collapse; 
     // height: 200px;
@@ -16,10 +17,14 @@
         text-align: center;
     }
     & button {
+        width: 100px;
        border-radius: 5px;
        margin: auto;
-       display: flex;
+    //    display: flex;
        cursor: pointer;
       
+    }
+    & .approve-btn{
+        margin-bottom: 5px;
     }
 }

@@ -49,14 +49,14 @@ export const bookingStore = {
         },
 
         async updateBooking(context, { booking }) {
+            
             const updatedBooking = await bookingService.updateBooking(booking)
+            socketService.emit('updateBooking',updatedBooking)
             context.commit({ type: 'setBooking', booking: updatedBooking })
         },
         
         async removeBooking(context, { booking }) {
-            // console.log('booking',booking);
             const deletedBooking = await bookingService.remove(booking)
-            // console.log('deletedBooking',deletedBooking);
             context.commit({ type: 'removeBooking', booking: deletedBooking })
         }
     }

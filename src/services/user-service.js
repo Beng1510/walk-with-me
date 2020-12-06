@@ -29,9 +29,7 @@ async function updateUser(user) {
 }
 
 async function login(userCred) {
-    // console.log('userCred',userCred);
     const user = await httpService.post('auth/login', userCred)
-    // console.log('user login at service',user);
     return _handleLogin(user)
 }
 async function signup(userCred) {
@@ -44,7 +42,6 @@ async function logout() {
 }
 
 function _handleLogin(user) {
-    // console.log('user at handle',user);
     sessionStorage.setItem('user', JSON.stringify(user))
     return user;
 }
