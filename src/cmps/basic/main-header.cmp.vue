@@ -39,7 +39,7 @@
           <!-- {{ userName(user) }} -->
           Profile
         </router-link>
-        <button @click="logout">Logout</button>
+        <a @click="logout">Logout</a>
         <template v-show="!isLoggingIn">
           <div v-if="loggedUser" class="login-btns">
             <button v-if="!loggedUser" @click="loginSignUp('login')">
