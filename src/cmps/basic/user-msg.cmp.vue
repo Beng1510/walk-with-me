@@ -1,7 +1,7 @@
 <template>
   <section v-if="msg" class="user-msg">
     <div class="alert" :class="alertClass">
-      <h1>{{ msg }}</h1>
+      <p class="bold">{{ msg }}</p>
     </div>
   </section>
 </template>

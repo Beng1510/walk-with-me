@@ -1,18 +1,18 @@
 .alert {
-    color:black;
-    padding: 10px;
-    font-size: 1.4em;
+    @include bordered-box;
+    color: $clr6;
+    padding: .5rem 1rem;
     position: fixed;
-    top: 1em;
-    right: 1em;
-    background-color: grey;
+    top: 50px;
+    right: 10px;
     border-radius: 10px;
     z-index: 2;
+    background-color: $primary;
 }
 
-.alert-success {
-    background-color: lightblue
-}
-.alert-danger {
-    background-color: rgb(122, 11, 11);
-}
+// .alert-success {
+//     background-color: lightblue
+// }
+// .alert-danger {
+//     background-color: rgb(122, 11, 11);
+// }
