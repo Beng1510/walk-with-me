@@ -2,33 +2,53 @@
   <section class="main-header full main-layout">
     <div class="main-header-content flex space-between align-center">
       <div class="logo flex align-center">
-        <router-link to="/"><img v-if="isHome" src="@/assets/logo/logo-text-OW.svg" class="logo" />
-        <img v-else src="@/assets/logo/logo-O.svg" class="logo" />
+        <router-link to="/"
+          ><img
+            v-if="isHome"
+            src="@/assets/logo/logo-text-OW.svg"
+            class="logo"
+          />
+          <img v-else src="@/assets/logo/logo-O.svg" class="logo" />
         </router-link>
       </div>
       <user-msg :user="this.user"></user-msg>
-      <template v-show="!isLoggingIn">
-        <div v-if="loggedUser" class="login-btns">
-          <button v-if="!loggedUser" @click="loginSignUp('login')">Login</button>
-          <button v-if="!loggedUser" @click="loginSignUp('signUp')">Sign Up</button>
+      <div class="nav-bar flex space-between align-center">
+        <div class="nav-link">
+          <router-link to="/">Home</router-link>
         </div>
-        <template class="logout">
-          <button @click="logout">Logout</button>
-        </template>
-      </template>
-
-      <div class="nav-bar">
-        <router-link to="/">Home</router-link> 
-        <router-link to="/about">About</router-link> 
-        <router-link to="/user/:id" v-if="!user.isGuide">
-          {{ userName(user) }}</router-link>
-        
-
+        <div class="nav-link">
+          <router-link to="/about">About</router-link>
+        </div>
+        <div class="nav-link">
+          <a @click="becomeGuide(user)">Become a Guide</a>
+        </div>
+        <div class="avatar flex align-center" @click="toggleMenu">
+          <i class="fas fa-bars"></i>
+          <img
+            class="avatar-img profile-img-s"
+            :src="require('@/assets/img/users/' + this.user.profileImgUrl)"
+          />
+        </div>
+      </div>
+      <div v-if="isMenuOpen" class="user-menu flex column">
         <router-link to="/back-office" v-if="user.isGuide">
           {{ userName(user) }}'s Office</router-link
         >
-
-        <a @click="becomeGuide(user)">Become a Guide</a>
+        <router-link to="/user/:id" v-if="!user.isGuide">
+          <!-- {{ userName(user) }} -->
+          Profile
+        </router-link>
+        <button @click="logout">Logout</button>
+        <template v-show="!isLoggingIn">
+          <div v-if="loggedUser" class="login-btns">
+            <button v-if="!loggedUser" @click="loginSignUp('login')">
+              Login
+            </button>
+            <button v-if="!loggedUser" @click="loginSignUp('signUp')">
+              Sign Up
+            </button>
+          </div>
+        </template>
       </div>
     </div>
   </section>
@@ -44,19 +64,25 @@ export default {
       type: Object,
     },
     isHome: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
 
   data() {
-   return {
-      imgSrc: ''
-   }
+    return {
+      imgSrc: "",
+      isMenuOpen: false,
+    };
   },
 
   methods: {
     userName(user) {
       var loggedUser = this.user.name;
+      var userFullName = loggedUser.split(" ");
+      return userFullName[0];
+    },
+    userAvatar(user) {
+      var loggedUser = this.user.profileImgUrl;
       var userFullName = loggedUser.split(" ");
       return userFullName[0];
     },
@@ -74,10 +100,13 @@ export default {
       await this.$store.dispatch({ type: "logout" });
       this.$store.dispatch({ type: "loadTrip" });
     },
-     isHomePage() {
+    isHomePage() {
       let isHomePage = this.$route.path === "/";
-      if (isHomePage) return 'text-OW';
-      else return 'O';
+      if (isHomePage) return "text-OW";
+      else return "O";
+    },
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
     },
   },
   computed: {
@@ -87,7 +116,6 @@ export default {
     loggedUser() {
       return this.$store.getters.loggedinUser;
     },
-   
   },
 
   components: {

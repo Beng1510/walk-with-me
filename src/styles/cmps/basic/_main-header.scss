@@ -1,50 +1,74 @@
-
 .main-header {
-    padding: .5rem 0 .5rem;
-    color: $clr6;
+  padding: 0.5rem 0 0.5rem;
+  color: $clr6;
+  box-shadow: $shadow-soft;
+  position: relative;
 
-    &.dark {
-        background-color: $secondary;
-        .logo, a {
-            color: $clr3;
-        }
+  .avatar {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.3rem 0.5rem;
+    border-radius: 35px;
+    cursor: pointer;
+    transition: all 0.4s ease-out;
+
+    &:hover {
+      box-shadow: $shadow-soft;
+      background-color: rgba(255, 255, 255, 0.4);
     }
-}
 
-.logo { 
-    text-decoration: none;
-    display: inline-block;
-    
-    & h2 {
-        color: $clr6;
-        font-family: montserratBold;
-        font-size: rem(36px);
-        margin: 1rem 0 1rem;
+    img {
+      margin-inline-start: 0.5rem;
     }
-}
+  }
 
-.nav-bar {
+  &.light {
+    .logo,
+    .nav-link,
+    .avatar {
+      color: $clr3;
+    }
 
-    & a {
-        color: $clr6;
-        font-size: em(20px);
-        margin: 1rem .5rem 1rem 0;
-        transition: all .4s ease-in-out;
+    .avatar {
+      border: 0.5px solid $clr5;
+    }
+  }
 
-        &:not(:last-child):after {
-            content: "•" ;
-            margin-inline-start: .5rem;
-        }
+  .nav-bar {
+    & .nav-link {
+      color: $clr6;
+      font-size: em(20px);
+      margin: 1rem 0.5rem 1rem 0;
 
-        &:last-child {
-            margin-inline-end: 0;
-        }
+      &:not(:last-child):after {
+        content: "•";
+        margin-inline-start: 0.5rem;
+      }
+
+      &:last-child {
+        margin-inline-end: 0;
+      }
+      a {
+        transition: all 0.4s ease-in-out;
 
         &:hover {
-            border-bottom: 2px solid $clr6;
+          border-bottom: 2px solid $primary;
         }
+
+        &:visited {
+          color: inherit;
+          .light {
+            color: $clr3;
+          }
+        }
+      }
     }
+  }
 
+  .user-menu {
+      @include bordered-box;
+      position: absolute;
+      right: 0;
+      top: 10vh;
+      background-color: $clr6;
+  }
 }
-
-

@@ -2,7 +2,7 @@
   <section class="main-layout" id="app">
     <main-header 
       :user="defaultUserForDisplay"
-      :class="{ dark: !homePage }"
+      :class="{ light: !homePage }"
       :isHome="homePage"
     />
     <hero v-if="homePage" @filterBy="updateFilter" />

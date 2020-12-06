@@ -29,6 +29,7 @@ async function updateBooking(booking) {
 
 async function remove(booking) {
     console.log('bookingId',booking._id);
-    return httpService.delete(`booking/${booking._id}`)
+     await httpService.delete(`booking/${booking._id}`)
+     return booking;
 
 }

@@ -48,17 +48,17 @@ export default {
     removeBooking(booking) {
       this.$store.dispatch({
         type: "removeBooking",
-        booking: JSON.parse(JSON.stringify(this.booking)),
-      }),
-        this.$store.dispatch({
-          type: "loadBookings",
-        });
+        booking: this.booking
+      })
     },
     toggleFav(trip) {
       this.$store.dispatch({
         type: "toggleFavs",
         trip,
       });
+    },
+    emitFav(trip) {
+      this.$emit("emitFav", trip);
     },
   },
   created() {

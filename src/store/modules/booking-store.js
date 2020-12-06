@@ -23,9 +23,9 @@ export const bookingStore = {
             const idx = state.bookings.findIndex(prd => prd._id === booking._id)
             if (idx >= 0) state.bookings.splice(idx, 1, booking)
         },
-        async removeBooking(state, { booking }) {
+       removeBooking(state, { booking }) {
             console.log('booking at mutation',booking);
-            const idx = await state.bookings.findIndex(prd => prd._id === booking._id)
+            const idx = state.bookings.findIndex(prd => prd._id === booking._id)
             if (idx >= 0) state.bookings.splice(idx, 1);
         }
     },
@@ -46,7 +46,6 @@ export const bookingStore = {
             socketService.setup();
             // socketService.emit('guideId', newBooking.guide._id);
             socketService.emit('addBooking',newBooking)
-            // console.log('newBooking:', newBooking)
             context.commit({ type: 'addBooking', booking: newBooking })
         },
 
