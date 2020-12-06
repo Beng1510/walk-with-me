@@ -135,7 +135,7 @@ export default {
   async created() {
 
     
-    console.log('this.trip:', this.isFav)
+    // console.log('this.trip:', this.isFav)
     this.trip = await tripService.getTripById(this.tripId);
     this.checkIsFav();
     this.getGuideRate(this.trip);
