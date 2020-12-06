@@ -42,7 +42,7 @@ export const bookingStore = {
             };
             const newBooking = await bookingService.createBooking(booking);
 
-            socketService.setup();
+            // socketService.setup();
             // socketService.emit('guideId', newBooking.guide._id);
             socketService.emit('addBooking',newBooking)
             context.commit({ type: 'addBooking', booking: newBooking })
@@ -50,6 +50,7 @@ export const bookingStore = {
 
         async updateBooking(context, { booking }) {
             const updatedBooking = await bookingService.updateBooking(booking)
+            socketService.emit('updateBooking',updatedBooking)
             context.commit({ type: 'setBooking', booking: updatedBooking })
         },
         
