@@ -2,7 +2,7 @@
   <section class="main-layout" id="app">
     <main-header
       :user="defaultUserForDisplay"
-      :class="{ dark: !homePage }"
+      :class="{ light: !homePage }"
       :isHome="homePage"
     />
     <hero v-if="homePage" @filterBy="updateFilter" />
@@ -16,6 +16,7 @@
 <script>
 import mainHeader from "./cmps/basic/main-header.cmp.vue";
 import mainFooter from "./cmps/basic/main-footer.cmp.vue";
+import  socketService  from './services/socket-service.js';
 import hero from "./cmps/basic/hero.cmp.vue";
 
 export default {
@@ -26,6 +27,7 @@ export default {
   },
   methods: {
     updateFilter(filterBy) {
+   
       this.$store.commit({
         type: "setFilterBy",
         filterBy,
@@ -42,8 +44,8 @@ export default {
     },
 
     homePage() {
-      return this.$route.path === "/";
-    },
+    return (this.$route.path === '/');
+     }
   },
   created() {
     this.$store.dispatch({
@@ -53,6 +55,7 @@ export default {
     this.$store.dispatch({
       type: "loadTrips",
     });
+    socketService.setup();
   },
 };
 </script>

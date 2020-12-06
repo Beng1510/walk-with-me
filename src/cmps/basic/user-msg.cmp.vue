@@ -1,7 +1,7 @@
 <template>
   <section v-if="msg" class="user-msg">
     <div class="alert" :class="alertClass">
-      <h1 >{{ msg }}</h1>
+      <h1>{{ msg }}</h1>
     </div>
   </section>
 </template>
@@ -11,11 +11,11 @@ import { eventBusService, SHOW_MSG } from "../../services/eventBus-service.js";
 import socketService from "../../services/socket-service.js";
 
 export default {
-   props: {
+  props: {
     user: {
       type: Object,
-    }
-   },
+    },
+  },
   data() {
     return {
       alive: false,
@@ -36,23 +36,36 @@ export default {
   },
   created() {
     // eventBusService.$on(SHOW_MSG, msg=>{
-      //     this.msg = msg;
+    //     this.msg = msg;
     //     var delay = msg.delay || 2000;
     //     this.alive = true;
     //     setTimeout(() => {
-      //         this.alive = false;
+    //         this.alive = false;
     //     }, delay)
-   
+
     // })
-    socketService.setup();
+  // console.log('hiiiiiiiiii');
+    // if(){
+    // socketService.setup();
     socketService.on("sendBooking", (booking) => {
-      this.msg = `${this.user.name}  booked new trip now, pending approval`;
+    
+      this.msg = `${booking.user.name} booked new trip now, pending approval`;
       setTimeout(() => {
         this.closeMgs();
       }, 3500);
     });
+    // } else {
+
+    // socketService.on("sendApproveBooking", (booking) => {
+    //   console.log('bookingdddddd:', this.booking)
+    //   this.msg = `The trip in the name of ${this.booking.trip.name} has been approved for you!`;
+    //   setTimeout(() => {
+    //     this.closeMgs();
+    //   }, 3500);
+    // });
+    // }
   },
-}
+};
 </script>
 
 <style>
