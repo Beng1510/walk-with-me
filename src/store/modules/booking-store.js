@@ -49,6 +49,7 @@ export const bookingStore = {
         },
 
         async updateBooking(context, { booking }) {
+            
             const updatedBooking = await bookingService.updateBooking(booking)
             context.commit({ type: 'setBooking', booking: updatedBooking })
         },
