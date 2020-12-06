@@ -1,5 +1,5 @@
 <template>
-  <section v-if="bookingToShow" class="back-office">
+  <section v-if="bookingsToShow" class="back-office">
     <h2>Back Office</h2>
     Hello {{ guide.name }}
     <hr />
@@ -15,14 +15,14 @@
           <th>Approve Booking</th>
         </tr>
       </thead>
-      <tbody v-for="booking in bookingToShow" :key="booking._id">
+      <tbody v-for="booking in bookingsToShow" :key="booking._id">
         <approve-booking :booking="booking" :key="booking._id" />
       
       </tbody>
     </table>
     <!-- <ul> -->
       <!-- <li v-for="booking in bookingToShow" :key="booking._id"> -->
-        <!-- <chart :booking="bookingToShow" /> -->
+        <!-- <chart :bookings="bookingsToShow" /> -->
       <!-- </li> -->
 
     <!-- </ul> -->
@@ -86,8 +86,9 @@ export default {
     // },
   },
   computed: {
-    bookingToShow() {
+    bookingsToShow() {
       const bookings = this.$store.getters.bookings;
+    
       return bookings.filter((booking) => booking.guide._id === this.guide._id);
     },
     guide() {
