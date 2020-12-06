@@ -100,7 +100,7 @@ export default {
     },
   },
   async created() {
-    console.log('this.guideId:', this.guideId)
+    // console.log('this.guideId:', this.guideId)
     this.$store.dispatch({ type: "loadReviews", guideId: this.guideId });
   },
   components: {
