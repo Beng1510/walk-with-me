@@ -5,7 +5,7 @@ import { Doughnut } from 'vue-chartjs'
  
 export default {
   props:{
-    booking: Object
+    booking: Array
   },
   extends: Doughnut,
   mounted () {

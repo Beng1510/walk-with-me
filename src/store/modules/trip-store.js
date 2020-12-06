@@ -67,7 +67,6 @@ export const tripStore = {
     },
     mutations: {
         setFilterBy(state, { filterBy }) {
-            console.log('state form filter',state);
             state.filterBy = filterBy
         },
         setTrips(state, { trips }) {
