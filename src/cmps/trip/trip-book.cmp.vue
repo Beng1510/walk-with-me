@@ -84,7 +84,6 @@ export default {
       //   subTxt: "Please wait for guide's final approval",
       //   type: "success",
       // });
-      
       this.updateTotalBooked();
     },
 

@@ -17,8 +17,15 @@
       </thead>
       <tbody v-for="booking in bookingToShow" :key="booking._id">
         <approve-booking :booking="booking" :key="booking._id" />
+      
       </tbody>
     </table>
+    <ul>
+      <li v-for="booking in bookingToShow" :key="booking._id">
+        <chart :booking="booking" />
+      </li>
+
+    </ul>
 
     <add-trip :guide="this.guide" />
   </section>
@@ -28,7 +35,9 @@
 import { userService } from "../services/user-service.js";
 import { bookingService } from "../services/booking-service.js";
 import addTrip from "../cmps/trip/add-trip.cmp.vue";
-import approveBooking from '../cmps/basic/approve-booking.vue'
+import approveBooking from '../cmps/basic/approve-booking.vue';
+import chart from '../cmps/basic/chart.cmp.vue'
+
 export default {
   name: "back-office",
   data() {
@@ -93,7 +102,9 @@ export default {
   },
   components: {
     addTrip,
-    approveBooking
+    approveBooking,
+        chart
+
   },
 };
 </script>
