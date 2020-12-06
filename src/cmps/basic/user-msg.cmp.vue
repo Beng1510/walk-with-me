@@ -35,21 +35,21 @@ export default {
     },
   },
   created() {
-    // eventBusService.$on(SHOW_MSG, msg=>{
-    //     this.msg = msg;
-    //     var delay = msg.delay || 2000;
-    //     this.alive = true;
-    //     setTimeout(() => {
-    //         this.alive = false;
-    //     }, delay)
+    
 
-    // })
-  // console.log('hiiiiiiiiii');
     // if(){
     // socketService.setup();
     socketService.on("sendBooking", (booking) => {
     
       this.msg = `${booking.user.name} booked new trip now, pending approval`;
+      setTimeout(() => {
+        this.closeMgs();
+      }, 3500);
+    });
+
+    socketService.on("approveBooking", (booking) => {
+    
+      this.msg = `${booking.guide.name} approved your booking`;
       setTimeout(() => {
         this.closeMgs();
       }, 3500);
