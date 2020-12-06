@@ -1,17 +1,17 @@
 <template>
-<section class="booking-list">
-  <div class="flex column">
-    <trip-preview
-      v-for="trip in tripsToShow"
-      :key="trip._id"
-      :tripId="trip._id"
-      @emitFav="emitFav"
-      @click="goToDetails(trip._id)"
-    >
-    </trip-preview>
-    <button @click.stop="removeBooking(booking)">Cancel</button>
-  </div>
-</section>
+  <section class="booking-list">
+    <div class="flex column">
+      <trip-preview
+        v-for="trip in tripsToShow"
+        :key="trip._id"
+        :tripId="trip._id"
+        @emitFav="emitFav"
+        @click="goToDetails(trip._id)"
+      >
+      </trip-preview>
+      <button @click.stop="removeBooking(booking)">Cancel</button>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -45,12 +45,13 @@ export default {
     removeBooking(booking) {
       this.$store.dispatch({
         type: "removeBooking",
-        booking: JSON.parse(JSON.stringify(this.booking)),
-      }),
-        this.$store.dispatch({
-          type: "loadBookings",
-        });
+        booking:this.booking
+      })
+        // this.$store.dispatch({
+        //   type: "loadBookings",
+        // });
     },
+    
     toggleFav(trip) {
       this.$store.dispatch({
         type: "toggleFavs",

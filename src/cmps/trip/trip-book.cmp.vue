@@ -79,11 +79,11 @@ export default {
     emitBook() {
       this.$emit("bookTrip", this.booking);
 
-      eventBusService.$emit(SHOW_MSG, {
-        txt: "Trip Booked!",
-        subTxt: "Please wait for guide's final approval",
-        type: "success",
-      });
+      // eventBusService.$emit(SHOW_MSG, {
+      //   txt: "Trip Booked!",
+      //   subTxt: "Please wait for guide's final approval",
+      //   type: "success",
+      // });
       this.updateTotalBooked();
     },
 

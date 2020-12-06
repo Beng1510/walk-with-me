@@ -45,8 +45,13 @@ export default {
    
     // })
     socketService.setup();
+    console.log('hi');
+
     socketService.on("sendBooking", (booking) => {
+    console.log('booking2',booking);
+    console.log('hi2');
       this.msg = `${this.user.name}  booked new trip now, pending approval`;
+    console.log('hi3');
 
       setTimeout(() => {
         this.closeMgs();
