@@ -43,7 +43,16 @@ export default {
         this.closeMgs();
       }, 3500);
     });
+
+    socketService.on("approveBooking", (booking) => {
     
+    
+      this.msg = `${booking.guide.name} approved your booking`;
+      setTimeout(() => {
+        this.closeMgs();
+      }, 3500);
+    });
+    // } else {
 
     // socketService.on("sendApproveBooking", (booking) => {
     //   console.log('bookingdddddd:', this.booking)

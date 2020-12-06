@@ -18,7 +18,7 @@ function setup() {
 }
 
 function terminate() {
-    socket = null;ד
+    socket = null;
 }
 
 function on(eventName, cb) {
