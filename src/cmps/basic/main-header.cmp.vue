@@ -92,7 +92,7 @@ export default {
     becomeGuide(user) {
       // user.isGuide = !user.isGuide;
       // if (user.isGuide) {
-      //   socketService.setup();
+        // socketService.setup();
       // }
       this.$store.dispatch({
         type:"login",

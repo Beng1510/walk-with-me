@@ -88,6 +88,7 @@ export default {
   computed: {
     bookingToShow() {
       const bookings = this.$store.getters.bookings;
+      console.log(bookings, 'BOOKINGGGG')
       return bookings.filter((booking) => booking.guide._id === this.guide._id);
     },
     guide() {
