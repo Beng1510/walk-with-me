@@ -35,18 +35,7 @@ export default {
     },
   },
   created() {
-    // eventBusService.$on(SHOW_MSG, msg=>{
-    //     this.msg = msg;
-    //     var delay = msg.delay || 2000;
-    //     this.alive = true;
-    //     setTimeout(() => {
-    //         this.alive = false;
-    //     }, delay)
-
-    // })
-  // console.log('hiiiiiiiiii');
-    // if(){
-    // socketService.setup();
+ 
     socketService.on("sendBooking", (booking) => {
     
       this.msg = `${booking.user.name} booked new trip now, pending approval`;
@@ -54,7 +43,7 @@ export default {
         this.closeMgs();
       }, 3500);
     });
-    // } else {
+    
 
     // socketService.on("sendApproveBooking", (booking) => {
     //   console.log('bookingdddddd:', this.booking)
