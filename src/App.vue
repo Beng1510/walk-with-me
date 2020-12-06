@@ -16,6 +16,7 @@
 <script>
 import mainHeader from "./cmps/basic/main-header.cmp.vue";
 import mainFooter from "./cmps/basic/main-footer.cmp.vue";
+import  socketService  from './services/socket-service.js';
 import hero from "./cmps/basic/hero.cmp.vue";
 
 export default {
@@ -50,6 +51,7 @@ export default {
     this.$store.dispatch({
       type: "loadTrips",
     });
+    socketService.setup();
   },
 };
 </script>

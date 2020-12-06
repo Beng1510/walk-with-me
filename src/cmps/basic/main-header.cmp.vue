@@ -68,10 +68,15 @@ export default {
       return userFullName[0];
     },
     becomeGuide(user) {
-      user.isGuide = !user.isGuide;
-      if (user.isGuide) {
-        socketService.setup();
-      }
+      // user.isGuide = !user.isGuide;
+      // if (user.isGuide) {
+      //   socketService.setup();
+      // }
+      this.$store.dispatch({
+        type:"login",
+        userCred:{  name: "Arnold Wellington", password: "123456" }
+
+      })
     },
     loginSignUp(action) {
       this.$store.commit({ type: "setLoginSignUp", action });
