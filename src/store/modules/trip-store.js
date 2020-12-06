@@ -34,21 +34,13 @@ export const tripStore = {
             return random
         },
         difficultTripsForDisplay(state) {
-            if (state.showBy === "Extreme" && state.isShowAll === true) {
-                return state.trips.filter(trip => trip.difficulty >= 4)
-            } else {
                 const extremeTrips = state.trips.filter(trip => trip.difficulty >= 4)
                 return extremeTrips.slice(0, 4)
-            }
         },
         europeTripsForDisplay(state) {
-            if (state.showBy === "Europe" && state.isShowAll === true) {
-                return state.trips.filter(trip => trip.region === "Europe")
-            } else {
                 const europeTrips = state.trips.filter(trip => trip.region === "Europe")
                 let random = europeTrips.sort(() => .5 - Math.random()).slice(0,4)
             return random
-            }
         },
         usaTripsForDisplay(state) {
             if (state.showBy === "USA" && state.isShowAll === true) {
