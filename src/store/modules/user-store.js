@@ -65,14 +65,14 @@ var defaultGuide = {
 
 var localLoggedinUser = null;
 if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user);
-else {
+// else {
 
-    userService.login({ name: "Charlie McBride", password: "123456" })
-        .then(user => localLoggedinUser = user)
-    // .then(context.commit({ type: 'setUser', localLoggedinUser }))
+//     userService.login({ name: "Charlie McBride", password: "123456" })
+//         .then(user => localLoggedinUser = user)
+//     // .then(context.commit({ type: 'setUser', localLoggedinUser }))
 
 
-}
+// }
 
 export const userStore = {
     strict: true,

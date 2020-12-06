@@ -26,7 +26,7 @@ export const httpService = {
         return ajax(endpoint, 'GET', data)
     },
     post(endpoint, data) {
-        console.log('endpoint:', endpoint)
+        // console.log('endpoint:', endpoint)
         return ajax(endpoint, 'POST', data)
     },
     put(endpoint, data) {
@@ -47,11 +47,11 @@ async function ajax(endpoint, method = 'get', data = null) {
 
         return res.data;
     } catch (err) {
-        console.log('err', err);
+        // console.log('err', err);
         if (err.response.status === 401) {
             router.push('/');
         }
-        console.log(`Had issues ${method}ing to server`, err)
+        // console.log(`Had issues ${method}ing to server`, err)
         throw err;
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <section class="main-footer full main-layout flex align-center">
-    <small>Coffee Rights</small>
+    <small><span class="footer-title">Walk With Me</span> - International Tours & Guides</small>
   </section>
 </template>
 

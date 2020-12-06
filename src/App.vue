@@ -1,6 +1,6 @@
 <template>
   <section class="main-layout" id="app">
-    <main-header 
+    <main-header
       :user="defaultUserForDisplay"
       :class="{ dark: !homePage }"
       :isHome="homePage"
@@ -8,8 +8,8 @@
     <hero v-if="homePage" @filterBy="updateFilter" />
     <main>
       <router-view />
-      <main-footer />
     </main>
+    <main-footer />
   </section>
 </template>
 
@@ -32,15 +32,16 @@ export default {
         type: "setFilterBy",
         filterBy,
       });
-        this.$store.dispatch({
-      type: "loadTrips",
-    });
+      this.$store.dispatch({
+        type: "loadTrips",
+      });
     },
   },
   computed: {
     defaultUserForDisplay() {
-      
-      return this.$store.getters.loggedinUser;
+      const userLogged = this.$store.getters.loggedinUser;
+      // console.log("userLogged", userLogged);
+      return userLogged;
     },
 
     homePage() {
@@ -48,6 +49,10 @@ export default {
      }
   },
   created() {
+    this.$store.dispatch({
+      type: "login",
+      userCred: { name: "Charlie McBride", password: "123456" },
+    });
     this.$store.dispatch({
       type: "loadTrips",
     });

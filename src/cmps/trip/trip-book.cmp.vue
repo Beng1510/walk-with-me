@@ -84,7 +84,6 @@ export default {
       //   subTxt: "Please wait for guide's final approval",
       //   type: "success",
       // });
-      
       this.updateTotalBooked();
     },
 
@@ -96,7 +95,7 @@ export default {
     },
     updateTotalBooked() {
       let totalBooked = this.booking.trip.totalBooked;
-      console.log("totalBooked after", totalBooked);
+      // console.log("totalBooked after", totalBooked);
 
       const peopleToSign = this.booking.peopleToSign;
       totalBooked += peopleToSign;
@@ -105,7 +104,7 @@ export default {
         id: this.trip._id,
         totalBooked: JSON.parse(JSON.stringify(totalBooked)),
       });
-      console.log("totalBooked after", totalBooked);
+      // console.log("totalBooked after", totalBooked);
     },
     getBookingByUser(user) {
       const bookings = this.$store.getters.bookings;
