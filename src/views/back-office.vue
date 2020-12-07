@@ -3,7 +3,7 @@
     <h1>Trip Manager</h1>
     <h3>Hello, {{ guide.name }}</h3>
     <h3>Your Bookings:</h3>
-
+<div class="table-container">
     <table class="back-office-table">
       <thead>
         <tr>
@@ -20,6 +20,7 @@
         <approve-booking :booking="booking" :key="booking._id" />
       </tbody>
     </table>
+</div>
     
     <add-trip :guide="this.guide" />
   </section>
