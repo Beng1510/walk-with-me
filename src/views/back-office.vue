@@ -91,7 +91,6 @@ export default {
     this.$store.dispatch({
       type: "loadBookings",
     });
-    // this.getStatusBooking();
   },
   components: {
     addTrip,
