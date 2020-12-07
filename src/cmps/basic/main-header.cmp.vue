@@ -91,11 +91,6 @@ export default {
       var userFullName = loggedUser.split(" ");
       return userFullName[0];
     },
-    userAvatar(user) {
-      var loggedUser = this.user.profileImgUrl;
-      var userFullName = loggedUser.split(" ");
-      return userFullName[0];
-    },
     becomeGuide(user) {
       // user.isGuide = !user.isGuide;
       // if (user.isGuide) {
