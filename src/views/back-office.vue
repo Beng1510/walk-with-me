@@ -1,5 +1,5 @@
 <template>
-  <section v-if="bookingToShow" class="back-office">
+  <section v-if="bookingsToShow" class="back-office">
     <h1>Trip Manager</h1>
     <h3>Hello, {{ guide.name }}</h3>
     <h3>Your Bookings:</h3>
@@ -91,7 +91,6 @@ export default {
     this.$store.dispatch({
       type: "loadBookings",
     });
-    // this.getStatusBooking();
   },
   components: {
     addTrip,
