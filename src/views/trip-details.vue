@@ -135,23 +135,11 @@ export default {
         }
       });
     },
-    // getTripDate(date) {
-    //   console.log("date", date);
-    //   this.dateTrip = date;
-    // },
   },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedinUser;
     },
-    // getDateString(trip) {
-    //   const upcomingTripDates = this.trip.upcomingDates;
-    //   const convertedDates = upcomingTripDates.map((date) => {
-    //     var nextTrip = new Date(date);
-    //     return nextTrip.toLocaleDateString("en-GB");
-    //   });
-    //   return convertedDates;
-    // },
     bookedMsg() {
       if (!this.isBooked && this.trip.totalBooked < 10) {
         return "Come & Join The Trip ";

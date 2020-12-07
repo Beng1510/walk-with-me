@@ -30,6 +30,11 @@
 
   .specialReq {
     padding: 0.5rem;
+
+    &:focus {
+      outline: 1px solid $primary;
+      -moz-outline-radius: 25px;
+    }
   }
   .el-input-number__decrease:hover,
   .el-input-number__increase:hover {
