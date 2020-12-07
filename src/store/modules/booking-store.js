@@ -9,7 +9,6 @@ export const bookingStore = {
     },
     getters: {
         bookings(state) {
-            console.log(state.bookings, 'getBooking')
             return state.bookings
         }
     },

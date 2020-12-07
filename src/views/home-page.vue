@@ -1,14 +1,5 @@
 <template>
   <section class="home-page">
-    <!-- <span v-if="isLoading">Loading...</span> -->
-    <!-- <loading
-      :active.sync="isLoading"
-      :can-cancel="true"
-      :on-cancel="onCancel"
-      :is-full-page="fullPage"
-      color='#FF8A44'
-    ></loading> -->
-
     <div class="trips-by flex space-between">
       <h3>Trips Across Europe</h3>
       <button
@@ -119,12 +110,12 @@ export default {
       // this.isLoading = true;
 
       // setTimeout(() => {
-        // this.isLoading = false;
+      // this.isLoading = false;
       // }, 2000);
       this.$router.push("/trip");
     },
     // onCancel() {
-      // console.log("User cancelled the loader.");
+    // console.log("User cancelled the loader.");
     // },
   },
   computed: {

@@ -27,4 +27,13 @@
     & .approve-btn{
         margin-bottom: 5px;
     }
+    & .active {
+        background-color:$clr5;
+        cursor: crosshair;
+        cursor: not-allowed;
+    }
+    & .active:hover {
+        color: white;
+    }
+    
 }

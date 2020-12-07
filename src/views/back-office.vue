@@ -12,6 +12,7 @@
           <th>Amount of People</th>
           <th>Special Requests</th>
           <th>Status</th>
+          <th>Date</th>
           <th>Approve Booking</th>
         </tr>
       </thead>

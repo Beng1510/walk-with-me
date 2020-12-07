@@ -23,6 +23,10 @@
     color: $clr4;
   }
 
+  p.fully-booked {
+      color: $primary;
+  }
+
   .seperator {
     color: $clr4;
     margin: 0 0.5rem;
@@ -82,3 +86,4 @@
     transition: opacity 0.24s ease-out;
   }
 }
+
