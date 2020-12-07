@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .back-office-table {
     border: 1px solid black;
     margin: 0 auto;
@@ -37,3 +38,47 @@
     }
     
 }
+=======
+.back-office {
+
+    h1 {
+        font-size: 2rem;
+        font-family: montserratBold;
+        margin-block: 1.5rem 1.25rem; 
+      }
+
+      .back-office-table {
+          border-collapse: collapse;
+          overflow: hidden;
+          border-radius: 8px;
+          margin-block-end: 2rem;
+
+          th {
+              background-color: $primary;
+              color: $clr6;
+              font-family: openSansBold;
+              padding: 1rem;
+              text-align: start; 
+          }
+
+          td {
+            padding:1.5rem;
+            text-align: start; 
+          }
+      }
+
+      tbody {
+
+        &:nth-child(even) {
+            background-color: #f1eeee;
+        }
+
+        button {
+            
+            &:first-child {
+                margin-inline-end: 1rem;
+            }
+        }
+      }
+}
+>>>>>>> f4c7a722bc379c8bb7c448a8986051a831b1ab84
