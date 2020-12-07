@@ -28,11 +28,12 @@
             {{ desc }}
           </p>
         </div>
-        <h2>Upcoming Trips</h2>
+        <!-- <h2>Upcoming Trips</h2>
         <div class="upcoming-trips" v-for="n in 3" :key="n">
           <p @click="getTripDate(getDateString[n - 1])">{{ getDateString[n - 1] }}</p>
-        </div>
-        <div v-if="this.filterdBookings" class="booked-by">
+        </div> -->
+
+        <div v-if="somebodyBooked" class="booked-by">
           <h3>Already Booked:</h3>
           <!-- need to add if -->
           <ul>
@@ -106,16 +107,14 @@ export default {
       isBooked: false,
       guide: null,
       user: null,
-      dateTrip: null
+      dateTrip: null,
+      somebodyBooked: true,
     };
   },
 
   methods: {
     bookTrip(booking) {
-      console.log("bookTrip", booking);
-      console.log('dateTrip',this.dateTrip);
-      booking.datePicked = this.dateTrip
-      console.log('booking22222',booking);
+      // booking.datePicked = this.dateTrip
       this.$store.dispatch({ type: "addBooking", booking });
       let totalPplBooked = booking.trip.totalBooked;
 
@@ -136,25 +135,23 @@ export default {
         }
       });
     },
-    getTripDate(date) {
-console.log('date',date);
-this.dateTrip = date
-console.log("🚀 ~ file: trip-details.vue ~ line 139 ~ getTripDate ~ this.dateTrip", this.dateTrip)
-
-    }
+    // getTripDate(date) {
+    //   console.log("date", date);
+    //   this.dateTrip = date;
+    // },
   },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedinUser;
     },
-    getDateString(trip) {
-      const upcomingTripDates = this.trip.upcomingDates;
-      const convertedDates = upcomingTripDates.map((date) => {
-        var nextTrip = new Date(date);
-        return nextTrip.toLocaleDateString("en-GB");
-      });
-      return convertedDates;
-    },
+    // getDateString(trip) {
+    //   const upcomingTripDates = this.trip.upcomingDates;
+    //   const convertedDates = upcomingTripDates.map((date) => {
+    //     var nextTrip = new Date(date);
+    //     return nextTrip.toLocaleDateString("en-GB");
+    //   });
+    //   return convertedDates;
+    // },
     bookedMsg() {
       if (!this.isBooked && this.trip.totalBooked < 10) {
         return "Come & Join The Trip ";
@@ -162,21 +159,6 @@ console.log("🚀 ~ file: trip-details.vue ~ line 139 ~ getTripDate ~ this.dateT
         return "Sorry, We're Fully Booked";
       } else return "You've Already Booked This Trip";
     },
-    // upcomingDates(trip) {
-    //   var upcomingTrips = this.trip.upcomingDates;
-    //   console.log("upcomingTrips", upcomingTrips);
-
-    //   // upcomingTrips.forEach((date) => {
-    //   //   console.log("date", date);
-
-    //   //   var upcomingTrip = new Date(date);
-    //   //   console.log("upcomingTrip", upcomingTrip);
-
-    //   //   //  console.log('upcomingTrip',upcomingTrip);
-    //   // });
-    //     return upcomingTrips.toLocaleDateString("en-GB");
-    //   // return upcomingTrips;
-    // },
   },
   async created() {
     const tripId = this.$route.params.id;
@@ -194,7 +176,9 @@ console.log("🚀 ~ file: trip-details.vue ~ line 139 ~ getTripDate ~ this.dateT
       (booking) => booking.trip._id === tripId
     );
     this.filterdBookings = filteredBookingsByTrip;
-
+    if (this.filterdBookings.length < 1) {
+      return (this.somebodyBooked = false);
+    }
     this.getBookingByUser(this.loggedInUser);
   },
   components: {
