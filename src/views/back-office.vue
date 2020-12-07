@@ -1,5 +1,5 @@
 <template>
-  <section v-if="bookingToShow" class="back-office">
+  <section v-if="bookingsToShow" class="back-office">
     <h1>Trip Manager</h1>
     <h3>Hello, {{ guide.name }}</h3>
     <h3>Your Bookings:</h3>
@@ -12,10 +12,11 @@
           <th>Signed</th>
           <th>Special Requests</th>
           <th>Status</th>
+          <th>Date</th>
           <th>Approve Booking</th>
         </tr>
       </thead>
-      <tbody v-for="booking in bookingToShow" :key="booking._id">
+      <tbody v-for="booking in bookingsToShow" :key="booking._id">
         <approve-booking :booking="booking" :key="booking._id" />
       </tbody>
     </table>
@@ -30,7 +31,6 @@ import { userService } from "../services/user-service.js";
 import { bookingService } from "../services/booking-service.js";
 import addTrip from "../cmps/trip/add-trip.cmp.vue";
 import approveBooking from "../cmps/basic/approve-booking.vue";
-// import chart from '../cmps/basic/chart.cmp.vue'
 
 export default {
   name: "back-office",
@@ -79,9 +79,9 @@ export default {
     // },
   },
   computed: {
-    bookingToShow() {
+    bookingsToShow() {
       const bookings = this.$store.getters.bookings;
-      console.log(bookings, "BOOKINGGGG");
+    
       return bookings.filter((booking) => booking.guide._id === this.guide._id);
     },
     guide() {
@@ -92,12 +92,10 @@ export default {
     this.$store.dispatch({
       type: "loadBookings",
     });
-    // this.getStatusBooking();
   },
   components: {
     addTrip,
     approveBooking,
-    // chart
   },
 };
 </script>

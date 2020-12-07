@@ -1,6 +1,7 @@
 <template>
   <section v-if="msg" class="user-msg">
     <div class="alert" :class="alertClass">
+      <p @click="closeMgs() ">X</p>
       <p class="bold">{{ msg }}</p>
     </div>
   </section>
@@ -35,25 +36,22 @@ export default {
     },
   },
   created() {
-    
-
-    // if(){
-    // socketService.setup();
+ 
     socketService.on("sendBooking", (booking) => {
     
-      this.msg = `${booking.user.name} booked new trip now, pending approval`;
-      setTimeout(() => {
-        this.closeMgs();
-      }, 3500);
+      this.msg = `${booking.user.name} booked the ${booking.trip.name} trip, pending your approval`;
+      // setTimeout(() => {
+      //   this.closeMgs();
+      // }, 3500);
     });
 
     socketService.on("approveBooking", (booking) => {
     
     
       this.msg = `${booking.guide.name} approved your booking`;
-      setTimeout(() => {
-        this.closeMgs();
-      }, 3500);
+      // setTimeout(() => {
+      //   this.closeMgs();
+      // }, 3500);
     });
     // } else {
 
