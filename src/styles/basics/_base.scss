@@ -119,8 +119,16 @@ textarea {
     font-family: openSansReg;
     
     &:focus {
+        outline: 1px solid $primary;
         -moz-outline-radius: 15px;
-    }
+      }
+}
+
+.txt-input {
+    &:focus {
+        outline: 1px solid $primary;
+        -moz-outline-radius: 25px;
+      }
 }
 
 .all-trips-list {
