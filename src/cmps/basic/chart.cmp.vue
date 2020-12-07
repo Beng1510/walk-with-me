@@ -5,13 +5,13 @@ import { Doughnut } from 'vue-chartjs'
  
 export default {
   props:{
-    booking: Array
+    bookings: Array
   },
   extends: Doughnut,
   mounted () {
     // Overwriting base render method with actual data.
     this.renderChart({
-      labels: ['Adult', 'Funny', 'Educational'],
+      labels: ['name', 'Funny', 'Educational'],
       datasets: [
         {
           label: 'GitHub Commits',

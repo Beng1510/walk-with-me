@@ -24,10 +24,17 @@
             <span class="price bold">${{ this.trip.price }}</span> / person
           </p>
           <span class="seperator">∙</span>
-          <p>
-            <span class="bold">{{ this.trip.totalBooked }}</span
-            >/10 joined
-          </p>
+
+          <div v-if="fullyBooked">
+            <p class="fully-booked">Fully Booked</p>
+          </div>
+
+          <div v-else>
+            <p>
+              <span class="bold">{{ this.trip.totalBooked }}</span
+              >/10 joined
+            </p>
+          </div>
         </div>
         <hr />
         <div class="guide-info flex space-between">
@@ -41,7 +48,9 @@
             <p>{{ this.trip.aboutGuide.name }}</p>
           </div>
           <p>
-            <i class="fas fa-star trip-star-rate"></i> {{ rateGuide }}({{ rateTotal }})
+            <i class="fas fa-star trip-star-rate"></i> {{ rateGuide }} ({{
+              rateTotal
+            }})
           </p>
         </div>
       </div>
@@ -67,6 +76,7 @@ export default {
       rateGuide: null,
       guide: null,
       rateTotal: null,
+      fullyBooked: false
     };
   },
   name: "trip-preview",
@@ -81,7 +91,6 @@ export default {
     },
 
     checkIsFav() {
-      
       const user = this.getCurrUser;
       const userFavs = user.favoriteTrips;
       let isInFav = userFavs.some((userFav) =>
@@ -101,13 +110,18 @@ export default {
     },
 
     async getRateTotal(trip) {
-       const tripGuideId = trip.aboutGuide._id;
-       const total = await this.$store.dispatch({
-         type: "getRateTotal",
-         tripGuideId
-       });
-       this.rateTotal = total 
+      const tripGuideId = trip.aboutGuide._id;
+      const total = await this.$store.dispatch({
+        type: "getRateTotal",
+        tripGuideId,
+      });
+      this.rateTotal = total;
     },
+     checkIfFullyBooked(trip) {
+      if (trip.totalBooked === 10) {
+        this.fullyBooked = true      
+      }
+    }
   },
 
   computed: {
@@ -130,11 +144,10 @@ export default {
       var date = new Date(this.trip.date);
       return date.toLocaleDateString("en-GB");
     },
+   
   },
 
   async created() {
-
-    
     // console.log('this.trip:', this.isFav)
     this.trip = await tripService.getTripById(this.tripId);
     this.checkIsFav();
@@ -142,6 +155,8 @@ export default {
 
     this.guide = await userService.getUserById(this.trip.aboutGuide._id);
     this.getRateTotal(this.trip);
+
+    this.checkIfFullyBooked(this.trip)
   },
 };
 </script>

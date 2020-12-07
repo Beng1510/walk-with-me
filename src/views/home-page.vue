@@ -1,14 +1,5 @@
 <template>
   <section class="home-page">
-    <span v-if="isLoading">Loading...</span>
-    <loading
-      :active.sync="isLoading"
-      :can-cancel="true"
-      :on-cancel="onCancel"
-      :is-full-page="fullPage"
-      color='#FF8A44'
-    ></loading>
-
     <div class="trips-by flex space-between">
       <h3>Trips Across Europe</h3>
       <button
@@ -78,7 +69,7 @@
 import tripFilter from "../cmps/trip/trip-filter.cmp.vue";
 import tripList from "../cmps/trip/trip-list.cmp.vue";
 import guideList from "../cmps/guide/guide-list.cmp.vue";
-import Loading from "vue-loading-overlay";
+// import Loading from "vue-loading-overlay";
 // Import stylesheet
 import "vue-loading-overlay/dist/vue-loading.css";
 
@@ -86,7 +77,7 @@ export default {
   name: "home-page",
   data() {
     return {
-      isLoading: false,
+      // isLoading: false,
       fullPage: true,
       user: null,
       filterBy: {
@@ -116,16 +107,16 @@ export default {
       });
     },
     goToAllTrips() {
-      this.isLoading = true;
+      // this.isLoading = true;
 
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 2000);
+      // setTimeout(() => {
+      // this.isLoading = false;
+      // }, 2000);
       this.$router.push("/trip");
     },
-    onCancel() {
-      console.log("User cancelled the loader.");
-    },
+    // onCancel() {
+    // console.log("User cancelled the loader.");
+    // },
   },
   computed: {
     mountainTripsForDisplay() {
@@ -156,22 +147,22 @@ export default {
   components: {
     tripList,
     guideList,
-    Loading,
+    // Loading,
   },
   created() {
     this.$store.commit({
       type: "setFilterBy",
       filterBy: { name: "", type: "", location: "", region: "" },
     });
-    this.isLoading = true;
+    // this.isLoading = true;
     // this.$router.push("/trip");
 
     this.$store.dispatch({
       type: "loadTrips",
     });
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 2000);
+    // setTimeout(() => {
+    //   this.isLoading = false;
+    // }, 2000);
     this.$store.dispatch({
       type: "loadUsers",
     });

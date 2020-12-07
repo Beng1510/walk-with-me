@@ -94,3 +94,25 @@
     }
     
 }
+@media(max-width :720px){
+    
+    .user-details{
+        width: 450px;
+    }
+    .profile-img-l {
+        width: 180px;
+        height: 180px;
+    }
+    
+}
+@media(max-width :520px){
+    
+    .user-details{
+        width: 350px;
+    }
+    .profile-img-l {
+        width: 150px;
+        height: 150px;
+    }
+    
+}

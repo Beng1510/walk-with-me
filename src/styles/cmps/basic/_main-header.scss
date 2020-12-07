@@ -1,7 +1,13 @@
 .main-header {
-  padding: 0.5rem 0 0.5rem;
+  padding: 1rem 0;
   color: $clr6;
   position: relative;
+
+  .logo {
+    .router-link-active {
+      line-height: 1;
+    }
+  }
 
   .avatar {
     background-color: rgba(255, 255, 255, 0.2);
@@ -9,6 +15,8 @@
     border-radius: 35px;
     cursor: pointer;
     transition: all 0.4s ease-out;
+    max-height: 3rem;
+    position: relative;
 
     &:hover {
       box-shadow: $shadow-soft;
@@ -21,15 +29,17 @@
   }
 
   .nav-bar {
+    max-height: 3rem;
+
     & .nav-link {
       position: relative;
       color: $clr6;
       font-size: em(20px);
-      margin: 1rem 0.5rem 1rem 0;
+      margin-inline-end: 0.5rem;
 
       &:not(:last-child):after {
         content: "•";
-        margin-inline-start: 0.5rem;
+        margin-inline-start: 0.75rem;
       }
 
       &:last-child {
@@ -43,26 +53,79 @@
         }
 
         &:visited {
-            color: $clr6;
+          color: $clr6;
         }
+      }
+    }
+
+    @media screen and (max-width: $bp2-s) {
+      .nav-link {
+        display: none;
       }
     }
   }
 
   .user-menu {
-      @include bordered-box;
-      position: absolute;
-      right: 20px;
-      top: 10vh;
-      background-color: rgba(255,255,255,.9);
-      padding: .75rem;
-      color: $clr3;
+    @include bordered-box;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    padding-block-start: 1rem;
+    padding-block-end: .5rem;
+    border-radius: 8px;
+    background-color: $clr6;
+    color: $clr3;
+    transition: all 0.2s ease-in-out;
+    white-space: nowrap;
+    opacity: 1;
+    box-shadow: $shadow-soft;
+
+    &.hide {
+      right: -50%;
+      opacity: 0;
+    }
+
+    a {
+      margin-block-end: .25rem;
+      padding: .25rem 1.5rem;
+      font-family: openSansReg;
+      transition: all 0.3s ease-in-out;
+      width: 100%;
+
+      &:visited {
+        color: $clr3;
+      }
+
+      &:hover {
+        background-color: $clr5;
+      }
+    }
+
+    .s-nav-link {
+      display: none;
+      margin-block-end: .25rem;
+      padding: .25rem;
+      width: 100%;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: $clr5;
+      }
+
+      @media screen and (max-width: $bp2-s) {
+        display: block;
+      }
+    }
+    
   }
 
   &.light {
     box-shadow: $shadow-soft;
-    
-    .logo,
+
+    .logo {
+      max-height: rem(48px);
+    }
+
     .nav-link,
     a,
     .avatar {
@@ -70,7 +133,7 @@
 
       a:visited {
         color: $clr3;
-    }
+      }
     }
 
     .avatar {
@@ -78,7 +141,7 @@
     }
 
     .nav-link a:visited {
-        color: $clr3;
+      color: $clr3;
     }
   }
 }

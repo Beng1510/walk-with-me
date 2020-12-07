@@ -1,6 +1,6 @@
 <template>
   <section v-if="tripToEdit" class="add-trip">
-    <button @click="showAddBtn">Add Trip</button>
+    <button class="action" @click="showAddBtn">Create A New Trip</button>
 
     <form class="add-trip-form" @submit.prevent="addTrip" v-if="isAdding">
       <input

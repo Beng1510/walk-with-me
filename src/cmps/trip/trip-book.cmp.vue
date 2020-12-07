@@ -11,7 +11,7 @@
         name="specialReq"
         placeholder="e.g.: I want a vegan option for lunch"
       />
-      <label for="peopleToSign">How many hikers?</label>
+      <label for="peopleToSign">How Many Travellers?</label>
       <el-input-number
         class="trip-book-peopleToSign"
         v-model.number="booking.peopleToSign"
