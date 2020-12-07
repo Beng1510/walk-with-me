@@ -3,7 +3,11 @@
     font-size: 2rem;
     font-family: montserratBold;
     margin-block-end: 1.25rem;
-    margin-inline: 2rem;
+    margin-inline-start: 2rem;
+
+    @media screen and (max-width: $bp3-m) {
+      margin-inline-start: 1rem;
+    }
   }
 
   p {
@@ -14,7 +18,21 @@
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: 6rem;
-    padding-inline: 2rem;
+    padding: 0 2rem;
+
+    @media screen and (max-width: $bp3-m) {
+      gap: 4rem;
+    }
+
+    @media screen and (max-width: $bp3-m) {
+      gap: 3rem;
+      padding: 0 1rem;
+    }
+
+    @media screen and (max-width: $bp2-s) {
+      gap: 1.5rem;
+      padding: 0 .5rem;
+    }
   }
 
   .img-container {
@@ -58,6 +76,11 @@
     gap: 10px;
     margin-block-end: 1.25rem;
     padding-block-end: 1.25rem;
+
+    @media screen and (max-width: $bp3-m) {
+      margin-block-end: .75rem;
+      padding-block-end: .5rem;
+    }
   }
 
   .about-trip {

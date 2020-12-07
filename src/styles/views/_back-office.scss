@@ -43,11 +43,8 @@
         button {
             
             &:first-child {
-                margin-inline-end: 1rem;
-
-                @media screen and (max-width: 1190px) {
                     margin-block-end: 1rem;
-                }
+                
             }
 
            &.action {
