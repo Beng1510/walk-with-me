@@ -17,7 +17,7 @@
         <div class="nav-link">
           <router-link to="/">Home</router-link>
         </div>
-        <div class="nav-link">
+        <div class="nav-link">    
           <router-link to="/about">About</router-link>
         </div>
         <div class="nav-link">
