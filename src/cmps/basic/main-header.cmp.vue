@@ -38,9 +38,7 @@
             <a @click="logout">Logout</a>
             <template v-show="!isLoggingIn">
               <div v-if="loggedUser" class="login-btns">
-                <a v-if="!loggedUser" @click="loginSignUp('login')">
-                  Login
-                </a>
+                <a v-if="!loggedUser" @click="loginSignUp('login')"> Login </a>
                 <a v-if="!loggedUser" @click="loginSignUp('signUp')">
                   Sign Up
                 </a>
@@ -86,21 +84,14 @@ export default {
   methods: {
     userName(user) {
       var loggedUser = this.user.name;
-      
-
       var userFullName = loggedUser.split(" ");
       return userFullName[0];
     },
     becomeGuide(user) {
-      // user.isGuide = !user.isGuide;
-      // if (user.isGuide) {
-        // socketService.setup();
-      // }
       this.$store.dispatch({
-        type:"login",
-        userCred:{  name: "Arnold Wellington", password: "123456" }
-
-      })
+        type: "login",
+        userCred: { name: "Arnold Wellington", password: "123456" },
+      });
     },
     loginGuide() {
       this.$store.dispatch({
@@ -137,8 +128,8 @@ export default {
   components: {
     userMsg,
   },
-  created(){
+  created() {
     // console.log('user main header:', this.user)
-  }
+  },
 };
 </script>
