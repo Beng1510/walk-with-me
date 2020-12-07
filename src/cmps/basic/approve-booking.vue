@@ -8,11 +8,11 @@
           <td>
             <button v-if="booking.status !== 'approved'" class="action approve-btn"   @click.stop="approveBooking(booking)">
             <!-- <button v-if="booking.status === 'pending'" @click.stop="approveBooking(booking)"> -->
-              Approve
+              Accept
             </button>
             <button class="approve-btn" @click.stop="removeBooking(booking)">
             <!-- <button v-if="booking.status === 'approved'" @click.stop="removeBooking(booking)"> -->
-              Reject
+              Decline
             </button>
           </td>
         </tr>
