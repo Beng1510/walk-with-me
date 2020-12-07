@@ -157,8 +157,9 @@
     }
   }
 }
-@media (max-width: 490px) {
+@media (max-width: 440px) {
   .trip-details {
+    width: 350px;
     .img-container {
       grid-template-columns: repeat(6, 65px);
   
