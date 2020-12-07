@@ -40,13 +40,11 @@ export const bookingStore = {
                 name: context.rootGetters.loggedinUser.name,
                 imgUrl: context.rootGetters.loggedinUser.profileImgUrl,
             };
-            console.log('hiii')
             const newBooking = await bookingService.createBooking(booking);
 
             // socketService.setup();
             // socketService.emit('guideId', newBooking.guide._id);
             socketService.emit('addBooking',newBooking)
-            console.log('adding bookin', newBooking)
             context.commit({ type: 'addBooking', booking: newBooking })
         
         },
