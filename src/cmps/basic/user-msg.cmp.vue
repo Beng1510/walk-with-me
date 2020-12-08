@@ -47,17 +47,19 @@ export default {
   methods: {
     closeMgs() {
       this.msg = null;
+      this.msgBus = null;
+
     },
   },
   created() {
-    eventBusService.$on(SHOW_MSG, (msgBus) => {  
+    eventBusService.$on(SHOW_MSG, msgBus => {
       this.msgBus = msgBus;
-     
+      var delay = msgBus.delay || 3000;
       this.alive = true;
+      // this.msgBus = `Hello ${booking.user.name} Trip Booked! Please wait for guide's final approval`;
       setTimeout(() => {
         this.alive = false;
       }, delay);
-      console.log("msgBus", this.msgBus);
     });
 
     socketService.on("sendBooking", (booking) => {
