@@ -47,6 +47,14 @@
       }
     }
   }
+
+  @media screen and (max-width: $bp2-s) {
+    .txt-search {
+      label {
+        padding-block-end: 0;
+      }
+    }
+  }
 }
 
 .input {
