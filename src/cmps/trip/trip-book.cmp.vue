@@ -1,8 +1,8 @@
 <template>
   <section v-if="trip" class="trip-book flex column">
-    <h3>{{booking.trip.date}}</h3>
+    <h3>{{ booking.trip.date }}</h3>
     <h3>Price: ${{ trip.price }}</h3>
-    <form  @submit.prevent="emitBook" class="flex column" v-if="!isBooked">
+    <form @submit.prevent="emitBook" class="flex column" v-if="!isBooked">
       <label for="specialReq">Any special requests?</label>
       <textarea
         class="specialReq"
@@ -58,7 +58,7 @@ export default {
           name: this.trip.name,
           imgUrl: this.trip.imgUrls,
           totalBooked: this.trip.totalBooked,
-          date: null
+          date: this.trip.date
         },
         status: "pending",
         peopleToSign: 1,
@@ -80,7 +80,21 @@ export default {
   methods: {
     emitBook() {
       this.$emit("bookTrip", this.booking);
+
+ eventBusService.$emit(SHOW_MSG, {
+        txt: "Trip Booked!",
+        subTxt: "Please wait for guide's final approval",
+        type: "success",
+      });
+      
+
       this.updateTotalBooked();
+
+      eventBusService.$emit(SHOW_MSG, {
+        txt: "Trip Booked!",
+        subTxt: "Please wait for guide's final approval",
+        type: "success",
+      });
     },
 
     totalPrice() {
@@ -107,11 +121,10 @@ export default {
       );
 
       filteredBookings.some((booking) => {
-        if (booking.trip.name === this.trip.name)
-          return (this.isBooked = true);
+        if (booking.trip.name === this.trip.name) return (this.isBooked = true);
       });
     },
-     getDateString(trip) {
+    getDateString(trip) {
       var date = new Date(this.trip.date);
       return date.toLocaleDateString("en-GB");
     },
@@ -119,7 +132,7 @@ export default {
 
   created() {
     this.getBookingByUser(this.user);
-    this.booking.trip.date = this.getDateString(this.trip)
+    this.booking.trip.date = this.getDateString(this.trip);
   },
 };
 </script>
