@@ -1,8 +1,17 @@
 <template>
-  <section v-if="msg" class="user-msg">
-    <div class="alert" :class="alertClass">
-      <p @click="closeMgs() ">X</p>
-      <p class="bold">{{ msg }}</p>
+  <section class="user-msg">
+    <div v-if="msg">
+      <div class="alert" :class="alertClass">
+        <p @click="closeMgs()">X</p>
+        <p class="bold">{{ msg }}</p>
+      </div>
+    </div>
+
+    <div v-if="msgBus">
+      <div class="alert" :class="alertClassBus">
+        <h2>{{ msgBus.txt }}</h2>
+        <p>{{ msgBus.subTxt }}</p>
+      </div>
     </div>
   </section>
 </template>
@@ -21,6 +30,7 @@ export default {
     return {
       alive: false,
       msg: null,
+      msgBus: null,
     };
   },
 
@@ -29,6 +39,10 @@ export default {
       if (!this.msg) return;
       return `alert-${this.msg.type}`;
     },
+    alertClassBus() {
+      if (!this.msgBus) return;
+      return `alert-${this.msgBus.type}`;
+    },
   },
   methods: {
     closeMgs() {
@@ -36,9 +50,17 @@ export default {
     },
   },
   created() {
- 
+    eventBusService.$on(SHOW_MSG, (msgBus) => {  
+      this.msgBus = msgBus;
+     
+      this.alive = true;
+      setTimeout(() => {
+        this.alive = false;
+      }, delay);
+      console.log("msgBus", this.msgBus);
+    });
+
     socketService.on("sendBooking", (booking) => {
-    
       this.msg = `${booking.user.name} booked the ${booking.trip.name} trip, pending your approval`;
       // setTimeout(() => {
       //   this.closeMgs();
@@ -46,8 +68,6 @@ export default {
     });
 
     socketService.on("approveBooking", (booking) => {
-    
-    
       this.msg = `${booking.guide.name} approved your booking`;
       // setTimeout(() => {
       //   this.closeMgs();

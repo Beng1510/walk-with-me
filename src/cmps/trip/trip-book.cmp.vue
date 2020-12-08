@@ -58,7 +58,7 @@ export default {
           name: this.trip.name,
           imgUrl: this.trip.imgUrls,
           totalBooked: this.trip.totalBooked,
-          date: null
+          date: this.trip.date
         },
         status: "pending",
         peopleToSign: 1,
@@ -80,6 +80,14 @@ export default {
   methods: {
     emitBook() {
       this.$emit("bookTrip", this.booking);
+
+ eventBusService.$emit(SHOW_MSG, {
+        txt: "Trip Booked!",
+        subTxt: "Please wait for guide's final approval",
+        type: "success",
+      });
+      
+
       this.updateTotalBooked();
     },
 

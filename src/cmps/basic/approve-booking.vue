@@ -5,7 +5,7 @@
           <td>{{ booking.peopleToSign }}</td>
           <td>{{ booking.specialReq }}</td>
           <td>{{ booking.status }}</td>
-          <td>{{ booking.datePicked }}</td>
+          <td> {{ getDateString }} </td>
           <td>
             <button class="action" :class="{active: isApproved}" @click="approveBooking(booking)">
               Accept
@@ -34,7 +34,10 @@ export default {
     },
  
   computed: {
-   
+   getDateString(trip) {
+      var date = new Date(this.booking.trip.date);
+      return date.toLocaleDateString("en-GB");
+    },
   },
 
   methods: {
