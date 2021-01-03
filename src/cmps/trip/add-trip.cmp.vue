@@ -1,4 +1,4 @@
-<template>
+  <template>
   <section v-if="tripToEdit" class="add-trip">
     <button class="action" @click="showAddBtn">Create A New Trip</button>
 
@@ -38,7 +38,7 @@
         <option value="forest">forest</option>
       </select>
 <br/>
-
+  
       <button>Save</button>
     </form>
   </section>
