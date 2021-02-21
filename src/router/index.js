@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import home from "../views/home-page.vue";
-import about from "../views/about.vue";
+// import about from "../views/about.vue";
 import allTripList from "../views/all-trips-list";
 import tripDetails from "../views/trip-details.vue";
 import userDetails from "../views/user-details.vue";
@@ -46,12 +46,12 @@ const routes = [
     path: '/login',
     component: login
   },
-  {
-    path: "/about",
-    name: "about",
-    component: about
+  // {
+  //   path: "/about",
+  //   name: "about",
+  //   component: about
     
-  }
+  // }
 ];
 
 const router = new VueRouter({
